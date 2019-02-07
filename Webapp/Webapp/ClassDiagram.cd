@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Webapp.Models.Data.Administrator">
+    <Position X="3.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\Administrator.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Institution" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.Comment">
+    <Position X="11" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\Comment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Webapp.Models.Data.Department">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAAAAAAgAABgAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\Department.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Patients" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.Doctor">
+    <Position X="6.5" Y="2.5" Width="1.5" />
+    <AssociationLine Name="TreatmentTypes" Type="Webapp.Models.Data.TreadmentType" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="6.5" Y="2.886" />
+        <Point X="6.125" Y="2.886" />
+        <Point X="6.125" Y="4.552" />
+        <Point X="6.5" Y="4.552" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Models\Data\Doctor.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Departments" />
+      <Property Name="Treadments" />
+      <Property Name="TreatmentTypes" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.Institution">
+    <Position X="6.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\Institution.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Departments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.Patient">
+    <Position X="13" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\Patient.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Departments" />
+      <Property Name="Treadments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.Treadment">
+    <Position X="11" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAABAAAAAAQAAAAAAAAAKAA=</HashCode>
+      <FileName>Models\Data\Treadment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Comments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="Webapp.Models.Data.TreadmentType">
+    <Position X="6.5" Y="4" Width="1.5" />
+    <AssociationLine Name="Departments" Type="Webapp.Models.Data.Department" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8" Y="4.245" />
+        <Point X="10.188" Y="4.245" />
+        <Point X="10.188" Y="1.988" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.131" Y="0.072" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACCAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Models\Data\TreadmentType.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Property Name="Treadments" />
+      <Property Name="Departments" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
