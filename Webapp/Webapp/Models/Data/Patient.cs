@@ -8,6 +8,6 @@ namespace Webapp.Models.Data
     public class Patient
     {
         public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Treadment> Treadments { get; set; }
+        public IEnumerable<Treatment> Treatments { get; set; }
     }
 }

@@ -8,7 +8,7 @@ namespace Webapp.Models.Data
     public class Doctor
     {
         public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<TreadmentType> TreatmentTypes { get; set; }
-        public IEnumerable<Treadment> Treadments { get; set; }
+        public IEnumerable<TreatmentType> TreatmentTypes { get; set; }
+        public IEnumerable<Treatment> Treatments { get; set; }
     }
 }

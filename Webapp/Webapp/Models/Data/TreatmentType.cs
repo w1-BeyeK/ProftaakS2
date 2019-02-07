@@ -5,10 +5,10 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class TreadmentType
+    public class TreatmentType
     {
         public IEnumerable<Department> Departments { get; set; }
         public IEnumerable<Doctor> Doctors { get; set; }
-        public IEnumerable<Treadment> Treadments { get; set; }
+        public IEnumerable<Treatment> Treatments { get; set; }
     }
 }

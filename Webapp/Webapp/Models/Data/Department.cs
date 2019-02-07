@@ -10,6 +10,6 @@ namespace Webapp.Models.Data
         public Institution Institution { get; set; }
         public IEnumerable<Doctor> Doctors { get; set; }
         public IEnumerable<Patient> Patients { get; set; }
-        public IEnumerable<TreadmentType> TreadmentTypes { get; set; }
+        public IEnumerable<TreatmentType> TreatmentTypes { get; set; }
     }
 }

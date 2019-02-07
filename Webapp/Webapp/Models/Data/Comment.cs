@@ -7,6 +7,6 @@ namespace Webapp.Models.Data
 {
     public class Comment
     {
-        public Treadment Treadment { get; set; }
+        public Treatment Treatment { get; set; }
     }
 }
