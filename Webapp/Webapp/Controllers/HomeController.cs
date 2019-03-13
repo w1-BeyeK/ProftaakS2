@@ -22,6 +22,12 @@ namespace Webapp.Controllers
             return View();
         }
 
+        public IActionResult Login()
+        {
+            ViewData["Message"] = "Kevin Beye <3 Catujah";
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
