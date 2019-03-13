@@ -1,0 +1,41 @@
+﻿body {
+    background: url('https://static-communitytable.parade.com/wp-content/uploads/2014/03/rethink-target-heart-rate-number-ftr.jpg');
+    background-size: cover;
+    height: 100%;
+}
+
+.grandParentContaniner {
+    height: 50%;
+    margin: 0;
+}
+
+.parentContainer {
+    vertical-align: middle;
+    height: 100%;
+}
+
+.loginForm {
+    vertical-align: middle;
+    max-width: 330px;
+    padding: 15px;
+    border-radius: 0.3em;
+    background-color: #f2f2f2;
+}
+
+*[role="form"] h2 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 40px;
+    font-weight: 600;
+    color: #000000;
+    margin-top: 5%;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+.loginForm{
+    align-content:center;
+    vertical-align:auto;
+    margin-top:20%;
+    margin-bottom:20%;
+}
