@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Doctor :UserAccount
+    public class Doctor : UserAccount
     {
 
         public long EmployeeNumber { get; set; }
