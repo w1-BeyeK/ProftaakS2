@@ -5,10 +5,54 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Doctor
+    public class Doctor :UserAccount
     {
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<TreatmentType> TreatmentTypes { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
+
+        public long EmployeeNumber { get; set; }
+
+        public Doctor()
+        {
+
+        }
+
+        public void RegisterTreatment()
+        {
+
+        }
+
+        public void ChangeContactPreference()
+        {
+
+        }
+
+        public void ShowDoctors()
+        {
+
+        }
+
+        public void ShowPatients()
+        {
+
+        }
+
+        public void ShowTreatmentsTypes()
+        {
+
+        }
+
+        public override void AddComment()
+        {
+            base.AddComment();
+        }
+
+        public override void ChangePersonalData()
+        {
+            base.ChangePersonalData();
+        }
+
+        public override void ShowTreatments()
+        {
+            base.ShowTreatments();
+        }
     }
 }
