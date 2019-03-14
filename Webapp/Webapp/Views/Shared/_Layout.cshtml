@@ -35,7 +35,7 @@
                             <i class="fa fa-dashboard fa-lg"></i> Dashboard
                         </a>
                     </li>
-                    @if (Context.Session.GetString("loginType") == "admin")
+                    @if (Context.User.IsInRole("admin"))
                     {
                         <li data-toggle="collapse" data-target="#departments" class="collapsed">
                             <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdelingen <span class="arrow"></span></a>
@@ -59,7 +59,7 @@
                             <li><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</li>
                         </ul>
                     }
-                    else if (Context.Session.GetString("loginType") == "doctor")
+                    else if (Context.User.IsInRole("doctor"))
                     {
                         <li data-toggle="collapse" data-target="#behandelingen" class="collapsed">
                             <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen <span class="arrow"></span></a>
@@ -76,7 +76,7 @@
                             <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdeling</a>
                         </li>
                     }
-                    else if (Context.Session.GetString("loginType") == "patient")
+                    else if (Context.User.IsInRole("patient"))
                     {
                         <li>
                             <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen</a>

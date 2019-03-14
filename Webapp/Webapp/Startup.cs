@@ -39,7 +39,7 @@ namespace Webapp
             services.AddIdentity<BaseAccount, Role>()
                 .AddDefaultTokenProviders();
 
-            services.AddSession();
+            // services.AddSession();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -61,7 +61,7 @@ namespace Webapp
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-            app.UseSession();
+        //    app.UseSession();
 
             app.UseMvc(routes =>
             {

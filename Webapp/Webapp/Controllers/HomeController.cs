@@ -29,6 +29,7 @@ namespace Webapp.Controllers
         {
             return View();
         }
+
         
         public IActionResult About()
         {
@@ -49,11 +50,9 @@ namespace Webapp.Controllers
         {
             if (ModelState.IsValid)
             {
-
                 var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-
                     return RedirectToAction("about");
                 }
                 else
