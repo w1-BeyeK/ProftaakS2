@@ -10,6 +10,8 @@ namespace Webapp.Models.Data
 
         public long EmployeeNumber { get; set; }
 
+        public string Function { get; set; }
+
         public Doctor()
         {
 
