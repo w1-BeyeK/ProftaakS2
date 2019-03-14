@@ -149,7 +149,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<TreatmentType> ShowTreatmentsType(Department department)
+        public List<TreatmentType> ShowTreatmentTypes(Department department)
         {
             throw new NotImplementedException();
         }
