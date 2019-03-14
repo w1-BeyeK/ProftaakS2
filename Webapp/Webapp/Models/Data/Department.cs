@@ -7,9 +7,9 @@ namespace Webapp.Models.Data
 {
     public class Department
     {
-        public Institution Institution { get; set; }
-        public IEnumerable<Doctor> Doctors { get; set; }
-        public IEnumerable<Patient> Patients { get; set; }
-        public IEnumerable<TreatmentType> TreatmentTypes { get; set; }
+
+        public string Name { get; set; }
+        public bool Active { get; set; }
+        public string Description { get; set; }
     }
 }

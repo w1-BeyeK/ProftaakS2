@@ -22,6 +22,24 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [HttpPost]
+        public IActionResult Login(string Username, string Password)
+        {
+            string s1 = Username;//
+            string s2 = Password;//
+            if(Username== "Admin" && Password == "Admin")
+            {
+                ViewData["succes"] = "Login Succes";
+                ViewData["username"] = Username;
+                ViewData["password"] = Password;
+            }
+            else
+            {
+                ViewData["Message"] = "Login gefaald!!!!!!";
+            }
+            return View();
+        }
+
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
