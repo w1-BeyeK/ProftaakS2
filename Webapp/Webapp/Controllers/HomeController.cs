@@ -37,7 +37,7 @@ namespace Webapp.Controllers
             {
                 ViewData["Message"] = "Login gefaald!!!!!!";
             }
-            return View();
+            return RedirectToAction("User");
         }
 
         public IActionResult Contact()
@@ -48,6 +48,11 @@ namespace Webapp.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult User()
         {
             return View();
         }
