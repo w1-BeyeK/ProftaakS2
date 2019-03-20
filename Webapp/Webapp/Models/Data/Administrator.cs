@@ -9,9 +9,19 @@ namespace Webapp.Models.Data
     {
         public long EmployeeNumber { get; set; }
 
+        public Administrator(int id, string username, string email) : base(id, username, email)
+        {
+            Role = "admin";
+        }
+
+        public Administrator(int id, string username, string email, string password) : base(id, username, email, password)
+        {
+            Role = "admin";
+        }
+
         public Administrator()
         {
-
+            Role = "admin";
         }
 
         public void AddDepartment()

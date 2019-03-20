@@ -6,11 +6,12 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Webapp.Context;
-using Webapp.Interfaces;
+using Webapp.Context.Login;
+using Webapp.Models.Data;
 
 namespace Webapp
 {
@@ -33,9 +34,12 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
+            services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
+            services.AddIdentity<BaseAccount, Role>()
+                .AddDefaultTokenProviders();
+          
             services.AddScoped<IContext, TestContext>();
-
-            services.AddSession();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -56,7 +60,8 @@ namespace Webapp
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
-            app.UseSession();
+            app.UseAuthentication();
+        //    app.UseSession();
 
             app.UseMvc(routes =>
             {

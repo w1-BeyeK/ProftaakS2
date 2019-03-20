@@ -22,85 +22,89 @@
     </environment>
 </head>
 <body>
-    <div class="container-fluid row">
-        <div class="nav-side-menu col-xs-3">
-            <div class="brand">Brand Logo</div>
-            <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-3 col-sm-12">
+                <div class="nav-side-menu">
+                    <div class="brand">Brand Logo</div>
+                    <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
 
-            <div class="menu-list">
+                    <div class="menu-list">
 
-                <ul id="menu-content" class="menu-content collapse out">
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-dashboard fa-lg"></i> Dashboard
-                        </a>
-                    </li>
-                    @if (Context.Session.GetString("loginType") == "admin")
-                    {
-                        <li data-toggle="collapse" data-target="#departments" class="collapsed">
-                            <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdelingen <span class="arrow"></span></a>
-                        </li>
-                        <ul class="sub-menu collapse" id="departments">
-                            <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                            <li><i class="fa fa-users fa-lg"></i> Nieuwe toevoegen</li>
-                        </ul>
-                        <li data-toggle="collapse" data-target="#typeTreatment" class="collapsed">
-                            <a href="#"><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen <span class="arrow"></span></a>
-                        </li>
-                        <ul class="sub-menu collapse" id="typeTreatment">
-                            <li><i class="fa fa-bar-chart fa-lg"></i> Overzicht</li>
-                            <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
-                        </ul>
-                        <li data-toggle="collapse" data-target="#doctors" class="collapsed">
-                            <a href="#"><i class="fa fa-user-md fa-lg"></i> Artsen <span class="arrow"></span></a>
-                        </li>
-                        <ul class="sub-menu collapse" id="doctors">
-                            <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                            <li><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</li>
-                        </ul>
-                    }
-                    else if (Context.Session.GetString("loginType") == "doctor")
-                    {
-                        <li data-toggle="collapse" data-target="#behandelingen" class="collapsed">
-                            <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen <span class="arrow"></span></a>
-                        </li>
-                        <ul class="sub-menu collapse" id="behandelingen">
-                            <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                            <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
-                        </ul>
+                        <ul id="menu-content" class="menu-content collapse out">
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-dashboard fa-lg"></i> Dashboard
+                                </a>
+                            </li>
+                            @if (Context.User.IsInRole("admin"))
+                            {
+                                <li data-toggle="collapse" data-target="#departments" class="collapsed">
+                                    <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdelingen <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="departments">
+                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
+                                    <li><i class="fa fa-users fa-lg"></i> Nieuwe toevoegen</li>
+                                </ul>
+                                <li data-toggle="collapse" data-target="#typeTreatment" class="collapsed">
+                                    <a href="#"><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="typeTreatment">
+                                    <li><i class="fa fa-bar-chart fa-lg"></i> Overzicht</li>
+                                    <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
+                                </ul>
+                                <li data-toggle="collapse" data-target="#doctors" class="collapsed">
+                                    <a href="#"><i class="fa fa-user-md fa-lg"></i> Artsen <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="doctors">
+                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
+                                    <li><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</li>
+                                </ul>
+                            }
+                            else if (Context.User.IsInRole("doctor"))
+                            {
+                                <li data-toggle="collapse" data-target="#behandelingen" class="collapsed">
+                                    <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen <span class="arrow"></span></a>
+                                </li>
+                                <ul class="sub-menu collapse" id="behandelingen">
+                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
+                                    <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
+                                </ul>
 
-                        <li>
-                            <a href="#"><i class="fa fa-bed fa-lg"></i> Patienten</a>
-                        </li>
-                        <li>
-                            <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdeling</a>
-                        </li>
-                    }
-                    else if (Context.Session.GetString("loginType") == "patient")
-                    {
-                        <li>
-                            <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen</a>
-                        </li>
-                    }
-                    <hr style="margin:0;" />
-                    <li>
-                        <a href="#"><i class="fa fa-user fa-lg"></i> Profiel</a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-sign-out fa-lg"></i> Logout
-                        </a>
-                    </li>
-                </ul>
+                                <li>
+                                    <a href="#"><i class="fa fa-bed fa-lg"></i> Patienten</a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdeling</a>
+                                </li>
+                            }
+                            else if (Context.User.IsInRole("patient"))
+                            {
+                                <li>
+                                    <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen</a>
+                                </li>
+                            }
+                            <hr style="margin:0;" />
+                            <li>
+                                <a href="#"><i class="fa fa-user fa-lg"></i> Profiel</a>
+                            </li>
+                            <li>
+                                <a href="#">
+                                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
 
-        <div class="col-md-9 col-xs-12" style="float:right;">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2019 - Webapp</p>
-            </footer>
+            <div class="col-sm-9 col-xs-12">
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; 2019 - Webapp</p>
+                </footer>
+            </div>
         </div>
     </div>
 
