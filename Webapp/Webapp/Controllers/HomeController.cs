@@ -57,6 +57,11 @@ namespace Webapp.Controllers
             return View();
         }
 
+        public IActionResult Doctor()
+        {
+            return View();
+        }
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
