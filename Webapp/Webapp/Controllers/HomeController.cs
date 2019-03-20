@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
 
@@ -34,6 +35,8 @@ namespace Webapp.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
+            ViewData["uname"] = HttpContext.Session.GetString("uname");
+            ViewData["loginType"] = HttpContext.Session.GetString("loginType");
 
             return View();
         }
@@ -68,7 +71,6 @@ namespace Webapp.Controllers
                 }
             }
             return View();
-
         }
 
         public IActionResult Contact()

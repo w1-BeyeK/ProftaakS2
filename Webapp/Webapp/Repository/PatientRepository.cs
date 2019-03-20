@@ -11,6 +11,11 @@ namespace Webapp.Repository
     {
         IContext context;
 
+        public PatientRepository(IContext context)
+        {
+            this.context = context;
+        }
+
         public Patient LoginPatient(string username, string password)
         {
             return context.LoginPatient(username, password);

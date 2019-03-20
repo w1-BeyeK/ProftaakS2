@@ -30,7 +30,7 @@ namespace Webapp
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
+                options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
@@ -38,8 +38,8 @@ namespace Webapp
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
             services.AddIdentity<BaseAccount, Role>()
                 .AddDefaultTokenProviders();
-
-            // services.AddSession();
+          
+            services.AddScoped<IContext, TestContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
