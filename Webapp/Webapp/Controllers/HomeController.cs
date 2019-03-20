@@ -35,8 +35,6 @@ namespace Webapp.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            ViewData["uname"] = HttpContext.Session.GetString("uname");
-            ViewData["loginType"] = HttpContext.Session.GetString("loginType");
 
             return View();
         }

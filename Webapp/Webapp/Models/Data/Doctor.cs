@@ -7,7 +7,7 @@ namespace Webapp.Models.Data
 {
     public class Doctor : UserAccount
     {
-
+        public string Function { get; set; }
         public long EmployeeNumber { get; set; }
 
         public Doctor(int id, string username, string email) : base(id, username, email)

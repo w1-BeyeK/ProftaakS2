@@ -15,46 +15,16 @@ namespace Webapp.Context
         {
             patients = new List<Patient>()
             {
-                new Patient()
-                {
-                    Name = "Kevin Beye",
-                    Mail = "k.beye@student.fontys.nl",
-                    Gender = Gender.Male,
-                    Password = "Test123",
-                    Active = true,
-                    Username = "kevinbeye",
-                    Birth = DateTime.Now
-                },
-                new Patient()
-                {
-                    Name = "Michael Vroegop",
-                    Mail = "m.vroegop@student.fontys.nl",
-                    Gender = Gender.Male,
-                    Password = "Test123",
-                    Active = true,
-                    Username = "michaelvroegop",
-                    Birth = DateTime.Now
-                },
-                new Patient()
-                {
-                    Name = "Wang zonder Achternaam",
-                    Mail = "wza@student.fontys.nl",
-                    Gender = Gender.Male,
-                    Password = "Test123",
-                    Active = true,
-                    Username = "wangza",
-                    Birth = DateTime.Now
-                },
-                new Patient()
-                {
-                    Name = "Tim Iets",
-                    Mail = "t.iets@student.fontys.nl",
-                    Gender = Gender.Male,
-                    Password = "Test123",
-                    Active = true,
-                    Username = "timiets",
-                    Birth = DateTime.Now
-                }
+                //new Patient()
+                //{
+                //    Name = "Kevin Beye",
+                //    Mail = "k.beye@student.fontys.nl",
+                //    Gender = Gender.Male,
+                //    Password = "Test123",
+                //    Active = true,
+                //    Username = "kevinbeye",
+                //    Birth = DateTime.Now
+                //}
             };
         }
 
@@ -160,7 +130,7 @@ namespace Webapp.Context
 
         public Patient LoginPatient(string username, string password)
         {
-            Patient patient = patients.FirstOrDefault(p => p.Username == username && p.Password == password);
+            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
 
             if (patient == null)
                 throw new KeyNotFoundException("No patient found");

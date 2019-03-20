@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Identity;
 using System;
+using Webapp.Models.Data;
 using Xunit;
 
 namespace TestWebapp
@@ -8,7 +10,6 @@ namespace TestWebapp
         [Fact]
         public void Test1()
         {
-
         }
     }
 }
