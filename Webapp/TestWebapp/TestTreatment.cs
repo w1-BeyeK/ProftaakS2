@@ -28,6 +28,5 @@ namespace TestWebapp
             Assert.Equal(role, doctor2.Role);
             Assert.Equal(role, doctor3.Role);
         }
-        verwerkditlater
     }
 }

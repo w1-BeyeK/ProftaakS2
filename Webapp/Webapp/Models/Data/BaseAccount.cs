@@ -7,8 +7,10 @@ namespace Webapp.Models.Data
 {
     public abstract class BaseAccount
     {
+        //TODO : Moet dit in de constructor?
         public string Role { get; set; }
 
+        //TODO : Moet dit in de constructor?
         public long Id { get; set; }
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }

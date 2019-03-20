@@ -7,17 +7,21 @@ namespace Webapp.Models.Data
 {
     public class Treatment
     {
+        public string Name { get; set; }
+        public DateTime BeginDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+        //TODO : Moet dit in de constructor?
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
 
-        public Treatment(Patient patient, Doctor doctor, TreatmentType treatmentType, IEnumerable<Comment> comments)
+        public Treatment(string name, DateTime beginDate, DateTime endDate)
         {
-            Patient = patient;
-            Doctor = doctor;
-            TreatmentType = treatmentType;
-            Comments = comments;
+            Name = name;
+            BeginDate = beginDate;
+            EndDate = endDate;
         }
 
         public int DaysUntilTreatment()
