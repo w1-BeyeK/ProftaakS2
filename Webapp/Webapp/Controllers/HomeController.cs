@@ -24,13 +24,13 @@ namespace Webapp.Controllers
             this.userManager = userManager;
             this.signInManager = signInManager;
         }
-
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        
+        [Authorize(Roles = "patient")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
