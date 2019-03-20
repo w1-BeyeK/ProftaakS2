@@ -5,10 +5,10 @@ using Xunit;
 
 namespace TestWebapp
 {
-    public class TestAdministrator
+    public class TestInstitution
     {
         [Fact]
-        public void AdministratorConstructor()
+        public void InstitutionConstructor()
         {
             string username = "Henk";
             string password = "Sjoeki";
