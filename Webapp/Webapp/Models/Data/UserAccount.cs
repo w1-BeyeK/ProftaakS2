@@ -25,20 +25,9 @@ namespace Webapp.Models.Data
 
         }
 
-        public virtual void AddComment()
+        public string ShowPersonalData()
         {
-
+            throw new NotImplementedException();
         }
-
-        public virtual void ChangePersonalData()
-        {
-
-        }
-
-        public virtual void ShowTreatments()
-        {
-
-        }
-
     }
 }

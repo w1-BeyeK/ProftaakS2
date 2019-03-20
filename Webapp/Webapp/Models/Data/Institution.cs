@@ -10,5 +10,11 @@ namespace Webapp.Models.Data
         public Administrator Administrator { get; set; }
 
         public IEnumerable<Department> Departments { get; set; }
+
+        public Institution(Administrator administrator, IEnumerable<Department> departments)
+        {
+            Administrator = administrator;
+            Departments = departments;
+        }
     }
 }

@@ -8,5 +8,10 @@ namespace Webapp.Models.Data
     public class Comment
     {
         public Treatment Treatment { get; set; }
+
+        public Comment(Treatment treatment)
+        {
+            Treatment = treatment;
+        }
     }
 }

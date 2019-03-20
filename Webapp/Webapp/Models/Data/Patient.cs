@@ -7,6 +7,9 @@ namespace Webapp.Models.Data
 {
     public class Patient: UserAccount
     {
+        public IEnumerable<Department> Departments { get; set; }
+        public IEnumerable<Treatment> Treatments { get; set; }
+
         public Patient(int id, string username, string email) : base(id, username, email)
         {
             Role = "patient";
@@ -17,7 +20,9 @@ namespace Webapp.Models.Data
             Role = "patient";
         }
 
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
+        public int GetAge()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

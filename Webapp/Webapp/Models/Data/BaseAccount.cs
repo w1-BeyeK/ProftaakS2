@@ -9,6 +9,14 @@ namespace Webapp.Models.Data
     {
         public string Role { get; set; }
 
+        public long Id { get; set; }
+        public string UserName { get; set; }
+        public string NormalizedUserName { get; set; }
+        public string Email { get; set; }
+        public string NormalizedEmail { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+
         public BaseAccount()
         {
         }
@@ -27,15 +35,10 @@ namespace Webapp.Models.Data
             Email = email;
             Password = password;
         }
-        public long Id { get; set; }
-        public string UserName { get; set; }
-        public string NormalizedUserName { get; set; }
-        public string Email { get; set; }
-        public string NormalizedEmail { get; set; }
-        public string Password { get; set; }
-        
-        public string Name { get; set; }
 
-        public void ShowPersonalData() { }
+        public string RatingPassword()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
