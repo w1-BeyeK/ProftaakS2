@@ -53,7 +53,14 @@ namespace Webapp.Controllers
                 var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("about");
+                    if (HttpContext.User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("about");
+                    }
+                    else
+                    {
+                        return RedirectToAction("contact");
+                    }
                 }
                 else
                 {
