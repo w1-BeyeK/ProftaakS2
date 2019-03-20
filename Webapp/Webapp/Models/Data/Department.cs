@@ -7,7 +7,6 @@ namespace Webapp.Models.Data
 {
     public class Department
     {
-
         public string Name { get; set; }
         public bool Active { get; set; }
         public string Description { get; set; }

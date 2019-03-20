@@ -5,7 +5,7 @@ using Xunit;
 
 namespace TestWebapp
 {
-    public class TestAdministrator
+    public class TestUserAccount
     {
         [Fact]
         public void AdministratorConstructor()

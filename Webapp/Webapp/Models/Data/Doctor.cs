@@ -7,6 +7,8 @@ namespace Webapp.Models.Data
 {
     public class Doctor : UserAccount
     {
+        //TODO : Moet dit in de constructor?
+        //TODO : Moet dit ook in Classendiagram???
         public string Function { get; set; }
         public long EmployeeNumber { get; set; }
 
