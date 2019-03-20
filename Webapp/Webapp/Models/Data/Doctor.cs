@@ -10,11 +10,19 @@ namespace Webapp.Models.Data
 
         public long EmployeeNumber { get; set; }
 
-        public string Function { get; set; }
+        public Doctor(int id, string username, string email) : base(id, username, email)
+        {
+            Role = "doctor";
+        }
+
+        public Doctor(int id, string username, string email, string password) : base(id, username, email, password)
+        {
+            Role = "doctor";
+        }
 
         public Doctor()
         {
-
+            Role = "doctor";
         }
 
         public void RegisterTreatment()
