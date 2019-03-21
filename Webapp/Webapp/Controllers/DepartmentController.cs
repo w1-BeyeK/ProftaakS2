@@ -18,141 +18,109 @@ namespace Webapp.Controllers
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 },
                 new Department()
                 {
                     Name = "Hartafdeling",
+                    Active = true,
                     Description = "Afdeling voor hartproblemen"
                 },
                 new Department()
                 {
                     Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
+                    Active = true,
                     Description = "Hier worden röngtenfoto's gemaakt"
                 }
             };

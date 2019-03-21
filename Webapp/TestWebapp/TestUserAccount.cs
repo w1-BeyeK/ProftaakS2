@@ -8,25 +8,24 @@ namespace TestWebapp
     public class TestUserAccount
     {
         [Fact]
-        public void AdministratorConstructor()
+        public void UserAccountConstructor()
         {
-            string username = "Henk";
-            string password = "Sjoeki";
+            int id = 1;
+            string username = "Spons";
             string email = "Henk@gmail.com";
-            string role = "admin";
+            string password = "Sjaak";
 
-            Administrator administrator1 = new Administrator(1, username, email);
-            Administrator administrator2 = new Administrator(2, username, email, password);
-            Administrator administrator3 = new Administrator();
+            UserAccount userAccount1 = new UserAccount(id, username, email);
+            UserAccount userAccount2 = new UserAccount(id, username, email, password);
+            UserAccount userAccount3 = new UserAccount();
 
-            Assert.Equal(username, administrator1.UserName);
-            Assert.Equal(email, administrator1.Email);
-            Assert.Equal(role, administrator1.Role);
-            Assert.Equal(username, administrator2.UserName);
-            Assert.Equal(email, administrator2.Email);
-            Assert.Equal(password, administrator2.Password);
-            Assert.Equal(role, administrator2.Role);
-            Assert.Equal(role, administrator3.Role);
+            Assert.Equal(id, userAccount1.Id);
+            Assert.Equal(username, userAccount1.UserName);
+            Assert.Equal(email, userAccount1.Email);
+            Assert.Equal(id, userAccount2.Id);
+            Assert.Equal(username, userAccount2.UserName);
+            Assert.Equal(email, userAccount2.Email);
+            Assert.Equal(password, userAccount2.Password);
         }
     }
 }

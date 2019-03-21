@@ -17,5 +17,10 @@ namespace Webapp.Models.Data
             Active = active;
             Description = description;
         }
+
+        //TODO: Verwijder later
+        public Department()
+        {
+        }
     }
 }

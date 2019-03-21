@@ -10,23 +10,15 @@ namespace TestWebapp
         [Fact]
         public void TreatmentConstructor()
         {
-            string username = "Sjaak";
-            string password = "Loeki";
-            string email = "Sjaak@gmail.com";
-            string role = "doctor";
+            string name = "Kaakbehandeling";
+            DateTime beginDate = new DateTime(2010-02-10);
+            DateTime endDate = new DateTime(2010-03-20);
 
-            Doctor doctor1 = new Doctor(1, username, email);
-            Doctor doctor2 = new Doctor(2, username, email, password);
-            Doctor doctor3 = new Doctor();
+            Treatment treatment = new Treatment(name, beginDate, endDate);
 
-            Assert.Equal(username, doctor1.UserName);
-            Assert.Equal(email, doctor1.Email);
-            Assert.Equal(role, doctor1.Role);
-            Assert.Equal(username, doctor2.UserName);
-            Assert.Equal(email, doctor2.Email);
-            Assert.Equal(password, doctor2.Password);
-            Assert.Equal(role, doctor2.Role);
-            Assert.Equal(role, doctor3.Role);
+            Assert.Equal(name, treatment.Name);
+            Assert.Equal(beginDate, treatment.BeginDate);
+            Assert.Equal(endDate, treatment.EndDate);
         }
     }
 }
