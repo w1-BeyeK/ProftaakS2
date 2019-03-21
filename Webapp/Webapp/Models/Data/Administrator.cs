@@ -18,10 +18,5 @@ namespace Webapp.Models.Data
         {
             Role = "admin";
         }
-
-        public Administrator()
-        {
-            Role = "admin";
-        }
     }
 }

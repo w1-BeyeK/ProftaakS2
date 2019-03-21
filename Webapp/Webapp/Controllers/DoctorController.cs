@@ -12,7 +12,6 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("loginType", "admin");
             List<Doctor> items = new List<Doctor>()
             {
                 new Doctor()
