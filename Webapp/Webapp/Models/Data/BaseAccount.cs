@@ -20,14 +20,16 @@ namespace Webapp.Models.Data
         public string Name { get; set; }
 
         public BaseAccount()
-        {
-        }
+        { }
 
         public BaseAccount(int id, string username, string email)
         {
             Id = id;
             UserName = username;
             Email = email;
+
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
         }
 
         public BaseAccount(int id, string username, string email, string password)
@@ -36,6 +38,9 @@ namespace Webapp.Models.Data
             UserName = username;
             Email = email;
             Password = password;
+
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
         }
 
         public string RatingPassword()

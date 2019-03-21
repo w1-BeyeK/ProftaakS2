@@ -5,13 +5,12 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public enum Gender { Male, Female };
+    public enum Gender { Male, Female, Other };
     public abstract class UserAccount : BaseAccount
     {
         //TODO : Moet dit in de constructor?
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
-        public string Mail { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 

@@ -8,6 +8,9 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
+        Patient GetPatientById(long id);
+        Doctor GetDoctorById(long id);
+
         bool ActivateDepartment(Department department, bool activate);
         bool ActivateDoctor(Doctor doctor, bool activate);
         bool ActivateInstitution(Institution institution, bool activate);

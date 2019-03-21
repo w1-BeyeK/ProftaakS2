@@ -14,6 +14,7 @@ using Webapp.Context;
 using Webapp.Context.Login;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
+using Webapp.Repository;
 
 namespace Webapp
 {
@@ -35,6 +36,9 @@ namespace Webapp
                 options.CheckConsentNeeded = context => false;
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
+
+            services.AddScoped<PatientRepository>();
+            services.AddScoped<DoctorRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();

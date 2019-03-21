@@ -16,6 +16,11 @@ namespace Webapp.Repository
             this.context = context;
         }
 
+        public Patient GetById(long id)
+        {
+            return context.GetPatientById(id);
+        }
+
         public Patient LoginPatient(string username, string password)
         {
             return context.LoginPatient(username, password);

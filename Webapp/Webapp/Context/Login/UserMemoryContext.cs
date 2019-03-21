@@ -16,7 +16,7 @@ namespace Webapp.Context.Login
         {
             accounts = new List<BaseAccount>()
             {
-                new Patient(1, "kevinbeye", "k.beye@student.fontys.nl", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==")
+                new Patient(12, "kevinbeye", "k.beye@student.fontys.nl", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==")
                 {
                     NormalizedUserName = "KEVINBEYE"
                 },
@@ -97,7 +97,7 @@ namespace Webapp.Context.Login
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                return Task.FromResult(accounts.FirstOrDefault(a => a.NormalizedUserName == normalizedUserName));
+                return Task.FromResult(accounts.FirstOrDefault(a => a.UserName.ToUpper() == normalizedUserName));
             }
             catch(Exception)
             {
