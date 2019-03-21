@@ -20,5 +20,10 @@ namespace Webapp.Models.Data
             Name = name;
             Description = description;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

@@ -25,5 +25,10 @@ namespace Webapp.Models.Data
             PhoneNumber = phoneNumber;
             Country = country;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

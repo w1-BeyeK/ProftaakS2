@@ -17,5 +17,10 @@ namespace Webapp.Models.Data
             Active = active;
             Description = description;
         }
+
+        public override string ToString()
+        {
+            return base.ToString();
+        }
     }
 }

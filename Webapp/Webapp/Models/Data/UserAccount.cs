@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace Webapp.Models.Data
 {
     public enum Gender { Male, Female };
-    public class UserAccount : BaseAccount
+    public abstract class UserAccount : BaseAccount
     {
         //TODO : Moet dit in de constructor?
         public DateTime Birth { get; set; }
@@ -24,11 +24,6 @@ namespace Webapp.Models.Data
         public UserAccount()
         {
 
-        }
-
-        public string ShowPersonalData()
-        {
-            throw new NotImplementedException();
         }
     }
 }
