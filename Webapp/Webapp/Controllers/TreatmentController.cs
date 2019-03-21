@@ -11,27 +11,18 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            List<Treatment> items = new List<Treatment>()
+            List<Treatment> items = new List<Treatment>();
+
+            string[] treat = { "VoetZoeken", "BeenHakken", "ArmAandraaien", "FipronilTrekken", "Oorsmeerpeuteren" };
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < 23; i++)
             {
-                new Treatment()
-                {
-                    Name = "VoetZoeken",
-                    BeginDate = DateTime.Now,
-                    EndDate = new DateTime(2020, 1, 18)
-                },
-                new Treatment()
-                {
-                    Name = "BeenHakken",
-                    BeginDate = DateTime.Now,
-                    EndDate = new DateTime(2020, 1, 18)
-                },
-                new Treatment()
-                {
-                    Name = "ArmAandraaien",
-                    BeginDate = DateTime.Now,
-                    EndDate = new DateTime(2020, 1, 18)
-                }
-            };
+                Treatment treatment = new Treatment(treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
+                items.Add(treatment);
+            }
+
             return View(items);
         }
 

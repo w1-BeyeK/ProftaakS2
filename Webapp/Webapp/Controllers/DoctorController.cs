@@ -22,7 +22,7 @@ namespace Webapp.Controllers
             {
                 Doctor doctor = new Doctor(i, "", "");
                 doctor.Name = "Sjaak " + i.ToString();
-                doctor.Function = functie[rnd.Next(4)];
+                doctor.Function = functie[rnd.Next(5)];
                 items.Add(doctor);
             }
 
