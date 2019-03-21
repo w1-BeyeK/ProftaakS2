@@ -20,8 +20,6 @@ namespace Webapp.Models.Data
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }
-
-        //TODO : Moet dit in de constructor?
         public IEnumerable<Department> Departments { get; set; }
         public IEnumerable<Treatment> Treatments { get; set; }
 
@@ -30,8 +28,28 @@ namespace Webapp.Models.Data
             Role = "patient";
         }
 
-        public Patient(int id, string username, string email, string password) : base(id, username, email, password)
+        public Patient(int id, string userName, string email, string password) : base(id, userName, email, password)
         {
+            Role = "patient";
+        }
+
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN, string contactPersonName, string contactPersonPhone, int houseNumber, string zipcode, bool privContactPersonName, bool privContactPersonPhone, bool privMail, bool privPhoneNumber, bool privAdress, bool privGender, bool privBirthDate, IEnumerable<Department> departments, IEnumerable<Treatment> treatments) : base (id, userName, email, password, name, birth, phoneNumber, mail, active, gender)
+        {
+            BSN = bSN;
+            ContactPersonName = contactPersonName;
+            ContactPersonPhone = contactPersonPhone;
+            HouseNumber = houseNumber;
+            Zipcode = zipcode;
+            PrivContactPersonName = privContactPersonName;
+            PrivContactPersonPhone = privContactPersonPhone;
+            PrivMail = privMail;
+            PrivPhoneNumber = privPhoneNumber;
+            PrivAdress = privAdress;
+            PrivGender = privGender;
+            PrivBirthDate = privBirthDate;
+            Departments = departments;
+            Treatments = treatments;
+
             Role = "patient";
         }
 
