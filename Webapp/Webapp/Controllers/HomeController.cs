@@ -3,18 +3,35 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Webapp.Interfaces;
 using Webapp.Models;
+using Webapp.Models.Data;
 
 namespace Webapp.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly UserManager<BaseAccount> userManager;
+        private readonly SignInManager<BaseAccount> signInManager;
+
+        public HomeController(
+                UserManager<BaseAccount> userManager,
+                SignInManager<BaseAccount> signInManager
+            )
+        {
+            this.userManager = userManager;
+            this.signInManager = signInManager;
+        }
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = "patient")]
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
@@ -22,20 +39,34 @@ namespace Webapp.Controllers
             return View();
         }
 
-        [HttpPost]
-        public IActionResult Login(string Username, string Password)
+        public async Task<IActionResult> Test()
         {
-            string s1 = Username;//
-            string s2 = Password;//
-            if(Username== "Admin" && Password == "Admin")
+            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test", "Test1234!"), "Test123!");
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(string username, string password)
+        {
+            if (ModelState.IsValid)
             {
-                ViewData["succes"] = "Login Succes";
-                ViewData["username"] = Username;
-                ViewData["password"] = Password;
-            }
-            else
-            {
-                ViewData["Message"] = "Login gefaald!!!!!!";
+                var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    if (HttpContext.User.IsInRole("admin"))
+                    {
+                        return RedirectToAction("about");
+                    }
+                    else
+                    {
+                        return RedirectToAction("contact");
+                    }
+                }
+                else
+                {
+                    return View();
+                }
             }
             return RedirectToAction("User");
         }
