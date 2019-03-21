@@ -15,6 +15,7 @@ namespace Webapp.Controllers
             HttpContext.Session.SetString("loginType", "admin");
             List<Department> items = new List<Department>()
             {
+                /*
                 new Department()
                 {
                     Name = "Hartafdeling",
@@ -155,6 +156,7 @@ namespace Webapp.Controllers
                     Name = "Röngtenafdeling",
                     Description = "Hier worden röngtenfoto's gemaakt"
                 }
+                */
             };
             return View(items);
         }

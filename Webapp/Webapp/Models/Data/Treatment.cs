@@ -24,6 +24,11 @@ namespace Webapp.Models.Data
             EndDate = endDate;
         }
 
+        public Treatment()
+        {
+
+        }
+
         public int DaysUntilTreatment()
         {
             throw new NotImplementedException();
