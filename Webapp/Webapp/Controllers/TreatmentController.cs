@@ -34,5 +34,15 @@ namespace Webapp.Controllers
             };
             return View(items);
         }
+
+        public IActionResult AddTreatment()
+        {
+            return View();
+        }
+
+        public IActionResult EditTreatment()
+        {
+            return View();
+        }
     }
 }
