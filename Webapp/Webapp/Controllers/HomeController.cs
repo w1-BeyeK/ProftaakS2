@@ -71,6 +71,18 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [HttpGet]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+           if (User?.Identity.IsAuthenticated == true)
+            {
+                await signInManager.SignOutAsync();
+            }
+
+            return View();
+        }        
+        
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
