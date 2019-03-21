@@ -68,7 +68,7 @@ namespace Webapp.Controllers
                     return View();
                 }
             }
-            return View();
+            return RedirectToAction("User");
         }
 
         public IActionResult Contact()
@@ -79,6 +79,16 @@ namespace Webapp.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult User()
+        {
+            return View();
+        }
+
+        public IActionResult Doctor()
         {
             return View();
         }
