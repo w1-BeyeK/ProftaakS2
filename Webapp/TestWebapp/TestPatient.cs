@@ -16,6 +16,7 @@ namespace TestWebapp
             string role = "patient";
             Patient patient1 = new Patient(1, username, email);
             Patient patient2 = new Patient(2, username, email, password);
+            Patient patient3 = new Patient(3, username, email, password);
 
             Assert.Equal(username, patient1.UserName);
             Assert.Equal(email, patient1.Email);

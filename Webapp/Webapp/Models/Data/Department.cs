@@ -22,10 +22,5 @@ namespace Webapp.Models.Data
         {
             return base.ToString();
         }
-
-        //TODO: Verwijder later
-        public Department()
-        {
-        }
     }
 }

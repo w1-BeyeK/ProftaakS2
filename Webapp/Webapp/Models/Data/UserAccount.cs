@@ -10,7 +10,6 @@ namespace Webapp.Models.Data
     {
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
-        public string Mail { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
@@ -20,11 +19,11 @@ namespace Webapp.Models.Data
         public UserAccount(int id, string userName, string email, string password) : base(id, userName, email, password)
         { }
 
-        public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender) : base(id, userName, email, password, name)
+        public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name)
         {
             Birth = birth;
             PhoneNumber = phoneNumber;
-            Mail = mail;
+            Email = email;
             Active = active;
             Gender = gender;
         }
