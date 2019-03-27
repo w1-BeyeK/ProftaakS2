@@ -21,7 +21,7 @@ namespace TestWebapp
             string role = "doctor";
 
             Doctor doctor1 = new Doctor(1, username, email);
-            Doctor doctor2 = new Doctor(2, username, email, "Haha", name, birthDate, phoneNumber, active, gender);
+            Doctor doctor2 = new Doctor(2, username, email, password, name, birthDate, phoneNumber, active, gender);
 
             Assert.Equal(username, doctor1.UserName);
             Assert.Equal(email, doctor1.Email);
