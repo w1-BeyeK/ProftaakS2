@@ -80,7 +80,7 @@ namespace Webapp.Controllers
                 await signInManager.SignOutAsync();
             }
 
-            return View();
+            return RedirectToAction("index");
         }        
         
         public IActionResult Contact()
