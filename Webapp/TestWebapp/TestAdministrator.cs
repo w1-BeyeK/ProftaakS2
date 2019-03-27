@@ -14,17 +14,21 @@ namespace TestWebapp
             string password = "Sjoeki";
             string email = "Henk@gmail.com";
             string role = "admin";
+            string name = "Henk";
+            long employeeNumber = 2138129;
 
-            Administrator administrator1 = new Administrator(1, username, email);
-            Administrator administrator2 = new Administrator(2, username, email, password);
+            Administrator administrator = new Administrator(1, username, email, password, name)
+            {
+                EmployeeNumber = employeeNumber
+            };
 
-            Assert.Equal(username, administrator1.UserName);
-            Assert.Equal(email, administrator1.Email);
-            Assert.Equal(role, administrator1.Role);
-            Assert.Equal(username, administrator2.UserName);
-            Assert.Equal(email, administrator2.Email);
-            Assert.Equal(password, administrator2.Password);
-            Assert.Equal(role, administrator2.Role);
+            Assert.Equal(1, administrator.Id);
+            Assert.Equal(username, administrator.UserName);
+            Assert.Equal(email, administrator.Email);
+            Assert.Equal(password, administrator.Password);
+            Assert.Equal(name, administrator.Name);
+            Assert.Equal(employeeNumber, administrator.EmployeeNumber);
+            Assert.Equal(role, administrator.Role);
         }
     }
 }

@@ -13,8 +13,8 @@ namespace TestWebapp
             string name = "Kaakbehandeling";
             DateTime beginDate = new DateTime(2010-02-10);
             DateTime endDate = new DateTime(2010-03-20);
-            Patient patient = new Patient(1, "username", "email", "password");
-            Doctor doctor = new Doctor(1, "username", "password");
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment(name, beginDate, endDate, patient, doctor, treatmentType);
 
@@ -26,8 +26,8 @@ namespace TestWebapp
         [Fact]
         public void AddComment()
         {
-            Patient patient = new Patient(1, "username", "email");
-            Doctor doctor = new Doctor(1, "username", "password");
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
             Comment comment = new Comment("title", "description", DateTime.Today, treatment);
@@ -43,8 +43,8 @@ namespace TestWebapp
         [Fact]
         public void TestToString()
         {
-            Patient patient = new Patient(1, "username", "email");
-            Doctor doctor = new Doctor(1, "username", "password");
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
 

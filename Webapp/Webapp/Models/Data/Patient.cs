@@ -25,9 +25,18 @@ namespace Webapp.Models.Data
 
         public Patient(int id, string userName, string email, string password,string name) : base(id, userName, email, password,name)
         {
-            Role = "patient";
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
+
+            Role = "patient";
+
+            PrivAdress = true;
+            PrivBirthDate = true;
+            PrivContactPersonName = true;
+            PrivContactPersonPhone = true;
+            PrivGender = true;
+            PrivMail = true;
+            PrivPhoneNumber = true;
         }
 
         public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
@@ -37,6 +46,14 @@ namespace Webapp.Models.Data
             Treatments = new List<Treatment>();
 
             Role = "patient";
+
+            PrivAdress = true;
+            PrivBirthDate = true;
+            PrivContactPersonName = true;
+            PrivContactPersonPhone = true;
+            PrivGender = true;
+            PrivMail = true;
+            PrivPhoneNumber = true;
         }
 
         public void AddDepartment(Department department)

@@ -18,23 +18,29 @@ namespace TestWebapp
             string phoneNumber = "0428375212";
             bool active = true;
             Gender gender = Gender.Female;
+            string function = "Kaakchirurg";
+            long employeeNumber = 2138128;
             string role = "doctor";
 
-            Doctor doctor1 = new Doctor(1, username, email);
-            Doctor doctor2 = new Doctor(2, username, email, password, name, birthDate, phoneNumber, active, gender);
 
-            Assert.Equal(username, doctor1.UserName);
-            Assert.Equal(email, doctor1.Email);
-            Assert.Equal(role, doctor1.Role);
-            Assert.Equal(username, doctor2.UserName);
-            Assert.Equal(email, doctor2.Email);
-            Assert.Equal(password, doctor2.Password);
-            Assert.Equal(name, doctor2.Name);
-            Assert.Equal(birthDate, doctor2.Birth);
-            Assert.Equal(phoneNumber, doctor2.PhoneNumber);
-            Assert.Equal(active, doctor2.Active);
-            Assert.Equal(gender, doctor2.Gender);
-            Assert.Equal(role, doctor2.Role);
+            Doctor doctor = new Doctor(1, username, email, password, name, birthDate, phoneNumber, active, gender)
+            {
+                Function = function,
+                EmployeeNumber = employeeNumber
+            };
+
+            Assert.Equal(1, doctor.Id);
+            Assert.Equal(username, doctor.UserName);
+            Assert.Equal(email, doctor.Email);
+            Assert.Equal(role, doctor.Role);
+            Assert.Equal(name, doctor.Name);
+            Assert.Equal(birthDate, doctor.Birth);
+            Assert.Equal(phoneNumber, doctor.PhoneNumber);
+            Assert.Equal(active, doctor.Active);
+            Assert.Equal(gender, doctor.Gender);
+            Assert.Equal(function, doctor.Function);
+            Assert.Equal(employeeNumber, doctor.EmployeeNumber);
+            Assert.Equal(role, doctor.Role);
         }
     }
 }

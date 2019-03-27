@@ -37,9 +37,8 @@ namespace TestWebapp
         [Fact]
         public void AddDoctor()
         {
-            
-            Doctor doctor = new Doctor(1, "username", "password");
-            Doctor doctor2 = new Doctor(2, "username", "password");
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            Doctor doctor2 = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
 
             treatmentType.AddDoctor(doctor);
@@ -52,8 +51,8 @@ namespace TestWebapp
         [Fact]
         public void AddTreatment()
         {
-            Patient patient = new Patient(1, "username", "email");
-            Doctor doctor = new Doctor(1, "username", "password");
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
             Treatment treatment2 = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
