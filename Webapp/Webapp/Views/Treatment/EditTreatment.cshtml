@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Webapp.Models.Data.Treatment
+@{
     ViewData["Title"] = "Behandeling";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -19,19 +20,19 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="//Naam van de patiënt//" title="//Naam van de patiënt//">
+                                <input type="text" class="form-control" name="patientname" id="patientname" value="@Model.Patient.Name" title="//Naam van de patiënt//">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="Age"><h4>Behandelingsnaam</h4></label>
-                                <input type="text" class="form-control" name="age" id="age" placeholder="Naam van de behandeling" title="Naam van de behandeling.">
+                                <input type="text" class="form-control" name="treatmentname" id="treatmentname" value="@Model.Name" title="Naam van de behandeling.">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Behandelingstype</h4></label>
-                                <select type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Type van de behandeling" title="Type van de behandeling.">
+                                <select type="text" class="form-control" name="treatmenttype" id="treatmenttype" value="@Model.TreatmentType" title="Type van de behandeling.">
                                     naam
                                     optie 2
                                     optie 3
@@ -41,7 +42,7 @@
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Begindate"><h4>Begindatum</h4></label>
-                                <input type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling">
+                                <input type="date" class="form-control" name="begindate" id="begindate" value="@Model.BeginDate.ToString("MM/DD/YYYY") " title="Begindatum behandeling">
                             </div>
                         </div>
                         <div class="form-group">
@@ -53,7 +54,7 @@
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Enddate"><h4>Einddatum</h4></label>
-                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling">
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="@Model.EndDate" title="Einddatum behandeling">
                             </div>
                         </div>
                         <div class="form-group">
@@ -68,6 +69,7 @@
                                 <input type="text" class="form-control" name="comments" id="comments" placeholder="Bericht" title="Bericht.">
                                 <br />
                                 <br />
+                                <button type="submit" class="btn btn-primary" asp-action="Index" formmethod="post">Pas Aan</button>
                             </div>
                         </div>
                     </form>

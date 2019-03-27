@@ -8,6 +8,7 @@ namespace Webapp.Models.Data
     public class Treatment
     {
         public string Name { get; set; }
+        public int Id { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
 
@@ -17,8 +18,9 @@ namespace Webapp.Models.Data
         public TreatmentType TreatmentType { get; set; }
         public IEnumerable<Comment> Comments { get; set; }
 
-        public Treatment(string name, DateTime beginDate, DateTime endDate)
+        public Treatment(int id, string name, DateTime beginDate, DateTime endDate)
         {
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;

@@ -19,7 +19,7 @@ namespace Webapp.Controllers
 
             for (int i = 0; i < 23; i++)
             {
-                Treatment treatment = new Treatment(treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
+                Treatment treatment = new Treatment(i, treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
                 items.Add(treatment);
             }
 
@@ -33,7 +33,8 @@ namespace Webapp.Controllers
 
         public IActionResult EditTreatment()
         {
-            return View();
+            Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
+            return View(treatment);
         }
     }
 }
