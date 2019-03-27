@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Conv
 {
-    public class TreatmentConverter
+    public class TreatmentViewModelConverter
     {
         public Treatment ViewModelToTreatment(TreatmentDetailViewModel vm)
         {

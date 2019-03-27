@@ -3,13 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Webapp.Context;
 using Webapp.Conv;
+using Webapp.Interfaces;
 using Webapp.Models.Data;
+using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
     public class TreatmentController : Controller
     {
+        IContext context;
+        TreatmentRepository repo;
+        TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+
+        public TreatmentController()
+        {
+            context = TestContext.GetInstance();
+            //repo = new TreatmentRepository(context);
+        }
+
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
@@ -32,7 +45,8 @@ namespace Webapp.Controllers
             return View();
         }
 
-        public IActionResult EditTreatment(int Id)
+        [HttpGet]
+        public IActionResult EditTreatment()
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
             Patient patient = new Patient()
@@ -43,6 +57,12 @@ namespace Webapp.Controllers
             treatment.Patient = patient;
             TreatmentConverter converter = new TreatmentConverter();
             return View(converter.ViewModelFromTreatment(treatment));
+        }
+
+        [HttpPost]
+        public IActionResult EditTreatment()
+        {
+            return View();
         }
     }
 }
