@@ -26,27 +26,20 @@ namespace Webapp.Models.Data
         public Patient(int id, string username, string email) : base(id, username, email)
         {
             Role = "patient";
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
         }
 
         public Patient(int id, string userName, string email, string password) : base(id, userName, email, password)
         {
             Role = "patient";
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
         }
 
-        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN, string contactPersonName, string contactPersonPhone, int houseNumber, string zipcode, bool privContactPersonName, bool privContactPersonPhone, bool privMail, bool privPhoneNumber, bool privAdress, bool privGender, bool privBirthDate) : base (id, userName, email, password, name, birth, phoneNumber, active, gender)
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             BSN = bSN;
-            ContactPersonName = contactPersonName;
-            ContactPersonPhone = contactPersonPhone;
-            HouseNumber = houseNumber;
-            Zipcode = zipcode;
-            PrivContactPersonName = privContactPersonName;
-            PrivContactPersonPhone = privContactPersonPhone;
-            PrivMail = privMail;
-            PrivPhoneNumber = privPhoneNumber;
-            PrivAdress = privAdress;
-            PrivGender = privGender;
-            PrivBirthDate = privBirthDate;
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
 
