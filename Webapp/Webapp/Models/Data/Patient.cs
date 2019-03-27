@@ -23,21 +23,14 @@ namespace Webapp.Models.Data
         public List<Department> Departments { get; set; }
         public List<Treatment> Treatments { get; set; }
 
-        public Patient(int id, string username, string email) : base(id, username, email)
+        public Patient(int id, string userName, string email, string password,string name) : base(id, userName, email, password,name)
         {
             Role = "patient";
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
         }
 
-        public Patient(int id, string userName, string email, string password) : base(id, userName, email, password)
-        {
-            Role = "patient";
-            Departments = new List<Department>();
-            Treatments = new List<Treatment>();
-        }
-
-        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             BSN = bSN;
             Departments = new List<Department>();

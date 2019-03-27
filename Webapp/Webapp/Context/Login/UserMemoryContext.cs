@@ -16,12 +16,12 @@ namespace Webapp.Context.Login
         {
             accounts = new List<BaseAccount>()
             {
-                new Patient(1, "kevinbeye", "k.beye@student.fontys.nl", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==")
+                new Patient(1, "kevinbeye", "k.beye@student.fontys.nl", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==","Kevin")
                 {
                     NormalizedUserName = "KEVINBEYE"
                 },
-                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "test123"),
-                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "test123"),
+                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "test123","Kevin"),
+                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "test123","Kevin"),
             };
 
         }

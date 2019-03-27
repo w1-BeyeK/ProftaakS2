@@ -13,10 +13,7 @@ namespace Webapp.Models.Data
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
-        public UserAccount(int id, string userName, string email) : base(id, userName, email)
-        { }
-
-        public UserAccount(int id, string userName, string email, string password) : base(id, userName, email, password)
+        public UserAccount(int id, string userName, string email, string password, string name) : base(id, userName, email, password, name)
         { }
 
         public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name)

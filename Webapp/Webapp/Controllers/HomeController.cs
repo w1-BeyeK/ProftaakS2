@@ -41,7 +41,7 @@ namespace Webapp.Controllers
 
         public async Task<IActionResult> Test()
         {
-            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test", "Test1234!"), "Test123!");
+            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Test1234!","Kevin"), "Test123!");
 
             return View();
         }

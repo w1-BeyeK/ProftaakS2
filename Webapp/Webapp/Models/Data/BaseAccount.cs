@@ -18,22 +18,7 @@ namespace Webapp.Models.Data
         //Deze moet wellicht weg? Ligt eraan wat handig is!
         public string NormalizedUserName { get; set; }
 
-        public BaseAccount(long id, string userName, string email)
-        {
-            Id = id;
-            UserName = userName;
-            Email = email;
-        }
-
-        public BaseAccount(long id, string userName, string email, string password)
-        {
-            Id = id;
-            UserName = userName;
-            Email = email;
-            Password = password;
-        }
-
-        protected BaseAccount(long id, string userName, string email, string password, string name)
+        public BaseAccount(long id, string userName, string email, string password, string name)
         {
             Id = id;
             UserName = userName;
