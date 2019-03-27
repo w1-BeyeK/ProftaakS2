@@ -40,13 +40,22 @@ namespace Webapp.Controllers
             return View(items);
         }
 
+        [HttpGet]
         public IActionResult AddTreatment()
         {
             return View();
         }
 
+        //TODO : Voeg extra parameters toe!
+        [HttpPost]
+        public IActionResult AddTreatment(string name, string age, string treatment)
+        {
+            //Sla het op
+            return View();
+        }
+
         [HttpGet]
-        public IActionResult EditTreatment()
+        public IActionResult EditTreatment(int id)
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
             Patient patient = new Patient()
@@ -55,7 +64,7 @@ namespace Webapp.Controllers
                 Name = "Grietje"
             };
             treatment.Patient = patient;
-            TreatmentConverter converter = new TreatmentConverter();
+            TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
             return View(converter.ViewModelFromTreatment(treatment));
         }
 
