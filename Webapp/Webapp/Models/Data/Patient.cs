@@ -35,6 +35,11 @@ namespace Webapp.Models.Data
             Role = "patient";
         }
 
+        public Patient()
+        {
+
+        }
+
         public int GetAge()
         {
             throw new NotImplementedException();
