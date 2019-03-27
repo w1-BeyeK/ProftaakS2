@@ -13,9 +13,9 @@ namespace Webapp.Models.Data
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
-        public Treatment(string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType, IEnumerable<Comment> comments)
+        public Treatment(string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
         {
             Name = name;
             BeginDate = beginDate;
@@ -23,7 +23,12 @@ namespace Webapp.Models.Data
             Patient = patient;
             Doctor = doctor;
             TreatmentType = treatmentType;
-            Comments = comments;
+            Comments = new List<Comment>();
+        }
+
+        public void AddComment(Comment comment)
+        {
+            Comments.Add(comment);
         }
 
         public int DaysUntilTreatment()

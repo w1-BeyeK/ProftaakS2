@@ -20,8 +20,8 @@ namespace Webapp.Models.Data
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
+        public List<Department> Departments { get; set; }
+        public List<Treatment> Treatments { get; set; }
 
         public Patient(int id, string username, string email) : base(id, username, email)
         {
@@ -33,7 +33,7 @@ namespace Webapp.Models.Data
             Role = "patient";
         }
 
-        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN, string contactPersonName, string contactPersonPhone, int houseNumber, string zipcode, bool privContactPersonName, bool privContactPersonPhone, bool privMail, bool privPhoneNumber, bool privAdress, bool privGender, bool privBirthDate, IEnumerable<Department> departments, IEnumerable<Treatment> treatments) : base (id, userName, email, password, name, birth, phoneNumber, mail, active, gender)
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN, string contactPersonName, string contactPersonPhone, int houseNumber, string zipcode, bool privContactPersonName, bool privContactPersonPhone, bool privMail, bool privPhoneNumber, bool privAdress, bool privGender, bool privBirthDate) : base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             BSN = bSN;
             ContactPersonName = contactPersonName;
@@ -47,10 +47,20 @@ namespace Webapp.Models.Data
             PrivAdress = privAdress;
             PrivGender = privGender;
             PrivBirthDate = privBirthDate;
-            Departments = departments;
-            Treatments = treatments;
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
 
             Role = "patient";
+        }
+
+        public void AddDepartment(Department department)
+        {
+            Departments.Add(department);
+        }
+
+        public void AddTreatment(Treatment treatment)
+        {
+            Treatments.Add(treatment);
         }
 
         public int GetAge()

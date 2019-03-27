@@ -10,23 +10,22 @@ namespace TestWebapp
         [Fact]
         public void InstitutionConstructor()
         {
-            string username = "Henk";
-            string password = "Sjoeki";
-            string email = "Henk@gmail.com";
-            string role = "admin";
+            string name = "Ziekenhuis Gezond";
+            int houseNumber = 1;
+            string zipcode = "5022 DM";
+            string phoneNumber = "0885080000";
+            string country = "Nederland";
+            Administrator administrator = new Administrator(1, "username", "email");
 
-            Administrator administrator1 = new Administrator(1, username, email);
-            Administrator administrator2 = new Administrator(2, username, email, password);
-            Administrator administrator3 = new Administrator();
+            Institution institution = new Institution(name, houseNumber, zipcode, phoneNumber, country, administrator);
 
-            Assert.Equal(username, administrator1.UserName);
-            Assert.Equal(email, administrator1.Email);
-            Assert.Equal(role, administrator1.Role);
-            Assert.Equal(username, administrator2.UserName);
-            Assert.Equal(email, administrator2.Email);
-            Assert.Equal(password, administrator2.Password);
-            Assert.Equal(role, administrator2.Role);
-            Assert.Equal(role, administrator3.Role);
+            Assert.Equal(name, institution.Name);
+            Assert.Equal(houseNumber, institution.HouseNumber);
+            Assert.Equal(zipcode, institution.Zipcode);
+            Assert.Equal(phoneNumber, institution.PhoneNumber);
+            Assert.Equal(country, institution.Country);
+            Assert.Equal(administrator, institution.Administrator);
+
         }
     }
 }

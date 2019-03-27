@@ -9,17 +9,33 @@ namespace Webapp.Models.Data
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Doctor> Doctors { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
+        public List<Department> Departments { get; set; }
+        public List<Doctor> Doctors { get; set; }
+        public List<Treatment> Treatments { get; set; }
 
-        public TreatmentType(string name, string description, IEnumerable<Department> departments, IEnumerable<Doctor> doctors, IEnumerable<Treatment> treatments)
+        public TreatmentType(string name, string description)
         {
             Name = name;
             Description = description;
-            Departments = departments;
-            Doctors = doctors;
-            Treatments = treatments;
+            Departments = new List<Department>();
+            Doctors = new List<Doctor>();
+            Treatments = new List<Treatment>();
+        }
+
+
+        public void AddDoctor(Doctor doctor)
+        {
+            Doctors.Add(doctor);
+        }
+
+        public void AddDepartment(Department department)
+        {
+            Departments.Add(department);
+        }
+
+        public void AddTreatment(Treatment treatment)
+        {
+            Treatments.Add(treatment);
         }
 
         public override string ToString()

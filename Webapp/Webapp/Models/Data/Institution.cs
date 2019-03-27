@@ -13,9 +13,9 @@ namespace Webapp.Models.Data
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
         public Administrator Administrator { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
+        public List<Department> Departments { get; set; }
 
-        public Institution(string name, int houseNumber, string zipcode, string phoneNumber, string country, Administrator administrator, IEnumerable<Department> departments)
+        public Institution(string name, int houseNumber, string zipcode, string phoneNumber, string country, Administrator administrator)
         {
             Name = name;
             HouseNumber = houseNumber;
@@ -23,7 +23,12 @@ namespace Webapp.Models.Data
             PhoneNumber = phoneNumber;
             Country = country;
             Administrator = administrator;
-            Departments = departments;
+            Departments = new List<Department>();
+        }
+
+        public void AddDepartment(Department department)
+        {
+            Departments.Add(department);
         }
 
         public override string ToString()

@@ -18,7 +18,7 @@ namespace Webapp.Models.Data
             EmployeeNumber = Id;
         }
 
-        public Doctor(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender) : base(id, userName, email, password, name, birth, phoneNumber, mail, active, gender)
+        public Doctor(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             Role = "doctor";
             EmployeeNumber = Id;
