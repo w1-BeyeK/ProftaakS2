@@ -15,7 +15,7 @@
     <div class="row">
         <div class="col-sm-9">
             <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
                 <li><a data-toggle="tab" href="#messages">Privacy</a></li>
             </ul>
 
@@ -118,21 +118,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password"><h4>Wachtwoord</h4></label>
-                                <input type="password" class="form-control" name="password" id="password" placeholder="Wachtwoord" title="Voer je wachtwoord in.">
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="password2"><h4>Wachtwoord bevestigen</h4></label>
-                                <input type="password" class="form-control" name="password2" id="password2" placeholder="Wachtwoord bevestigen" title="Voer nog een keer je wachtwoord in.">
-                            </div>
-                        </div>
-
 
                         <div class="form-group">
                             <div class="form-group">
@@ -168,7 +153,8 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone">
+
                                     <span class="slider"></span>
                                 </label>
                                 Contact persoon telefoonnummer
@@ -177,7 +163,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonName">
                                     <span class="slider"></span>
                                 </label>
                                 Contact persoon naam
@@ -188,7 +174,7 @@
 
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivBirthDate">
                                     <span class="slider"></span>
                                 </label>
                                 Geboortedatum
@@ -198,7 +184,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivMail">
                                     <span class="slider"></span>
                                 </label>
                                 Email
@@ -208,17 +194,17 @@
 
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivPhoneNumber">
                                     <span class="slider"></span>
                                 </label>
                                 Telefoonnummer
                             </div>
                         </div>
-                        <div class="form-group">
+                        <div ifass="form-group">
 
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivAdress">
                                     <span class="slider"></span>
                                 </label>
                                 Adres
@@ -228,11 +214,15 @@
 
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox">
+                                    <input type="checkbox" checked="@Model.Patient.PrivGender">
                                     <span class="slider"></span>
                                 </label>
                                 Geslacht
                             </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <br>
+                            <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Opslaan</button>
                         </div>
                     </form>
 
@@ -282,20 +272,6 @@
                                 <div class="col-xs-6">
                                     <label for="email"><h4>Location</h4></label>
                                     <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="password"><h4>Wachtwoord</h4></label>
-                                    <input type="password" class="form-control" name="password" id="password" placeholder="password" title="voer je wachtwoord in.">
-                                </div>
-                            </div>
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="password2"><h4>Verify</h4></label>
-                                    <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
                                 </div>
                             </div>
                             <div class="form-group">

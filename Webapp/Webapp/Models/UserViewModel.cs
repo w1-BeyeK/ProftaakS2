@@ -8,7 +8,7 @@ namespace Webapp.Models
 {
     public class UserViewModel
     {
-        public Patient Patient { get; set; } 
+        public PatientDetailViewModel Patient { get; set; } 
         public Doctor Doctor { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Webapp.Models.Data
 
         public UserAccount(int id, string username, string email, string password) : base(id, username, email, password)
         { }
-
+        
         public UserAccount()
         {
 
