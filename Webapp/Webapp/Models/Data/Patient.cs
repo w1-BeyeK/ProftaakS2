@@ -37,13 +37,12 @@ namespace Webapp.Models.Data
             Treatments = new List<Treatment>();
         }
 
-        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, string mail, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
+            Role = "patient";
             BSN = bSN;
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
-
-            Role = "patient";
         }
 
         public void AddDepartment(Department department)

@@ -22,5 +22,33 @@ namespace TestWebapp
             Assert.Equal(beginDate, treatment.BeginDate);
             Assert.Equal(endDate, treatment.EndDate);
         }
+
+        [Fact]
+        public void AddComment()
+        {
+            Patient patient = new Patient(1, "username", "email");
+            Doctor doctor = new Doctor(1, "username", "password");
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+            Comment comment = new Comment("title", "description", DateTime.Today, treatment);
+            Comment comment2 = new Comment("title", "description", DateTime.Today, treatment);
+
+            treatment.AddComment(comment);
+            treatment.AddComment(comment2);
+
+            Assert.True(treatment.Comments.Exists(c => c == comment));
+            Assert.Equal(2, treatment.Comments.Count);
+        }
+
+        [Fact]
+        public void TestToString()
+        {
+            Patient patient = new Patient(1, "username", "email");
+            Doctor doctor = new Doctor(1, "username", "password");
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+
+            Assert.Equal("Webapp.Models.Data.Treatment", treatment.ToString());
+        }
     }
 }
