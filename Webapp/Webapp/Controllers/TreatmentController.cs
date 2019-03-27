@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Webapp.Conv;
 using Webapp.Models.Data;
 
 namespace Webapp.Controllers
@@ -31,10 +32,17 @@ namespace Webapp.Controllers
             return View();
         }
 
-        public IActionResult EditTreatment()
+        public IActionResult EditTreatment(int Id)
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
-            return View(treatment);
+            Patient patient = new Patient()
+            {
+                Id = 0,
+                Name = "Grietje"
+            };
+            treatment.Patient = patient;
+            TreatmentConverter converter = new TreatmentConverter();
+            return View(converter.ViewModelFromTreatment(treatment));
         }
     }
 }

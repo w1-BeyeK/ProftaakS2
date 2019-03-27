@@ -1,4 +1,4 @@
-﻿@model Webapp.Models.Data.Treatment
+﻿@model Webapp.Models.TreatmentDetailViewModel
 @{
     ViewData["Title"] = "Behandeling";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
-                                <input type="text" class="form-control" name="patientname" id="patientname" value="@Model.Patient.Name" title="//Naam van de patiënt//">
+                                <input type="text" class="form-control" name="patientname" id="patientname" value="@Model.PatientName" title="//Naam van de patiënt//">
                             </div>
                         </div>
                         <div class="form-group">
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Behandelingstype</h4></label>
-                                <select type="text" class="form-control" name="treatmenttype" id="treatmenttype" value="@Model.TreatmentType" title="Type van de behandeling.">
+                                <select type="text" class="form-control" name="treatmenttype" id="treatmenttype" value="Model.TreatmentType" title="Type van de behandeling.">
                                     naam
                                     optie 2
                                     optie 3
@@ -42,13 +42,13 @@
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Begindate"><h4>Begindatum</h4></label>
-                                <input type="date" class="form-control" name="begindate" id="begindate" value="@Model.BeginDate.ToString("MM/DD/YYYY") " title="Begindatum behandeling">
+                                <input type="date" class="form-control" name="begindate" id="begindate" value="@Model.BeginDate" title="Begindatum behandeling">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="BeginTime"><h4>Tijd</h4></label>
-                                <input type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling">
+                                <input type="time" class="form-control" name="beginTime" id="beginTime" value="@Model.BeginDate.ToShortTimeString()" title="Begintijd behandeling">
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,7 +60,7 @@
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="EndTime"><h4>Tijd</h4></label>
-                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling">
+                                <input type="time" class="form-control" name="endTime" id="endTime" value="@Model.EndDate.ToShortTimeString()" title="Eindtijd behandeling">
                             </div>
                         </div>
                         <div class="form-group">
