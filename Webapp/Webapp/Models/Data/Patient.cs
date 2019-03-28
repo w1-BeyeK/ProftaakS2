@@ -73,7 +73,8 @@ namespace Webapp.Models.Data
 
         public int GetAge()
         {
-            throw new NotImplementedException();
+            int age = (int)((DateTime.Today - Birth).Days / 365.25);
+            return age;
         }
     }
 }
