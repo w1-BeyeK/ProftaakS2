@@ -23,6 +23,21 @@ namespace Webapp.Context.Login
                 },
                 new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "Kevin"),
                 new Patient(3, "w@ng", "w@ng@student.fontys.nl", "Kevin"),
+                new Patient(12, "patient", "patient", "patient")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "PATIENT"
+                },
+                new Doctor(12, "doctor", "doctor", "doctor")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "DOCTOR"
+                },
+                new Administrator(12, "admin", "admin", "admin")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "ADMIN"
+                },
             };
 
         }

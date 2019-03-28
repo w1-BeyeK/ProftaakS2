@@ -49,7 +49,7 @@ namespace Webapp.Context
             };
             doctors = new List<Doctor>()
             {
-                new Doctor(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin")
+                new Doctor(12, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
                 {
                     Active = true,
                     Birth = DateTime.Now,
@@ -72,8 +72,9 @@ namespace Webapp.Context
                     Name = "Zowarmarollen",
                     Id = 1,
                     BeginDate = DateTime.Now,
-                    EndDate = DateTime.Today
-                    
+                    EndDate = DateTime.Today,
+                    Patient = patients.Find(t => t.Id == 12),
+                    Doctor = doctors.Find(t => t.Id == 12)
                 }
             };
         }

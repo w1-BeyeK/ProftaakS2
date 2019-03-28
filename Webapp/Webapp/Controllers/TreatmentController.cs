@@ -64,17 +64,20 @@ namespace Webapp.Controllers
             {
                 Id = patientid,
             };
+
+            //Type = treatmenttype,
             TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
             {
                 Name = treatmentname,
-                //Type = treatmenttype,
                 BeginDate = begindate + begintime,
                 EndDate = begindate + begintime,
                 Comment = comment,
                 PatientDetailViewModel = patientDetail,
             };
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
-            repo.AddTreatment(treatment);
+            bool gelukt = repo.AddTreatment(treatment, doctorId, patientId);
+
+            ViewBag.Bericht = gelukt.ToString();
             return View();
         }
 

@@ -49,5 +49,16 @@ namespace Webapp.Converters
             };
             return vm;
         }
+
+        internal List<TreatmentDetailViewModel> TreatmentsToViewModel(List<Treatment> treatments)
+        {
+            List<TreatmentDetailViewModel> result = new List<TreatmentDetailViewModel>();
+
+            foreach(Treatment treatment in treatments)
+            {
+                result.Add(TreatmentToViewModel(treatment));
+            }
+            return result;
+        }
     }
 }
