@@ -26,15 +26,15 @@ namespace Webapp.Controllers
             repo = new TreatmentRepository(context);
         }
 
-        //[Authorize(Roles = "Doctor, Patient")]
+        [Authorize(Roles = "doctor, patient")]
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
-            if (User.IsInRole("Doctor"))
+            if (User.IsInRole("doctor"))
             {
                 items = repo.ShowTreatmentsByDoctorId(GetUserId());
             }
-            else if (User.IsInRole("Patient"))
+            else if (User.IsInRole("patient"))
             {
                 items = repo.ShowTreatmentsByPatientId(GetUserId());
             }
@@ -63,6 +63,8 @@ namespace Webapp.Controllers
         string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             //Sla het op
+
+            repo.AddTreatment();
             return View();
         }
 
