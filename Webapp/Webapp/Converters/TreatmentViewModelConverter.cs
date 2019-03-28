@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Webapp.Models;
 using Webapp.Models.Data;
 
-namespace Webapp.Conv
+namespace Webapp.Converters
 {
     public class TreatmentViewModelConverter
     {

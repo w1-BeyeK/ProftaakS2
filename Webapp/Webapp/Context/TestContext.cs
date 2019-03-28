@@ -212,12 +212,14 @@ namespace Webapp.Context
 
         public List<Treatment> ShowTreatments(Patient patient)
         {
-            throw new NotImplementedException();
+            List<Treatment> Treatments = treatments.FindAll(t => t.Patient.Id == patient.Id);
+            return Treatments;
         }
 
         public List<Treatment> ShowTreatments(Doctor doctor)
         {
-            throw new NotImplementedException();
+            List<Treatment> Treatments = treatments.FindAll(t => t.Doctor.Id == doctor.Id);
+            return Treatments;
         }
 
         public List<TreatmentType> ShowTreatmentTypes(Department department)
