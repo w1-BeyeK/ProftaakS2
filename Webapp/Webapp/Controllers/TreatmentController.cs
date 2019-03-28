@@ -48,7 +48,8 @@ namespace Webapp.Controllers
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult AddTreatment(string name, string age, string treatment)
+        public IActionResult AddTreatment(long patientid, string patientname, string treatmentname, 
+        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             //Sla het op
             return View();
@@ -69,7 +70,8 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        public IActionResult EditTreatment()
+        public IActionResult AddTreatment(string patientname, string treatmentname,
+        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             return View();
         }
