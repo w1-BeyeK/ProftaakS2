@@ -30,16 +30,16 @@ namespace Webapp.Repository
         /// Shows treatments of a patient
         /// </summary>
         /// <param name="patient"></param>
-        public List<Treatment> ShowTreatments(Patient patient)
+        public List<Treatment> ShowTreatmentsByPatientId(long patientId)
         {
-            return context.ShowTreatments(patient);
+            return context.ShowTreatmentsByPatientId(patientId);
         }
 
         /// <summary>
         /// Shows treatments of a doctor
         /// </summary>
         /// <param name="doctor"></param>
-        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
+        public List<Treatment> ShowTreatmentsByDoctorId(long doctorId)
         {
             return context.ShowTreatmentsByDoctorId(doctorId);
         }

@@ -209,13 +209,13 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatments(Patient patient)
+        public List<Treatment> ShowTreatmentsByPatientId(long patientId)
         {
-            List<Treatment> Treatments = treatments.FindAll(t => t.Patient.Id == patient.Id);
+            List<Treatment> Treatments = treatments.FindAll(t => t.Patient.Id == patientId);
             return Treatments;
         }
 
-        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
+        public List<Treatment> ShowTreatmentsByDoctorId(long doctorId)
         {
             List<Treatment> Treatments = treatments.FindAll(t => t.Doctor.Id == doctorId);
             return Treatments;
