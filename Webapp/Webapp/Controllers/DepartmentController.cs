@@ -13,12 +13,16 @@ namespace Webapp.Controllers
         public IActionResult Index()
         {
             List<Department> items = new List<Department>();
-            for (int i = 0; i < 50; i++)
+
+            string[] departName = { "VoetZoekAfdeling", "BeenHakAfdeling", "ArmAandraaiAfdeling", "FipronilTrekAfdeling", "OorsmeerpeuterAfdeling" };
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < 23; i++)
             {
-                Department depart = new Department("Röngtenafdeling " + i.ToString(), "Hier worden röngtenfoto's gemaakt", true);
-                items.Add(depart);
+                Department treatment = new Department(departName[rnd.Next(5)], true, "Ojaa");
+                items.Add(treatment);
             }
-            
             return View(items);
         }
     }

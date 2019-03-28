@@ -10,6 +10,7 @@ namespace Webapp.Context
     public class TestContext : IContext
     {
         private List<Patient> patients;
+        private List<Treatment> treatments;
         private List<Doctor> doctors;
 
         public TestContext()
@@ -44,7 +45,21 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
+            treatments = new List<Treatment>();
         }
+
+        /// <summary>
+        /// Dit is om even tijdelijk met deze testdata te kunnen werken...
+        /// </summary>
+        /// <returns></returns>
+        public static TestContext GetInstance()
+        {
+            if (instance == null)
+                instance = new TestContext();
+            return instance;
+        }
+        private static TestContext instance = null;
+
 
         public bool ActivateDepartment(Department department, bool activate)
         {
@@ -83,7 +98,8 @@ namespace Webapp.Context
 
         public bool AddTreatment(Treatment treatment)
         {
-            throw new NotImplementedException();
+            treatments.Add(treatment);
+            return true;
         }
 
         public bool AddTreatmentType(TreatmentType treatmentType)
@@ -128,7 +144,13 @@ namespace Webapp.Context
 
         public bool EditTreatment(Treatment treatment)
         {
-            throw new NotImplementedException();
+            if (treatments.Exists(t => t.Id == treatment.Id))
+            {
+                int index = treatments.FindIndex(t => t.Id == treatment.Id);
+                treatments[index] = treatment;
+                return true;
+            }
+            return false;
         }
 
         public bool EditTreatmentType(TreatmentType treatmentType)

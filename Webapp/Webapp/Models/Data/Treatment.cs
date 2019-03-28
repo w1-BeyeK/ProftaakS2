@@ -8,6 +8,7 @@ namespace Webapp.Models.Data
     public class Treatment
     {
         public string Name { get; set; }
+        public int Id { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public Patient Patient { get; set; }
@@ -17,6 +18,7 @@ namespace Webapp.Models.Data
 
         public Treatment(string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
         {
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
@@ -29,6 +31,11 @@ namespace Webapp.Models.Data
         public void AddComment(Comment comment)
         {
             Comments.Add(comment);
+        }
+
+        public Treatment()
+        {
+
         }
 
         public int DaysUntilTreatment()

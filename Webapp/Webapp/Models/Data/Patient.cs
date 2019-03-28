@@ -66,6 +66,11 @@ namespace Webapp.Models.Data
             Treatments.Add(treatment);
         }
 
+        public Patient()
+        {
+
+        }
+
         public int GetAge()
         {
             throw new NotImplementedException();

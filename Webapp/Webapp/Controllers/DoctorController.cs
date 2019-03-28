@@ -12,10 +12,19 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            List<Doctor> items = new List<Doctor>()
+            List<Doctor> items = new List<Doctor>();
+
+            string[] functie = { "Cardioloog", "Gynaecoloog", "Hersenchirurg", "Anesthesist", "Chocoladefabriek" };
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < 20; i++)
             {
-               
-            };
+                Doctor doctor = new Doctor(i, "", "");
+                doctor.Name = "Sjaak " + i.ToString();
+                doctor.Function = functie[rnd.Next(5)];
+                items.Add(doctor);
+            }
             return View(items);
         }
     }
