@@ -10,7 +10,7 @@ namespace Webapp.Context
     public class TestContext : IContext
     {
         private List<Patient> patients;
-        private List<Treatment> treatments;
+        private List<Treatment> treatments = new List<Treatment>();
         private List<Doctor> doctors;
 
         private static TestContext instance = null;
@@ -55,7 +55,6 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            treatments = new List<Treatment>();
         }
 
         public bool ActivateDepartment(Department department, bool activate)
@@ -216,9 +215,9 @@ namespace Webapp.Context
             return Treatments;
         }
 
-        public List<Treatment> ShowTreatments(Doctor doctor)
+        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
         {
-            List<Treatment> Treatments = treatments.FindAll(t => t.Doctor.Id == doctor.Id);
+            List<Treatment> Treatments = treatments.FindAll(t => t.Doctor.Id == doctorId);
             return Treatments;
         }
 

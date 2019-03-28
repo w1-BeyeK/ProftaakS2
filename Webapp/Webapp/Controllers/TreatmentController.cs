@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Webapp.Context;
 using Webapp.Converters;
 using Webapp.Interfaces;
+using Webapp.Models;
 using Webapp.Models.Data;
 using Webapp.Repository;
 
@@ -21,23 +22,23 @@ namespace Webapp.Controllers
         {
             context = TestContext.GetInstance();
             //repo = new TreatmentRepository(context);
+            repo = new TreatmentRepository(context);
         }
-        
+
         public IActionResult Index()
         {
-            List<Treatment> items = new List<Treatment>();
+            List<Treatment> items = repo.ShowTreatmentsByDoctorId(0);
 
-            string[] treat = { "VoetZoeken", "BeenHakken", "ArmAandraaien", "FipronilTrekken", "Oorsmeerpeuteren" };
-
-            Random rnd = new Random();
-
-            for (int i = 0; i < 23; i++)
+            TreatmentViewModel vm = new TreatmentViewModel()
             {
-                Treatment treatment = new Treatment(i, treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
-                items.Add(treatment);
+                treatments = new List<TreatmentDetailViewModel>()
+            };
+            foreach (Treatment treatment in items)
+            {
+                vm.treatments.Add(TreatmentVMC.ViewModelFromTreatment(treatment));
             }
 
-            return View(items);
+            return View(vm.treatments);
         }
 
         [HttpGet]
@@ -66,7 +67,7 @@ namespace Webapp.Controllers
             };
             treatment.Patient = patient;
             TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
-            return View(converter.ViewModelFromTreatment(treatment));
+            return View(converter.TreatmentToViewModel(treatment));
         }
 
         [HttpPost]

@@ -11,6 +11,11 @@ namespace Webapp.Repository
     {
         IContext context;
 
+        public TreatmentRepository(IContext context)
+        {
+            this.context = context;
+        }
+
         public bool AddTreatment(Treatment treatment)
         {
             return context.AddTreatment(treatment);
@@ -34,9 +39,9 @@ namespace Webapp.Repository
         /// Shows treatments of a doctor
         /// </summary>
         /// <param name="doctor"></param>
-        public List<Treatment> ShowTreatments(Doctor doctor)
+        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
         {
-            return context.ShowTreatments(doctor);
+            return context.ShowTreatmentsByDoctorId(doctorId);
         }
     }
 }

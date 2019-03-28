@@ -29,7 +29,7 @@ namespace Webapp.Converters
             return treatment;
         }
 
-        public TreatmentDetailViewModel ViewModelFromTreatment(Treatment treatment)
+        public TreatmentDetailViewModel TreatmentToViewModel(Treatment treatment)
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel()
             {
