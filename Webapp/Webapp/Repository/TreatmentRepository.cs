@@ -16,9 +16,9 @@ namespace Webapp.Repository
             this.context = context;
         }
 
-        public bool AddTreatment(Treatment treatment)
+        public bool AddTreatment(Treatment treatment, int doctorId, int patientId)
         {
-            return context.AddTreatment(treatment);
+            return context.AddTreatment(treatment, doctorId, patientId);
         }
 
         public bool EditTreatment(Treatment treatment)

@@ -18,7 +18,7 @@ namespace Webapp.Interfaces
         bool AddDoctor();
         bool AddDepartment();
         bool AddInstitution(Institution institution);
-        bool AddTreatment(Treatment treatment);
+        bool AddTreatment(Treatment treatment, int doctorId, int patientId);
         bool AddTreatmentType(TreatmentType treatmentType);
         bool AssignDoctor(Department department, Doctor doctor);
         bool EditDepartment(Department department);

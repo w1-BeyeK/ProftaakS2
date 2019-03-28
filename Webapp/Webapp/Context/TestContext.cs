@@ -63,8 +63,9 @@ namespace Webapp.Context
                     Name = "Zowarmarollen",
                     Id = 1,
                     BeginDate = DateTime.Now,
-                    EndDate = DateTime.Today
-                    
+                    EndDate = DateTime.Today,
+                    Patient = patients.Find(t => t.Id == 12),
+                    Doctor = doctors.Find(t => t.Id == 12)
                 }
             };
         }
@@ -106,6 +107,15 @@ namespace Webapp.Context
 
         public bool AddTreatment(Treatment treatment)
         {
+            if (treatments.First() == null)
+            {
+                treatment.Id = 0;
+            }
+            else
+            {
+                treatments.OrderBy(t => t.Id);
+                treatment.Id = treatments.Last().Id + 1;
+            }
             treatments.Add(treatment);
             return true;
         }
