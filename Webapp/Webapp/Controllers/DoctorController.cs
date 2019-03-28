@@ -20,9 +20,10 @@ namespace Webapp.Controllers
 
             for (int i = 0; i < 20; i++)
             {
-                Doctor doctor = new Doctor(i, "", "");
-                doctor.Name = "Sjaak " + i.ToString();
-                doctor.Function = functie[rnd.Next(5)];
+                Doctor doctor = new Doctor(i, "", "", "Sjaak " + i.ToString())
+                {
+                    Function = functie[rnd.Next(5)]
+                };
                 items.Add(doctor);
             }
             return View(items);

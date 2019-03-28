@@ -13,9 +13,9 @@ namespace Webapp.Controllers
 {
     public class TreatmentController : Controller
     {
-        IContext context;
-        TreatmentRepository repo;
-        TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+        private readonly IContext context;
+        private readonly TreatmentRepository repo;
+        private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
 
         public TreatmentController()
         {

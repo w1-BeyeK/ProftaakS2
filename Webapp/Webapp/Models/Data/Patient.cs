@@ -66,7 +66,7 @@ namespace Webapp.Models.Data
             Treatments.Add(treatment);
         }
 
-        public Patient()
+        public Patient() : base(-1, "", "", "")
         {
 
         }

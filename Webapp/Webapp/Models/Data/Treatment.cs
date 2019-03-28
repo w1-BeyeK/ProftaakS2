@@ -16,9 +16,19 @@ namespace Webapp.Models.Data
         public TreatmentType TreatmentType { get; set; }
         public List<Comment> Comments { get; set; }
 
-        public Treatment(string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
+        public Treatment(long id, string name, DateTime beginDate, DateTime endDate)
         {
-            Id = id;
+            Id = (int)id;
+            Name = name;
+            BeginDate = beginDate;
+            EndDate = endDate;
+
+            Comments = new List<Comment>();
+        }
+
+        public Treatment(long id, string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
+        {
+            Id = (int)id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
