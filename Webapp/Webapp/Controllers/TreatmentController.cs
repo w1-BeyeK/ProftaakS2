@@ -22,7 +22,6 @@ namespace Webapp.Controllers
         public TreatmentController()
         {
             context = TestContext.GetInstance();
-            //repo = new TreatmentRepository(context);
             repo = new TreatmentRepository(context);
         }
 
@@ -62,9 +61,22 @@ namespace Webapp.Controllers
         public IActionResult AddTreatment(long patientid, string patientname, string treatmentname, 
         string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
-            //Sla het op
-
-            repo.AddTreatment();
+            //Doe iets met de tijd en de dagen...
+            PatientDetailViewModel patientDetail = new PatientDetailViewModel()
+            {
+                Id = patientid
+            };
+            TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
+            {
+                Name = treatmentname,
+                //Type = treatmenttype,
+                BeginDate = begindate,
+                EndDate = enddate,
+                Comment = comment,
+                PatientDetailViewModel = patientDetail,
+            };
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
+            repo.AddTreatment(treatment);
             return View();
         }
 
