@@ -15,7 +15,7 @@ namespace TestWebapp
             string zipcode = "5022 DM";
             string phoneNumber = "0885080000";
             string country = "Nederland";
-            Administrator administrator = new Administrator(1, "username", "email", "password", "name");
+            Administrator administrator = new Administrator(1, "username", "email", "name");
 
             Institution institution = new Institution(name, houseNumber, zipcode, phoneNumber, country, administrator);
 

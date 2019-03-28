@@ -11,13 +11,12 @@ namespace TestWebapp
         public void AdministratorConstructor()
         {
             string username = "Henk";
-            string password = "Sjoeki";
             string email = "Henk@gmail.com";
             string role = "admin";
             string name = "Henk";
             long employeeNumber = 2138129;
 
-            Administrator administrator = new Administrator(1, username, email, password, name)
+            Administrator administrator = new Administrator(1, username, email, name)
             {
                 EmployeeNumber = employeeNumber
             };
@@ -25,7 +24,6 @@ namespace TestWebapp
             Assert.Equal(1, administrator.Id);
             Assert.Equal(username, administrator.UserName);
             Assert.Equal(email, administrator.Email);
-            Assert.Equal(password, administrator.Password);
             Assert.Equal(name, administrator.Name);
             Assert.Equal(employeeNumber, administrator.EmployeeNumber);
             Assert.Equal(role, administrator.Role);

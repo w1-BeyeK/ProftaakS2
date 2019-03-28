@@ -25,7 +25,7 @@ namespace TestWebapp
             int houseNumber = 24;
             string zipcode = "3152SL";
 
-            Patient patient = new Patient(1, username, email, password, name)
+            Patient patient = new Patient(1, username, email, name)
             {
                 ContactPersonName = contactPersonName,
                 ContactPersonPhone = contactPersonPhone,
@@ -36,7 +36,6 @@ namespace TestWebapp
             Assert.Equal(1, patient.Id);
             Assert.Equal(username, patient.UserName);
             Assert.Equal(email, patient.Email);
-            Assert.Equal(password, patient.Password);
             Assert.Equal(name, patient.Name);
             Assert.Equal(role, patient.Role);
             Assert.Equal(contactPersonName, patient.ContactPersonName);
@@ -62,7 +61,6 @@ namespace TestWebapp
             Assert.Equal(1, patient.Id);
             Assert.Equal(username, patient.UserName);
             Assert.Equal(email, patient.Email);
-            Assert.Equal(password, patient.Password);
             Assert.Equal(name, patient.Name);
             Assert.Equal(birth, patient.Birth);
             Assert.Equal(phonenumber, patient.PhoneNumber);
@@ -96,7 +94,7 @@ namespace TestWebapp
             Assert.True(patient.Departments.Exists(d => d == department));
             Assert.Equal(2, patient.Departments.Count);
 
-            patient = new Patient(1, "username", "email", "password", "name");
+            patient = new Patient(1, "username", "email", "name");
 
             patient.AddDepartment(department);
             patient.AddDepartment(department2);
@@ -112,8 +110,8 @@ namespace TestWebapp
             Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
             Doctor  doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
-            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
-            Treatment treatment2 = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+            Treatment treatment = new Treatment(1, "name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+            Treatment treatment2 = new Treatment(1, "name", DateTime.MinValue, DateTime.Today);
 
             patient.AddTreatment(treatment);
             patient.AddTreatment(treatment2);
@@ -121,7 +119,7 @@ namespace TestWebapp
             Assert.True(patient.Treatments.Exists(t => t == treatment));
             Assert.Equal(2, patient.Treatments.Count);
 
-            patient = new Patient(1, "username", "email", "password", "name");
+            patient = new Patient(1, "username", "email", "name");
 
             patient.AddTreatment(treatment);
             patient.AddTreatment(treatment2);
