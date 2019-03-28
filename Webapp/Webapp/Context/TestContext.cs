@@ -9,17 +9,18 @@ namespace Webapp.Context
 {
     public class TestContext : IContext
     {
-        private List<Patient> patients;
+        private List<Patient> patients = new List<Patient>();
         private List<Treatment> treatments = new List<Treatment>();
-        private List<Doctor> doctors;
+        private List<Doctor> doctors = new List<Doctor>();
 
         private static TestContext instance = null;
 
         public static TestContext GetInstance()
         {
             if (instance == null)
+            {
                 instance = new TestContext();
-
+            }
             return instance;
         }
 
@@ -53,6 +54,17 @@ namespace Webapp.Context
                     Gender = Gender.Male,
                     Password = "Test123",
                     PhoneNumber = "12345"
+                }
+            };
+            treatments = new List<Treatment>()
+            {
+                new Treatment()
+                {
+                    Name = "Zowarmarollen",
+                    Id = 1,
+                    BeginDate = DateTime.Now,
+                    EndDate = DateTime.Today
+                    
                 }
             };
         }
