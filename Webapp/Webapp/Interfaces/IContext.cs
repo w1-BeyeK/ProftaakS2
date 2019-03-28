@@ -8,37 +8,54 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
+        #region Patient
+        bool AddPatient(Patient patient);
+        bool UpdatePatient(long id, Patient patient);
+        bool DeletePatientById(long id);
+        List<Patient> GetPatients();
         Patient GetPatientById(long id);
+        List<Patient> GetPatientsByDoctorId(long id);
+        #endregion
+        #region Doctor
+        bool AddDoctor(Doctor doctor);
+        bool UpdateDoctor(long id, Doctor doctor);
+        bool DeleteDoctorById(long id);
+        List<Doctor> GetDoctors();
         Doctor GetDoctorById(long id);
-
-        bool ActivateDepartment(Department department, bool activate);
-        bool ActivateDoctor(Doctor doctor, bool activate);
-        bool ActivateInstitution(Institution institution, bool activate);
-        bool AddComment(Comment comment);
-        bool AddDoctor();
-        bool AddDepartment();
+        #endregion
+        #region Department
+        bool AddDepartment(Department department);
+        bool UpdateDepartment(long id, Department department);
+        bool DeleteDepartmentById(long id);
+        List<Department> GetDepartments();
+        Department GetDepartmenById(long id);
+        #endregion
+        #region Institution
         bool AddInstitution(Institution institution);
-        bool AddTreatment(Treatment treatment);
+        bool UpdateInstitution(long id, Institution institution);
+        bool DeleteInstitutionById(long id);
+        List<Institution> GetInstitutions();
+        Institution GetInstitutionById(long id);
+        #endregion
+        #region TreatmentType
         bool AddTreatmentType(TreatmentType treatmentType);
-        bool AssignDoctor(Department department, Doctor doctor);
-        bool EditDepartment(Department department);
-        bool EditDoctor(Doctor doctor);
-        bool EditDoctorPrivacy(Doctor doctor);
-        bool EditPatient(Patient patient);
-        bool EditPatientPrivacy(Patient patient);
-        bool EditInstitution(Institution institution);
-        bool EditTreatment(Treatment treatment);
-        bool EditTreatmentType(TreatmentType treatmentType);
-        Administrator LoginAdmin(string username, string password);
-        Doctor LoginDoctor(string username, string password);
-        Patient LoginPatient(string username, string password);
-        List<Department> ShowDepartments(Institution institution);
-        List<Department> ShowDepartments(Institution institution, Doctor doctor);
-        List<Doctor> ShowDoctors(Department department);
-        List<Doctor> ShowDoctors(Patient patient);
-        List<Patient> ShowPatients(Doctor doctor);
-        List<Treatment> ShowTreatments(Patient patient);
-        List<Treatment> ShowTreatments(Doctor doctor);
-        List<TreatmentType> ShowTreatmentTypes(Department department);
+        bool UpdateTreatmentType(long id, TreatmentType treatmentType);
+        bool DeleteTreatmentTypeById(long id);
+        List<TreatmentType> GetTreatmentTypes();
+        TreatmentType GetTreatmentTypeById(long id);
+        #endregion
+        #region Treatment
+        bool AddTreatment(Treatment treatment);
+        bool UpdateTreatment(long id, Treatment Treatment);
+        bool DeleteTreatmentById(long id);
+        List<Treatment> GetTreatments();
+        Treatment GetTreatmentById(long id);
+        #endregion
+        #region Comment
+        bool AddComment(Comment comment);
+        List<Comment> GetComments();
+        Comment GetCommentById(long id);
+        #endregion
+        
     }
 }

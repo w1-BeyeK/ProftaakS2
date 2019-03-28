@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Treatment
+    public class Treatment : Entity
     {
         public string Name { get; set; }
         public int Id { get; set; }

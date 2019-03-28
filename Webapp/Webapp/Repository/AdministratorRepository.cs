@@ -11,9 +11,9 @@ namespace Webapp.Repository
     {
         IContext context;
 
-        public Administrator LoginAdmin(string username, string password)
-        {
-            return context.LoginAdmin(username, password);
-        }
+        //public Administrator LoginAdmin(string username, string password)
+        //{
+        //    return context.LoginAdmin(username, password);
+        //}
     }
 }

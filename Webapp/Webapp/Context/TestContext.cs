@@ -12,6 +12,10 @@ namespace Webapp.Context
         private List<Patient> patients;
         private List<Treatment> treatments;
         private List<Doctor> doctors;
+        private List<Comment> comments;
+        private List<Department> departments;
+        private List<Institution> institutions;
+        private List<TreatmentType> treatmentTypes;
 
         private static TestContext instance = null;
 
@@ -56,103 +60,16 @@ namespace Webapp.Context
                 }
             };
             treatments = new List<Treatment>();
-        }
-
-        public bool ActivateDepartment(Department department, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ActivateDoctor(Doctor doctor, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ActivateInstitution(Institution institution, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddComment(Comment comment)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddDepartment()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddDoctor()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AddInstitution(Institution institution)
-        {
-            throw new NotImplementedException();
+            comments = new List<Comment>();
+            departments = new List<Department>();
+            institutions = new List<Institution>();
+            treatmentTypes = new List<TreatmentType>();
         }
 
         public bool AddTreatment(Treatment treatment)
         {
             treatments.Add(treatment);
             return true;
-        }
-
-        public bool AddTreatmentType(TreatmentType treatmentType)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool AssignDoctor(Department department, Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditDepartment(Department department)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditDoctor(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditDoctorPrivacy(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditInstitution(Institution institution)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditPatient(Patient patient)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditPatientPrivacy(Patient patient)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool EditTreatment(Treatment treatment)
-        {
-            if (treatments.Exists(t => t.Id == treatment.Id))
-            {
-                int index = treatments.FindIndex(t => t.Id == treatment.Id);
-                treatments[index] = treatment;
-                return true;
-            }
-            return false;
-        }
-
-        public bool EditTreatmentType(TreatmentType treatmentType)
-        {
-            throw new NotImplementedException();
         }
 
         public Patient GetPatientById(long id)
@@ -165,16 +82,6 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
-        public Administrator LoginAdmin(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Doctor LoginDoctor(string username, string password)
-        {
-            throw new NotImplementedException();
-        }
-
         public Patient LoginPatient(string username, string password)
         {
             Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
@@ -185,44 +92,204 @@ namespace Webapp.Context
             return patient;
         }
 
-        public List<Department> ShowDepartments(Institution institution)
+        public bool AddPatient(Patient patient)
+        {
+            patients.Add(patient);
+            return true;
+        }
+
+        public bool UpdatePatient(long id, Patient patient)
+        {
+            if (id != patient.Id)
+                return false;
+
+            Patient oldPatient = GetPatientById(id);
+            oldPatient = patient;
+            return true;
+        }
+
+        public bool DeletePatientById(long id)
+        {
+            patients.Remove(GetPatientById(id));
+            return true;
+        }
+
+        public List<Patient> GetPatients()
+        {
+            return patients;
+        }
+
+        public List<Patient> GetPatientsByDoctorId(long id)
+        {
+            // ??
+            return patients;
+        }
+
+        public bool AddDoctor(Doctor doctor)
+        {
+            doctors.Add(doctor);
+            return true;
+        }
+
+        public bool UpdateDoctor(long id, Doctor doctor)
+        {
+            if (id != doctor.Id)
+                return false;
+
+            Doctor oldDoctor = GetDoctorById(id);
+            oldDoctor = doctor;
+            return true;
+        }
+
+        public bool DeleteDoctorById(long id)
+        {
+            doctors.Remove(GetDoctorById(id));
+            return true;
+        }
+
+        public List<Doctor> GetDoctors()
+        {
+            return doctors;
+        }
+
+        public bool AddComment(Comment comment)
+        {
+            comments.Add(comment);
+            return true;
+        }
+
+        public List<Comment> GetComments()
+        {
+            return comments;
+        }
+
+        public Comment GetCommentById(long id)
+        {
+            return comments.FirstOrDefault(c => c.Id == id);
+        }
+
+        public bool AddDepartment(Department department)
+        {
+            departments.Add(department);
+            return true;
+        }
+
+        public bool UpdateDepartment(long id, Department department)
+        {
+            if (id != department.Id)
+                return false;
+
+            Department oldDepartment = GetDepartmenById(id);
+            oldDepartment = department;
+            return true;
+        }
+
+        public bool DeleteDepartmentById(long id)
+        {
+            departments.Remove(GetDepartmenById(id));
+            return true;
+        }
+
+        public List<Department> GetDepartments()
+        {
+            return departments;
+        }
+
+        public Department GetDepartmenById(long id)
+        {
+            return departments.FirstOrDefault(d => d.Id == id);
+        }
+
+        public bool AddInstitution(Institution institution)
+        {
+            institutions.Add(institution);
+            return true;
+        }
+
+        public bool UpdateInstitution(long id, Institution institution)
+        {
+            if (id != institution.Id)
+                return false;
+
+            Institution oldInstitution = GetInstitutionById(id);
+            oldInstitution = institution;
+            return true;
+        }
+
+        public bool DeleteInstitutionById(long id)
+        {
+            institutions.Remove(GetInstitutionById(id));
+            return true;
+        }
+
+        public List<Institution> GetInstitutions()
+        {
+            return institutions;
+        }
+
+        public Institution GetInstitutionById(long id)
+        {
+            return institutions.FirstOrDefault(i => i.Id == id);
+        }
+
+        public bool UpdateTreatment(long id, Treatment treatment)
+        {
+            if (id != treatment.Id)
+                return false;
+
+            if (treatments.Exists(t => t.Id == treatment.Id))
+            {
+                int index = treatments.FindIndex(t => t.Id == treatment.Id);
+                treatments[index] = treatment;
+                return true;
+            }
+            return false;
+        }
+
+        public bool DeleteTreatmentById(long id)
+        {
+            Treatment treatment = GetTreatmentById(id);
+            treatments.Remove(GetTreatmentById(id));
+            return true;
+        }
+
+        public List<Treatment> GetTreatments()
+        {
+            return treatments;
+        }
+
+        public Treatment GetTreatmentById(long id)
+        {
+            return treatments.FirstOrDefault(t => t.Id == id);
+        }
+
+        public bool AddTreatmentType(TreatmentType treatmentType)
+        {
+            treatmentTypes.Add(treatmentType);
+            return true;
+        }
+
+        public bool UpdateTreatmentType(long id, TreatmentType treatmentType)
+        {
+            if (id != treatmentType.Id)
+                return false;
+
+            TreatmentType oldTreatmentType = GetTreatmentTypeById(id);
+            oldTreatmentType = treatmentType;
+            return true;
+        }
+
+        public bool DeleteTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Department> ShowDepartments(Institution institution, Doctor doctor)
+        public List<TreatmentType> GetTreatmentTypes()
         {
             throw new NotImplementedException();
         }
 
-        public List<Doctor> ShowDoctors(Department department)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Doctor> ShowDoctors(Patient patient)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Patient> ShowPatients(Doctor doctor)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Treatment> ShowTreatments(Patient patient)
-        {
-            List<Treatment> Treatments = treatments.FindAll(t => t.Patient.Id == patient.Id);
-            return Treatments;
-        }
-
-        public List<Treatment> ShowTreatments(Doctor doctor)
-        {
-            List<Treatment> Treatments = treatments.FindAll(t => t.Doctor.Id == doctor.Id);
-            return Treatments;
-        }
-
-        public List<TreatmentType> ShowTreatmentTypes(Department department)
+        public TreatmentType GetTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
         }

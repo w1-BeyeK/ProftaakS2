@@ -7,7 +7,6 @@ namespace Webapp.Models.Data
 {
     public class Patient: UserAccount
     {        
-        //TODO : Moet dit in de constructor?
         public long BSN { get; set; }
         public string ContactPersonName { get; set; }
         public string ContactPersonPhone { get; set; }

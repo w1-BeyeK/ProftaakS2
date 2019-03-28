@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Department
+    public class Department : Entity
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }

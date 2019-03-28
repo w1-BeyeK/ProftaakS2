@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Comment
+    public class Comment : Entity
     {
+        public long Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }

@@ -18,16 +18,16 @@ namespace Webapp.Repository
         
         public bool EditTreatmentType(TreatmentType treatment)
         {
-            return context.EditTreatmentType(treatment);
+            return context.UpdateTreatmentType(treatment.Id, treatment);
         }
 
         /// <summary>
         /// Shows TreatmentTypes of a department
         /// </summary>
         /// <param name="department"></param>
-        public List<TreatmentType> ShowTreatmentTypes(Department department)
-        {
-            return context.ShowTreatmentTypes(department);
-        }
+        //public List<TreatmentType> ShowTreatmentTypes(Department department)
+        //{
+        //    return context.GetTrea(department);
+        //}
     }
 }

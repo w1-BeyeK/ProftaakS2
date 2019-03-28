@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Role
+    public class Role : Entity
     {
         public int Id { get; set; }
         public string Name { get; set; }

@@ -20,28 +20,5 @@ namespace Webapp.Repository
         {
             return context.GetPatientById(id);
         }
-
-        public Patient LoginPatient(string username, string password)
-        {
-            return context.LoginPatient(username, password);
-        }
-
-        public bool EditPatient(Patient patient)
-        {
-            return context.EditPatient(patient);
-        }
-
-        public bool EditPatientPrivacy(Patient patient)
-        {
-            return context.EditPatientPrivacy(patient);
-        }
-
-        /// <summary>
-        /// Shows all doctors of a patient.
-        /// </summary>
-        public List<Doctor> ShowDoctorsOfPatient(Patient patient)
-        {
-            return context.ShowDoctors(patient);
-        }
     }
 }

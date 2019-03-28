@@ -9,37 +9,27 @@ namespace Webapp.Context
 {
     public class MSSQLContext : IContext
     {
-        public bool ActivateDepartment(Department department, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ActivateDoctor(Doctor doctor, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool ActivateInstitution(Institution institution, bool activate)
-        {
-            throw new NotImplementedException();
-        }
-
         public bool AddComment(Comment comment)
         {
             throw new NotImplementedException();
         }
 
-        public bool AddDepartment()
+        public bool AddDepartment(Department department)
         {
             throw new NotImplementedException();
         }
 
-        public bool AddDoctor()
+        public bool AddDoctor(Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
         public bool AddInstitution(Institution institution)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddPatient(Patient patient)
         {
             throw new NotImplementedException();
         }
@@ -54,47 +44,57 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool AssignDoctor(Department department, Doctor doctor)
+        public bool DeleteDepartmentById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditDepartment(Department department)
+        public bool DeleteDoctorById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditDoctor(Doctor doctor)
+        public bool DeleteInstitutionById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditDoctorPrivacy(Doctor doctor)
+        public bool DeletePatientById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditInstitution(Institution institution)
+        public bool DeleteTreatmentById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditPatient(Patient patient)
+        public bool DeleteTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditPatientPrivacy(Patient patient)
+        public Comment GetCommentById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditTreatment(Treatment treatment)
+        public Comment GetCommentByTreatmentId(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool EditTreatmentType(TreatmentType treatmentType)
+        public List<Comment> GetComments()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Department GetDepartmenById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Department> GetDepartments()
         {
             throw new NotImplementedException();
         }
@@ -104,62 +104,92 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public List<Doctor> GetDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Institution GetInstitutionById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Institution> GetInstitutions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Institution> GetInstitutionsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Patient GetPatientById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Administrator LoginAdmin(string username, string password)
+        public List<Patient> GetPatients()
         {
             throw new NotImplementedException();
         }
 
-        public Doctor LoginDoctor(string username, string password)
+        public List<Patient> GetPatientsByDoctorId(long id)
         {
             throw new NotImplementedException();
         }
 
-        public Patient LoginPatient(string username, string password)
+        public Treatment GetTreatmentById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Department> ShowDepartments(Institution institution)
+        public List<Treatment> GetTreatments()
         {
             throw new NotImplementedException();
         }
 
-        public List<Department> ShowDepartments(Institution institution, Doctor doctor)
+        public TreatmentType GetTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Doctor> ShowDoctors(Department department)
+        public List<TreatmentType> GetTreatmentTypes()
         {
             throw new NotImplementedException();
         }
 
-        public List<Doctor> ShowDoctors(Patient patient)
+        public bool UpdateDepartment(Department department)
         {
             throw new NotImplementedException();
         }
 
-        public List<Patient> ShowPatients(Doctor doctor)
+        public bool UpdateDepartment(long id, Department department)
         {
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatments(Patient patient)
+        public bool UpdateDoctor(long id, Doctor doctor)
         {
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatments(Doctor doctor)
+        public bool UpdateInstitution(long id, Institution institution)
         {
             throw new NotImplementedException();
         }
 
-        public List<TreatmentType> ShowTreatmentTypes(Department department)
+        public bool UpdatePatient(long id, Patient patient)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateTreatment(long id, Treatment Treatment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool UpdateTreatmentType(long id, TreatmentType treatmentType)
         {
             throw new NotImplementedException();
         }

@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public abstract class BaseAccount
+    public abstract class BaseAccount : Entity
     {
         public string Role { get; set; }
 

@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Institution
+    public class Institution : Entity
     {
+        public long Id { get; set; }
         public string Name { get; set; }
         public int HouseNumber { get; set; }
         public string Zipcode { get; set; }

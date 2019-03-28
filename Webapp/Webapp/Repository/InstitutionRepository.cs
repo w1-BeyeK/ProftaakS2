@@ -15,15 +15,5 @@ namespace Webapp.Repository
         {
             return context.AddInstitution(institution);
         }
-
-        public bool EditInstitution(Institution institution)
-        {
-            return context.EditInstitution(institution);
-        }
-
-        public bool ActivateInstitution(Institution institution, bool activate)
-        {
-            return context.ActivateInstitution(institution, activate);
-        }
     }
 }
