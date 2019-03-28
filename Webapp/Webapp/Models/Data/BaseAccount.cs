@@ -18,7 +18,7 @@ namespace Webapp.Models.Data
         public BaseAccount()
         { }
 
-        public BaseAccount(int id, string username, string email)
+        public BaseAccount(long id, string username, string email)
         {
             Id = id;
             UserName = username;

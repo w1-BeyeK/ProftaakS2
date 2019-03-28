@@ -37,8 +37,8 @@ namespace Webapp.Interfaces
         List<Doctor> ShowDoctors(Department department);
         List<Doctor> ShowDoctors(Patient patient);
         List<Patient> ShowPatients(Doctor doctor);
-        List<Treatment> ShowTreatments(Patient patient);
-        List<Treatment> ShowTreatmentsByDoctorId(int doctorId);
+        List<Treatment> ShowTreatmentsByPatientId(long patientId);
+        List<Treatment> ShowTreatmentsByDoctorId(long doctorId);
         List<TreatmentType> ShowTreatmentTypes(Department department);
     }
 }

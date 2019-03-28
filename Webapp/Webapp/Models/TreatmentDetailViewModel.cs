@@ -8,9 +8,8 @@ namespace Webapp.Models
 {
     public class TreatmentDetailViewModel
     {
-        public int Id { get; set; }
-        public string TreatmentName { get; set; }
-        public TreatmentType TreatmentType { get; set; }
+        public long Id { get; set; }
+        public string Name { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime BeginTime { get; set; }
         public DateTime EndDate { get; set; }

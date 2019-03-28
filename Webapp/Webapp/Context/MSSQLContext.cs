@@ -149,12 +149,12 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatments(Patient patient)
+        public List<Treatment> ShowTreatmentsByPatientId(long patientId)
         {
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
+        public List<Treatment> ShowTreatmentsByDoctorId(long doctorId)
         {
             throw new NotImplementedException();
         }

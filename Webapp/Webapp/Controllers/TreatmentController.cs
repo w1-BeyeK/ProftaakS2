@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webapp.Context;
 using Webapp.Converters;
@@ -12,7 +13,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    public class TreatmentController : Controller
+    public class TreatmentController : BaseController
     {
         private readonly IContext context;
         private readonly TreatmentRepository repo;
@@ -25,9 +26,18 @@ namespace Webapp.Controllers
             repo = new TreatmentRepository(context);
         }
 
+        [Authorize(Roles = "doctor, patient")]
         public IActionResult Index()
         {
-            List<Treatment> items = repo.ShowTreatmentsByDoctorId(0);
+            List<Treatment> items = new List<Treatment>();
+            if (User.IsInRole("doctor"))
+            {
+                items = repo.ShowTreatmentsByDoctorId(GetUserId());
+            }
+            else if (User.IsInRole("patient"))
+            {
+                items = repo.ShowTreatmentsByPatientId(GetUserId());
+            }
 
             TreatmentViewModel vm = new TreatmentViewModel()
             {
@@ -35,7 +45,7 @@ namespace Webapp.Controllers
             };
             foreach (Treatment treatment in items)
             {
-                vm.treatments.Add(TreatmentVMC.ViewModelFromTreatment(treatment));
+                vm.treatments.Add(TreatmentVMC.TreatmentToViewModel(treatment));
             }
 
             return View(vm.treatments);
@@ -49,14 +59,17 @@ namespace Webapp.Controllers
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult AddTreatment(string name, string age, string treatment)
+        public IActionResult AddTreatment(long patientid, string patientname, string treatmentname, 
+        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             //Sla het op
+
+            repo.AddTreatment();
             return View();
         }
 
         [HttpGet]
-        public IActionResult EditTreatment(int id)
+        public IActionResult EditTreatment(long id)
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
             Patient patient = new Patient()
@@ -65,12 +78,12 @@ namespace Webapp.Controllers
                 Name = "Grietje"
             };
             treatment.Patient = patient;
-            TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
-            return View(converter.TreatmentToViewModel(treatment));
+            return View(TreatmentVMC.TreatmentToViewModel(treatment));
         }
 
         [HttpPost]
-        public IActionResult EditTreatment()
+        public IActionResult AddTreatment(string patientname, string treatmentname,
+        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             return View();
         }
