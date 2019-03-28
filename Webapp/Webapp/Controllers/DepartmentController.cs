@@ -12,8 +12,6 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("loginType", "admin");
-
             List<Department> items = new List<Department>();
 
             string[] departName = { "VoetZoekAfdeling", "BeenHakAfdeling", "ArmAandraaiAfdeling", "FipronilTrekAfdeling", "OorsmeerpeuterAfdeling" };
@@ -25,7 +23,6 @@ namespace Webapp.Controllers
                 Department treatment = new Department(departName[rnd.Next(5)], true, "Ojaa");
                 items.Add(treatment);
             }
-
             return View(items);
         }
     }

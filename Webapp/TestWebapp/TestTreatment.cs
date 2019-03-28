@@ -10,23 +10,45 @@ namespace TestWebapp
         [Fact]
         public void TreatmentConstructor()
         {
-            string username = "Sjaak";
-            string password = "Loeki";
-            string email = "Sjaak@gmail.com";
-            string role = "doctor";
+            string name = "Kaakbehandeling";
+            DateTime beginDate = new DateTime(2010-02-10);
+            DateTime endDate = new DateTime(2010-03-20);
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment(name, beginDate, endDate, patient, doctor, treatmentType);
 
-            Doctor doctor1 = new Doctor(1, username, email);
-            Doctor doctor2 = new Doctor(2, username, email, password);
-            Doctor doctor3 = new Doctor();
+            Assert.Equal(name, treatment.Name);
+            Assert.Equal(beginDate, treatment.BeginDate);
+            Assert.Equal(endDate, treatment.EndDate);
+        }
 
-            Assert.Equal(username, doctor1.UserName);
-            Assert.Equal(email, doctor1.Email);
-            Assert.Equal(role, doctor1.Role);
-            Assert.Equal(username, doctor2.UserName);
-            Assert.Equal(email, doctor2.Email);
-            Assert.Equal(password, doctor2.Password);
-            Assert.Equal(role, doctor2.Role);
-            Assert.Equal(role, doctor3.Role);
+        [Fact]
+        public void AddComment()
+        {
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+            Comment comment = new Comment("title", "description", DateTime.Today, treatment);
+            Comment comment2 = new Comment("title", "description", DateTime.Today, treatment);
+
+            treatment.AddComment(comment);
+            treatment.AddComment(comment2);
+
+            Assert.True(treatment.Comments.Exists(c => c == comment));
+            Assert.Equal(2, treatment.Comments.Count);
+        }
+
+        [Fact]
+        public void TestToString()
+        {
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+
+            Assert.Equal("Webapp.Models.Data.Treatment", treatment.ToString());
         }
     }
 }

@@ -10,6 +10,7 @@
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
         <link rel="stylesheet" href="~/css/custom.css" />
         <link rel="stylesheet" href="~/css/site.css" />
+        <link rel="stylesheet" href="~/css/slider.css" />
         <link rel="stylesheet" href="//cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" />
         <link rel="stylesheet" href="//cdn.datatables.net/responsive/2.2.3/css/responsive.bootstrap.min.css" />
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -86,18 +87,18 @@
                             }
                             <hr style="margin:0;" />
                             <li>
-                                <a href="#"><i class="fa fa-user fa-lg"></i> Profiel</a>
+                                <a asp-action="index" asp-controller="profile"><i class="fa fa-user fa-lg"></i> Profiel</a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                                <a asp-action="Logout" method="get">
+                                    <i class="fa fa-sign-out fa-lg">
+                                    </i>  Logout
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-9 col-xs-12">
                 @RenderBody()
                 <hr />

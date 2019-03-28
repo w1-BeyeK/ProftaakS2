@@ -20,19 +20,50 @@ namespace Webapp.Models.Data
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }
+        public List<Department> Departments { get; set; }
+        public List<Treatment> Treatments { get; set; }
 
-        //TODO : Moet dit in de constructor?
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Treatment> Treatments { get; set; }
-
-        public Patient(int id, string username, string email) : base(id, username, email)
+        public Patient(int id, string userName, string email, string password,string name) : base(id, userName, email, password,name)
         {
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
+
             Role = "patient";
+
+            PrivAdress = true;
+            PrivBirthDate = true;
+            PrivContactPersonName = true;
+            PrivContactPersonPhone = true;
+            PrivGender = true;
+            PrivMail = true;
+            PrivPhoneNumber = true;
         }
 
-        public Patient(int id, string username, string email, string password) : base(id, username, email, password)
+        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
+            BSN = bSN;
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
+
             Role = "patient";
+
+            PrivAdress = true;
+            PrivBirthDate = true;
+            PrivContactPersonName = true;
+            PrivContactPersonPhone = true;
+            PrivGender = true;
+            PrivMail = true;
+            PrivPhoneNumber = true;
+        }
+
+        public void AddDepartment(Department department)
+        {
+            Departments.Add(department);
+        }
+
+        public void AddTreatment(Treatment treatment)
+        {
+            Treatments.Add(treatment);
         }
 
         public Patient()

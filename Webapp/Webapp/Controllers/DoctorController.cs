@@ -25,7 +25,6 @@ namespace Webapp.Controllers
                 doctor.Function = functie[rnd.Next(5)];
                 items.Add(doctor);
             }
-
             return View(items);
         }
     }

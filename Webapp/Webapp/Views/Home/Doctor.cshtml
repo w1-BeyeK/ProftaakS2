@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewData["Title"] = "Doctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Doctor</h2>
+
+<link rel="stylesheet" href="~/css/User.css" />
+<div class="container bootstrap snippet col-lg-offset-0" id="container">
+    <div class="row">
+        <div class="col-sm-10"><h1>Gegevens patiënt</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="name"><h4>Volledige naam</h4></label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="Gender"><h4>Geslacht</h4></label>
+                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="Birthday"><h4>Geboortedatum</h4></label>
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="Age"><h4>Leeftijd</h4></label>
+                                <input type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd.">
+
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="nameTreatment"><h4>Naam behandeling</h4></label>
+                                <input type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="TreatmentType"><h4>Type behandeling</h4></label>
+                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                <label for="Begindate"><h4>Begindatum behandeling</h4></label>
+                                <input type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label for="BeginTime"><h4>Begin tijd</h4></label>
+                                <input type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-4">
+                                <label for="Enddate"><h4>Einddatum behandeling</h4></label>
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-2">
+                                <label for="EndTime"><h4>Eind tijd</h4></label>
+                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="Description"><h4>Omschrijving</h4></label>
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="Comments"><h4>Commentaar</h4></label>
+                                <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar.">
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde type behandelingen</h4></label>
+                                <li>behandeling 1</li>
+                                <li>behandeling 2</li>
+                                <li>behandeling 3</li>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->

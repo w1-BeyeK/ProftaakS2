@@ -11,19 +11,26 @@ namespace Webapp.Models.Data
         public int Id { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
-
-        //TODO : Moet dit in de constructor?
         public Patient Patient { get; set; }
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
-        public IEnumerable<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; }
 
-        public Treatment(int id, string name, DateTime beginDate, DateTime endDate)
+        public Treatment(string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
         {
             Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
+            Patient = patient;
+            Doctor = doctor;
+            TreatmentType = treatmentType;
+            Comments = new List<Comment>();
+        }
+
+        public void AddComment(Comment comment)
+        {
+            Comments.Add(comment);
         }
 
         public Treatment()

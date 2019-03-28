@@ -12,18 +12,23 @@ namespace Webapp.Models.Data
         public string Zipcode { get; set; }
         public string PhoneNumber { get; set; }
         public string Country { get; set; }
-
-        //TODO : Moet dit in de constructor?
         public Administrator Administrator { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
+        public List<Department> Departments { get; set; }
 
-        public Institution(string name, int houseNumber, string zipcode, string phoneNumber, string country)
+        public Institution(string name, int houseNumber, string zipcode, string phoneNumber, string country, Administrator administrator)
         {
             Name = name;
             HouseNumber = houseNumber;
             Zipcode = zipcode;
             PhoneNumber = phoneNumber;
             Country = country;
+            Administrator = administrator;
+            Departments = new List<Department>();
+        }
+
+        public void AddDepartment(Department department)
+        {
+            Departments.Add(department);
         }
 
         public override string ToString()

@@ -11,21 +11,40 @@ namespace Webapp.Context
     {
         private List<Patient> patients;
         private List<Treatment> treatments;
+        private List<Doctor> doctors;
 
         public TestContext()
         {
             patients = new List<Patient>()
             {
-                //new Patient()
-                //{
-                //    Name = "Kevin Beye",
-                //    Mail = "k.beye@student.fontys.nl",
-                //    Gender = Gender.Male,
-                //    Password = "Test123",
-                //    Active = true,
-                //    Username = "kevinbeye",
-                //    Birth = DateTime.Now
-                //}
+                new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com")
+                {
+                    Name = "Kevin Beye",
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = DateTime.Now,
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS"
+                }
+            };
+            doctors = new List<Doctor>()
+            {
+                new Doctor(12, "kevinbeye", "kevin.beye1999@hotmail.com")
+                {
+                    Active = true,
+                    Birth = DateTime.Now,
+                    EmployeeNumber = 12,
+                    Function = "HOI",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    PhoneNumber = "12345"
+                }
             };
             treatments = new List<Treatment>();
         }
@@ -138,6 +157,16 @@ namespace Webapp.Context
         public bool EditTreatmentType(TreatmentType treatmentType)
         {
             throw new NotImplementedException();
+        }
+
+        public Patient GetPatientById(long id)
+        {
+            return patients.FirstOrDefault(p => p.Id == id);
+        }
+
+        public Doctor GetDoctorById(long id)
+        {
+            return doctors.FirstOrDefault(d => d.Id == id);
         }
 
         public Administrator LoginAdmin(string username, string password)
