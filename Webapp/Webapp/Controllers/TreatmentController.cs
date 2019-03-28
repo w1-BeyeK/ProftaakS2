@@ -13,16 +13,6 @@ namespace Webapp.Controllers
 {
     public class TreatmentController : Controller
     {
-        IContext context;
-        TreatmentRepository repo;
-        TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
-
-        public TreatmentController()
-        {
-            context = TestContext.GetInstance();
-            //repo = new TreatmentRepository(context);
-        }
-
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
