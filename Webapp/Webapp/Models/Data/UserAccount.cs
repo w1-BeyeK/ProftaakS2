@@ -5,40 +5,24 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public enum Gender { Male, Female };
-    public class UserAccount : BaseAccount
+    public enum Gender { Male, Female, Other };
+    public abstract class UserAccount : BaseAccount
     {
-        public UserAccount(int id, string username, string email) : base(id, username, email)
-        { }
-
-        public UserAccount(int id, string username, string email, string password) : base(id, username, email, password)
-        { }
-
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
-        public string Mail { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
-        public UserAccount()
+        public UserAccount(int id, string userName, string email, string name) : base(id, userName, email, name)
+        { }
+        
+        public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, name)
         {
-
+            Birth = birth;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            Active = active;
+            Gender = gender;
         }
-
-        public virtual void AddComment()
-        {
-
-        }
-
-        public virtual void ChangePersonalData()
-        {
-
-        }
-
-        public virtual void ShowTreatments()
-        {
-
-        }
-
     }
 }

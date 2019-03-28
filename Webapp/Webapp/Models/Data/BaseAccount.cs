@@ -9,33 +9,46 @@ namespace Webapp.Models.Data
     {
         public string Role { get; set; }
 
+        public long Id { get; set; }
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public string Name { get; set; }
+
         public BaseAccount()
-        {
-        }
+        { }
 
         public BaseAccount(int id, string username, string email)
         {
             Id = id;
             UserName = username;
             Email = email;
-        }
 
-        public BaseAccount(int id, string username, string email, string password)
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
+        }
+        public string NormalizedUserName { get; set; }
+        public string NormalizedEmail { get; set; }
+      
+        public BaseAccount(long id, string userName, string email, string name)
         {
             Id = id;
-            UserName = username;
+            UserName = userName;
             Email = email;
-            Password = password;
-        }
-        public long Id { get; set; }
-        public string UserName { get; set; }
-        public string NormalizedUserName { get; set; }
-        public string Email { get; set; }
-        public string NormalizedEmail { get; set; }
-        public string Password { get; set; }
-        
-        public string Name { get; set; }
 
-        public void ShowPersonalData() { }
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
+            Name = name;
+        }
+
+        public string RatingPassword()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual string ToString()
+        {
+            return "";
+        }
     }
 }

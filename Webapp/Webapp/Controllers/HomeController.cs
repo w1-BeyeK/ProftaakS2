@@ -1,29 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Webapp.Converters;
 using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
+using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        private readonly PatientRepository patientRepository;
+        private readonly DoctorRepository doctorRepository;
+
+        private readonly PatientViewModelConverter patientConverter;
+
         private readonly UserManager<BaseAccount> userManager;
         private readonly SignInManager<BaseAccount> signInManager;
 
         public HomeController(
                 UserManager<BaseAccount> userManager,
-                SignInManager<BaseAccount> signInManager
+                SignInManager<BaseAccount> signInManager,
+                PatientRepository patientRepository,
+                DoctorRepository doctorRepository
             )
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+
+            this.patientRepository = patientRepository;
+            this.doctorRepository = doctorRepository;
+
+            this.patientConverter = new PatientViewModelConverter();
         }
         [AllowAnonymous]
         public IActionResult Index()
@@ -35,15 +50,13 @@ namespace Webapp.Controllers
         public IActionResult About()
         {
             ViewData["Message"] = "Your application description page.";
-            ViewData["uname"] = HttpContext.Session.GetString("uname");
-            ViewData["loginType"] = HttpContext.Session.GetString("loginType");
 
             return View();
         }
 
         public async Task<IActionResult> Test()
         {
-            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test", "Test1234!"), "Test123!");
+            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Kevin"), "Test123!");
 
             return View();
         }
@@ -62,7 +75,7 @@ namespace Webapp.Controllers
                     }
                     else
                     {
-                        return RedirectToAction("contact");
+                        return RedirectToAction("index", "profile");
                     }
                 }
                 else
@@ -70,9 +83,21 @@ namespace Webapp.Controllers
                     return View();
                 }
             }
-            return View();
+            return RedirectToAction("User");
         }
 
+        [HttpGet]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+           if (HttpContext.User?.Identity.IsAuthenticated == true)
+            {
+                await signInManager.SignOutAsync();
+            }
+
+            return RedirectToAction("index");
+        }        
+        
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -81,6 +106,16 @@ namespace Webapp.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult User()
+        {
+            return View();
+        }
+
+        public IActionResult Doctor()
         {
             return View();
         }

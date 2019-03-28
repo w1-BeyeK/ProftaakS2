@@ -7,62 +7,18 @@ namespace Webapp.Models.Data
 {
     public class Doctor : UserAccount
     {
-
+        //TODO : Moet dit in de constructor?
+        //TODO : Moet dit ook in Classendiagram???
+        public string Function { get; set; }
         public long EmployeeNumber { get; set; }
 
-        public Doctor(int id, string username, string email) : base(id, username, email)
+        public Doctor(long id, string userName, string email, string name) : base((int)id, userName, email, name)
+        { }
+
+        public Doctor(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             Role = "doctor";
-        }
-
-        public Doctor(int id, string username, string email, string password) : base(id, username, email, password)
-        {
-            Role = "doctor";
-        }
-
-        public Doctor()
-        {
-            Role = "doctor";
-        }
-
-        public void RegisterTreatment()
-        {
-
-        }
-
-        public void ChangeContactPreference()
-        {
-
-        }
-
-        public void ShowDoctors()
-        {
-
-        }
-
-        public void ShowPatients()
-        {
-
-        }
-
-        public void ShowTreatmentsTypes()
-        {
-
-        }
-
-        public override void AddComment()
-        {
-            base.AddComment();
-        }
-
-        public override void ChangePersonalData()
-        {
-            base.ChangePersonalData();
-        }
-
-        public override void ShowTreatments()
-        {
-            base.ShowTreatments();
+            EmployeeNumber = Id;
         }
     }
 }

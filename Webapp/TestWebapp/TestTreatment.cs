@@ -1,0 +1,54 @@
+using Microsoft.AspNetCore.Identity;
+using System;
+using Webapp.Models.Data;
+using Xunit;
+
+namespace TestWebapp
+{
+    public class TestTreatment
+    {
+        [Fact]
+        public void TreatmentConstructor()
+        {
+            string name = "Kaakbehandeling";
+            DateTime beginDate = new DateTime(2010-02-10);
+            DateTime endDate = new DateTime(2010-03-20);
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment(name, beginDate, endDate, patient, doctor, treatmentType);
+
+            Assert.Equal(name, treatment.Name);
+            Assert.Equal(beginDate, treatment.BeginDate);
+            Assert.Equal(endDate, treatment.EndDate);
+        }
+
+        [Fact]
+        public void AddComment()
+        {
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+            Comment comment = new Comment("title", "description", DateTime.Today, treatment);
+            Comment comment2 = new Comment("title", "description", DateTime.Today, treatment);
+
+            treatment.AddComment(comment);
+            treatment.AddComment(comment2);
+
+            Assert.True(treatment.Comments.Exists(c => c == comment));
+            Assert.Equal(2, treatment.Comments.Count);
+        }
+
+        [Fact]
+        public void TestToString()
+        {
+            Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
+            Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
+            TreatmentType treatmentType = new TreatmentType("name", "description");
+            Treatment treatment = new Treatment("name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
+
+            Assert.Equal("Webapp.Models.Data.Treatment", treatment.ToString());
+        }
+    }
+}

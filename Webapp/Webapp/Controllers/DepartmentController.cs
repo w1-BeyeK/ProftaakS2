@@ -12,150 +12,17 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            HttpContext.Session.SetString("loginType", "admin");
-            List<Department> items = new List<Department>()
+            List<Department> items = new List<Department>();
+
+            string[] departName = { "VoetZoekAfdeling", "BeenHakAfdeling", "ArmAandraaiAfdeling", "FipronilTrekAfdeling", "OorsmeerpeuterAfdeling" };
+
+            Random rnd = new Random();
+
+            for (int i = 0; i < 23; i++)
             {
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                },
-                new Department()
-                {
-                    Name = "Hartafdeling",
-                    Description = "Afdeling voor hartproblemen"
-                },
-                new Department()
-                {
-                    Name = "Röngtenafdeling",
-                    Description = "Hier worden röngtenfoto's gemaakt"
-                }
-            };
+                Department treatment = new Department(departName[rnd.Next(5)], "Ojaa", true);
+                items.Add(treatment);
+            }
             return View(items);
         }
     }

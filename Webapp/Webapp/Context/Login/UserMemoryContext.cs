@@ -16,12 +16,13 @@ namespace Webapp.Context.Login
         {
             accounts = new List<BaseAccount>()
             {
-                new Patient(1, "kevinbeye", "k.beye@student.fontys.nl", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==")
+                new Patient(12, "kevinbeye", "k.beye@student.fontys.nl", "Kevin")
                 {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "KEVINBEYE"
                 },
-                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "test123"),
-                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "test123"),
+                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "Kevin"),
+                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "Kevin"),
             };
 
         }
@@ -97,7 +98,7 @@ namespace Webapp.Context.Login
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                return Task.FromResult(accounts.FirstOrDefault(a => a.NormalizedUserName == normalizedUserName));
+                return Task.FromResult(accounts.FirstOrDefault(a => a.UserName.ToUpper() == normalizedUserName));
             }
             catch(Exception)
             {
@@ -117,7 +118,7 @@ namespace Webapp.Context.Login
 
         public Task<string> GetNormalizedEmailAsync(BaseAccount user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.NormalizedEmail);
+            return Task.FromResult(user.Email);
         }
 
         public Task<string> GetNormalizedUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
@@ -201,9 +202,9 @@ namespace Webapp.Context.Login
             throw new NotImplementedException();
         }
 
-        public Task SetNormalizedEmailAsync(BaseAccount user, string normalizedEmail, CancellationToken cancellationToken)
+        public Task SetNormalizedEmailAsync(BaseAccount user, string Email, CancellationToken cancellationToken)
         {
-            user.NormalizedEmail = normalizedEmail;
+            user.Email = Email;
             return Task.FromResult(0);
         }
 
