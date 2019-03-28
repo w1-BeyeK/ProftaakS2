@@ -154,7 +154,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Treatment> ShowTreatments(Doctor doctor)
+        public List<Treatment> ShowTreatmentsByDoctorId(int doctorId)
         {
             throw new NotImplementedException();
         }
