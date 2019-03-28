@@ -47,7 +47,7 @@ namespace Webapp.Converters
                 PhoneNumber = patient.PhoneNumber,
                 Zipcode = patient.Zipcode,
                 Name = patient.Name,
-                PrivAdress = true,//patient.PrivAdress,
+                PrivAdress = patient.PrivAdress,
                 PrivContactPersonName = patient.PrivContactPersonName,
                 PrivContactPersonPhone = patient.PrivContactPersonPhone,
                 PrivBirthDate = patient.PrivBirthDate,
