@@ -8,7 +8,7 @@ namespace Webapp.Models.Data
     public class Treatment
     {
         public string Name { get; set; }
-        public int Id { get; set; }
+        public long Id { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public Patient Patient { get; set; }
@@ -18,7 +18,7 @@ namespace Webapp.Models.Data
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate)
         {
-            Id = (int)id;
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
@@ -28,7 +28,7 @@ namespace Webapp.Models.Data
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
         {
-            Id = (int)id;
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
