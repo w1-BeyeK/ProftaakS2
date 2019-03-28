@@ -20,11 +20,11 @@ namespace Webapp.Converters
             Treatment treatment = new Treatment()
             {
                 Id = vm.Id,
-                Name = vm.TreatmentName,
+                Name = vm.Name,
                 Patient = patient,
                 BeginDate = vm.BeginDate,
                 EndDate = vm.EndDate,
-                TreatmentType = vm.TreatmentType
+                TreatmentType = vm.Type
             };
 
             return treatment;
@@ -41,8 +41,8 @@ namespace Webapp.Converters
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel()
             {
                 Id = treatment.Id,
-                TreatmentName = treatment.Name,
-                TreatmentType = treatment.TreatmentType,
+                Name = treatment.Name,
+                Type = treatment.TreatmentType,
                 PatientDetailViewModel = patientDetailViewModel,
                 BeginDate = treatment.BeginDate,
                 EndDate = treatment.EndDate

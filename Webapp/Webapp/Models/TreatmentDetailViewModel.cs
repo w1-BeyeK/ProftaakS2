@@ -10,6 +10,7 @@ namespace Webapp.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
+        public TreatmentType Type { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime BeginTime { get; set; }
         public DateTime EndDate { get; set; }
