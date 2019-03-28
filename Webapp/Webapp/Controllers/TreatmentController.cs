@@ -22,7 +22,7 @@ namespace Webapp.Controllers
             context = TestContext.GetInstance();
             //repo = new TreatmentRepository(context);
         }
-
+        
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();

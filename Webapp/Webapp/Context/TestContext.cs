@@ -13,6 +13,16 @@ namespace Webapp.Context
         private List<Treatment> treatments;
         private List<Doctor> doctors;
 
+        private static TestContext instance = null;
+
+        public static TestContext GetInstance()
+        {
+            if (instance == null)
+                instance = new TestContext();
+
+            return instance;
+        }
+
         public TestContext()
         {
             patients = new List<Patient>()
@@ -47,19 +57,6 @@ namespace Webapp.Context
             };
             treatments = new List<Treatment>();
         }
-
-        /// <summary>
-        /// Dit is om even tijdelijk met deze testdata te kunnen werken...
-        /// </summary>
-        /// <returns></returns>
-        public static TestContext GetInstance()
-        {
-            if (instance == null)
-                instance = new TestContext();
-            return instance;
-        }
-        private static TestContext instance = null;
-
 
         public bool ActivateDepartment(Department department, bool activate)
         {
