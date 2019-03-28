@@ -17,5 +17,7 @@ namespace Webapp.Models
         public DateTime EndTime { get; set; }
         public string Comments { get; set; }
         public string Description { get; set; }
+        public PatientDetailViewModel PatientDetailViewModel { get; set; }
+        
     }
 }
