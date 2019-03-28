@@ -2,16 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webapp.Context;
 using Webapp.Converters;
 using Webapp.Interfaces;
+using Webapp.Models;
 using Webapp.Models.Data;
 using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    public class TreatmentController : Controller
+    public class TreatmentController : BaseController
     {
         private readonly IContext context;
         private readonly TreatmentRepository repo;
@@ -20,42 +22,64 @@ namespace Webapp.Controllers
         public TreatmentController()
         {
             context = TestContext.GetInstance();
-            //repo = new TreatmentRepository(context);
+            repo = new TreatmentRepository(context);
         }
-        
+
+        [Authorize(Roles = "doctor, patient")]
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
-
-            string[] treat = { "VoetZoeken", "BeenHakken", "ArmAandraaien", "FipronilTrekken", "Oorsmeerpeuteren" };
-
-            Random rnd = new Random();
-
-            for (int i = 0; i < 23; i++)
+            if (User.IsInRole("doctor"))
             {
-                Treatment treatment = new Treatment(i, treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
-                items.Add(treatment);
+                items = repo.GetTreatmentsByDoctor(GetUserId());
+            }
+            else if (User.IsInRole("patient"))
+            {
+                items = repo.GetTreatmentsByPatient(GetUserId());
             }
 
-            return View(items);
+            TreatmentViewModel vm = new TreatmentViewModel()
+            {
+                treatments = new List<TreatmentDetailViewModel>()
+            };
+            foreach (Treatment treatment in items)
+            {
+                vm.treatments.Add(TreatmentVMC.TreatmentToViewModel(treatment));
+            }
+
+            return View(vm.treatments);
         }
 
         [HttpGet]
-        public IActionResult AddTreatment()
+        public IActionResult Add()
         {
             return View();
         }
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult AddTreatment(string name, string age, string treatment)
+        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, string comment)
         {
-            //Sla het op
+            PatientDetailViewModel patientDetail = new PatientDetailViewModel()
+            {
+                Id = patientid,
+            };
+            TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
+            {
+                Name = treatmentname,
+                //Type = treatmenttype,
+                BeginDate = begindate + begintime,
+                EndDate = begindate + begintime,
+                Comment = comment,
+                PatientDetailViewModel = patientDetail,
+            };
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
+            repo.AddTreatment(treatment);
             return View();
         }
 
         [HttpGet]
-        public IActionResult EditTreatment(int id)
+        public IActionResult Edit(long id)
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
             Patient patient = new Patient()
@@ -64,12 +88,12 @@ namespace Webapp.Controllers
                 Name = "Grietje"
             };
             treatment.Patient = patient;
-            TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
-            return View(converter.TreatmentToViewModel(treatment));
+            return View(TreatmentVMC.TreatmentToViewModel(treatment));
         }
 
         [HttpPost]
-        public IActionResult EditTreatment()
+        public IActionResult Edit(string patientname, string treatmentname,
+        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             return View();
         }

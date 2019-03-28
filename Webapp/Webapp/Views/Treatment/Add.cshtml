@@ -1,5 +1,4 @@
-﻿@model Webapp.Models.TreatmentDetailViewModel
-@{
+﻿@{
     ViewData["Title"] = "Behandeling";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -7,9 +6,9 @@
 <h2>Doctor</h2>
 
 <link rel="stylesheet" href="~/css/User.css" />
-<div class="container bootstrap snippet col-lg-offset-0" id="container">
+<div class="container bootstrap snippet col-lg-offset-0" id="container"/>
     <div class="row">
-        <div class="col-sm-10"><h1>Pas de behandeling aan</h1></div>
+        <div class="col-sm-10"><h1>Maak een behandeling aan</h1></div>
     </div>
     <div class="row">
         <div class="col-sm-9">
@@ -20,58 +19,58 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
-                                <input type="text" class="form-control" name="patientname" id="patientname" value="@Model.PatientName" title="//Naam van de patiënt//">
+                                <input type="text" class="form-control" name="patientname" id="patientname" placeholder="Naam van de patiënt" title="//Naam van de patiënt//">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="Age"><h4>Behandelingsnaam</h4></label>
-                                <input type="text" class="form-control" name="treatmentname" id="treatmentname" value="@Model.Name" title="Naam van de behandeling.">
+                                <input type="text" class="form-control" name="treatmentname" id="treatmentname" placeholder="Naam van de behandeling" title="Naam van de behandeling.">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Behandelingstype</h4></label>
-                                <select type="text" class="form-control" name="treatmenttype" id="treatmenttype" value="Model.TreatmentType" title="Type van de behandeling.">
-                                    naam
-                                    optie 2
-                                    optie 3
+                                <select type="text" class="form-control" name="treatmenttype" id="treatmenttype" placeholder="Type van de behandeling" title="Type van de behandeling.">
+                                    <option>Behandeling 1</option>
+                                    <option>Behandeling 2</option>
+                                    <option>Behandeling 3</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Begindate"><h4>Begindatum</h4></label>
-                                <input type="date" class="form-control" name="begindate" id="begindate" value="@Model.BeginDate" title="Begindatum behandeling">
+                                <input type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="BeginTime"><h4>Tijd</h4></label>
-                                <input type="time" class="form-control" name="beginTime" id="beginTime" value="@Model.BeginDate.ToShortTimeString()" title="Begintijd behandeling">
+                                <input type="time" class="form-control" name="begintime" id="begintime" title="Begintijd behandeling">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Enddate"><h4>Einddatum</h4></label>
-                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="@Model.EndDate" title="Einddatum behandeling">
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="EndTime"><h4>Tijd</h4></label>
-                                <input type="time" class="form-control" name="endTime" id="endTime" value="@Model.EndDate.ToShortTimeString()" title="Eindtijd behandeling">
+                                <input type="time" class="form-control" name="endtime" id="endtime" title="Eindtijd behandeling">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Comments"><h4>Bericht</h4></label>
-                                <input type="text" class="form-control" name="comments" id="comments" placeholder="Bericht" title="Bericht.">
+                                <input type="text" class="form-control" name="comment" id="comment" placeholder="Bericht" title="Bericht.">
                                 <br />
                                 <br />
-                                <button type="submit" class="btn btn-primary" asp-action="Index" formmethod="post">Pas Aan</button>
                             </div>
                         </div>
+                        <button type="submit" class="btn btn-primary" asp-action="Index" formmethod="post">Maak Aan</button>
                     </form>
                     <hr>
                 </div><!--/tab-pane-->

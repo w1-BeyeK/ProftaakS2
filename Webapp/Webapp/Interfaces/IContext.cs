@@ -49,6 +49,8 @@ namespace Webapp.Interfaces
         bool UpdateTreatment(long id, Treatment Treatment);
         bool DeleteTreatmentById(long id);
         List<Treatment> GetTreatments();
+        List<Treatment> GetTreatmentsByDoctor(long id);
+        List<Treatment> GetTreatmentsByPatient(long id);
         Treatment GetTreatmentById(long id);
         #endregion
         #region Comment
@@ -56,6 +58,5 @@ namespace Webapp.Interfaces
         List<Comment> GetComments();
         Comment GetCommentById(long id);
         #endregion
-        
     }
 }

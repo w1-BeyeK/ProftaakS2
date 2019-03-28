@@ -22,7 +22,7 @@ namespace Webapp.Models.Data
         public List<Department> Departments { get; set; }
         public List<Treatment> Treatments { get; set; }
 
-        public Patient(int id, string userName, string email, string name) : base(id, userName, email, name)
+        public Patient(long id, string userName, string email, string name) : base(id, userName, email, name)
         {
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
@@ -38,7 +38,7 @@ namespace Webapp.Models.Data
             PrivPhoneNumber = true;
         }
 
-        public Patient(int id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
+        public Patient(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
         {
             BSN = bSN;
             Departments = new List<Department>();
@@ -72,7 +72,8 @@ namespace Webapp.Models.Data
 
         public int GetAge()
         {
-            throw new NotImplementedException();
+            int age = (int)((DateTime.Today - Birth).Days / 365.25);
+            return age;
         }
     }
 }

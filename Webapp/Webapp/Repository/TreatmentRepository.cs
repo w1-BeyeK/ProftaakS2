@@ -9,11 +9,26 @@ namespace Webapp.Repository
 {
     public class TreatmentRepository
     {
-        IContext context;
+        private readonly IContext context;
+
+        public TreatmentRepository(IContext context)
+        {
+            this.context = context;
+        }
 
         public bool AddTreatment(Treatment treatment)
         {
             return context.AddTreatment(treatment);
+        }
+
+        public List<Treatment> GetTreatmentsByDoctor(long id)
+        {
+            return context.GetTreatmentsByDoctor(id);
+        }
+
+        public List<Treatment> GetTreatmentsByPatient(long id)
+        {
+            return context.GetTreatmentsByPatient(id);
         }
     }
 }

@@ -79,11 +79,6 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public Comment GetCommentByTreatmentId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Comment> GetComments()
         {
             throw new NotImplementedException();
@@ -119,11 +114,6 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Institution> GetInstitutionsByDoctorId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Patient GetPatientById(long id)
         {
             throw new NotImplementedException();
@@ -149,17 +139,22 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public List<Treatment> GetTreatmentsByDoctor(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetTreatmentsByPatient(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public TreatmentType GetTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
         }
 
         public List<TreatmentType> GetTreatmentTypes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool UpdateDepartment(Department department)
         {
             throw new NotImplementedException();
         }

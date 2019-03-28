@@ -2,18 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Models.Data;
 
 namespace Webapp.Models
 {
     public class TreatmentDetailViewModel
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
+        public TreatmentType Type { get; set; }
         public DateTime BeginDate { get; set; }
+        public DateTime BeginTime { get; set; }
         public DateTime EndDate { get; set; }
-        public long PatientId { get; set; }
-        public string PatientName { get; set; }
-        //public TreatmentType TreatmentType { get; set; }
-        //public IEnumerable<Comment> Comments { get; set; }
+        public DateTime EndTime { get; set; }
+        public string Comment { get; set; }
+        public string Description { get; set; }
+        public PatientDetailViewModel PatientDetailViewModel { get; set; }
+        
     }
 }

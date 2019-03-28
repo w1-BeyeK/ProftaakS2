@@ -22,8 +22,9 @@ namespace Webapp.Context
         public static TestContext GetInstance()
         {
             if (instance == null)
+            {
                 instance = new TestContext();
-
+            }
             return instance;
         }
 
@@ -64,6 +65,17 @@ namespace Webapp.Context
             departments = new List<Department>();
             institutions = new List<Institution>();
             treatmentTypes = new List<TreatmentType>();
+            treatments = new List<Treatment>()
+            {
+                new Treatment()
+                {
+                    Name = "Zowarmarollen",
+                    Id = 1,
+                    BeginDate = DateTime.Now,
+                    EndDate = DateTime.Today
+                    
+                }
+            };
         }
 
         public bool AddTreatment(Treatment treatment)
@@ -278,7 +290,7 @@ namespace Webapp.Context
             oldTreatmentType = treatmentType;
             return true;
         }
-
+        
         public bool DeleteTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
@@ -292,6 +304,16 @@ namespace Webapp.Context
         public TreatmentType GetTreatmentTypeById(long id)
         {
             throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetTreatmentsByDoctor(long id)
+        {
+            return treatments.Where(t => t.Doctor != null && t.Doctor.Id == id).ToList();
+        }
+
+        public List<Treatment> GetTreatmentsByPatient(long id)
+        {
+            return treatments.Where(t => t.Patient != null && t.Patient.Id == id).ToList();
         }
     }
 }

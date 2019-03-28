@@ -11,7 +11,7 @@ namespace Webapp.Converters
     {
         public Patient ViewModelToPatient(PatientDetailViewModel vm)
         {
-            return new Patient((int)vm.Id, vm.UserName, vm.Email, vm.Name)
+            return new Patient(vm.Id, vm.UserName, vm.Email, vm.Name)
             {
                 Birth = vm.Birth,
                 BSN = vm.BSN,

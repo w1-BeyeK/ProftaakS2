@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models
 {
-    public class TreatmentViewModel
+    public class PatientViewModel
     {
-        public List<TreatmentDetailViewModel> treatments { get; set; }
+        List<PatientDetailViewModel> patients = new List<PatientDetailViewModel>();
     }
 }

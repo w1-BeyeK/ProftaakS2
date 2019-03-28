@@ -7,7 +7,7 @@ namespace Webapp.Models.Data
 {
     public class Role : Entity
     {
-        public int Id { get; set; }
+        public long Id { get; set; }
         public string Name { get; set; }
         public DateTime CreatedDate { get; set; }
     }

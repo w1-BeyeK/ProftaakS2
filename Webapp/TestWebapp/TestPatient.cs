@@ -127,5 +127,13 @@ namespace TestWebapp
             Assert.True(patient.Treatments.Exists(t => t == treatment));
             Assert.Equal(2, patient.Treatments.Count);
         }
+
+        [Fact]
+        public void GetAge()
+        {
+            Patient patient = new Patient(1, "username", "email", "password", "name", new DateTime(2000, 3, 20), "phonenumber", true, Gender.Female, 23);
+
+            Assert.Equal(19, patient.GetAge());
+        }
     }
 }
