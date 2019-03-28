@@ -13,7 +13,5 @@ namespace Webapp.Models
         public DateTime EndDate { get; set; }
         public long PatientId { get; set; }
         public string PatientName { get; set; }
-        //public TreatmentType TreatmentType { get; set; }
-        //public IEnumerable<Comment> Comments { get; set; }
     }
 }
