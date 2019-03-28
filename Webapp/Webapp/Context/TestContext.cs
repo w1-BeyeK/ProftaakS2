@@ -44,7 +44,7 @@ namespace Webapp.Context
             };
             doctors = new List<Doctor>()
             {
-                new Doctor(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin")
+                new Doctor(12, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
                 {
                     Active = true,
                     Birth = DateTime.Now,
