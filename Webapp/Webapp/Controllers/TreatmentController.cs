@@ -65,7 +65,7 @@ namespace Webapp.Controllers
             };
             treatment.Patient = patient;
             TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
-            return View(converter.ViewModelFromTreatment(treatment));
+            return View(converter.TreatmentToViewModel(treatment));
         }
 
         [HttpPost]
