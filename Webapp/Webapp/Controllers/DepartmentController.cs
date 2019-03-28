@@ -18,7 +18,7 @@ namespace Webapp.Controllers
                 Department depart = new Department("Röngtenafdeling " + i.ToString(), "Hier worden röngtenfoto's gemaakt", true);
                 items.Add(depart);
             }
-
+            
             return View(items);
         }
     }

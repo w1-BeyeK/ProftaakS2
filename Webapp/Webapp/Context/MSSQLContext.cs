@@ -99,6 +99,16 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public Doctor GetDoctorById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Patient GetPatientById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
         public Administrator LoginAdmin(string username, string password)
         {
             throw new NotImplementedException();

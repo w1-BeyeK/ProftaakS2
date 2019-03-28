@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public enum Gender { Male, Female };
+    public enum Gender { Male, Female, Other };
     public abstract class UserAccount : BaseAccount
     {
         public DateTime Birth { get; set; }
@@ -15,7 +15,7 @@ namespace Webapp.Models.Data
 
         public UserAccount(int id, string userName, string email, string password, string name) : base(id, userName, email, password, name)
         { }
-
+        
         public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name)
         {
             Birth = birth;

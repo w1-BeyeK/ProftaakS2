@@ -11,6 +11,11 @@ namespace Webapp.Repository
     {
         IContext context;
 
+        public DoctorRepository(IContext context)
+        {
+            this.context = context;
+        }
+
         public Doctor LoginDoctor(string username, string password)
         {
             return context.LoginDoctor(username, password);
@@ -37,6 +42,11 @@ namespace Webapp.Repository
         public bool ActivateDoctor(Doctor doctor, bool activate)
         {
             return context.ActivateDoctor(doctor, activate);
+        }
+
+        public Doctor GetDoctorById(long id)
+        {
+            return context.GetDoctorById(id);
         }
 
         /// <summary>

@@ -15,15 +15,29 @@ namespace Webapp.Models.Data
         public string Password { get; set; }
         public string Name { get; set; }
 
-        //Deze moet wellicht weg? Ligt eraan wat handig is!
-        public string NormalizedUserName { get; set; }
+        public BaseAccount()
+        { }
 
+        public BaseAccount(int id, string username, string email)
+        {
+            Id = id;
+            UserName = username;
+            Email = email;
+
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
+        }
+        public string NormalizedUserName { get; set; }
+      
         public BaseAccount(long id, string userName, string email, string password, string name)
         {
             Id = id;
             UserName = userName;
             Email = email;
             Password = password;
+
+            NormalizedUserName = UserName.ToUpper();
+            NormalizedEmail = email.ToUpper();
             Name = name;
         }
 
