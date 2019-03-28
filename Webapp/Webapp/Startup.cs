@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -45,7 +46,19 @@ namespace Webapp
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
             services.AddIdentity<BaseAccount, Role>()
                 .AddDefaultTokenProviders();
-          
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                // TODO: access denied pagina maken
+                options.AccessDeniedPath = new PathString("/");
+                options.Cookie.Name = "Cookie";
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(720);
+                options.LoginPath = new PathString("/");
+                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                options.SlidingExpiration = true;
+            });
+
             services.AddScoped<IContext, TestContext>();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

@@ -7,15 +7,11 @@ namespace Webapp.Models.Data
 {
     public abstract class BaseAccount
     {
-        //TODO : Moet dit in de constructor?
         public string Role { get; set; }
 
-        //TODO : Moet dit in de constructor?
         public long Id { get; set; }
         public string UserName { get; set; }
-        public string NormalizedUserName { get; set; }
         public string Email { get; set; }
-        public string NormalizedEmail { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
 
@@ -31,16 +27,18 @@ namespace Webapp.Models.Data
             NormalizedUserName = UserName.ToUpper();
             NormalizedEmail = email.ToUpper();
         }
-
-        public BaseAccount(int id, string username, string email, string password)
+        public string NormalizedUserName { get; set; }
+      
+        public BaseAccount(long id, string userName, string email, string password, string name)
         {
             Id = id;
-            UserName = username;
+            UserName = userName;
             Email = email;
             Password = password;
 
             NormalizedUserName = UserName.ToUpper();
             NormalizedEmail = email.ToUpper();
+            Name = name;
         }
 
         public string RatingPassword()
@@ -48,9 +46,9 @@ namespace Webapp.Models.Data
             throw new NotImplementedException();
         }
 
-        public override string ToString()
+        public virtual string ToString()
         {
-            return base.ToString();
+            return "";
         }
     }
 }

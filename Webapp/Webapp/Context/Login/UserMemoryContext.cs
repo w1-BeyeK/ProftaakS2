@@ -20,8 +20,8 @@ namespace Webapp.Context.Login
                 {
                     NormalizedUserName = "KEVINBEYE"
                 },
-                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "test123"),
-                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "test123"),
+                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "test123","Kevin"),
+                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "test123","Kevin"),
             };
 
         }
@@ -117,7 +117,7 @@ namespace Webapp.Context.Login
 
         public Task<string> GetNormalizedEmailAsync(BaseAccount user, CancellationToken cancellationToken)
         {
-            return Task.FromResult(user.NormalizedEmail);
+            return Task.FromResult(user.Email);
         }
 
         public Task<string> GetNormalizedUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
@@ -201,9 +201,9 @@ namespace Webapp.Context.Login
             throw new NotImplementedException();
         }
 
-        public Task SetNormalizedEmailAsync(BaseAccount user, string normalizedEmail, CancellationToken cancellationToken)
+        public Task SetNormalizedEmailAsync(BaseAccount user, string Email, CancellationToken cancellationToken)
         {
-            user.NormalizedEmail = normalizedEmail;
+            user.Email = Email;
             return Task.FromResult(0);
         }
 

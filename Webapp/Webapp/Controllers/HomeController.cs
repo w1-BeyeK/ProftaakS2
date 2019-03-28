@@ -56,7 +56,7 @@ namespace Webapp.Controllers
 
         public async Task<IActionResult> Test()
         {
-            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test", "Test1234!"), "Test123!");
+            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Test1234!","Kevin"), "Test123!");
 
             return View();
         }
@@ -83,9 +83,21 @@ namespace Webapp.Controllers
                     return View();
                 }
             }
-            return View();
+            return RedirectToAction("User");
         }
 
+        [HttpGet]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+           if (User?.Identity.IsAuthenticated == true)
+            {
+                await signInManager.SignOutAsync();
+            }
+
+            return RedirectToAction("index");
+        }        
+        
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
@@ -94,6 +106,16 @@ namespace Webapp.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult User()
+        {
+            return View();
+        }
+
+        public IActionResult Doctor()
         {
             return View();
         }

@@ -8,21 +8,21 @@ namespace Webapp.Models.Data
     public enum Gender { Male, Female, Other };
     public abstract class UserAccount : BaseAccount
     {
-        //TODO : Moet dit in de constructor?
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
-        public UserAccount(int id, string username, string email) : base(id, username, email)
-        { }
-
-        public UserAccount(int id, string username, string email, string password) : base(id, username, email, password)
+        public UserAccount(int id, string userName, string email, string password, string name) : base(id, userName, email, password, name)
         { }
         
-        public UserAccount()
+        public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name)
         {
-
+            Birth = birth;
+            PhoneNumber = phoneNumber;
+            Email = email;
+            Active = active;
+            Gender = gender;
         }
     }
 }

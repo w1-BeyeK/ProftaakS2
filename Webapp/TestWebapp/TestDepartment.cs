@@ -14,7 +14,7 @@ namespace TestWebapp
             bool active = true;
             string description = "De afdeling van mondheelkunde";
 
-            Department department = new Department(name, active, description);
+            Department department = new Department(name, description, active);
 
             Assert.Equal(name, department.Name);
             Assert.Equal(active, department.Active);

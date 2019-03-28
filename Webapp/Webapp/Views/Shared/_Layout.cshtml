@@ -90,15 +90,15 @@
                                 <a asp-action="index" asp-controller="profile"><i class="fa fa-user fa-lg"></i> Profiel</a>
                             </li>
                             <li>
-                                <a href="#">
-                                    <i class="fa fa-sign-out fa-lg"></i> Logout
+                                <a asp-action="Logout" method="get">
+                                    <i class="fa fa-sign-out fa-lg">
+                                    </i>  Logout
                                 </a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </div>
-
             <div class="col-sm-9 col-xs-12">
                 @RenderBody()
                 <hr />

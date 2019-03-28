@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewData["Title"] = "Patiënt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/User.css" />
+<div class="container bootstrap snippet col-lg-offset-0" id="container">
+    <div class="row">
+        <div class="col-sm-10"><h1>Patiënt</h1><hr /></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Home</a></li>
+                <li><a data-toggle="tab" href="#messages">Privacy</a></li>
+            </ul>
+
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="name"><h4>Volledige naam</h4></label>
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="Gender"><h4>Geslacht</h4></label>
+                                <select tag="option" class="form-control" name="gender" id="gender" placeholder="Voer je geslacht in" title="Voer je geslacht in.">
+                                    <option>Man</option>
+                                    <option>Vrouw</option>
+                                    <option>X</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="Username"><h4>Gebruikersnaam</h4></label>
+                                <input type="text" class="form-control" name="username" id="username" placeholder="username" title="voer je gebruikersnaam in">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="Birthday"><h4>Geboortedatum</h4></label>
+                                <input type="date" class="form-control" name="birthday" id="birthday" placeholder="Geboortedatum" title="Voer hier je Geboortedatum in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="BSN"><h4>BSN</h4></label>
+                                <input type="text" class="form-control" name="BSN" id="BSN" placeholder="BSN" title="Voer hier je BSN in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="email"><h4>Email</h4></label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="jouw@email.com" title="Voer je email in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="phonenumber"><h4>Telefoonnummer</h4></label>
+                                <input type="tel" class="form-control" name="phonenumber" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
+                                <input type="tel" class="form-control" name="mobile" id="mobile" placeholder="Voer mobiele nummer in" title="Voer mobiele nummer in.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="Zipcode"><h4>Postcode</h4></label>
+                                <input type="text" class="form-control" id="zipcode" placeholder="Postcode" title="Voer hier je postcode in">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="HouseNumber"><h4>Huisnummer</h4></label>
+                                <input type="text" class="form-control" id="address" placeholder="Huisnummer" title="Voer je huisnummer in">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="password"><h4>Wachtwoord</h4></label>
+                                <input type="password" class="form-control" name="password" id="password" placeholder="Wachtwoord" title="Voer je wachtwoord in.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="password2"><h4>Wachtwoord bevestigen</h4></label>
+                                <input type="password" class="form-control" name="password2" id="password2" placeholder="Wachtwoord bevestigen" title="Voer nog een keer je wachtwoord in.">
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="ContactPersonName"><h4>Contactpersoon naam</h4></label>
+                                    <input type="text" class="form-control" name="contactPersonName" id="contactPersonName" placeholder="Contactpersoon naam" title="Voer hier de contactpersoon naam in.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="ContactPersonPhoneNumber"><h4>Contactpersoon telefoonnummer</h4></label>
+                                    <input type="tel" class="form-control" name="contactPersonPhoneNumber" id="contactPersonPhoneNumber" placeholder="Contactpersoon telefoonnummer" title="Voer hier het telefoonnummer van je contactpersoon in.">
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Opslaan</button>
+                                <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Velden leeg maken</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                    <hr>
+
+                </div><!--/tab-pane-->
+                <div class="tab-pane" id="messages">
+
+                    <h2></h2>
+
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Contact persoon telefoonnummer
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Contact persoon naam
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Geboortedatum
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Email
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Telefoonnummer
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Adres
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox">
+                                    <span class="slider"></span>
+                                </label>
+                                Geslacht
+                            </div>
+                        </div>
+                    </form>
+
+                </div><!--/tab-pane-->
+                <div class="tab-pane" id="settings">
+
+
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="first_name"><h4>First name</h4></label>
+                                <input type="text" class="form-control" name="first_name" id="first_name" placeholder="first name" title="enter your first name if any.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="last_name"><h4>Last name</h4></label>
+                                <input type="text" class="form-control" name="last_name" id="last_name" placeholder="last name" title="enter your last name if any.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="phone"><h4>Phone</h4></label>
+                                <input type="text" class="form-control" name="phone" id="phone" placeholder="enter phone" title="enter your phone number if any.">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label for="mobile"><h4>Mobile</h4></label>
+                                <input type="text" class="form-control" name="mobile" id="mobile" placeholder="enter mobile number" title="enter your mobile number if any.">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label for="email"><h4>Email</h4></label>
+                                <input type="email" class="form-control" name="email" id="email" placeholder="you@email.com" title="voer je email in.">
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Location</h4></label>
+                                    <input type="email" class="form-control" id="location" placeholder="somewhere" title="enter a location">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="password"><h4>Wachtwoord</h4></label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="password" title="voer je wachtwoord in.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="password2"><h4>Verify</h4></label>
+                                    <input type="password" class="form-control" name="password2" id="password2" placeholder="password2" title="enter your password2.">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <br>
+                                    <button class="btn btn-lg btn-success pull-right" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> Save</button>
+                                    <!--<button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset</button>-->
+                                </div>
+                            </div>
+                    </form>
+                </div>
+
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->

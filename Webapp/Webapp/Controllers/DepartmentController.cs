@@ -12,25 +12,13 @@ namespace Webapp.Controllers
     {
         public IActionResult Index()
         {
-            List<Department> items = new List<Department>()
+            List<Department> items = new List<Department>();
+            for (int i = 0; i < 50; i++)
             {
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt"),
-                new Department("Hartafdeling", true, "Afdeling voor hartproblemen"),
-                new Department("Röngtenafdeling", true, "Hier worden röngtenfoto's gemaakt")
-            };
+                Department depart = new Department("Röngtenafdeling " + i.ToString(), "Hier worden röngtenfoto's gemaakt", true);
+                items.Add(depart);
+            }
+            
             return View(items);
         }
     }
