@@ -16,9 +16,8 @@ namespace Webapp.Context
         {
             patients = new List<Patient>()
             {
-                new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com")
+                new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
                 {
-                    Name = "Kevin Beye",
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
                     Password = "Test123",
@@ -34,7 +33,7 @@ namespace Webapp.Context
             };
             doctors = new List<Doctor>()
             {
-                new Doctor(12, "kevinbeye", "kevin.beye1999@hotmail.com")
+                new Doctor(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin")
                 {
                     Active = true,
                     Birth = DateTime.Now,

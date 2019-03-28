@@ -56,7 +56,7 @@ namespace Webapp.Controllers
 
         public async Task<IActionResult> Test()
         {
-            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Test1234!","Kevin"), "Test123!");
+            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Kevin"), "Test123!");
 
             return View();
         }
@@ -90,7 +90,7 @@ namespace Webapp.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-           if (User?.Identity.IsAuthenticated == true)
+           if (HttpContext.User?.Identity.IsAuthenticated == true)
             {
                 await signInManager.SignOutAsync();
             }

@@ -28,13 +28,13 @@ namespace Webapp.Models.Data
             NormalizedEmail = email.ToUpper();
         }
         public string NormalizedUserName { get; set; }
+        public string NormalizedEmail { get; set; }
       
-        public BaseAccount(long id, string userName, string email, string password, string name)
+        public BaseAccount(long id, string userName, string email, string name)
         {
             Id = id;
             UserName = userName;
             Email = email;
-            Password = password;
 
             NormalizedUserName = UserName.ToUpper();
             NormalizedEmail = email.ToUpper();

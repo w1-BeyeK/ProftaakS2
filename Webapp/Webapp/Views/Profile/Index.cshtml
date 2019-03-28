@@ -128,23 +128,22 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" disabled>
-
-                        <span class="slider"></span>
+                                    <input type="checkbox" checked="@Model.Patient.PrivMail" disabled>
+                                    <span class="slider"></span>
                                 </label>
-                                Contact persoon telefoonnummer
+                                Email
                             </div>
                         </div>
                         <div class="form-group">
+
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" disabled>
+                                    <input type="checkbox" checked="@Model.Patient.PrivGender" disabled>
                                     <span class="slider"></span>
                                 </label>
-                                Contact persoon naam
+                                Geslacht
                             </div>
                         </div>
-
                         <div class="form-group">
 
                             <div class="col-xs-6">
@@ -153,16 +152,6 @@
                                     <span class="slider"></span>
                                 </label>
                                 Geboortedatum
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivMail" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Email
                             </div>
                         </div>
                         <div class="form-group">
@@ -186,13 +175,22 @@
                             </div>
                         </div>
                         <div class="form-group">
-
                             <div class="col-xs-6">
                                 <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivGender" disabled>
+                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" disabled>
+
                                     <span class="slider"></span>
                                 </label>
-                                Geslacht
+                                Contact persoon telefoonnummer
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label class="switch">
+                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" disabled>
+                                    <span class="slider"></span>
+                                </label>
+                                Contact persoon naam
                             </div>
                         </div>
                     </form>

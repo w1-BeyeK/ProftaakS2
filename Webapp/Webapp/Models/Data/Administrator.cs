@@ -10,7 +10,7 @@ namespace Webapp.Models.Data
         public long EmployeeNumber { get; set; }
         
 
-        public Administrator(int id, string username, string email, string password,string name) : base(id, username, email, password,name)
+        public Administrator(int id, string username, string email, string password,string name) : base(id, username, email, name)
         {
             Role = "admin";
         }

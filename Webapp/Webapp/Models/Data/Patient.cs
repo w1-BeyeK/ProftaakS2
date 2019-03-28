@@ -23,7 +23,7 @@ namespace Webapp.Models.Data
         public List<Department> Departments { get; set; }
         public List<Treatment> Treatments { get; set; }
 
-        public Patient(int id, string userName, string email, string password,string name) : base(id, userName, email, password,name)
+        public Patient(int id, string userName, string email, string name) : base(id, userName, email, name)
         {
             Departments = new List<Department>();
             Treatments = new List<Treatment>();
