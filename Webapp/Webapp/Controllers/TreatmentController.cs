@@ -25,7 +25,7 @@ namespace Webapp.Controllers
             repo = new TreatmentRepository(context);
         }
 
-        [Authorize(Roles = "doctor, patient")]
+        //[Authorize(Roles = "doctor, patient")]
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
@@ -51,27 +51,25 @@ namespace Webapp.Controllers
         }
 
         [HttpGet]
-        public IActionResult AddTreatment()
+        public IActionResult Add()
         {
             return View();
         }
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult AddTreatment(long patientid, string patientname, string treatmentname, 
-        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
+        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, string comment)
         {
-            //Doe iets met de tijd en de dagen...
             PatientDetailViewModel patientDetail = new PatientDetailViewModel()
             {
-                Id = patientid
+                Id = patientid,
             };
             TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
             {
                 Name = treatmentname,
                 //Type = treatmenttype,
-                BeginDate = begindate,
-                EndDate = enddate,
+                BeginDate = begindate + begintime,
+                EndDate = begindate + begintime,
                 Comment = comment,
                 PatientDetailViewModel = patientDetail,
             };
@@ -81,7 +79,7 @@ namespace Webapp.Controllers
         }
 
         [HttpGet]
-        public IActionResult EditTreatment(long id)
+        public IActionResult Edit(long id)
         {
             Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
             Patient patient = new Patient()
@@ -94,7 +92,7 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddTreatment(string patientname, string treatmentname,
+        public IActionResult Edit(string patientname, string treatmentname,
         string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
         {
             return View();
