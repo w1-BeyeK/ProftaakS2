@@ -79,12 +79,6 @@ namespace Webapp.Context
             };
         }
 
-        public bool AddTreatment(Treatment treatment)
-        {
-            treatments.Add(treatment);
-            return true;
-        }
-
         public Patient GetPatientById(long id)
         {
             return patients.FirstOrDefault(p => p.Id == id);
@@ -245,6 +239,14 @@ namespace Webapp.Context
             return institutions.FirstOrDefault(i => i.Id == id);
         }
 
+        #region Treatment
+
+        public bool AddTreatment(Treatment treatment)
+        {
+            treatments.Add(treatment);
+            return true;
+        }
+
         public bool UpdateTreatment(long id, Treatment treatment)
         {
             if (id != treatment.Id)
@@ -259,22 +261,29 @@ namespace Webapp.Context
             return false;
         }
 
-        public bool DeleteTreatmentById(long id)
+        public bool DeleteTreatment(long id)
         {
             Treatment treatment = GetTreatmentById(id);
             treatments.Remove(GetTreatmentById(id));
             return true;
         }
 
-        public List<Treatment> GetTreatments()
-        {
-            return treatments;
-        }
-
         public Treatment GetTreatmentById(long id)
         {
             return treatments.FirstOrDefault(t => t.Id == id);
         }
+
+        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetTreatmentsByPatientId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
 
         public bool AddTreatmentType(TreatmentType treatmentType)
         {
@@ -292,7 +301,7 @@ namespace Webapp.Context
             return true;
         }
         
-        public bool DeleteTreatmentTypeById(long id)
+        public bool DeleteTreatmentType(long id)
         {
             throw new NotImplementedException();
         }

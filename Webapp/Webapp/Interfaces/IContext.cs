@@ -40,17 +40,16 @@ namespace Webapp.Interfaces
         #region TreatmentType
         bool AddTreatmentType(TreatmentType treatmentType);
         bool UpdateTreatmentType(long id, TreatmentType treatmentType);
-        bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
+        bool DeleteTreatmentType(long id);
         List<TreatmentType> GetTreatmentTypes();
         TreatmentType GetTreatmentTypeById(long id);
         #endregion
         #region Treatment
         bool AddTreatment(Treatment treatment);
         bool UpdateTreatment(long id, Treatment Treatment);
-        bool DeleteTreatmentById(long id);
-        List<Treatment> GetTreatments();
-        List<Treatment> GetTreatmentsByDoctor(long id);
-        List<Treatment> GetTreatmentsByPatient(long id);
+        bool DeleteTreatment(long id);
+        List<Treatment> GetTreatmentsByDoctorId(long id);
+        List<Treatment> GetTreatmentsByPatientId(long id);
         Treatment GetTreatmentById(long id);
         #endregion
         #region Comment

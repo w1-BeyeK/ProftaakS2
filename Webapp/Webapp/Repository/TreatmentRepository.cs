@@ -26,26 +26,24 @@ namespace Webapp.Repository
             return context.UpdateTreatment(id, treatment);
         }
 
-        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
+        public bool DeleteTreatment(long id)
         {
-            return context.ActiveTreatmentTypeByIdAndActive(id, active);
+            return context.DeleteTreatment(id);
         }
 
-        public List<Treatment> GetTreatments()
+        public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            return context.GetTreatments();
+            return context.GetTreatmentsByPatientId(id);
         }
 
-        public List<Treatment> GetTreatmentsByPatient(long id)
+        public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
-            return context.GetTreatmentsByPatient(id);
+            return context.GetTreatmentsByDoctorId(id);
         }
 
         public Treatment GetTreatmentById(long id)
         {
             return context.GetTreatmentById(id);
         }
-
-        //List<Treatment> GetTreatments();
     }
 }

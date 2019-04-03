@@ -31,11 +31,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetTreatmentsByDoctor(GetUserId());
+                items = repo.GetTreatmentsByDoctorId(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetTreatmentsByPatient(GetUserId());
+                items = repo.GetTreatmentsByPatientId(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()
@@ -76,8 +76,10 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(TreatmentDetailViewModel vm)
+        public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
+            repo.UpdateTreatment(id, TreatmentVMC.ViewModelToTreatment(vm));
+
             return View();
         }
     }

@@ -64,12 +64,12 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool DeleteTreatmentById(long id)
+        public bool DeleteTreatment(long id)
         {
             throw new NotImplementedException();
         }
 
-        public bool DeleteTreatmentTypeById(long id)
+        public bool DeleteTreatmentType(long id)
         {
             throw new NotImplementedException();
         }
@@ -134,17 +134,12 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Treatment> GetTreatments()
+        public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Treatment> GetTreatmentsByDoctor(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Treatment> GetTreatmentsByPatient(long id)
+        public List<Treatment> GetTreatmentsByPatientId(long id)
         {
             throw new NotImplementedException();
         }
