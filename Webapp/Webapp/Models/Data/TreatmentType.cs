@@ -10,17 +10,19 @@ namespace Webapp.Models.Data
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public bool Active { get; set; }
         public List<Department> Departments { get; set; }
         public List<Doctor> Doctors { get; set; }
         public List<Treatment> Treatments { get; set; }
 
-        public TreatmentType(string name, string description)
+        public TreatmentType(string name, string description, bool active = true)
         {
             Name = name;
             Description = description;
             Departments = new List<Department>();
             Doctors = new List<Doctor>();
             Treatments = new List<Treatment>();
+            Active = active;
         }
 
 

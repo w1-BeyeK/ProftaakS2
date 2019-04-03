@@ -9,7 +9,7 @@ namespace Webapp.Converters
 {
     public class TreatmentDetailViewModelConverter
     {
-        public Patient ViewModelToTreatment(PatientDetailViewModel vm)
+        public Patient ViewModelToPatient(PatientDetailViewModel vm)
         {
             Patient patient = new Patient()
             {
@@ -17,17 +17,20 @@ namespace Webapp.Converters
                 Name = vm.Name
             };
 
-            Treatment treatment = new Treatment()
+            foreach (TreatmentDetailViewModel t in vm.TreatmentDetailViewModels)
             {
-                Id = vm.TreatmentDetailViewModel.Id,
-                Name = vm.TreatmentDetailViewModel.Name,
-                Patient = patient,
-                BeginDate = vm.TreatmentDetailViewModel.BeginDate,
-                EndDate = vm.TreatmentDetailViewModel.EndDate,
-                TreatmentType = vm.TreatmentDetailViewModel.Type
-            };
-
-            patient.AddTreatment(treatment);
+                Treatment treatment = new Treatment()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Patient = patient,
+                    BeginDate = t.BeginDate,
+                    EndDate = t.EndDate,
+                    TreatmentType = t.Type,
+                    Comments = new List<Comment>(t.Comments),
+                };
+                patient.AddTreatment(treatment);
+            }
 
             return patient;
         }
@@ -39,22 +42,26 @@ namespace Webapp.Converters
         /// <returns></returns>
         public PatientDetailViewModel PatientToViewModel(Patient patient)
         {
-            TreatmentDetailViewModel treatmentDetailViewModel = new TreatmentDetailViewModel()
-            {
-                Id = patient.Treatments.First().Id,
-                Name = patient.Treatments.First().Name,
-                Type = patient.Treatments.First().TreatmentType,
-                BeginDate = patient.Treatments.First().BeginDate,
-                EndDate = patient.Treatments.First().EndDate
-            };
-
             PatientDetailViewModel vm = new PatientDetailViewModel()
             {
                 Id = patient.Id,
-                Name = patient.Name,
-                TreatmentDetailViewModel = treatmentDetailViewModel
+                Name = patient.Name
             };
-            
+            vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
+            foreach (Treatment t in patient.Treatments)
+            {
+                TreatmentDetailViewModel treatmentDetailViewModel = new TreatmentDetailViewModel()
+                {
+                    Id = t.Id,
+                    Name = t.Name,
+                    Type = t.TreatmentType,
+                    BeginDate = t.BeginDate,
+                    EndDate = t.EndDate,
+                    Comments = new List<Comment>(t.Comments),
+                };
+                vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
+            }
+
             return vm;
         }
     }

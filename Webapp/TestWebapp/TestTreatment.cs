@@ -31,8 +31,8 @@ namespace TestWebapp
             Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment(1, "name", DateTime.MinValue, DateTime.Today, patient, doctor, treatmentType);
-            Comment comment = new Comment("title", "description", DateTime.Today, treatment);
-            Comment comment2 = new Comment("title", "description", DateTime.Today, treatment);
+            Comment comment = new Comment("title", "description", DateTime.Today);
+            Comment comment2 = new Comment("title", "description", DateTime.Today);
 
             treatment.AddComment(comment);
             treatment.AddComment(comment2);

@@ -11,14 +11,12 @@ namespace Webapp.Models.Data
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime Date { get; set; }
-        public Treatment Treatment { get; set; }
 
-        public Comment(string title, string description, DateTime date, Treatment treatment)
+        public Comment(string title, string description, DateTime date)
         {
             Title = title;
             Description = description;
             Date = date;
-            Treatment = treatment;
         }
 
         public override string ToString()

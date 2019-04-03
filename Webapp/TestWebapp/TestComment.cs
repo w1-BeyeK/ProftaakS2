@@ -18,12 +18,11 @@ namespace TestWebapp
             TreatmentType treatmentType = new TreatmentType("name", "description");
             Treatment treatment = new Treatment(1, "name", date, date, patient, doctor, treatmentType);
 
-            Comment comment = new Comment(title, description, date, treatment);
+            Comment comment = new Comment(title, description, date);
 
             Assert.Equal(title, comment.Title);
             Assert.Equal(description, comment.Description);
             Assert.Equal(date, comment.Date);
-            Assert.Equal(treatment, comment.Treatment);
         }
     }
 }

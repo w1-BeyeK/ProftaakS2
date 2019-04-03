@@ -28,20 +28,20 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="Gender"><h4>Geslacht</h4></label>
-                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht.">
+                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht." value="@Model.Gender">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="Birthday"><h4>Geboortedatum</h4></label>
-                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum">
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")">
                             </div>
                         </div>
                         <div class="form-group">
 
                             <div class="col-xs-6">
                                 <label for="Age"><h4>Leeftijd</h4></label>
-                                <input type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd.">
+                                <input type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age">
 
                                 <br />
                                 <br />
@@ -50,49 +50,49 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Naam behandeling</h4></label>
-                                <input type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling.">
+                                <input type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling." value="@Model.TreatmentDetailViewModels[0].Name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="TreatmentType"><h4>Type behandeling</h4></label>
-                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling.">
+                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].Type.Name">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Begindate"><h4>Begindatum behandeling</h4></label>
-                                <input type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling">
+                                <input type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="BeginTime"><h4>Begin tijd</h4></label>
-                                <input type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling">
+                                <input type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToShortTimeString()">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-4">
                                 <label for="Enddate"><h4>Einddatum behandeling</h4></label>
-                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling">
+                                <input type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToString("yyyy-MM-dd")">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-2">
                                 <label for="EndTime"><h4>Eind tijd</h4></label>
-                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling">
+                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Description"><h4>Omschrijving</h4></label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving.">
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="@Model.TreatmentDetailViewModels[0].Comments[0].Description">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Comments"><h4>Commentaar</h4></label>
-                                <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar.">
+                                <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@Model.TreatmentDetailViewModels[0].Comments[1].Description">
                                 <br />
                                 <br />
                             </div>

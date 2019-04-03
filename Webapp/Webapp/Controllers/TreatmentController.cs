@@ -58,7 +58,7 @@ namespace Webapp.Controllers
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, string comment)
+        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, List<Comment> comments)
         {
             PatientDetailViewModel patientDetail = new PatientDetailViewModel()
             {
@@ -71,7 +71,7 @@ namespace Webapp.Controllers
                 Name = treatmentname,
                 BeginDate = begindate + begintime,
                 EndDate = begindate + begintime,
-                Comment = comment,
+                Comments = comments,
                 PatientDetailViewModel = patientDetail,
             };
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);

@@ -39,12 +39,11 @@ namespace Webapp.Controllers
         public IActionResult Detail(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
-            PatientViewModelConverter patientViewModelConverter = new PatientViewModelConverter();
-
+            TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
             try
             {
                 Patient patient = patientRepository.GetById(id);
-                patientDetailViewModel = patientViewModelConverter.PatientToViewModel(patient);
+                patientDetailViewModel = treatmentDetailViewModelConverter.PatientToViewModel(patient);
             }
             catch (Exception Ex)
             {

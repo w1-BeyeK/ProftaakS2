@@ -30,6 +30,27 @@ namespace Webapp.Context
 
         public TestContext()
         {
+            comments = new List<Comment>();
+            {
+                new Comment("Arm afzagen",
+                    "De arm wordt afgezaagd",
+                    DateTime.Now);
+                new Comment("Arm afzagen succes",
+                    "De arm is afgezaagd",
+                    DateTime.Now);
+            };
+            treatments = new List<Treatment>()
+            {
+                new Treatment()
+                {
+                    Name = "Zowarmarollen",
+                    Id = 1,
+                    BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
+                    EndDate = DateTime.Now,
+                    Comments = comments,
+                    TreatmentType = new TreatmentType("Arm afzagen", "Arm gaat eraf"),
+                }
+            };
             patients = new List<Patient>()
             {
                 new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
@@ -38,13 +59,14 @@ namespace Webapp.Context
                     Gender = Gender.Male,
                     Password = "Test123",
                     Active = true,
-                    Birth = DateTime.Now,
+                    Birth = new DateTime(2000, 12, 3),
                     PhoneNumber = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
-                    Zipcode = "5258HS"
+                    Zipcode = "5258HS",
+                    Treatments = treatments
                 }
             };
             doctors = new List<Doctor>()
@@ -60,23 +82,9 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            treatments = new List<Treatment>();
-            comments = new List<Comment>();
             departments = new List<Department>();
             institutions = new List<Institution>();
             treatmentTypes = new List<TreatmentType>();
-            treatments = new List<Treatment>()
-            {
-                new Treatment()
-                {
-                    Name = "Zowarmarollen",
-                    Id = 1,
-                    BeginDate = DateTime.Now,
-                    EndDate = DateTime.Today,
-                    Patient = patients.Find(t => t.Id == 12),
-                    Doctor = doctors.Find(t => t.Id == 12)
-                }
-            };
         }
 
         public bool AddTreatment(Treatment treatment)
