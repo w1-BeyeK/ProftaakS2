@@ -7,18 +7,20 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class TreatmentTypeRepository
+    public class TreatmentTypeRepository : BaseRepository
     {
-        IContext context;
+        public TreatmentTypeRepository(IContext context) : base(context)
+        {
+        }
 
         public bool AddTreatmentType(TreatmentType treatment)
         {
-            return context.AddTreatmentType(treatment);
+            return Context.AddTreatmentType(treatment);
         }
         
         public bool EditTreatmentType(TreatmentType treatment)
         {
-            return context.UpdateTreatmentType(treatment.Id, treatment);
+            return Context.UpdateTreatmentType(treatment.Id, treatment);
         }
 
         /// <summary>

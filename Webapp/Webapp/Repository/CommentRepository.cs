@@ -7,16 +7,18 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class CommentRepository
+    public class CommentRepository : BaseRepository
     {
-        IContext context;
+        public CommentRepository(IContext context) : base(context)
+        {
+        }
 
         /// <summary>
         /// Doctor adds a comment
         /// </summary>
-        public bool AddComment(Comment comment)
+        public bool AddComment(Comment comment, long treatmentId)
         {
-            return context.AddComment(comment);
+            return Context.AddComment(comment, treatmentId);
         }
     }
 }
