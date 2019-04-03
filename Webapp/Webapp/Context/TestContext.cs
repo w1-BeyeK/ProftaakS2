@@ -79,46 +79,21 @@ namespace Webapp.Context
             };
         }
 
-        public Patient GetPatientById(long id)
-        {
-            return patients.FirstOrDefault(p => p.Id == id);
-        }
-
-        public Doctor GetDoctorById(long id)
-        {
-            return doctors.FirstOrDefault(d => d.Id == id);
-        }
-
-        public Patient LoginPatient(string username, string password)
-        {
-            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
-
-            if (patient == null)
-                throw new KeyNotFoundException("No patient found");
-
-            return patient;
-        }
-
+        #region Patient
         public bool AddPatient(Patient patient)
         {
             patients.Add(patient);
             return true;
         }
 
-        public bool UpdatePatient(long id, Patient patient)
+        public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            if (id != patient.Id)
-                return false;
-
-            Patient oldPatient = GetPatientById(id);
-            oldPatient = patient;
-            return true;
+            throw new NotImplementedException();
         }
 
-        public bool DeletePatientById(long id)
+        public Patient GetPatientById(long id)
         {
-            patients.Remove(GetPatientById(id));
-            return true;
+            return patients.FirstOrDefault(p => p.Id == id);
         }
 
         public List<Patient> GetPatients()
@@ -132,10 +107,47 @@ namespace Webapp.Context
             return patients;
         }
 
+        public Patient LoginPatient(string username, string password)
+        {
+            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
+
+            if (patient == null)
+                throw new KeyNotFoundException("No patient found");
+
+            return patient;
+        }
+
+        public bool UpdatePatient(long id, Patient patient)
+        {
+            if (id != patient.Id)
+                return false;
+
+            Patient oldPatient = GetPatientById(id);
+            oldPatient = patient;
+            return true;
+        }
+
+        #endregion
+        #region Doctor
+        public bool ActiveDoctorByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddDoctor(Doctor doctor)
         {
             doctors.Add(doctor);
             return true;
+        }
+
+        public Doctor GetDoctorById(long id)
+        {
+            return doctors.FirstOrDefault(d => d.Id == id);
+        }
+
+        public List<Doctor> GetDoctorsByDepartmentId(long id)
+        {
+            return doctors;
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)
@@ -147,34 +159,25 @@ namespace Webapp.Context
             oldDoctor = doctor;
             return true;
         }
-
-        public bool DeleteDoctorById(long id)
-        {
-            doctors.Remove(GetDoctorById(id));
-            return true;
-        }
-
-        public List<Doctor> GetDoctors()
-        {
-            return doctors;
-        }
-
+        #endregion
+        #region Comment
         public bool AddComment(Comment comment)
         {
             comments.Add(comment);
             return true;
         }
 
-        public List<Comment> GetComments()
+        public List<Comment> GetCommentsByTreatmentId(long id)
         {
-            return comments;
+            throw new NotImplementedException();
         }
 
         public Comment GetCommentById(long id)
         {
             return comments.FirstOrDefault(c => c.Id == id);
         }
-
+        #endregion
+        #region Department
         public bool AddDepartment(Department department)
         {
             departments.Add(department);
@@ -191,22 +194,22 @@ namespace Webapp.Context
             return true;
         }
 
-        public bool DeleteDepartmentById(long id)
+        public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
-            departments.Remove(GetDepartmenById(id));
-            return true;
+            throw new NotImplementedException();
         }
 
-        public List<Department> GetDepartments()
+        public List<Department> GetDepartmentsByInstitutionId(long id)
         {
-            return departments;
+            throw new NotImplementedException();
         }
 
         public Department GetDepartmenById(long id)
         {
             return departments.FirstOrDefault(d => d.Id == id);
         }
-
+        #endregion
+        #region Institution
         public bool AddInstitution(Institution institution)
         {
             institutions.Add(institution);
@@ -223,12 +226,6 @@ namespace Webapp.Context
             return true;
         }
 
-        public bool DeleteInstitutionById(long id)
-        {
-            institutions.Remove(GetInstitutionById(id));
-            return true;
-        }
-
         public List<Institution> GetInstitutions()
         {
             return institutions;
@@ -238,6 +235,7 @@ namespace Webapp.Context
         {
             return institutions.FirstOrDefault(i => i.Id == id);
         }
+        #endregion
 
         #region Treatment
 
@@ -261,13 +259,6 @@ namespace Webapp.Context
             return false;
         }
 
-        public bool DeleteTreatment(long id)
-        {
-            Treatment treatment = GetTreatmentById(id);
-            treatments.Remove(GetTreatmentById(id));
-            return true;
-        }
-
         public Treatment GetTreatmentById(long id)
         {
             return treatments.FirstOrDefault(t => t.Id == id);
@@ -284,7 +275,7 @@ namespace Webapp.Context
         }
 
         #endregion
-
+        #region TreatmentType
         public bool AddTreatmentType(TreatmentType treatmentType)
         {
             treatmentTypes.Add(treatmentType);
@@ -301,7 +292,7 @@ namespace Webapp.Context
             return true;
         }
         
-        public bool DeleteTreatmentType(long id)
+        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
             throw new NotImplementedException();
         }

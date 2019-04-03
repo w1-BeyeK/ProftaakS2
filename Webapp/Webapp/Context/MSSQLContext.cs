@@ -9,6 +9,26 @@ namespace Webapp.Context
 {
     public class MSSQLContext : IContext
     {
+        public bool ActiveDepartmentByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ActiveDoctorByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ActivePatientByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddComment(Comment comment)
         {
             throw new NotImplementedException();
@@ -44,36 +64,6 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool DeleteDepartmentById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteDoctorById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteInstitutionById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeletePatientById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteTreatment(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool DeleteTreatmentType(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Comment GetCommentById(long id)
         {
             throw new NotImplementedException();
@@ -84,12 +74,12 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public Department GetDepartmenById(long id)
+        public Department GetDepartmentById(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Department> GetDepartments()
+        public List<Department> GetDepartmentsByInstitutionId(long id)
         {
             throw new NotImplementedException();
         }
@@ -99,7 +89,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctors()
+        public List<Doctor> GetDoctorsByDepartmentId(long id)
         {
             throw new NotImplementedException();
         }
