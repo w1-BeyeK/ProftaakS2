@@ -268,12 +268,12 @@ namespace Webapp.Context
 
         public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
-            return treatments.Where(t => t.Doctor.Id == id).ToList();
+            return treatments.FindAll(t => t.Doctor.Id == id);
         }
 
         public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            return treatments.Where(t => t.Patient.Id == id).ToList();
+            return treatments.FindAll(t => t.Patient.Id == id);
         }
 
         #endregion

@@ -82,5 +82,12 @@ namespace Webapp.Controllers
 
             return View();
         }
+
+        public IActionResult Detail(long id)
+        {
+            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
+
+            return View(vm);
+        }
     }
 }
