@@ -9,13 +9,13 @@ namespace Webapp.Context
 {
     public class TestContext : IContext
     {
-        private List<Patient> patients;
-        private List<Treatment> treatments;
-        private List<Doctor> doctors;
-        private List<Comment> comments;
-        private List<Department> departments;
-        private List<Institution> institutions;
-        private List<TreatmentType> treatmentTypes;
+        private List<Patient> patients = new List<Patient>();
+        private List<Treatment> treatments = new List<Treatment>();
+        private List<Doctor> doctors = new List<Doctor>();
+        private List<Comment> comments = new List<Comment>();
+        private List<Department> departments = new List<Department>();
+        private List<Institution> institutions = new List<Institution>();
+        private List<TreatmentType> treatmentTypes = new List<TreatmentType>();
 
         private static TestContext instance = null;
 
@@ -30,15 +30,9 @@ namespace Webapp.Context
 
         public TestContext()
         {
-            comments = new List<Comment>();
-            {
-                new Comment("Arm afzagen",
-                    "De arm wordt afgezaagd",
-                    DateTime.Now);
-                new Comment("Arm afzagen succes",
-                    "De arm is afgezaagd",
-                    DateTime.Now);
-            };
+            comments.Add(new Comment("Arm afzagen", "De arm wordt afgezaagd",DateTime.Now));
+            comments.Add(new Comment("Arm afzagen succes","De arm is afgezaagd",DateTime.Now));
+
             treatments = new List<Treatment>()
             {
                 new Treatment()
@@ -322,7 +316,7 @@ namespace Webapp.Context
 
         public List<Treatment> GetTreatmentsByPatient(long id)
         {
-            return treatments.Where(t => t.Patient != null && t.Patient.Id == id).ToList();
+            return patients.Find(t => t.Id == id).Treatments;
         }
     }
 }

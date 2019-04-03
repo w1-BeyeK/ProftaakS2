@@ -57,7 +57,9 @@ namespace Webapp.Converters
                     Type = t.TreatmentType,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
+                    //The first comment must be deleted
                     Comments = new List<Comment>(t.Comments),
+                    Description = t.Comments.First()
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }
