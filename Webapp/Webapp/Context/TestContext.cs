@@ -128,6 +128,7 @@ namespace Webapp.Context
         }
 
         #endregion
+
         #region Doctor
         public bool ActiveDoctorByIdAndActive(long id, bool active)
         {
@@ -160,11 +161,11 @@ namespace Webapp.Context
             return true;
         }
         #endregion
+
         #region Comment
-        public bool AddComment(Comment comment)
+        public bool AddComment(Comment comment, long treatmentId)
         {
-            comments.Add(comment);
-            return true;
+            throw new NotImplementedException();
         }
 
         public List<Comment> GetCommentsByTreatmentId(long id)
@@ -177,26 +178,17 @@ namespace Webapp.Context
             return comments.FirstOrDefault(c => c.Id == id);
         }
         #endregion
+
         #region Department
+        public bool ActiveDepartmentByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddDepartment(Department department)
         {
             departments.Add(department);
             return true;
-        }
-
-        public bool UpdateDepartment(long id, Department department)
-        {
-            if (id != department.Id)
-                return false;
-
-            Department oldDepartment = GetDepartmenById(id);
-            oldDepartment = department;
-            return true;
-        }
-
-        public bool ActiveDepartmentByIdAndActive(long id, bool active)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Department> GetDepartmentsByInstitutionId(long id)
@@ -204,11 +196,22 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public Department GetDepartmenById(long id)
+        public Department GetDepartmentById(long id)
         {
-            return departments.FirstOrDefault(d => d.Id == id);
+            return departments.FirstOrDefault(t => t.Id == id);
+        }
+
+        public bool UpdateDepartment(long id, Department department)
+        {
+            if (id != department.Id)
+                return false;
+
+            Department oldDepartment = GetDepartmentById(id);
+            oldDepartment = department;
+            return true;
         }
         #endregion
+
         #region Institution
         public bool AddInstitution(Institution institution)
         {
@@ -239,10 +242,9 @@ namespace Webapp.Context
 
         #region Treatment
 
-        public bool AddTreatment(Treatment treatment)
+        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            treatments.Add(treatment);
-            return true;
+            throw new NotImplementedException();
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)
@@ -266,15 +268,16 @@ namespace Webapp.Context
 
         public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
-            throw new NotImplementedException();
+            return treatments.Where(t => t.Doctor.Id == id).ToList();
         }
 
         public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            throw new NotImplementedException();
+            return treatments.Where(t => t.Patient.Id == id).ToList();
         }
 
         #endregion
+
         #region TreatmentType
         public bool AddTreatmentType(TreatmentType treatmentType)
         {
@@ -306,15 +309,6 @@ namespace Webapp.Context
         {
             throw new NotImplementedException();
         }
-
-        public List<Treatment> GetTreatmentsByDoctor(long id)
-        {
-            return treatments.Where(t => t.Doctor != null && t.Doctor.Id == id).ToList();
-        }
-
-        public List<Treatment> GetTreatmentsByPatient(long id)
-        {
-            return treatments.Where(t => t.Patient != null && t.Patient.Id == id).ToList();
-        }
+        #endregion
     }
 }

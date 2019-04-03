@@ -7,18 +7,15 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class PatientRepository
+    public class PatientRepository : BaseRepository
     {
-        IContext context;
-
-        public PatientRepository(IContext context)
+        public PatientRepository(IContext context) : base(context)
         {
-            this.context = context;
         }
 
         public Patient GetById(long id)
         {
-            return context.GetPatientById(id);
+            return Context.GetPatientById(id);
         }
     }
 }

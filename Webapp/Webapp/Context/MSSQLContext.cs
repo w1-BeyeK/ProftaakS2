@@ -29,7 +29,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool AddComment(Comment comment)
+        public bool AddComment(Comment comment, long treatmentId)
         {
             throw new NotImplementedException();
         }
@@ -54,7 +54,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool AddTreatment(Treatment treatment)
+        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
             throw new NotImplementedException();
         }
@@ -69,7 +69,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Comment> GetComments()
+        public List<Comment> GetCommentsByTreatmentId(long treatmentId)
         {
             throw new NotImplementedException();
         }
