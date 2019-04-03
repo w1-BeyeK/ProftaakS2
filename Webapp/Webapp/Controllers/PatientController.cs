@@ -43,7 +43,7 @@ namespace Webapp.Controllers
             try
             {
                 Patient patient = patientRepository.GetById(id);
-                List<Treatment> treatments = treatmentRepository.ShowTreatmentsByDoctorId(id).OrderByDescending(p => p.BeginDate).ToList();
+                List<Treatment> treatments = treatmentRepository.GetTreatmentsByDoctor(id).OrderByDescending(p => p.BeginDate).ToList();
                 
                 treatmentViewModel.treatments = treatmentViewModelConverter.TreatmentsToViewModel(treatments);
             }

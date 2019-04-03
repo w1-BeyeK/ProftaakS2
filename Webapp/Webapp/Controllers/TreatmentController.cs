@@ -75,7 +75,7 @@ namespace Webapp.Controllers
                 PatientDetailViewModel = patientDetail,
             };
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
-            bool gelukt = repo.AddTreatment(treatment, doctorId, patientId);
+            bool gelukt = repo.AddTreatment(treatment);
 
             ViewBag.Bericht = gelukt.ToString();
             return View();
