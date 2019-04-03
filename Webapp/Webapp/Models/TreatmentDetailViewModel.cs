@@ -15,7 +15,7 @@ namespace Webapp.Models
         public TimeSpan BeginTime { get; set; }
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
-        public List<Comment> Comments { get; set; }
+        public List<Comment> Comments { get; set; } = new List<Comment>();
         public Comment Description { get; set; }
         public PatientDetailViewModel PatientDetailViewModel { get; set; }
         

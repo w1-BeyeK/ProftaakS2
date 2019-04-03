@@ -50,6 +50,12 @@ namespace Webapp.Converters
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
             {
+                //The first comment is the description
+                t.Comments.OrderBy(x => x.Date);
+                List<Comment> comments = t.Comments;
+                Comment description = comments[0];
+                comments.RemoveAt(0);
+
                 TreatmentDetailViewModel treatmentDetailViewModel = new TreatmentDetailViewModel()
                 {
                     Id = t.Id,
@@ -57,9 +63,8 @@ namespace Webapp.Converters
                     Type = t.TreatmentType,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
-                    //The first comment must be deleted
-                    Comments = new List<Comment>(t.Comments),
-                    Description = t.Comments.First()
+                    Comments = comments,
+                    Description = description
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }

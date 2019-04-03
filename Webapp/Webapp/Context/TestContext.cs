@@ -30,8 +30,9 @@ namespace Webapp.Context
 
         public TestContext()
         {
-            comments.Add(new Comment("Arm afzagen", "De arm wordt afgezaagd",DateTime.Now));
-            comments.Add(new Comment("Arm afzagen succes","De arm is afgezaagd",DateTime.Now));
+            comments.Add(new Comment("Arm afzagen", "De arm wordt afgezaagd1",new DateTime(2010 / 22 / 22)));
+            comments.Add(new Comment("Arm afzagen succes","De arm is afgezaagd2", new DateTime(2011 / 22 / 22)));
+            comments.Add(new Comment("Arm afzagen succes2","De arm is afgezaagd3",DateTime.Today));
 
             treatments = new List<Treatment>()
             {

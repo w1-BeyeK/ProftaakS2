@@ -56,12 +56,12 @@ namespace Webapp.Controllers
             return View();
         }
 
-        //TODO : Voeg extra parameters toe!
+        //TODO : Voeg extra parameters toe! bij AddTreatment
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            bool gelukt = repo.AddTreatment(treatment);
+            bool gelukt = repo.AddTreatment(treatment, 12, 0);
 
             ViewBag.Bericht = gelukt.ToString();
             return View();

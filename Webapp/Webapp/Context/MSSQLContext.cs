@@ -13,7 +13,7 @@ namespace Webapp.Context
     {
         string connectionString = "Server=mssql.fhict.local;Database=dbi409368;User Id=dbi409368;Password=Test123;";
 
-        public bool AddComment(Comment comment)
+        public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
             throw new NotImplementedException();
         }

@@ -89,14 +89,15 @@
                                 <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="@Model.TreatmentDetailViewModels[0].Description.Description">
                             </div>
                         </div>
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="Comments"><h4>Commentaar</h4></label>
-                                <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@Model.TreatmentDetailViewModels[0].Comments[1].Description">
-                                <br />
-                                <br />
+                        @foreach (Comment comment in Model.TreatmentDetailViewModels[0].Comments)
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Commentaar</h4></label>
+                                    <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@comment.Description">
+                                </div>
                             </div>
-                        </div>
+                        }
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde type behandelingen</h4></label>
