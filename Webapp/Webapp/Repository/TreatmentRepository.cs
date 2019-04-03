@@ -21,14 +21,31 @@ namespace Webapp.Repository
             return context.AddTreatment(treatment);
         }
 
-        public List<Treatment> GetTreatmentsByDoctor(long id)
+        public bool UpdateTreatment(long id, Treatment treatment)
         {
-            return context.GetTreatmentsByDoctor(id);
+            return context.UpdateTreatment(id, treatment);
+        }
+
+        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
+        {
+            return context.ActiveTreatmentTypeByIdAndActive(id, active);
+        }
+
+        public List<Treatment> GetTreatments()
+        {
+            return context.GetTreatments();
         }
 
         public List<Treatment> GetTreatmentsByPatient(long id)
         {
             return context.GetTreatmentsByPatient(id);
         }
+
+        public Treatment GetTreatmentById(long id)
+        {
+            return context.GetTreatmentById(id);
+        }
+
+        //List<Treatment> GetTreatments();
     }
 }

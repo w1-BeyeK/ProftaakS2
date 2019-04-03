@@ -58,23 +58,9 @@ namespace Webapp.Controllers
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, string comment)
+        public IActionResult Add(TreatmentDetailViewModel vm)
         {
-            PatientDetailViewModel patientDetail = new PatientDetailViewModel()
-            {
-                Id = patientid,
-            };
-
-            //Type = treatmenttype,
-            TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
-            {
-                Name = treatmentname,
-                BeginDate = begindate + begintime,
-                EndDate = begindate + begintime,
-                Comment = comment,
-                PatientDetailViewModel = patientDetail,
-            };
-            Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
             bool gelukt = repo.AddTreatment(treatment);
 
             ViewBag.Bericht = gelukt.ToString();
@@ -84,19 +70,13 @@ namespace Webapp.Controllers
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
-            Patient patient = new Patient()
-            {
-                Id = 0,
-                Name = "Grietje"
-            };
-            treatment.Patient = patient;
-            return View(TreatmentVMC.TreatmentToViewModel(treatment));
+            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
+
+            return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Edit(string patientname, string treatmentname,
-        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
+        public IActionResult Edit(TreatmentDetailViewModel vm)
         {
             return View();
         }
