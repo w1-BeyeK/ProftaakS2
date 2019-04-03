@@ -1,5 +1,5 @@
 ﻿@using Webapp.Models.Data;
-@Model Webapp.Models.TreatmentViewModel;
+@Model Webapp.Models.PatientDetailViewModel;
 @{
     ViewData["Title"] = "Doctor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -22,7 +22,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="name"><h4>Volledige naam</h4></label>
-                                <input type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Patient.Name">
+                                <input type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name">
                             </div>
                         </div>
                         <div class="form-group">

@@ -12,7 +12,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    [Route("patient")]
+    //[Route("patient")]
     public class PatientController : BaseController
     {
         private readonly PatientRepository patientRepository;
@@ -35,23 +35,22 @@ namespace Webapp.Controllers
             return View();
         }
 
-        [HttpGet("{id}")]
+        //[HttpGet("{id}")]
         public IActionResult Detail(long id)
         {
-            TreatmentViewModel treatmentViewModel = new TreatmentViewModel();
+            PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
+            PatientViewModelConverter patientViewModelConverter = new PatientViewModelConverter();
 
             try
             {
                 Patient patient = patientRepository.GetById(id);
-                List<Treatment> treatments = treatmentRepository.GetTreatmentsByDoctor(id).OrderByDescending(p => p.BeginDate).ToList();
-                
-                treatmentViewModel.treatments = treatmentViewModelConverter.TreatmentsToViewModel(treatments);
+                patientDetailViewModel = patientViewModelConverter.PatientToViewModel(patient);
             }
             catch (Exception Ex)
             {
                 return BadRequest(Ex.Message);
             }
-            return View();
+            return View(patientDetailViewModel);
         }
     }
 }
