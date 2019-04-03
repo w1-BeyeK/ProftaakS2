@@ -25,6 +25,7 @@
                 <td>@item.EndDate</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Detail", "Detail", new { id = item.Id })
                 </td>
             </tr>
         }
