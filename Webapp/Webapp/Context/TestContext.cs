@@ -275,12 +275,12 @@ namespace Webapp.Context
 
         public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
-            throw new NotImplementedException();
+            return treatments.FindAll(t => t.Doctor.Id == id);
         }
 
         public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            throw new NotImplementedException();
+            return treatments.FindAll(t => t.Patient.Id == id);
         }
 
         #endregion
