@@ -22,8 +22,8 @@ namespace Webapp.Converters
                 Id = vm.Id,
                 Name = vm.Name,
                 Patient = patient,
-                BeginDate = vm.BeginDate,
-                EndDate = vm.EndDate,
+                BeginDate = vm.BeginDate + vm.BeginTime,
+                EndDate = vm.EndDate + vm.EndTime,
                 TreatmentType = vm.Type
             };
 

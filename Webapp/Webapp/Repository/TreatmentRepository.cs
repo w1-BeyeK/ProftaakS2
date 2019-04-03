@@ -7,28 +7,35 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class TreatmentRepository
+    public class TreatmentRepository : BaseRepository
     {
-        private readonly IContext context;
-
-        public TreatmentRepository(IContext context)
+        public TreatmentRepository(IContext context) : base(context)
         {
-            this.context = context;
         }
 
-        public bool AddTreatment(Treatment treatment)
+        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            return context.AddTreatment(treatment);
+            return Context.AddTreatment(treatment, doctorId, patientId);
         }
 
-        public List<Treatment> GetTreatmentsByDoctor(long id)
+        public bool UpdateTreatment(long id, Treatment treatment)
         {
-            return context.GetTreatmentsByDoctor(id);
+            return Context.UpdateTreatment(id, treatment);
         }
 
-        public List<Treatment> GetTreatmentsByPatient(long id)
+        public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            return context.GetTreatmentsByPatient(id);
+            return Context.GetTreatmentsByPatientId(id);
+        }
+
+        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        {
+            return Context.GetTreatmentsByDoctorId(id);
+        }
+
+        public Treatment GetTreatmentById(long id)
+        {
+            return Context.GetTreatmentById(id);
         }
     }
 }

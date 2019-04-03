@@ -12,9 +12,9 @@ namespace Webapp.Models
         public string Name { get; set; }
         public TreatmentType Type { get; set; }
         public DateTime BeginDate { get; set; }
-        public DateTime BeginTime { get; set; }
+        public TimeSpan BeginTime { get; set; }
         public DateTime EndDate { get; set; }
-        public DateTime EndTime { get; set; }
+        public TimeSpan EndTime { get; set; }
         public List<Comment> Comments { get; set; }
         public Comment Description { get; set; }
         public PatientDetailViewModel PatientDetailViewModel { get; set; }

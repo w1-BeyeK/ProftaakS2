@@ -7,13 +7,15 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class InstitutionRepository
+    public class InstitutionRepository : BaseRepository
     {
-        IContext context;
+        public InstitutionRepository(IContext context) : base(context)
+        {
+        }
 
         public bool AddInstitution(Institution institution)
         {
-            return context.AddInstitution(institution);
+            return Context.AddInstitution(institution);
         }
     }
 }

@@ -31,11 +31,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetTreatmentsByDoctor(GetUserId());
+                items = repo.GetTreatmentsByDoctorId(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetTreatmentsByPatient(GetUserId());
+                items = repo.GetTreatmentsByPatientId(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()
@@ -58,23 +58,9 @@ namespace Webapp.Controllers
 
         //TODO : Voeg extra parameters toe!
         [HttpPost]
-        public IActionResult Add(long patientid, string treatmentname, DateTime begindate, TimeSpan begintime, DateTime enddate, TimeSpan endtime, List<Comment> comments)
+        public IActionResult Add(TreatmentDetailViewModel vm)
         {
-            PatientDetailViewModel patientDetail = new PatientDetailViewModel()
-            {
-                Id = patientid,
-            };
-
-            //Type = treatmenttype,
-            TreatmentDetailViewModel treatmentDetail = new TreatmentDetailViewModel()
-            {
-                Name = treatmentname,
-                BeginDate = begindate + begintime,
-                EndDate = begindate + begintime,
-                Comments = comments,
-                PatientDetailViewModel = patientDetail,
-            };
-            Treatment treatment = TreatmentVMC.ViewModelToTreatment(treatmentDetail);
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
             bool gelukt = repo.AddTreatment(treatment);
 
             ViewBag.Bericht = gelukt.ToString();
@@ -84,21 +70,24 @@ namespace Webapp.Controllers
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
-            Patient patient = new Patient()
-            {
-                Id = 0,
-                Name = "Grietje"
-            };
-            treatment.Patient = patient;
-            return View(TreatmentVMC.TreatmentToViewModel(treatment));
+            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
+
+            return View(vm);
         }
 
         [HttpPost]
-        public IActionResult Edit(string patientname, string treatmentname,
-        string treatmenttype, DateTime begindate, DateTime begintime, DateTime enddate, DateTime endtime, string comment)
+        public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
+            repo.UpdateTreatment(id, TreatmentVMC.ViewModelToTreatment(vm));
+
             return View();
+        }
+
+        public IActionResult Detail(long id)
+        {
+            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
+
+            return View(vm);
         }
     }
 }

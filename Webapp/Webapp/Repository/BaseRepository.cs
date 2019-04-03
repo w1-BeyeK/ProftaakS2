@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Interfaces;
-using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class AdministratorRepository : BaseRepository
+    public abstract class BaseRepository
     {
-        public AdministratorRepository(IContext context) : base(context)
+        public IContext Context { get; private set; }
+
+        protected BaseRepository(IContext context)
         {
+            Context = context;
         }
     }
 }

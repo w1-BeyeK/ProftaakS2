@@ -7,28 +7,25 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DoctorRepository
+    public class DoctorRepository : BaseRepository
     {
-        IContext context;
-
-        public DoctorRepository(IContext context)
+        public DoctorRepository(IContext context) : base(context)
         {
-            this.context = context;
         }
 
         public bool AddDoctor(Doctor doctor)
         {
-            return context.AddDoctor(doctor);
+            return Context.AddDoctor(doctor);
         }
 
         public bool EditDoctor(Doctor doctor)
         {
-            return context.UpdateDoctor(doctor.Id, doctor);
+            return Context.UpdateDoctor(doctor.Id, doctor);
         }
 
         public Doctor GetDoctorById(long id)
         {
-            return context.GetDoctorById(id);
+            return Context.GetDoctorById(id);
         }
     }
 }

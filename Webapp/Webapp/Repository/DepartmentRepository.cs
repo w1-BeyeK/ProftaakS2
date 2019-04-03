@@ -7,18 +7,20 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DepartmentRepository
+    public class DepartmentRepository : BaseRepository
     {
-        IContext context;
+        public DepartmentRepository(IContext context) : base(context)
+        {
+        }
 
         public bool AddDepartment(Department department)
         {
-            return context.AddDepartment(department);
+            return Context.AddDepartment(department);
         }
 
         public bool EditDepartment(Department department)
         {
-            return context.UpdateDepartment(department.Id, department);
+            return Context.UpdateDepartment(department.Id, department);
         }
     }
 }

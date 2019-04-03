@@ -81,52 +81,21 @@ namespace Webapp.Context
             treatmentTypes = new List<TreatmentType>();
         }
 
-        public bool AddTreatment(Treatment treatment)
-        {
-            treatments.Add(treatment);
-            return true;
-        }
-
-        public Patient GetPatientById(long id)
-        {
-            return patients.FirstOrDefault(p => p.Id == id);
-        }
-
-        public Doctor GetDoctorById(long id)
-        {
-            return doctors.FirstOrDefault(d => d.Id == id);
-        }
-
-        public Patient LoginPatient(string username, string password)
-        {
-            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
-
-            if (patient == null)
-                throw new KeyNotFoundException("No patient found");
-
-            return patient;
-        }
-
+        #region Patient
         public bool AddPatient(Patient patient)
         {
             patients.Add(patient);
             return true;
         }
 
-        public bool UpdatePatient(long id, Patient patient)
+        public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            if (id != patient.Id)
-                return false;
-
-            Patient oldPatient = GetPatientById(id);
-            oldPatient = patient;
-            return true;
+            throw new NotImplementedException();
         }
 
-        public bool DeletePatientById(long id)
+        public Patient GetPatientById(long id)
         {
-            patients.Remove(GetPatientById(id));
-            return true;
+            return patients.FirstOrDefault(p => p.Id == id);
         }
 
         public List<Patient> GetPatients()
@@ -140,10 +109,48 @@ namespace Webapp.Context
             return patients;
         }
 
+        public Patient LoginPatient(string username, string password)
+        {
+            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
+
+            if (patient == null)
+                throw new KeyNotFoundException("No patient found");
+
+            return patient;
+        }
+
+        public bool UpdatePatient(long id, Patient patient)
+        {
+            if (id != patient.Id)
+                return false;
+
+            Patient oldPatient = GetPatientById(id);
+            oldPatient = patient;
+            return true;
+        }
+
+        #endregion
+
+        #region Doctor
+        public bool ActiveDoctorByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddDoctor(Doctor doctor)
         {
             doctors.Add(doctor);
             return true;
+        }
+
+        public Doctor GetDoctorById(long id)
+        {
+            return doctors.FirstOrDefault(d => d.Id == id);
+        }
+
+        public List<Doctor> GetDoctorsByDepartmentId(long id)
+        {
+            return doctors;
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)
@@ -155,32 +162,29 @@ namespace Webapp.Context
             oldDoctor = doctor;
             return true;
         }
+        #endregion
 
-        public bool DeleteDoctorById(long id)
+        #region Comment
+        public bool AddComment(Comment comment, long treatmentId)
         {
-            doctors.Remove(GetDoctorById(id));
-            return true;
+            throw new NotImplementedException();
         }
 
-        public List<Doctor> GetDoctors()
+        public List<Comment> GetCommentsByTreatmentId(long id)
         {
-            return doctors;
-        }
-
-        public bool AddComment(Comment comment)
-        {
-            comments.Add(comment);
-            return true;
-        }
-
-        public List<Comment> GetComments()
-        {
-            return comments;
+            throw new NotImplementedException();
         }
 
         public Comment GetCommentById(long id)
         {
             return comments.FirstOrDefault(c => c.Id == id);
+        }
+        #endregion
+
+        #region Department
+        public bool ActiveDepartmentByIdAndActive(long id, bool active)
+        {
+            throw new NotImplementedException();
         }
 
         public bool AddDepartment(Department department)
@@ -189,32 +193,28 @@ namespace Webapp.Context
             return true;
         }
 
+        public List<Department> GetDepartmentsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Department GetDepartmentById(long id)
+        {
+            return departments.FirstOrDefault(t => t.Id == id);
+        }
+
         public bool UpdateDepartment(long id, Department department)
         {
             if (id != department.Id)
                 return false;
 
-            Department oldDepartment = GetDepartmenById(id);
+            Department oldDepartment = GetDepartmentById(id);
             oldDepartment = department;
             return true;
         }
+        #endregion
 
-        public bool DeleteDepartmentById(long id)
-        {
-            departments.Remove(GetDepartmenById(id));
-            return true;
-        }
-
-        public List<Department> GetDepartments()
-        {
-            return departments;
-        }
-
-        public Department GetDepartmenById(long id)
-        {
-            return departments.FirstOrDefault(d => d.Id == id);
-        }
-
+        #region Institution
         public bool AddInstitution(Institution institution)
         {
             institutions.Add(institution);
@@ -231,12 +231,6 @@ namespace Webapp.Context
             return true;
         }
 
-        public bool DeleteInstitutionById(long id)
-        {
-            institutions.Remove(GetInstitutionById(id));
-            return true;
-        }
-
         public List<Institution> GetInstitutions()
         {
             return institutions;
@@ -245,6 +239,14 @@ namespace Webapp.Context
         public Institution GetInstitutionById(long id)
         {
             return institutions.FirstOrDefault(i => i.Id == id);
+        }
+        #endregion
+
+        #region Treatment
+
+        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        {
+            throw new NotImplementedException();
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)
@@ -261,23 +263,24 @@ namespace Webapp.Context
             return false;
         }
 
-        public bool DeleteTreatmentById(long id)
-        {
-            Treatment treatment = GetTreatmentById(id);
-            treatments.Remove(GetTreatmentById(id));
-            return true;
-        }
-
-        public List<Treatment> GetTreatments()
-        {
-            return treatments;
-        }
-
         public Treatment GetTreatmentById(long id)
         {
             return treatments.FirstOrDefault(t => t.Id == id);
         }
 
+        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        {
+            return treatments.FindAll(t => t.Doctor.Id == id);
+        }
+
+        public List<Treatment> GetTreatmentsByPatientId(long id)
+        {
+            return treatments.FindAll(t => t.Patient.Id == id);
+        }
+
+        #endregion
+
+        #region TreatmentType
         public bool AddTreatmentType(TreatmentType treatmentType)
         {
             treatmentTypes.Add(treatmentType);
@@ -294,7 +297,7 @@ namespace Webapp.Context
             return true;
         }
         
-        public bool DeleteTreatmentTypeById(long id)
+        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
             throw new NotImplementedException();
         }
@@ -308,15 +311,6 @@ namespace Webapp.Context
         {
             throw new NotImplementedException();
         }
-
-        public List<Treatment> GetTreatmentsByDoctor(long id)
-        {
-            return treatments.Where(t => t.Doctor != null && t.Doctor.Id == id).ToList();
-        }
-
-        public List<Treatment> GetTreatmentsByPatient(long id)
-        {
-            return patients.Find(t => t.Id == id).Treatments;
-        }
+        #endregion
     }
 }
