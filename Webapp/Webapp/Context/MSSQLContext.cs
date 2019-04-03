@@ -4,11 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace Webapp.Context
 {
     public class MSSQLContext : IContext
     {
+        string connectionString = "Server=mssql.fhict.local;Database=dbi409368;User Id=dbi409368;Password=Test123;";
+
         public bool AddComment(Comment comment)
         {
             throw new NotImplementedException();
