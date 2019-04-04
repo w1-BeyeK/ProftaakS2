@@ -17,7 +17,7 @@ namespace Webapp.Interfaces
         bool ActivePatientByIdAndActive(long id, bool active);
         List<Patient> GetAllActivePatients();
         Patient GetPatientById(long id);
-        List<Patient> GetPatientsByDoctorId(long id);
+        List<Patient> GetAllPatientsByDoctorId(long id);
         #endregion
 
         #region Doctor
@@ -32,7 +32,7 @@ namespace Webapp.Interfaces
         bool AddDepartment(Department department);
         bool UpdateDepartment(long id, Department department);
         bool ActiveDepartmentByIdAndActive(long id, bool active);
-        List<Department> GetDepartmentsByInstitutionId(long id);
+        List<Department> GetAllDepartmentsByInstitutionId(long id);
         Department GetDepartmentById(long id);
         #endregion
 
@@ -48,22 +48,22 @@ namespace Webapp.Interfaces
         bool AddTreatmentType(TreatmentType treatmentType);
         bool UpdateTreatmentType(long id, TreatmentType treatmentType);
         bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
-        List<TreatmentType> GetTreatmentTypes();
-        List<TreatmentType> GetTreatmentTypesByActive(bool active);
+        List<TreatmentType> GetAllActiveTreatmentTypes();
+        List<TreatmentType> GetAllTreatmentTypesByActive(bool active);
         TreatmentType GetTreatmentTypeById(long id);
         #endregion
 
         #region Treatment
         bool AddTreatment(Treatment treatment, long doctorId, long patientId);
         bool UpdateTreatment(long id, Treatment Treatment);
-        List<Treatment> GetTreatmentsByDoctorId(long id);
-        List<Treatment> GetTreatmentsByPatientId(long id);
+        List<Treatment> GetAllTreatmentsByDoctorId(long id);
+        List<Treatment> GetAllTreatmentsByPatientId(long id);
         Treatment GetTreatmentById(long id);
         #endregion
 
         #region Comment
         bool AddComment(Comment comment, long treatmentId);
-        List<Comment> GetCommentsByTreatmentId(long treatmentId);
+        List<Comment> GetAllCommentsByTreatmentId(long treatmentId);
         #endregion
     }
 }

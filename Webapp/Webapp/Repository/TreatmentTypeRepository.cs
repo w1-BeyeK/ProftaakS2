@@ -38,19 +38,19 @@ namespace Webapp.Repository
         }
 
         /// <summary>
-        /// An administrator or doctor can get all treatmentTypes
+        /// An administrator or doctor can get all active treatmentTypes
         /// </summary>
-        public List<TreatmentType> GetTreatmentTypes()
+        public List<TreatmentType> GetAllActiveTreatmentTypes()
         {
-            return Context.GetTreatmentTypes();
+            return Context.GetAllActiveTreatmentTypes();
         }
 
         /// <summary>
         /// An administrator or doctor can get all treatmentTypes by active
         /// </summary>
-        public List<TreatmentType> GetTreatmentTypesByActive(bool active)
+        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
-            return Context.GetTreatmentTypesByActive(active);
+            return Context.GetAllTreatmentTypesByActive(active);
         }
 
         /// <summary>

@@ -40,9 +40,9 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator or doctor can get all departments of one institution
         /// </summary>
-        public List<Department> GetDepartmentsByInstitutionId(long id)
+        public List<Department> GetAllDepartmentsByInstitutionId(long id)
         {
-            return Context.GetDepartmentsByInstitutionId(id);
+            return Context.GetAllDepartmentsByInstitutionId(id);
         }
 
         /// <summary>

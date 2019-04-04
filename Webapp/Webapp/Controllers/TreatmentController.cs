@@ -31,11 +31,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetTreatmentsByDoctorId(GetUserId());
+                items = repo.GetAllTreatmentsByDoctorId(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetTreatmentsByPatientId(GetUserId());
+                items = repo.GetAllTreatmentsByPatientId(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()

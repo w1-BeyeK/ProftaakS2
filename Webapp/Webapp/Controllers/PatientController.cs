@@ -42,7 +42,7 @@ namespace Webapp.Controllers
             TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
             try
             {
-                Patient patient = patientRepository.GetById(id);
+                Patient patient = patientRepository.GetPatientById(id);
                 patientDetailViewModel = treatmentDetailViewModelConverter.PatientToViewModel(patient);
             }
             catch (Exception Ex)
