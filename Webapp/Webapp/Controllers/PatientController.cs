@@ -44,7 +44,7 @@ namespace Webapp.Controllers
                 return RedirectToAction("Index", "Profile");
             }
 
-            List<Patient> patienten = patientRepository.GetPatients();
+            List<Patient> patienten = patientRepository.GetAllActivePatients();
             List<PatientListViewModel> convert = new List<PatientListViewModel>();
 
             foreach (Patient p in patienten)

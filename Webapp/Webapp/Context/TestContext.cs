@@ -163,11 +163,6 @@ namespace Webapp.Context
             return patients.FirstOrDefault(p => p.Id == id);
         }
 
-        public List<Patient> GetAllPatients()
-        {
-            return patients;
-        }
-
         public List<Patient> GetAllActivePatients()
         {
             return patients.FindAll(t => t.Active == true);
