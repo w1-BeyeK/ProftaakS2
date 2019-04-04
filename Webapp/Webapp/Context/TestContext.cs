@@ -267,7 +267,12 @@ namespace Webapp.Context
             if (treatments.Exists(t => t.Id == treatment.Id))
             {
                 int index = treatments.FindIndex(t => t.Id == treatment.Id);
-                treatments[index] = treatment;
+                treatments[index].BeginDate = treatment.BeginDate;
+                treatments[index].Comments = treatment.Comments;
+                treatments[index].EndDate = treatment.EndDate;
+                treatments[index].Patient.Name = treatment.Patient.Name;
+                treatments[index].Name = treatment.Name;
+                treatments[index].TreatmentType = treatment.TreatmentType;
                 return true;
             }
             return false;

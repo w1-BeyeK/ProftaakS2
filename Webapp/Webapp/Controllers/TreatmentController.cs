@@ -62,9 +62,7 @@ namespace Webapp.Controllers
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            bool gelukt = repo.AddTreatment(treatment, 12, 0);
-
-            ViewBag.Bericht = gelukt.ToString();
+            repo.AddTreatment(treatment, GetUserId(), treatment.Patient.Id);
             return View();
         }
 
@@ -79,9 +77,9 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            repo.UpdateTreatment(id, TreatmentVMC.ViewModelToTreatment(vm));
-
-            return View();
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
+            repo.UpdateTreatment(id, treatment);
+            return RedirectToAction("index", "treatment");
         }
     }
 }
