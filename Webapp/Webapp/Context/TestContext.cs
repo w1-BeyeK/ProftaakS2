@@ -131,9 +131,16 @@ namespace Webapp.Context
         {
             if (id != patient.Id)
                 return false;
-
-            Patient oldPatient = GetPatientById(id);
-            oldPatient = patient;
+            
+            foreach (Patient p in patients)
+            {
+                if(p.Id == id)
+                {
+                    patients.Remove(p);
+                    patients.Add(patient);
+                    break;
+                }
+            }
             return true;
         }
 

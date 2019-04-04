@@ -91,13 +91,20 @@ namespace Webapp.Controllers
             }
         }
 
-
-        public IActionResult Update()
+        [HttpPost]
+        public IActionResult Edit(UserViewModel viewModel)
         {
             var id = GetUserId();
+            viewModel.Patient.Id = id;
 
+            if (HttpContext.User.IsInRole("patient"))
+            {
+                //  PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
+                Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
+                patientRepository.UpdatePatient(id,patient);
+            }
 
-            return RedirectToAction("index");
+            return RedirectToAction("index","Profile");
         }
     }
 }
