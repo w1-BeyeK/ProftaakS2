@@ -19,7 +19,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddPatient(Patient patient)
         {
-            return Context.AddPatient(patient);
+            return context.AddPatient(patient);
         }
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdatePatient(long id, Patient patient)
         {
-            return Context.UpdatePatient(id, patient);
+            return context.UpdatePatient(id, patient);
         }
 
         //TODO: is this possible? Because the only moment you want this is when a patient dies!
@@ -36,7 +36,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            return Context.ActivePatientByIdAndActive(id, active);
+            return context.ActivePatientByIdAndActive(id, active);
         }
 
         /// <summary>
@@ -44,7 +44,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Patient> GetAllActivePatients()
         {
-            return Context.GetAllActivePatients();
+            return context.GetAllActivePatients();
         }
 
         /// <summary>
@@ -52,7 +52,7 @@ namespace Webapp.Repository
         /// </summary>
         public Patient GetPatientById(long id)
         {
-            return Context.GetPatientById(id);
+            return context.GetPatientById(id);
         }
 
         public List<Patient> GetPatients()
@@ -66,7 +66,7 @@ namespace Webapp.Repository
         /// </summary>
         List<Patient> GetAllPatientsByDoctorId(long id)
         {
-            return Context.GetAllPatientsByDoctorId(id);
+            return context.GetAllPatientsByDoctorId(id);
         }
     }
 }

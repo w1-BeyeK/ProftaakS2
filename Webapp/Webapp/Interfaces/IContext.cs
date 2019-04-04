@@ -8,8 +8,7 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
-        //Doctor and Department must be added to eachother!
-        //Department to an institution must be added!
+        bool AddDoctorToDepartment(long departmentId, long doctorId);
 
         #region Patient
         bool AddPatient(Patient patient);
@@ -40,6 +39,7 @@ namespace Webapp.Interfaces
 
         #region Institution
         bool AddInstitution(Institution institution);
+        bool AddDepartmentToInstitution(long institutionId, long departmentId);
         bool UpdateInstitution(long id, Institution institution);
         List<Institution> GetAllInstitutions();
         Institution GetInstitutionById(long id);

@@ -18,7 +18,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddComment(Comment comment, long treatmentId)
         {
-            return Context.AddComment(comment, treatmentId);
+            return context.AddComment(comment, treatmentId);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
         {
-            return Context.GetAllCommentsByTreatmentId(treatmentId);
+            return context.GetAllCommentsByTreatmentId(treatmentId);
         }
     }
 }

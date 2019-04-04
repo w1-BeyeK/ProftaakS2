@@ -141,6 +141,11 @@ namespace Webapp.Context
             };
         }
 
+        public bool AddDoctorToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
         #region Patient
         public bool AddPatient(Patient patient)
         {
@@ -291,6 +296,11 @@ namespace Webapp.Context
             return true;
         }
 
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UpdateInstitution(long id, Institution institution)
         {
             if (id != institution.Id)
@@ -316,7 +326,27 @@ namespace Webapp.Context
 
         public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            throw new NotImplementedException();
+            int patientIndex = patients.FindIndex(t => t.Id == patientId);
+            int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
+
+            if (patientIndex >= 0 && doctorIndex >= 0)
+            {
+                treatment.Patient = patients[patientIndex];
+                treatment.Doctor = doctors[doctorIndex];
+
+                long id = 0;
+                if (treatments.Count > 0)
+                {
+                    treatments.OrderBy(t => t.Id);
+                    long idMax = treatments.Last().Id;
+                    id = idMax;
+                }
+                treatment.Id = id;
+
+                treatments.Add(treatment);
+                return true;
+            }
+            return false;
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)

@@ -18,7 +18,15 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddDoctor(Doctor doctor)
         {
-            return Context.AddDoctor(doctor);
+            return context.AddDoctor(doctor);
+        }
+
+        /// <summary>
+        /// An administrator can add a doctor to a department
+        /// </summary>
+        bool AddDoctorToDepartment(long departmentId, long doctorId)
+        {
+            return context.AddDoctorToDepartment(departmentId, doctorId);
         }
 
         /// <summary>
@@ -26,7 +34,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdateDoctor(long id, Doctor doctor)
         {
-            return Context.UpdateDoctor(id, doctor);
+            return context.UpdateDoctor(id, doctor);
         }
 
         /// <summary>
@@ -34,7 +42,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool ActiveDoctorByIdAndActive(long id, bool active)
         {
-            return Context.ActiveDoctorByIdAndActive(id, active);
+            return context.ActiveDoctorByIdAndActive(id, active);
         }
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetAllDoctors()
         {
-            return Context.GetAllDoctors();
+            return context.GetAllDoctors();
         }
 
         /// <summary>
@@ -50,7 +58,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
-            return Context.GetAllDoctorsByDepartmentId(id);
+            return context.GetAllDoctorsByDepartmentId(id);
         }
 
         /// <summary>
@@ -58,7 +66,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetAllDoctorsByInstitutionId(long id)
         {
-            return Context.GetAllDoctorsByInstitutionId(id);
+            return context.GetAllDoctorsByInstitutionId(id);
         }
 
         /// <summary>
@@ -66,7 +74,7 @@ namespace Webapp.Repository
         /// </summary>
         public Doctor GetDoctorById(long id)
         {
-            return Context.GetDoctorById(id);
+            return context.GetDoctorById(id);
         }
     }
 }
