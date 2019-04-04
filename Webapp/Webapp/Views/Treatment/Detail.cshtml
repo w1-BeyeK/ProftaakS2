@@ -1,4 +1,5 @@
-﻿@model Webapp.Models.TreatmentDetailViewModel
+﻿@using Webapp.Models.Data;
+@model Webapp.Models.TreatmentDetailViewModel
 @{
     ViewData["Title"] = "Behandeling";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -68,14 +69,29 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label for="Comments"><h4>Bericht</h4></label>
-                                @*<label type="text" title="Opmerking behandeling">@Model.Comment</label>*@
-                                <input type="text" class="form-control" value="@Model.Description.Description" readonly="readonly">
-                                <br />
-                                <br />
-                                <button class="btn btn-primary" asp-action="Index" formmethod="post">Ga terug</button>
+                                <label for="Description"><h4>Omschrijving</h4></label>
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="@Model.Description.Description">
                             </div>
                         </div>
+                        @foreach (Comment comment in Model.Comments)
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Commentaar</h4></label>
+                                    <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@comment.Description">
+                                </div>
+                            </div>
+                        }
+                        @*<div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Bericht</h4></label>
+                                    <label type="text" title="Opmerking behandeling">@Model.Comment</label>
+                                    <input type="text" class="form-control" value="@Model.Description.Description" readonly="readonly">
+                                    <br />
+                                    <br />
+                                    <button class="btn btn-primary" asp-action="Index" formmethod="post">Ga terug</button>
+                                </div>
+                            </div>*@
                     </form>
                     <hr>
                 </div><!--/tab-pane-->

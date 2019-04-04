@@ -44,6 +44,8 @@ namespace Webapp.Context
                     EndDate = DateTime.Now,
                     Comments = comments,
                     TreatmentType = new TreatmentType("Arm afzagen", "Arm gaat eraf"),
+                    Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
+                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
             };
             patients = new List<Patient>()
