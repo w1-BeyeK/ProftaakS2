@@ -55,6 +55,12 @@ namespace Webapp.Repository
             return Context.GetPatientById(id);
         }
 
+        public List<Patient> GetPatients()
+        {
+
+            return Context.GetAllActivePatients();
+        }
+
         /// <summary>
         /// Get all patients which have a treatment with the doctorId
         /// </summary>

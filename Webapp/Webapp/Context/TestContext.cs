@@ -65,7 +65,7 @@ namespace Webapp.Context
                     Zipcode = "5258HS",
                     Treatments = treatments
                 },
-                new Patient(12, "pieterjan", "pieter@jan.nl", "Pieter Jan")
+                new Patient(77, "pieterjan", "pieter@jan.nl", "Pieter Jan")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Other,
@@ -80,7 +80,7 @@ namespace Webapp.Context
                     Zipcode = "5258HS",
                     Treatments = treatments
                 },
-                new Patient(12, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                new Patient(69, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Female,
@@ -95,7 +95,7 @@ namespace Webapp.Context
                     Zipcode = "5258HS",
                     Treatments = treatments
                 },
-                new Patient(12, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                new Patient(25, "michaelv", "michael@catujaspanker.com", "Michaeltje")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
@@ -110,7 +110,7 @@ namespace Webapp.Context
                     Zipcode = "5258HS",
                     Treatments = treatments
                 },
-                new Patient(12, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
+                new Patient(15, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,

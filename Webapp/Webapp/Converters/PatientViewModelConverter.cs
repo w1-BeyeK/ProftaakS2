@@ -35,6 +35,7 @@ namespace Webapp.Converters
         {
             return new PatientListViewModel
             {
+                UserId = patient.Id,
                 Name = patient.Name,
                 Gender = patient.Gender,
                 Birth = patient.Birth

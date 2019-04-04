@@ -20,7 +20,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+           <tr>
                 <td>@item.Name</td>
                 <td>@item.Gender</td>
                 <td>@item.Birth</td>
@@ -31,22 +31,14 @@
 @section Scripts {
     <script>
         $("document").ready(function () {
-            var table = $('#patientTable').DataTable();
-            $("#patientTable").DataTable()
-            //initDataTable();
-           
+            var table = $('#patientTable').DataTable({
+                rowId: 'Id'
+            });
 
             $('#patientTable tbody').on('click', 'tr', function () {
                 var data = table.row(this).data();
-                alert('Test');
+                alert(' ' + data.rowId);
             });
         });
-
-        //function initDataTable() {
-        //    
-
-           
-        //});
-            
     </script>
 }

@@ -51,6 +51,8 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+
+
         [HttpGet]
         public IActionResult Add()
         {
