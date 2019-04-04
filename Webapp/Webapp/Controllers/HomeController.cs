@@ -54,6 +54,7 @@ namespace Webapp.Controllers
             return View();
         }
 
+        //TODO : Kan dit weg?
         public async Task<IActionResult> Test()
         {
             var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Kevin"), "Test123!");

@@ -68,12 +68,52 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public Comment GetCommentById(long id)
+        public List<Patient> GetAllActivePatients()
         {
             throw new NotImplementedException();
         }
 
-        public List<Comment> GetCommentsByTreatmentId(long treatmentId)
+        public List<TreatmentType> GetAllActiveTreatmentTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Department> GetAllDepartmentsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Institution> GetAllInstitutions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Patient> GetAllPatientsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetAllTreatmentsByPatientId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
             throw new NotImplementedException();
         }
@@ -83,17 +123,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Department> GetDepartmentsByInstitutionId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Doctor GetDoctorById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Doctor> GetDoctorsByDepartmentId(long id)
         {
             throw new NotImplementedException();
         }
@@ -103,22 +133,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Institution> GetInstitutions()
-        {
-            throw new NotImplementedException();
-        }
-
         public Patient GetPatientById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Patient> GetPatients()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Patient> GetPatientsByDoctorId(long id)
         {
             throw new NotImplementedException();
         }
@@ -128,22 +143,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Treatment> GetTreatmentsByDoctorId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Treatment> GetTreatmentsByPatientId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public TreatmentType GetTreatmentTypeById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<TreatmentType> GetTreatmentTypes()
         {
             throw new NotImplementedException();
         }

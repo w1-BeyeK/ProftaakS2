@@ -8,20 +8,23 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
+        //Doctor and Department must be added to eachother!
+        //Department to an institution must be added!
+
         #region Patient
         bool AddPatient(Patient patient);
         bool UpdatePatient(long id, Patient patient);
         bool ActivePatientByIdAndActive(long id, bool active);
-        List<Patient> GetPatients();
+        List<Patient> GetAllActivePatients();
         Patient GetPatientById(long id);
-        List<Patient> GetPatientsByDoctorId(long id);
+        List<Patient> GetAllPatientsByDoctorId(long id);
         #endregion
 
         #region Doctor
         bool AddDoctor(Doctor doctor);
         bool UpdateDoctor(long id, Doctor doctor);
         bool ActiveDoctorByIdAndActive(long id, bool active);
-        List<Doctor> GetDoctorsByDepartmentId(long id);
+        List<Doctor> GetAllDoctorsByDepartmentId(long id);
         Doctor GetDoctorById(long id);
         #endregion
 
@@ -29,37 +32,38 @@ namespace Webapp.Interfaces
         bool AddDepartment(Department department);
         bool UpdateDepartment(long id, Department department);
         bool ActiveDepartmentByIdAndActive(long id, bool active);
-        List<Department> GetDepartmentsByInstitutionId(long id);
+        List<Department> GetAllDepartmentsByInstitutionId(long id);
         Department GetDepartmentById(long id);
         #endregion
 
         #region Institution
         bool AddInstitution(Institution institution);
         bool UpdateInstitution(long id, Institution institution);
-        List<Institution> GetInstitutions();
+        List<Institution> GetAllInstitutions();
         Institution GetInstitutionById(long id);
         #endregion
 
+        //Renovation needed!
         #region TreatmentType
         bool AddTreatmentType(TreatmentType treatmentType);
         bool UpdateTreatmentType(long id, TreatmentType treatmentType);
         bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
-        List<TreatmentType> GetTreatmentTypes();
+        List<TreatmentType> GetAllActiveTreatmentTypes();
+        List<TreatmentType> GetAllTreatmentTypesByActive(bool active);
         TreatmentType GetTreatmentTypeById(long id);
         #endregion
 
         #region Treatment
         bool AddTreatment(Treatment treatment, long doctorId, long patientId);
         bool UpdateTreatment(long id, Treatment Treatment);
-        List<Treatment> GetTreatmentsByDoctorId(long id);
-        List<Treatment> GetTreatmentsByPatientId(long id);
+        List<Treatment> GetAllTreatmentsByDoctorId(long id);
+        List<Treatment> GetAllTreatmentsByPatientId(long id);
         Treatment GetTreatmentById(long id);
         #endregion
 
         #region Comment
         bool AddComment(Comment comment, long treatmentId);
-        List<Comment> GetCommentsByTreatmentId(long treatmentId);
-        Comment GetCommentById(long id);
+        List<Comment> GetAllCommentsByTreatmentId(long treatmentId);
         #endregion
     }
 }
