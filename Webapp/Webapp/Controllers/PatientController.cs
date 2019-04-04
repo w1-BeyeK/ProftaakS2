@@ -36,7 +36,7 @@ namespace Webapp.Controllers
         }
 
         //[HttpGet("{id}")]
-        public IActionResult Detail(long id)
+        public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
