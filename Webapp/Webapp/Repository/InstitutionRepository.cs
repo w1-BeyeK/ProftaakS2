@@ -18,7 +18,15 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddInstitution(Institution institution)
         {
-            return Context.AddInstitution(institution);
+            return context.AddInstitution(institution);
+        }
+
+        /// <summary>
+        /// A department is added to an institution
+        /// </summary>
+        bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            return context.AddDepartmentToInstitution(institutionId, departmentId);
         }
 
         /// <summary>
@@ -26,7 +34,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdateInstitution(long id, Institution institution)
         {
-            return Context.UpdateInstitution(id, institution);
+            return context.UpdateInstitution(id, institution);
         }
 
         /// <summary>
@@ -34,7 +42,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Institution> GetAllInstitutions()
         {
-            return Context.GetAllInstitutions();
+            return context.GetAllInstitutions();
         }
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace Webapp.Repository
         /// </summary>
         public Institution GetInstitutionById(long id)
         {
-            return Context.GetInstitutionById(id);
+            return context.GetInstitutionById(id);
         }
     }
 }

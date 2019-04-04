@@ -8,11 +8,11 @@ namespace Webapp.Repository
 {
     public abstract class BaseRepository
     {
-        public IContext Context { get; private set; }
+        protected readonly IContext context;
 
         protected BaseRepository(IContext context)
         {
-            Context = context;
+            this.context = context;
         }
     }
 }

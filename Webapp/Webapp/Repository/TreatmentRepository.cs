@@ -18,7 +18,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            return Context.AddTreatment(treatment, doctorId, patientId);
+            return context.AddTreatment(treatment, doctorId, patientId);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdateTreatment(long id, Treatment treatment)
         {
-            return Context.UpdateTreatment(id, treatment);
+            return context.UpdateTreatment(id, treatment);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Treatment> GetAllTreatmentsByDoctorId(long id)
         {
-            return Context.GetAllTreatmentsByDoctorId(id);
+            return context.GetAllTreatmentsByDoctorId(id);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Treatment> GetAllTreatmentsByPatientId(long id)
         {
-            return Context.GetAllTreatmentsByPatientId(id);
+            return context.GetAllTreatmentsByPatientId(id);
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Webapp.Repository
         /// </summary>
         public Treatment GetTreatmentById(long id)
         {
-            return Context.GetTreatmentById(id);
+            return context.GetTreatmentById(id);
         }
     }
 }
