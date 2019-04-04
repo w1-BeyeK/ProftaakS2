@@ -18,7 +18,15 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddDepartment(Department department)
         {
-            return Context.AddDepartment(department);
+            return context.AddDepartment(department);
+        }
+
+        /// <summary>
+        /// An administrator can add a doctor to a department
+        /// </summary>
+        bool AddDoctorToDepartment(long departmentId, long doctorId)
+        {
+            return context.AddDoctorToDepartment(departmentId, doctorId);
         }
 
         /// <summary>
@@ -26,7 +34,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdateDepartment(long id, Department department)
         {
-            return Context.UpdateDepartment(id, department);
+            return context.UpdateDepartment(id, department);
         }
 
         /// <summary>
@@ -34,7 +42,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
-            return Context.ActiveDepartmentByIdAndActive(id, active);
+            return context.ActiveDepartmentByIdAndActive(id, active);
         }
 
         /// <summary>
@@ -42,7 +50,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Department> GetAllDepartmentsByInstitutionId(long id)
         {
-            return Context.GetAllDepartmentsByInstitutionId(id);
+            return context.GetAllDepartmentsByInstitutionId(id);
         }
 
         /// <summary>
@@ -50,7 +58,7 @@ namespace Webapp.Repository
         /// </summary>
         public Department GetDepartmentById(long id)
         {
-            return Context.GetDepartmentById(id);
+            return context.GetDepartmentById(id);
         }
     }
 }

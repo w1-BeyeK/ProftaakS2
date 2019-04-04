@@ -18,7 +18,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddTreatmentType(TreatmentType treatment)
         {
-            return Context.AddTreatmentType(treatment);
+            return context.AddTreatmentType(treatment);
         }
 
         /// <summary>
@@ -26,7 +26,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool UpdateTreatmentType(long id, TreatmentType treatment)
         {
-            return Context.UpdateTreatmentType(id, treatment);
+            return context.UpdateTreatmentType(id, treatment);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
-            return Context.ActiveTreatmentTypeByIdAndActive(id, active);
+            return context.ActiveTreatmentTypeByIdAndActive(id, active);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<TreatmentType> GetAllActiveTreatmentTypes()
         {
-            return Context.GetAllActiveTreatmentTypes();
+            return context.GetAllActiveTreatmentTypes();
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
-            return Context.GetAllTreatmentTypesByActive(active);
+            return context.GetAllTreatmentTypesByActive(active);
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Webapp.Repository
         /// </summary>
         public TreatmentType GetTreatmentTypeById(long id)
         {
-            return Context.GetTreatmentTypeById(id);
+            return context.GetTreatmentTypeById(id);
         }
     }
 }

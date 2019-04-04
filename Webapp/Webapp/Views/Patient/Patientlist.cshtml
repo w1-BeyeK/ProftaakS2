@@ -1,0 +1,44 @@
+﻿@using Webapp.Models.Data;
+@model IEnumerable<Webapp.Models.PatientListViewModel>;
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Patiëntenlijst</h2>
+
+
+<table class="table table-striped table-hover" id="patientTable" style="width:100%;">
+    <thead>
+        <tr>
+            <th>Naam</th>
+            <th>Geslacht</th>
+            <th>Geboortedatum</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+           <tr>
+                <td>@item.Name</td>
+                <td>@item.Gender</td>
+                <td>@item.Birth</td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+        $("document").ready(function () {
+            var table = $('#patientTable').DataTable({
+                rowId: 'Id'
+            });
+
+            $('#patientTable tbody').on('click', 'tr', function () {
+                var data = table.row(this).data();
+                alert(' ' + data.rowId);
+            });
+        });
+    </script>
+}
