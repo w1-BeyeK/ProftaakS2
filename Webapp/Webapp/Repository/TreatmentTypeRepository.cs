@@ -13,23 +13,52 @@ namespace Webapp.Repository
         {
         }
 
+        /// <summary>
+        /// An administrator can add a treatmentType
+        /// </summary>
         public bool AddTreatmentType(TreatmentType treatment)
         {
             return Context.AddTreatmentType(treatment);
         }
-        
-        public bool EditTreatmentType(TreatmentType treatment)
+
+        /// <summary>
+        /// An administrator can update a treatmentType by its id
+        /// </summary>
+        public bool UpdateTreatmentType(long id, TreatmentType treatment)
         {
-            return Context.UpdateTreatmentType(treatment.Id, treatment);
+            return Context.UpdateTreatmentType(id, treatment);
         }
 
         /// <summary>
-        /// Shows TreatmentTypes of a department
+        /// An administrator can activate or deactivate a treatmentType by its id
         /// </summary>
-        /// <param name="department"></param>
-        //public List<TreatmentType> ShowTreatmentTypes(Department department)
-        //{
-        //    return context.GetTrea(department);
-        //}
+        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
+        {
+            return Context.ActiveTreatmentTypeByIdAndActive(id, active);
+        }
+
+        /// <summary>
+        /// An administrator or doctor can get all treatmentTypes
+        /// </summary>
+        public List<TreatmentType> GetTreatmentTypes()
+        {
+            return Context.GetTreatmentTypes();
+        }
+
+        /// <summary>
+        /// An administrator or doctor can get all treatmentTypes by active
+        /// </summary>
+        public List<TreatmentType> GetTreatmentTypesByActive(bool active)
+        {
+            return Context.GetTreatmentTypesByActive(active);
+        }
+
+        /// <summary>
+        /// An administrator or doctor can add a treatmentType by its id
+        /// </summary>
+        public TreatmentType GetTreatmentTypeById(long id)
+        {
+            return Context.GetTreatmentTypeById(id);
+        }
     }
 }
