@@ -18,6 +18,7 @@ namespace Webapp.Controllers
         private readonly IContext context;
         private readonly TreatmentRepository repo;
         private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+        private readonly TreatmentDetailViewModelConverter TreatmentDetailVMC = new TreatmentDetailViewModelConverter();
 
         public TreatmentController()
         {
@@ -50,6 +51,8 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+
+
         [HttpGet]
         public IActionResult Add()
         {
@@ -81,13 +84,6 @@ namespace Webapp.Controllers
             repo.UpdateTreatment(id, TreatmentVMC.ViewModelToTreatment(vm));
 
             return View();
-        }
-
-        public IActionResult Detail(long id)
-        {
-            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
-
-            return View(vm);
         }
     }
 }

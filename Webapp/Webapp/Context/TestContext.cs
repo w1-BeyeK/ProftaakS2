@@ -64,6 +64,66 @@ namespace Webapp.Context
                     HouseNumber = 2,
                     Zipcode = "5258HS",
                     Treatments = treatments
+                },
+                new Patient(77, "pieterjan", "pieter@jan.nl", "Pieter Jan")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Other,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2000, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(69, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Female,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1998, 10, 4),
+                    PhoneNumber = "0611061788",
+                    BSN = 222439355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(25, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1871, 2, 7),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(15, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2017, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
                 }
             };
             doctors = new List<Doctor>()
@@ -79,9 +139,11 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            departments = new List<Department>();
-            institutions = new List<Institution>();
-            treatmentTypes = new List<TreatmentType>();
+        }
+
+        public bool AddDoctorToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
         }
 
         #region Patient
@@ -163,9 +225,19 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
             return doctors;
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)
@@ -231,6 +303,11 @@ namespace Webapp.Context
             return true;
         }
 
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UpdateInstitution(long id, Institution institution)
         {
             if (id != institution.Id)
@@ -256,7 +333,27 @@ namespace Webapp.Context
 
         public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            throw new NotImplementedException();
+            int patientIndex = patients.FindIndex(t => t.Id == patientId);
+            int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
+
+            if (patientIndex >= 0 && doctorIndex >= 0)
+            {
+                treatment.Patient = patients[patientIndex];
+                treatment.Doctor = doctors[doctorIndex];
+
+                long id = 0;
+                if (treatments.Count > 0)
+                {
+                    treatments.OrderBy(t => t.Id);
+                    long idMax = treatments.Last().Id;
+                    id = idMax;
+                }
+                treatment.Id = id;
+
+                treatments.Add(treatment);
+                return true;
+            }
+            return false;
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)

@@ -43,7 +43,17 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddDoctor(Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddDoctorToDepartment(long departmentId, long doctorId)
         {
             throw new NotImplementedException();
         }
@@ -88,7 +98,17 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
         {
             throw new NotImplementedException();
         }
