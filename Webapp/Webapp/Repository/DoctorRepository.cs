@@ -38,11 +38,27 @@ namespace Webapp.Repository
         }
 
         /// <summary>
+        /// An administrator can get all doctors
+        /// </summary>
+        public List<Doctor> GetAllDoctors()
+        {
+            return Context.GetAllDoctors();
+        }
+
+        /// <summary>
         /// An administrator can get all doctors of a department
         /// </summary>
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
             return Context.GetAllDoctorsByDepartmentId(id);
+        }
+
+        /// <summary>
+        /// An administrator can get all doctors of an institution
+        /// </summary>
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            return Context.GetAllDoctorsByInstitutionId(id);
         }
 
         /// <summary>

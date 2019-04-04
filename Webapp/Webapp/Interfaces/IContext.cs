@@ -24,7 +24,9 @@ namespace Webapp.Interfaces
         bool AddDoctor(Doctor doctor);
         bool UpdateDoctor(long id, Doctor doctor);
         bool ActiveDoctorByIdAndActive(long id, bool active);
+        List<Doctor> GetAllDoctors();
         List<Doctor> GetAllDoctorsByDepartmentId(long id);
+        List<Doctor> GetAllDoctorsByInstitutionId(long id);
         Doctor GetDoctorById(long id);
         #endregion
 

@@ -79,9 +79,6 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            departments = new List<Department>();
-            institutions = new List<Institution>();
-            treatmentTypes = new List<TreatmentType>();
         }
 
         #region Patient
@@ -156,9 +153,19 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
             return doctors;
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)

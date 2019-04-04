@@ -88,7 +88,17 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
         {
             throw new NotImplementedException();
         }
