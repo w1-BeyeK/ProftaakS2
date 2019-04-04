@@ -22,10 +22,10 @@
             <tr>
                 <td>@item.Name</td>
                 <td>@item.BeginDate</td>
-                <td>@item.EndDate</td>
+                <td>@item.EndDate</td>  
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detail", "Detail", new { id = item.Id })
+                    @Html.ActionLink("Detail", "Treatment", "Patient", new { id = item.PatientDetailViewModel.Id })
                 </td>
             </tr>
         }

@@ -43,7 +43,7 @@ namespace Webapp.Controllers
 
                 if (HttpContext.User.IsInRole("patient"))
                 {
-                    Patient patient = patientRepository.GetById(id);
+                    Patient patient = patientRepository.GetPatientById(id);
                     viewModel.Patient = patientConverter.PatientToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
@@ -74,7 +74,7 @@ namespace Webapp.Controllers
 
                 if (HttpContext.User.IsInRole("patient"))
                 {
-                    Patient patient = patientRepository.GetById(id);
+                    Patient patient = patientRepository.GetPatientById(id);
                     viewModel.Patient = patientConverter.PatientToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
@@ -89,6 +89,15 @@ namespace Webapp.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+
+        public IActionResult Update()
+        {
+            var id = GetUserId();
+
+
+            return RedirectToAction("index");
         }
     }
 }

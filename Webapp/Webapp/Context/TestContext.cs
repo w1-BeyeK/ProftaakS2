@@ -44,6 +44,8 @@ namespace Webapp.Context
                     EndDate = DateTime.Now,
                     Comments = comments,
                     TreatmentType = new TreatmentType("Arm afzagen", "Arm gaat eraf"),
+                    Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
+                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
             };
             patients = new List<Patient>()
@@ -137,9 +139,6 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            departments = new List<Department>();
-            institutions = new List<Institution>();
-            treatmentTypes = new List<TreatmentType>();
         }
 
         #region Patient
@@ -159,12 +158,17 @@ namespace Webapp.Context
             return patients.FirstOrDefault(p => p.Id == id);
         }
 
-        public List<Patient> GetPatients()
+        public List<Patient> GetAllPatients()
         {
             return patients;
         }
 
-        public List<Patient> GetPatientsByDoctorId(long id)
+        public List<Patient> GetAllActivePatients()
+        {
+            return patients.FindAll(t => t.Active == true);
+        }
+
+        public List<Patient> GetAllPatientsByDoctorId(long id)
         {
             // ??
             return patients;
@@ -209,9 +213,19 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
-        public List<Doctor> GetDoctorsByDepartmentId(long id)
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
             return doctors;
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)
@@ -231,14 +245,9 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Comment> GetCommentsByTreatmentId(long id)
+        public List<Comment> GetAllCommentsByTreatmentId(long id)
         {
             throw new NotImplementedException();
-        }
-
-        public Comment GetCommentById(long id)
-        {
-            return comments.FirstOrDefault(c => c.Id == id);
         }
         #endregion
 
@@ -254,7 +263,7 @@ namespace Webapp.Context
             return true;
         }
 
-        public List<Department> GetDepartmentsByInstitutionId(long id)
+        public List<Department> GetAllDepartmentsByInstitutionId(long id)
         {
             throw new NotImplementedException();
         }
@@ -292,7 +301,7 @@ namespace Webapp.Context
             return true;
         }
 
-        public List<Institution> GetInstitutions()
+        public List<Institution> GetAllInstitutions()
         {
             return institutions;
         }
@@ -329,16 +338,15 @@ namespace Webapp.Context
             return treatments.FirstOrDefault(t => t.Id == id);
         }
 
-        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
         {
             return treatments.FindAll(t => t.Doctor.Id == id);
         }
 
-        public List<Treatment> GetTreatmentsByPatientId(long id)
+        public List<Treatment> GetAllTreatmentsByPatientId(long id)
         {
             return treatments.FindAll(t => t.Patient.Id == id);
         }
-
         #endregion
 
         #region TreatmentType
@@ -363,7 +371,12 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<TreatmentType> GetTreatmentTypes()
+        public List<TreatmentType> GetAllActiveTreatmentTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
             throw new NotImplementedException();
         }

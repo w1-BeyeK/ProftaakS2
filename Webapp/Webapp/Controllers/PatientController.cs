@@ -56,13 +56,13 @@ namespace Webapp.Controllers
         }
 
         //[HttpGet("{id}")]
-        public IActionResult Detail(long id)
+        public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
             try
             {
-                Patient patient = patientRepository.GetById(id);
+                Patient patient = patientRepository.GetPatientById(id);
                 patientDetailViewModel = treatmentDetailViewModelConverter.PatientToViewModel(patient);
             }
             catch (Exception Ex)
