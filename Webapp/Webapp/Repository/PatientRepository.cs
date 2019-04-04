@@ -17,5 +17,10 @@ namespace Webapp.Repository
         {
             return Context.GetPatientById(id);
         }
+
+        public List<Patient> GetPatients()
+        {
+            return Context.GetPatients();
+        }
     }
 }

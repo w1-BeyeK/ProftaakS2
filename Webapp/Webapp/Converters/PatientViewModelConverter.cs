@@ -31,6 +31,16 @@ namespace Webapp.Converters
             };
         }
 
+        public PatientListViewModel PatientlistToViewModel(Patient patient)
+        {
+            return new PatientListViewModel
+            {
+                Name = patient.Name,
+                Gender = patient.Gender,
+                Birth = patient.Birth
+            };
+        }
+
         public PatientDetailViewModel PatientToViewModel(Patient patient)
         {
             return new PatientDetailViewModel()

@@ -62,6 +62,66 @@ namespace Webapp.Context
                     HouseNumber = 2,
                     Zipcode = "5258HS",
                     Treatments = treatments
+                },
+                new Patient(12, "pieterjan", "pieter@jan.nl", "Pieter Jan")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Other,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2000, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(12, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Female,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1998, 10, 4),
+                    PhoneNumber = "0611061788",
+                    BSN = 222439355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(12, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1871, 2, 7),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(12, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2017, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
                 }
             };
             doctors = new List<Doctor>()
