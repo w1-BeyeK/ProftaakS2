@@ -24,9 +24,9 @@ namespace Webapp.Repository
         /// <summary>
         /// Get all comments of a treatment
         /// </summary>
-        public List<Comment> GetCommentsByTreatmentId(long treatmentId)
+        public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
         {
-            return Context.GetCommentsByTreatmentId(treatmentId);
+            return Context.GetAllCommentsByTreatmentId(treatmentId);
         }
     }
 }

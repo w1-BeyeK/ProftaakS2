@@ -32,17 +32,17 @@ namespace Webapp.Repository
         /// <summary>
         /// A doctor can get its treatments
         /// </summary>
-        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
         {
-            return Context.GetTreatmentsByDoctorId(id);
+            return Context.GetAllTreatmentsByDoctorId(id);
         }
 
         /// <summary>
         /// A patient or doctor can get the treatments of that patient
         /// </summary>
-        public List<Treatment> GetTreatmentsByPatientId(long id)
+        public List<Treatment> GetAllTreatmentsByPatientId(long id)
         {
-            return Context.GetTreatmentsByPatientId(id);
+            return Context.GetAllTreatmentsByPatientId(id);
         }
 
         /// <summary>
