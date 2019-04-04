@@ -8,11 +8,14 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
+        //Doctor and Department must be added to eachother!
+        //Department to an institution must be added!
+
         #region Patient
         bool AddPatient(Patient patient);
         bool UpdatePatient(long id, Patient patient);
         bool ActivePatientByIdAndActive(long id, bool active);
-        List<Patient> GetPatients();
+        List<Patient> GetAllActivePatients();
         Patient GetPatientById(long id);
         List<Patient> GetPatientsByDoctorId(long id);
         #endregion
@@ -21,7 +24,7 @@ namespace Webapp.Interfaces
         bool AddDoctor(Doctor doctor);
         bool UpdateDoctor(long id, Doctor doctor);
         bool ActiveDoctorByIdAndActive(long id, bool active);
-        List<Doctor> GetDoctorsByDepartmentId(long id);
+        List<Doctor> GetAllDoctorsByDepartmentId(long id);
         Doctor GetDoctorById(long id);
         #endregion
 
@@ -36,15 +39,17 @@ namespace Webapp.Interfaces
         #region Institution
         bool AddInstitution(Institution institution);
         bool UpdateInstitution(long id, Institution institution);
-        List<Institution> GetInstitutions();
+        List<Institution> GetAllInstitutions();
         Institution GetInstitutionById(long id);
         #endregion
 
+        //Renovation needed!
         #region TreatmentType
         bool AddTreatmentType(TreatmentType treatmentType);
         bool UpdateTreatmentType(long id, TreatmentType treatmentType);
         bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
         List<TreatmentType> GetTreatmentTypes();
+        List<TreatmentType> GetTreatmentTypesByActive(bool active);
         TreatmentType GetTreatmentTypeById(long id);
         #endregion
 
@@ -59,7 +64,6 @@ namespace Webapp.Interfaces
         #region Comment
         bool AddComment(Comment comment, long treatmentId);
         List<Comment> GetCommentsByTreatmentId(long treatmentId);
-        Comment GetCommentById(long id);
         #endregion
     }
 }

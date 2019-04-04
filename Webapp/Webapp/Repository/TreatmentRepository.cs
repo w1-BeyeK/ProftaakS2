@@ -13,26 +13,41 @@ namespace Webapp.Repository
         {
         }
 
+        /// <summary>
+        /// A doctor can add a treatment
+        /// </summary>
         public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
             return Context.AddTreatment(treatment, doctorId, patientId);
         }
 
+        /// <summary>
+        /// A doctor can update a treatment
+        /// </summary>
         public bool UpdateTreatment(long id, Treatment treatment)
         {
             return Context.UpdateTreatment(id, treatment);
         }
 
-        public List<Treatment> GetTreatmentsByPatientId(long id)
-        {
-            return Context.GetTreatmentsByPatientId(id);
-        }
-
+        /// <summary>
+        /// A doctor can get its treatments
+        /// </summary>
         public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
             return Context.GetTreatmentsByDoctorId(id);
         }
 
+        /// <summary>
+        /// A patient or doctor can get the treatments of that patient
+        /// </summary>
+        public List<Treatment> GetTreatmentsByPatientId(long id)
+        {
+            return Context.GetTreatmentsByPatientId(id);
+        }
+
+        /// <summary>
+        /// A doctor or patient can get a treatment by its id
+        /// </summary>
         public Treatment GetTreatmentById(long id)
         {
             return Context.GetTreatmentById(id);
