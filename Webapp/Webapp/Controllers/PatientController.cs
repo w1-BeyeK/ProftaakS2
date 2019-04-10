@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webapp.Context;
 using Webapp.Converters;
@@ -17,33 +18,40 @@ namespace Webapp.Controllers
     {
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
+        private readonly IContext context;
+        private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
+        private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
-        private readonly TreatmentViewModelConverter treatmentViewModelConverter;
-
-        public PatientController(PatientRepository patientRepository)
+        public PatientController()
         {
-            this.patientRepository = patientRepository;
             //this.treatmentRepository = treatmentRepository;
-
-            IContext context = TestContext.GetInstance();
+            context = TestContext.GetInstance();
+            patientRepository = new PatientRepository(context);
             treatmentRepository = new TreatmentRepository(context);
-            treatmentViewModelConverter = new TreatmentViewModelConverter();
         }
 
+        //[Authorize Roles("doctor")]
         public IActionResult Index()
         {
-            return View();
+            if (User.IsInRole("patient"))
+            {
+                return RedirectToAction("Index", "Profile");
+            }
+
+            List<Patient> patienten = patientRepository.GetAllActivePatients();
+            List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
+
+            return View(vms);
         }
 
         //[HttpGet("{id}")]
-        public IActionResult Detail(long id)
+        public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
-            TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
             try
             {
-                Patient patient = patientRepository.GetById(id);
-                patientDetailViewModel = treatmentDetailViewModelConverter.PatientToViewModel(patient);
+                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetPatientById(id));
             }
             catch (Exception Ex)
             {

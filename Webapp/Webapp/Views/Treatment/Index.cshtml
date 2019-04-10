@@ -5,9 +5,12 @@
 
 <h2>Treatment</h2>
 
-<p>
-    <a asp-action="Add">Create New</a>
-</p>
+@if (User.IsInRole("doctor"))
+{
+    <p>
+        <a asp-action="Add">Create New</a>
+    </p>
+}
 <table class="table table-striped table-hover" id="treatmentTable" style="width:100%;">
     <thead>
         <tr>
@@ -24,12 +27,15 @@
                 <td>@item.BeginDate</td>
                 <td>@item.EndDate</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Detail", "Detail", new { id = item.Id })
+                    @if (User.IsInRole("doctor"))
+                    {
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    }
+                    @Html.ActionLink("Detail", "Treatment", "Patient", new { id = item.PatientDetailViewModel.Id })
                 </td>
             </tr>
         }
-    </tbody>
+</tbody>
 </table>
 @section Scripts {
     <script>
@@ -38,7 +44,7 @@
         });
 
         function initDataTable() {
-            $("#doctorTable").DataTable({
+            $("#treatmentTable").DataTable({
 
             });
         }

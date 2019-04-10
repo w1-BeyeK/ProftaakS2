@@ -16,7 +16,7 @@
             <div class="tab-content">
                 <div class="tab-pane active" id="home">
                     <hr>
-                    <form class="form" action="##" method="post" id="registrationForm">
+                    <form class="form" method="post">
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
@@ -66,10 +66,10 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Comments"><h4>Bericht</h4></label>
-                                <input type="text" class="form-control" asp-for="Description.Description" value="@Model.Description.Description" title="Bericht.">
+                                <input type="text" class="form-control" asp-for="Description" value="@Model.Description" title="Bericht.">
                                 <br />
                                 <br />
-                                <button type="submit" class="btn btn-primary" asp-action="Index" formmethod="post">Pas Aan</button>
+                                <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Edit">Pas Aan</button>
                             </div>
                         </div>
                     </form>

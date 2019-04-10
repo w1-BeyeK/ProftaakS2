@@ -31,7 +31,7 @@ namespace Webapp.Repository
         {
             return context.Delete(GetById(id));
         }
-
+        
         public Department GetById(long id)
         {
             return context.GetById(id);

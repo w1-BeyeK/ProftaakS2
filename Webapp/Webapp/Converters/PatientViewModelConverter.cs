@@ -31,6 +31,26 @@ namespace Webapp.Converters
             };
         }
 
+        public List<PatientListViewModel> PatientlistToViewModel(List<Patient> patienten)
+        {
+            List<PatientListViewModel> Patienten = new List<PatientListViewModel>();
+
+            foreach (Patient p in patienten)
+            {
+                PatientListViewModel patient = new PatientListViewModel
+                {
+                    UserId = p.Id,
+                    Name = p.Name,
+                    Gender = p.Gender,
+                    Birth = p.Birth
+                };
+
+                Patienten.Add(patient);
+            }
+
+            return Patienten;
+        }
+
         public PatientDetailViewModel PatientToViewModel(Patient patient)
         {
             return new PatientDetailViewModel()

@@ -20,5 +20,13 @@ namespace Webapp.Repository
         {
             return context.AddComment(comment, treatmentId);
         }
+
+        /// <summary>
+        /// Get all comments of a treatment
+        /// </summary>
+        public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
+        {
+            return context.GetAllCommentsByTreatmentId(treatmentId);
+        }
     }
 }

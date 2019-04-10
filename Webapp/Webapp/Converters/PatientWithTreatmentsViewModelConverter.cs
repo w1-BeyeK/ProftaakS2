@@ -7,14 +7,15 @@ using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class TreatmentDetailViewModelConverter
+    public class PatientWithTreatmentsViewModelConverter
     {
         public Patient ViewModelToPatient(PatientDetailViewModel vm)
         {
             Patient patient = new Patient()
             {
                 Id = vm.Id,
-                Name = vm.Name
+                Name = vm.Name,
+                Birth = vm.Birth
             };
 
             foreach (TreatmentDetailViewModel t in vm.TreatmentDetailViewModels)
@@ -35,24 +36,21 @@ namespace Webapp.Converters
             return patient;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="patient"></param>
-        /// <returns></returns>
         public PatientDetailViewModel PatientToViewModel(Patient patient)
         {
             PatientDetailViewModel vm = new PatientDetailViewModel()
             {
                 Id = patient.Id,
-                Name = patient.Name
+                Name = patient.Name,
+                Birth = patient.Birth,
+                Age = patient.GetAge()
             };
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
             {
                 //The first comment is the description
                 t.Comments.OrderBy(x => x.Date);
-                List<Comment> comments = t.Comments;
+                List<Comment> comments = new List<Comment>(t.Comments);
                 Comment description = comments[0];
                 comments.RemoveAt(0);
 
@@ -64,7 +62,8 @@ namespace Webapp.Converters
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
                     Comments = comments,
-                    Description = description
+                    Description = description,
+                    Age = t.GetAge()
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }

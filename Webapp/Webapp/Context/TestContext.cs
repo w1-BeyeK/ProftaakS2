@@ -12,7 +12,6 @@ namespace Webapp.Context
         private List<Patient> patients = new List<Patient>();
         private List<Treatment> treatments = new List<Treatment>();
         private List<Doctor> doctors = new List<Doctor>();
-        private List<Comment> comments = new List<Comment>();
         private List<Department> departments = new List<Department>();
         private List<Institution> institutions = new List<Institution>();
         private List<TreatmentType> treatmentTypes = new List<TreatmentType>();
@@ -30,9 +29,12 @@ namespace Webapp.Context
 
         public TestContext()
         {
-            comments.Add(new Comment("Arm afzagen", "De arm wordt afgezaagd1",new DateTime(2010 / 22 / 22)));
-            comments.Add(new Comment("Arm afzagen succes","De arm is afgezaagd2", new DateTime(2011 / 22 / 22)));
-            comments.Add(new Comment("Arm afzagen succes2","De arm is afgezaagd3",DateTime.Today));
+            List<Comment> comments = new List<Comment>
+            {
+                new Comment("Arm afzagen", "De arm wordt afgezaagd1", new DateTime(2010 / 22 / 22)),
+                new Comment("Arm afzagen succes", "De arm is afgezaagd2", new DateTime(2011 / 22 / 22)),
+                new Comment("Arm afzagen succes2", "De arm is afgezaagd3", DateTime.Today)
+            };
 
             treatments = new List<Treatment>()
             {
@@ -44,6 +46,8 @@ namespace Webapp.Context
                     EndDate = DateTime.Now,
                     Comments = comments,
                     TreatmentType = new TreatmentType("Arm afzagen", "Arm gaat eraf"),
+                    Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
+                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
             };
             patients = new List<Patient>()
@@ -55,6 +59,66 @@ namespace Webapp.Context
                     Password = "Test123",
                     Active = true,
                     Birth = new DateTime(2000, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(77, "pieterjan", "pieter@jan.nl", "Pieter Jan")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Other,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2000, 12, 3),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(69, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Female,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1998, 10, 4),
+                    PhoneNumber = "0611061788",
+                    BSN = 222439355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(25, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(1871, 2, 7),
+                    PhoneNumber = "0611061788",
+                    BSN = 233619355,
+                    ContactPersonName = "Thomas",
+                    ContactPersonPhone = "0612345678",
+                    HouseNumber = 2,
+                    Zipcode = "5258HS",
+                    Treatments = treatments
+                },
+                new Patient(15, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
+                {
+                    Email = "k.beye@student.fontys.nl",
+                    Gender = Gender.Male,
+                    Password = "Test123",
+                    Active = true,
+                    Birth = new DateTime(2017, 12, 3),
                     PhoneNumber = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
@@ -77,9 +141,17 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
-            departments = new List<Department>();
-            institutions = new List<Institution>();
-            treatmentTypes = new List<TreatmentType>();
+            treatmentTypes = new List<TreatmentType>()
+            {
+                new TreatmentType("Armzagen","Hopsakee arm eraf."),
+                new TreatmentType("RibRemoven","Zin in een spare ribje?"),
+                new TreatmentType("VingerVangen","Beter 10 vingers in je hand dan 500 op de grond."),
+            };
+        }
+
+        public bool AddDoctorToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
         }
 
         #region Patient
@@ -91,22 +163,29 @@ namespace Webapp.Context
 
         public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = patients.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                patients[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public Patient GetPatientById(long id)
         {
-            return patients.FirstOrDefault(p => p.Id == id);
+            return patients.Find(t => t.Id == id);
         }
 
-        public List<Patient> GetPatients()
+        public List<Patient> GetAllActivePatients()
         {
-            return patients;
+            return patients.FindAll(t => t.Active == true);
         }
 
-        public List<Patient> GetPatientsByDoctorId(long id)
+        public List<Patient> GetAllPatientsByDoctorId(long id)
         {
-            // ??
+            //throw new NotImplementedException();
+            //Is not realy possible in TestContext...
             return patients;
         }
 
@@ -124,9 +203,16 @@ namespace Webapp.Context
         {
             if (id != patient.Id)
                 return false;
-
-            Patient oldPatient = GetPatientById(id);
-            oldPatient = patient;
+            
+            foreach (Patient p in patients)
+            {
+                if(p.Id == id)
+                {
+                    patients.Remove(p);
+                    patients.Add(patient);
+                    break;
+                }
+            }
             return true;
         }
 
@@ -135,7 +221,13 @@ namespace Webapp.Context
         #region Doctor
         public bool ActiveDoctorByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = doctors.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                doctors[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDoctor(Doctor doctor)
@@ -149,9 +241,23 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
-        public List<Doctor> GetDoctorsByDepartmentId(long id)
+        public List<Doctor> GetAllDoctors()
         {
             return doctors;
+        }
+
+        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            //throw new NotImplementedException();
+            //By department id!????????
+            return doctors;
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            List<Department> departmentDoctor = institutions.Find(t => t.Id == id).Departments;
+            //Get all doctors of all the departments and distinct all double doctors
+            throw new NotImplementedException();
         }
 
         public bool UpdateDoctor(long id, Doctor doctor)
@@ -168,24 +274,30 @@ namespace Webapp.Context
         #region Comment
         public bool AddComment(Comment comment, long treatmentId)
         {
-            throw new NotImplementedException();
+            if (treatments.Exists(t => t.Id == treatmentId))
+            {
+                treatments.Find(t => t.Id == treatmentId).Comments.Add(comment);
+                return true;
+            }
+            return false;
         }
 
-        public List<Comment> GetCommentsByTreatmentId(long id)
+        public List<Comment> GetAllCommentsByTreatmentId(long id)
         {
-            throw new NotImplementedException();
-        }
-
-        public Comment GetCommentById(long id)
-        {
-            return comments.FirstOrDefault(c => c.Id == id);
+            return treatments.Find(t => t.Id == id).Comments;
         }
         #endregion
 
         #region Department
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = departments.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                departments[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDepartment(Department department)
@@ -194,9 +306,9 @@ namespace Webapp.Context
             return true;
         }
 
-        public List<Department> GetDepartmentsByInstitutionId(long id)
+        public List<Department> GetAllDepartmentsByInstitutionId(long id)
         {
-            throw new NotImplementedException();
+            return institutions.Find(t => t.Id == id).Departments;
         }
 
         public Department GetDepartmentById(long id)
@@ -222,6 +334,17 @@ namespace Webapp.Context
             return true;
         }
 
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            if (departments.Exists(t => t.Id == departmentId) && institutions.Exists(t => t.Id == institutionId))
+            {
+                Department department = departments.Find(t => t.Id == departmentId);
+                institutions.Find(t => t.Id == institutionId).Departments.Add(department);
+                return true;
+            }
+            return false;
+        }
+
         public bool UpdateInstitution(long id, Institution institution)
         {
             if (id != institution.Id)
@@ -232,7 +355,7 @@ namespace Webapp.Context
             return true;
         }
 
-        public List<Institution> GetInstitutions()
+        public List<Institution> GetAllInstitutions()
         {
             return institutions;
         }
@@ -245,9 +368,31 @@ namespace Webapp.Context
 
         #region Treatment
 
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        public bool AddTreatment(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
         {
-            throw new NotImplementedException();
+            int patientIndex = patients.FindIndex(t => t.Id == patientId);
+            int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
+            int treatmentTypeIndex = treatmentTypes.FindIndex(t => t.Id == treatmentTypeId);
+
+            if (patientIndex >= 0 && doctorIndex >= 0 && treatmentTypeId >= 0)
+            {
+                treatment.Patient = patients[patientIndex];
+                treatment.Doctor = doctors[doctorIndex];
+                treatment.TreatmentType = treatmentTypes[treatmentTypeIndex];
+
+                long id = 0;
+                if (treatments.Count > 0)
+                {
+                    treatments.OrderBy(t => t.Id);
+                    long idMax = treatments.Last().Id;
+                    id = idMax;
+                }
+                treatment.Id = id;
+
+                treatments.Add(treatment);
+                return true;
+            }
+            return false;
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)
@@ -258,7 +403,12 @@ namespace Webapp.Context
             if (treatments.Exists(t => t.Id == treatment.Id))
             {
                 int index = treatments.FindIndex(t => t.Id == treatment.Id);
-                treatments[index] = treatment;
+                treatments[index].BeginDate = treatment.BeginDate;
+                treatments[index].Comments = treatment.Comments;
+                treatments[index].EndDate = treatment.EndDate;
+                treatments[index].Patient.Name = treatment.Patient.Name;
+                treatments[index].Name = treatment.Name;
+                treatments[index].TreatmentType = treatment.TreatmentType;
                 return true;
             }
             return false;
@@ -266,19 +416,18 @@ namespace Webapp.Context
 
         public Treatment GetTreatmentById(long id)
         {
-            return treatments.FirstOrDefault(t => t.Id == id);
+            return treatments.Where(t => t.Id == id).FirstOrDefault();
         }
 
-        public List<Treatment> GetTreatmentsByDoctorId(long id)
+        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
         {
-            return treatments.FindAll(t => t.Doctor.Id == id);
+            return new List<Treatment>(treatments.FindAll(t => t.Doctor.Id == id));
         }
 
-        public List<Treatment> GetTreatmentsByPatientId(long id)
+        public List<Treatment> GetAllTreatmentsByPatientId(long id)
         {
-            return treatments.FindAll(t => t.Patient.Id == id);
+            return new List<Treatment>(treatments.FindAll(t => t.Patient.Id == id));
         }
-
         #endregion
 
         #region TreatmentType
@@ -300,15 +449,31 @@ namespace Webapp.Context
         
         public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = treatmentTypes.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                treatmentTypes[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
-        public List<TreatmentType> GetTreatmentTypes()
+        public List<TreatmentType> GetAllActiveTreatmentTypes()
         {
-            throw new NotImplementedException();
+            return treatmentTypes.FindAll(t => t.Active == true);
+        }
+
+        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
+        {
+            return treatmentTypes.FindAll(t => t.Active == active);
         }
 
         public TreatmentType GetTreatmentTypeById(long id)
+        {
+            return treatmentTypes.Find(t => t.Id == id);
+        }
+
+        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
             throw new NotImplementedException();
         }

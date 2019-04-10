@@ -69,7 +69,17 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool AddDoctor(Doctor doctor)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool AddDoctorToDepartment(long departmentId, long doctorId)
         {
             throw new NotImplementedException();
         }
@@ -113,12 +123,62 @@ namespace Webapp.Context
             }
         }
 
-        public Comment GetCommentById(long id)
+        public List<Patient> GetAllActivePatients()
         {
             throw new NotImplementedException();
         }
 
-        public List<Comment> GetCommentsByTreatmentId(long treatmentId)
+        public List<TreatmentType> GetAllActiveTreatmentTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Department> GetAllDepartmentsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctors()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Institution> GetAllInstitutions()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Patient> GetAllPatientsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Treatment> GetAllTreatmentsByPatientId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
             throw new NotImplementedException();
         }
@@ -128,17 +188,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Department> GetDepartmentsByInstitutionId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
         public Doctor GetDoctorById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Doctor> GetDoctorsByDepartmentId(long id)
         {
             throw new NotImplementedException();
         }
@@ -148,50 +198,15 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public List<Institution> GetInstitutions()
-        {
-            throw new NotImplementedException();
-        }
-
         public Patient GetPatientById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Patient> GetPatients()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Patient> GetPatientsByDoctorId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Treatment GetTreatmentById(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Treatment> GetTreatmentsByDoctorId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Treatment> GetTreatmentsByPatientId(long id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public TreatmentType GetTreatmentTypeById(long id)
         {
             string query = "select * from PTS2_TreatmentType where Id = @id";
 
             var dbResult = handler.ExecuteSelect(query, id);
 
-            return default(TreatmentType);
+            return default(Patient);
         }
-
+        
         /// <summary>
         /// Get all treatment types
         /// </summary>
@@ -243,6 +258,16 @@ namespace Webapp.Context
         }
 
         public bool UpdateTreatmentType(long id, TreatmentType treatmentType)
+        {
+            throw new NotImplementedException();
+        }
+
+        public TreatmentType GetTreatmentTypeById(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Treatment GetTreatmentById(long id)
         {
             throw new NotImplementedException();
         }

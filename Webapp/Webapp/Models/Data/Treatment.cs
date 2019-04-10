@@ -53,6 +53,12 @@ namespace Webapp.Models.Data
             throw new NotImplementedException();
         }
 
+        public int GetAge()
+        {
+            int age = DateTime.Now.Day - EndDate.Day;
+            return age;
+        }
+
         public override string ToString()
         {
             return base.ToString();

@@ -17,12 +17,18 @@ namespace Webapp.Controllers
     {
         private readonly IContext context;
         private readonly TreatmentRepository repo;
+        private readonly PatientRepository patientRepo;
+        private readonly TreatmentTypeRepository typeRepo;
         private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter PatientVMC = new PatientViewModelConverter();
+        private readonly TreatmentTypeViewModelConverter TypeVMC = new TreatmentTypeViewModelConverter();
 
-        public TreatmentController()
+        public TreatmentController(ITreatmentTypeContext ttContext)
         {
             context = TestContext.GetInstance();
             repo = new TreatmentRepository(context);
+            patientRepo = new PatientRepository(context);
+            typeRepo = new TreatmentTypeRepository(ttContext);
         }
 
         [Authorize(Roles = "doctor, patient")]
@@ -31,11 +37,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetTreatmentsByDoctorId(GetUserId());
+                items = repo.GetAllTreatmentsByDoctorId(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetTreatmentsByPatientId(GetUserId());
+                items = repo.GetAllTreatmentsByPatientId(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()
@@ -50,10 +56,19 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+       
+
+
+
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            TreatmentDetailViewModel vm = new TreatmentDetailViewModel
+            {
+                Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAllActivePatients()),
+                TreatmentTypes = TypeVMC.ModelsToViewModel(typeRepo.GetAll())
+            };
+            return View(vm);
         }
 
         //TODO : Voeg extra parameters toe! bij AddTreatment
@@ -61,9 +76,7 @@ namespace Webapp.Controllers
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            bool gelukt = repo.AddTreatment(treatment, 12, 0);
-
-            ViewBag.Bericht = gelukt.ToString();
+            repo.AddTreatment(treatment, GetUserId(), treatment.Patient.Id);
             return View();
         }
 
@@ -78,16 +91,9 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            repo.UpdateTreatment(id, TreatmentVMC.ViewModelToTreatment(vm));
-
-            return View();
-        }
-
-        public IActionResult Detail(long id)
-        {
-            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
-
-            return View(vm);
+            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
+            repo.UpdateTreatment(id, treatment);
+            return RedirectToAction("index", "treatment");
         }
     }
 }
