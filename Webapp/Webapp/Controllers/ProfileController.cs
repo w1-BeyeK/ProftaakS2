@@ -97,15 +97,21 @@ namespace Webapp.Controllers
         public IActionResult Edit(UserViewModel viewModel)
         {
             var id = GetUserId();
-            viewModel.Patient.Id = id;
+            
 
             if (HttpContext.User.IsInRole("patient"))
             {
+                viewModel.Patient.Id = id;
                 //  PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
                 Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
                 patientRepository.UpdatePatient(id,patient);
             }
-
+            else if (HttpContext.User.IsInRole("doctor"))
+            {
+                viewModel.Doctor.EmployeeNumber = id;
+                Doctor doctor = doctorConverter.ViewModelToDoctor(viewModel.Doctor);
+                doctorRepository.UpdateDoctor(id, doctor);
+            }
             return RedirectToAction("index","Profile");
         }
     }

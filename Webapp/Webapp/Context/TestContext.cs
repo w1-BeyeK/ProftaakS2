@@ -128,11 +128,11 @@ namespace Webapp.Context
             };
             doctors = new List<Doctor>()
             {
-                new Doctor(15, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
+                new Doctor(11, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
                 {
                     Active = true,
                     Birth = DateTime.Now,
-                    EmployeeNumber = 15,
+                    EmployeeNumber = 11,
                     Function = "HOI",
                     Gender = Gender.Male,
                     Password = "Test123",

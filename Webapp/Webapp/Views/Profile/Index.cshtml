@@ -276,6 +276,10 @@ else if (Model.Doctor != null)
                                     <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
                                     <p>@Model.Doctor.PhoneNumber</p>
                                 </div>
+                                <div class="col-xs-12">
+                                    <br>
+                                    <a asp-controller="profile" asp-action="edit" class="btn btn-primary"><i class="fa fa-edit"></i> Aanpassen</a>
+                                </div>
                             </div>
                         </form>
                         <hr>
