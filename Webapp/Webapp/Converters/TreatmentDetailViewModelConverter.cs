@@ -14,7 +14,8 @@ namespace Webapp.Converters
             Patient patient = new Patient()
             {
                 Id = vm.Id,
-                Name = vm.Name
+                Name = vm.Name,
+                Birth = vm.Birth
             };
 
             foreach (TreatmentDetailViewModel t in vm.TreatmentDetailViewModels)
@@ -45,7 +46,9 @@ namespace Webapp.Converters
             PatientDetailViewModel vm = new PatientDetailViewModel()
             {
                 Id = patient.Id,
-                Name = patient.Name
+                Name = patient.Name,
+                Birth = patient.Birth,
+                Age = patient.GetAge()
             };
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
