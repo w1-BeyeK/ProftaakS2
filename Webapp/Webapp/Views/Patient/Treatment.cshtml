@@ -101,16 +101,13 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde type behandelingen</h4></label>
-                                @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailviewModels)
+                               @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                 {
-                                    @if(Model.treatment.Age <= 90)
+                                    @if(treatment.Age <= 90)
                                     {
-
+                                        <li>@treatment.Name</li>
                                     }
                                 }
-                                <li>behandeling 1</li>
-                                <li>behandeling 2</li>
-                                <li>behandeling 3</li>
                             </div>
                         </div>
                     </form>

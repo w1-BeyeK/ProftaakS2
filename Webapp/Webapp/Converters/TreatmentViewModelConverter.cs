@@ -45,7 +45,8 @@ namespace Webapp.Converters
                 Type = treatment.TreatmentType,
                 PatientDetailViewModel = patientDetailViewModel,
                 BeginDate = treatment.BeginDate,
-                EndDate = treatment.EndDate
+                EndDate = treatment.EndDate,
+                Age = treatment.GetAge()
             };
             return vm;
         }

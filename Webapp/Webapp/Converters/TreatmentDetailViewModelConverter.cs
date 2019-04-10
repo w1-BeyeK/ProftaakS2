@@ -67,7 +67,8 @@ namespace Webapp.Converters
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
                     Comments = comments,
-                    Description = description
+                    Description = description,
+                    Age = t.GetAge()
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }
