@@ -12,7 +12,6 @@ namespace Webapp.Context
         private List<Patient> patients = new List<Patient>();
         private List<Treatment> treatments = new List<Treatment>();
         private List<Doctor> doctors = new List<Doctor>();
-        private List<Comment> comments = new List<Comment>();
         private List<Department> departments = new List<Department>();
         private List<Institution> institutions = new List<Institution>();
         private List<TreatmentType> treatmentTypes = new List<TreatmentType>();
@@ -30,6 +29,7 @@ namespace Webapp.Context
 
         public TestContext()
         {
+            List<Comment> comments = new List<Comment>();
             comments.Add(new Comment("Arm afzagen", "De arm wordt afgezaagd1",new DateTime(2010 / 22 / 22)));
             comments.Add(new Comment("Arm afzagen succes","De arm is afgezaagd2", new DateTime(2011 / 22 / 22)));
             comments.Add(new Comment("Arm afzagen succes2","De arm is afgezaagd3",DateTime.Today));
@@ -139,6 +139,12 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
+            treatmentTypes = new List<TreatmentType>()
+            {
+                new TreatmentType("Armzagen","Hopsakee arm eraf."),
+                new TreatmentType("RibRemoven","Zin in een spare ribje?"),
+                new TreatmentType("VingerVangen","Beter 10 vingers in je hand dan 500 op de grond."),
+            };
         }
 
         public bool AddDoctorToDepartment(long departmentId, long doctorId)
@@ -155,12 +161,18 @@ namespace Webapp.Context
 
         public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = patients.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                patients[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public Patient GetPatientById(long id)
         {
-            return patients.FirstOrDefault(p => p.Id == id);
+            return patients.Find(t => t.Id == id);
         }
 
         public List<Patient> GetAllActivePatients()
@@ -170,7 +182,8 @@ namespace Webapp.Context
 
         public List<Patient> GetAllPatientsByDoctorId(long id)
         {
-            // ??
+            //throw new NotImplementedException();
+            //Is not realy possible in TestContext...
             return patients;
         }
 
@@ -206,7 +219,13 @@ namespace Webapp.Context
         #region Doctor
         public bool ActiveDoctorByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = doctors.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                doctors[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDoctor(Doctor doctor)
@@ -222,16 +241,20 @@ namespace Webapp.Context
 
         public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return doctors;
         }
 
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
+            //throw new NotImplementedException();
+            //By department id!????????
             return doctors;
         }
 
         public List<Doctor> GetAllDoctorsByInstitutionId(long id)
         {
+            List<Department> departmentDoctor = institutions.Find(t => t.Id == id).Departments;
+            //Get all doctors of all the departments and distinct all double doctors
             throw new NotImplementedException();
         }
 
@@ -249,19 +272,30 @@ namespace Webapp.Context
         #region Comment
         public bool AddComment(Comment comment, long treatmentId)
         {
-            throw new NotImplementedException();
+            if (treatments.Exists(t => t.Id == treatmentId))
+            {
+                treatments.Find(t => t.Id == treatmentId).Comments.Add(comment);
+                return true;
+            }
+            return false;
         }
 
         public List<Comment> GetAllCommentsByTreatmentId(long id)
         {
-            throw new NotImplementedException();
+            return treatments.Find(t => t.Id == id).Comments;
         }
         #endregion
 
         #region Department
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = departments.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                departments[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDepartment(Department department)
@@ -272,7 +306,7 @@ namespace Webapp.Context
 
         public List<Department> GetAllDepartmentsByInstitutionId(long id)
         {
-            throw new NotImplementedException();
+            return institutions.Find(t => t.Id == id).Departments;
         }
 
         public Department GetDepartmentById(long id)
@@ -300,7 +334,13 @@ namespace Webapp.Context
 
         public bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
-            throw new NotImplementedException();
+            if (departments.Exists(t => t.Id == departmentId) && institutions.Exists(t => t.Id == institutionId))
+            {
+                Department department = departments.Find(t => t.Id == departmentId);
+                institutions.Find(t => t.Id == institutionId).Departments.Add(department);
+                return true;
+            }
+            return false;
         }
 
         public bool UpdateInstitution(long id, Institution institution)
@@ -372,7 +412,7 @@ namespace Webapp.Context
 
         public Treatment GetTreatmentById(long id)
         {
-            return treatments.FirstOrDefault(t => t.Id == id);
+            return treatments.Where(t => t.Id == id).FirstOrDefault();
         }
 
         public List<Treatment> GetAllTreatmentsByDoctorId(long id)
@@ -405,22 +445,28 @@ namespace Webapp.Context
         
         public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = treatmentTypes.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                treatmentTypes[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public List<TreatmentType> GetAllActiveTreatmentTypes()
         {
-            throw new NotImplementedException();
+            return treatmentTypes.FindAll(t => t.Active == true);
         }
 
         public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
         {
-            throw new NotImplementedException();
+            return treatmentTypes.FindAll(t => t.Active == active);
         }
 
         public TreatmentType GetTreatmentTypeById(long id)
         {
-            throw new NotImplementedException();
+            return treatmentTypes.Find(t => t.Id == id);
         }
         #endregion
     }

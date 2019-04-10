@@ -17,12 +17,18 @@ namespace Webapp.Controllers
     {
         private readonly IContext context;
         private readonly TreatmentRepository repo;
+        private readonly PatientRepository patientRepo;
+        private readonly TreatmentTypeRepository typeRepo;
         private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter PatientVMC = new PatientViewModelConverter();
+        private readonly TreatmentTypeViewModelConverter TypeVMC = new TreatmentTypeViewModelConverter();
 
         public TreatmentController()
         {
             context = TestContext.GetInstance();
             repo = new TreatmentRepository(context);
+            patientRepo = new PatientRepository(context);
+            typeRepo = new TreatmentTypeRepository(context);
         }
 
         [Authorize(Roles = "doctor, patient")]
@@ -55,7 +61,10 @@ namespace Webapp.Controllers
         [HttpGet]
         public IActionResult Add()
         {
-            return View();
+            TreatmentDetailViewModel vm = new TreatmentDetailViewModel();
+            vm.Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAllActivePatients());
+            vm.TreatmentTypes = TypeVMC.TreatmentListToViewModel(typeRepo.GetAllActiveTreatmentTypes());
+            return View(vm);
         }
 
         //TODO : Voeg extra parameters toe! bij AddTreatment
