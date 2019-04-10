@@ -16,9 +16,9 @@ namespace Webapp.Repository
         /// <summary>
         /// A doctor can add a treatment
         /// </summary>
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        public bool AddTreatment(Treatment treatment, long treatmentType, long doctorId, long patientId)
         {
-            return context.AddTreatment(treatment, doctorId, patientId);
+            return context.AddTreatment(treatment, treatmentType, doctorId, patientId);
         }
 
         /// <summary>
