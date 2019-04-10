@@ -56,6 +56,8 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+       
+
 
 
         [HttpGet]
@@ -63,7 +65,7 @@ namespace Webapp.Controllers
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel();
             vm.Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAllActivePatients());
-            vm.TreatmentTypes = TypeVMC.TreatmentListToViewModel(typeRepo.GetAllActiveTreatmentTypes());
+            vm.TreatmentTypes = TypeVMC.TreatmentTypeToViewModel(typeRepo.GetAllActiveTreatmentTypes());
             return View(vm);
         }
 

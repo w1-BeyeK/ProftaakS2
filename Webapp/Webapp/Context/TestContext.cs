@@ -366,15 +366,17 @@ namespace Webapp.Context
 
         #region Treatment
 
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        public bool AddTreatment(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
         {
             int patientIndex = patients.FindIndex(t => t.Id == patientId);
             int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
+            int treatmentTypeIndex = treatmentTypes.FindIndex(t => t.Id == treatmentTypeId);
 
-            if (patientIndex >= 0 && doctorIndex >= 0)
+            if (patientIndex >= 0 && doctorIndex >= 0 && treatmentTypeId >= 0)
             {
                 treatment.Patient = patients[patientIndex];
                 treatment.Doctor = doctors[doctorIndex];
+                treatment.TreatmentType = treatmentTypes[treatmentTypeIndex];
 
                 long id = 0;
                 if (treatments.Count > 0)

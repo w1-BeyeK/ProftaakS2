@@ -21,6 +21,6 @@ namespace Webapp.Models
         public TreatmentTypeDetailViewModel TreatmentTypeDetailViewModel { get; set; }
         public int Age { get; set; }
         public List<PatientListViewModel> Patients { get; set; }
-        public List<TreatmentListViewModel> TreatmentTypes { get; set; }
+        public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
     }
 }
