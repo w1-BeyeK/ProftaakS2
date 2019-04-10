@@ -9,8 +9,11 @@ namespace Webapp.Repository
 {
     public class TreatmentRepository : BaseRepository
     {
-        public TreatmentRepository(IContext context) : base(context)
+        private readonly IContext context;
+
+        public TreatmentRepository(IContext context)
         {
+            this.context = context;
         }
 
         /// <summary>

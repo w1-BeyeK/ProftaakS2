@@ -12,7 +12,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Context where queries are executed/actions are performed
         /// </summary>
-        protected readonly ITreatmentTypeContext context;
+        private readonly ITreatmentTypeContext context;
 
         public TreatmentTypeRepository(ITreatmentTypeContext context)
         {

@@ -10,7 +10,7 @@ namespace Webapp.Repository
 {
     public class DepartmentRepository
     {
-        protected readonly IDepartmentContext context;
+        private readonly IDepartmentContext context;
 
         public DepartmentRepository(IDepartmentContext context)
         {
