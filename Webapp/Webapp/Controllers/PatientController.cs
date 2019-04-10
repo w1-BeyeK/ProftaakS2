@@ -19,9 +19,9 @@ namespace Webapp.Controllers
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
         private readonly IContext context;
-        private readonly TreatmentViewModelConverter treatmentViewModelConverter = new TreatmentViewModelConverter();
-        private readonly PatientListViewModel pLVM = new PatientListViewModel();
-        private readonly PatientViewModelConverter pVMC = new PatientViewModelConverter();
+        private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
+        private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
         public PatientController()
         {
@@ -31,13 +31,8 @@ namespace Webapp.Controllers
             treatmentRepository = new TreatmentRepository(context);
         }
 
+        //[Authorize Roles("doctor")]
         public IActionResult Index()
-        {
-            return View();
-        }
-
-        [Authorize]
-        public IActionResult Patientlist()
         {
             if (User.IsInRole("patient"))
             {
@@ -45,25 +40,18 @@ namespace Webapp.Controllers
             }
 
             List<Patient> patienten = patientRepository.GetAllActivePatients();
-            List<PatientListViewModel> convert = new List<PatientListViewModel>();
+            List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 
-            foreach (Patient p in patienten)
-            {
-                convert.Add(pVMC.PatientlistToViewModel(p));
-            }
-
-            return View(convert);
+            return View(vms);
         }
 
         //[HttpGet("{id}")]
         public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
-            TreatmentDetailViewModelConverter treatmentDetailViewModelConverter = new TreatmentDetailViewModelConverter();
             try
             {
-                Patient patient = patientRepository.GetPatientById(id);
-                patientDetailViewModel = treatmentDetailViewModelConverter.PatientToViewModel(patient);
+                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetPatientById(id));
             }
             catch (Exception Ex)
             {

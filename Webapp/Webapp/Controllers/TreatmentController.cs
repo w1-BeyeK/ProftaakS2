@@ -18,7 +18,6 @@ namespace Webapp.Controllers
         private readonly IContext context;
         private readonly TreatmentRepository repo;
         private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
-        private readonly TreatmentDetailViewModelConverter TreatmentDetailVMC = new TreatmentDetailViewModelConverter();
 
         public TreatmentController()
         {
