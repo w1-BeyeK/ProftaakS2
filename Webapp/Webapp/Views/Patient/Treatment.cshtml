@@ -80,8 +80,9 @@
                         <div class="form-group">
                             <div class="col-xs-3">
                                 <label for="EndTime"><h4>Eindtijd</h4></label>
-                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()">
+                                <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()"><br />
                             </div>
+                            
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
@@ -100,7 +101,7 @@
                         }
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde type behandelingen</h4></label>
+                                <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
                                @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                 {
                                     @if(treatment.Age <= 90)

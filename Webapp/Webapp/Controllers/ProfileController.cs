@@ -18,6 +18,7 @@ namespace Webapp.Controllers
         private readonly DoctorRepository doctorRepository;
 
         private readonly PatientViewModelConverter patientConverter;
+        private readonly DoctorViewModelConverter doctorConverter;
 
         public ProfileController(
             PatientRepository patientRepository,
@@ -28,6 +29,7 @@ namespace Webapp.Controllers
             this.doctorRepository = doctorRepository;
 
             patientConverter = new PatientViewModelConverter();
+            doctorConverter = new DoctorViewModelConverter();
         }
 
         public IActionResult Index()
@@ -49,7 +51,7 @@ namespace Webapp.Controllers
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetDoctorById(id);
-                    viewModel.Doctor = doctor;
+                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
                 return View(viewModel);
@@ -80,7 +82,7 @@ namespace Webapp.Controllers
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetDoctorById(id);
-                    viewModel.Doctor = doctor;
+                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
                 return View(viewModel);
