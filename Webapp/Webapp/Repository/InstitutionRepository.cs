@@ -15,7 +15,7 @@ namespace Webapp.Repository
 
         public bool AddInstitution(Institution institution)
         {
-            return Context.AddInstitution(institution);
+            return context.AddInstitution(institution);
         }
     }
 }

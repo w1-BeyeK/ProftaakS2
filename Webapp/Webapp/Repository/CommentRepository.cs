@@ -18,7 +18,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddComment(Comment comment, long treatmentId)
         {
-            return Context.AddComment(comment, treatmentId);
+            return context.AddComment(comment, treatmentId);
         }
     }
 }

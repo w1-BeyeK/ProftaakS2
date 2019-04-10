@@ -7,6 +7,9 @@ namespace Webapp.Models.Data
 {
     public class Administrator : BaseAccount
     {
+        public Administrator(): base()
+        { }
+
         public long EmployeeNumber { get; set; }
         
 

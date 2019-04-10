@@ -7,6 +7,9 @@ namespace Webapp.Models.Data
 {
     public abstract class BaseAccount : Entity
     {
+        public BaseAccount()
+        { }
+
         public string Role { get; set; }
 
         public long Id { get; set; }
@@ -14,10 +17,7 @@ namespace Webapp.Models.Data
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-
-        public BaseAccount()
-        { }
-
+        
         public BaseAccount(long id, string username, string email)
         {
             Id = id;

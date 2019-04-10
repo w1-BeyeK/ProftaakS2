@@ -15,7 +15,7 @@ namespace Webapp.Repository
 
         public Patient GetById(long id)
         {
-            return Context.GetPatientById(id);
+            return context.GetPatientById(id);
         }
     }
 }

@@ -14,8 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Webapp.Context;
 using Webapp.Context.Login;
 using Webapp.Converters;
+using Webapp.Handlers;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
+using Webapp.Parsers;
 using Webapp.Repository;
 
 namespace Webapp
@@ -31,7 +33,7 @@ namespace Webapp
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+            {
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.
@@ -39,8 +41,17 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddScoped<IContext, TestContext>();
+            services.AddScoped<IParser, DataRowParser>();
+            services.AddScoped<IHandler, MSSQLHandler>();
+
+            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+
             services.AddScoped<PatientRepository>();
+            services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();
+            services.AddScoped<DepartmentRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
@@ -58,8 +69,7 @@ namespace Webapp
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
-
-            services.AddScoped<IContext, TestContext>();
+            
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

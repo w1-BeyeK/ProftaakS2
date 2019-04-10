@@ -71,7 +71,7 @@ namespace Webapp.Controllers
                 {
                     if (HttpContext.User.IsInRole("admin"))
                     {
-                        return RedirectToAction("about");
+                        return RedirectToAction("dashboard");
                     }
                     else
                     {
@@ -102,6 +102,11 @@ namespace Webapp.Controllers
         {
             ViewData["Message"] = "Your contact page.";
 
+            return View();
+        }
+
+        public IActionResult Dashboard()
+        {
             return View();
         }
 

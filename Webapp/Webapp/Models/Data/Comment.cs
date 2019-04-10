@@ -12,6 +12,9 @@ namespace Webapp.Models.Data
         public string Description { get; set; }
         public DateTime Date { get; set; }
 
+        public Comment()
+        { }
+
         public Comment(string title, string description, DateTime date)
         {
             Title = title;

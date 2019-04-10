@@ -15,17 +15,22 @@ namespace Webapp.Repository
 
         public bool AddDoctor(Doctor doctor)
         {
-            return Context.AddDoctor(doctor);
+            return context.AddDoctor(doctor);
         }
 
         public bool EditDoctor(Doctor doctor)
         {
-            return Context.UpdateDoctor(doctor.Id, doctor);
+            return context.UpdateDoctor(doctor.Id, doctor);
         }
 
         public Doctor GetDoctorById(long id)
         {
-            return Context.GetDoctorById(id);
+            return context.GetDoctorById(id);
+        }
+
+        public List<Doctor> GetDoctors()
+        {
+            return default(List<Doctor>);
         }
     }
 }

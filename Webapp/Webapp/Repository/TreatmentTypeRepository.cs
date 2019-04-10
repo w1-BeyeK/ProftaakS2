@@ -2,34 +2,73 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Interfaces;
+using Webapp.Context;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class TreatmentTypeRepository : BaseRepository
+    public class TreatmentTypeRepository
     {
-        public TreatmentTypeRepository(IContext context) : base(context)
-        {
-        }
+        /// <summary>
+        /// Context where queries are executed/actions are performed
+        /// </summary>
+        protected readonly ITreatmentTypeContext context;
 
-        public bool AddTreatmentType(TreatmentType treatment)
+        public TreatmentTypeRepository(ITreatmentTypeContext context)
         {
-            return Context.AddTreatmentType(treatment);
-        }
-        
-        public bool EditTreatmentType(TreatmentType treatment)
-        {
-            return Context.UpdateTreatmentType(treatment.Id, treatment);
+            this.context = context;
         }
 
         /// <summary>
-        /// Shows TreatmentTypes of a department
+        /// Add treatmenttype in database
         /// </summary>
-        /// <param name="department"></param>
-        //public List<TreatmentType> ShowTreatmentTypes(Department department)
-        //{
-        //    return context.GetTrea(department);
-        //}
+        /// <param name="treatment"></param>
+        /// <returns></returns>
+        public long Add(TreatmentType treatment)
+        {
+            // Insert through context
+            return context.Insert(treatment);
+        }
+        
+        /// <summary>
+        /// Update treatmenttype in database
+        /// </summary>
+        /// <param name="treatment"></param>
+        /// <returns></returns>
+        public bool Update(TreatmentType treatment)
+        {
+            // Update through context
+            return context.Update(treatment);
+        }
+
+        /// <summary>
+        /// Update treatmenttype to active = 0
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool Delete(long id)
+        {
+            // Set treatmenttype inactive in database
+            return context.Delete(GetById(id));
+        }
+
+        /// <summary>
+        /// Returns a list of treatment types without filter
+        /// </summary>
+        /// <returns></returns>
+        public List<TreatmentType> GetAll()
+        {
+            return context.GetAll();
+        }
+
+        /// <summary>
+        /// Returns single instance of TreatmentType based on primary key (id)
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TreatmentType GetById(long id)
+        {
+            return context.GetById(id);
+        }
     }
 }

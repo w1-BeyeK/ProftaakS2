@@ -12,6 +12,9 @@ namespace Webapp.Models.Data
         public string Description { get; set; }
         public bool Active { get; set; }
 
+        public Department()
+        { }
+
         public Department(string name, string description, bool active)
         {
             Name = name;

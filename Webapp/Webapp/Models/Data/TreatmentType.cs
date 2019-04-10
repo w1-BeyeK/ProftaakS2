@@ -7,6 +7,9 @@ namespace Webapp.Models.Data
 {
     public class TreatmentType : Entity
     {
+        public TreatmentType()
+        { }
+
         public long Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
@@ -14,6 +17,7 @@ namespace Webapp.Models.Data
         public List<Department> Departments { get; set; }
         public List<Doctor> Doctors { get; set; }
         public List<Treatment> Treatments { get; set; }
+        public long DepartmentId { get; internal set; }
 
         public TreatmentType(string name, string description, bool active = true)
         {

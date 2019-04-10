@@ -1,0 +1,80 @@
+﻿@model Webapp.Models.TreatmentTypeViewModel
+
+@{
+    ViewData["Title"] = "View";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>TreatmentTypes</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table table-striped table-hover" id="treatmentTypeTable" style="width:100%;">
+    <thead>
+        <tr>
+            <th>
+                Naam
+            </th>
+            <th>
+                Omschrijving
+            </th>
+            <th>
+                Actief
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.TreatmentTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Active)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts {
+    <script>
+    $("document").ready(function () {
+        initDataTable();
+    });
+
+    function initDataTable() {
+        $("#treatmentTypeTable").DataTable({
+            bLengthChange: false,
+            pageLength: 10,
+            columns: [
+                {
+                    data: "name",
+                    width: "20%",
+                },
+                {
+                    data: "description",
+                    width: "50%",
+                },
+                {
+                    data: "active",
+                    width: "15%",
+                },
+                {
+                    width: "15%"
+                }
+            ]
+        });
+    }
+    </script>
+}

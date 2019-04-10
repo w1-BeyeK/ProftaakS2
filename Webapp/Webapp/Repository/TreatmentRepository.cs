@@ -15,27 +15,27 @@ namespace Webapp.Repository
 
         public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
         {
-            return Context.AddTreatment(treatment, doctorId, patientId);
+            return context.AddTreatment(treatment, doctorId, patientId);
         }
 
         public bool UpdateTreatment(long id, Treatment treatment)
         {
-            return Context.UpdateTreatment(id, treatment);
+            return context.UpdateTreatment(id, treatment);
         }
 
         public List<Treatment> GetTreatmentsByPatientId(long id)
         {
-            return Context.GetTreatmentsByPatientId(id);
+            return context.GetTreatmentsByPatientId(id);
         }
 
         public List<Treatment> GetTreatmentsByDoctorId(long id)
         {
-            return Context.GetTreatmentsByDoctorId(id);
+            return context.GetTreatmentsByDoctorId(id);
         }
 
         public Treatment GetTreatmentById(long id)
         {
-            return Context.GetTreatmentById(id);
+            return context.GetTreatmentById(id);
         }
     }
 }

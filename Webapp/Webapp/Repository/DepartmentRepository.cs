@@ -2,25 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DepartmentRepository : BaseRepository
+    public class DepartmentRepository
     {
-        public DepartmentRepository(IContext context) : base(context)
+        protected readonly IDepartmentContext context;
+
+        public DepartmentRepository(IDepartmentContext context)
         {
+            this.context = context;
         }
 
-        public bool AddDepartment(Department department)
+        public long Add(Department department)
         {
-            return Context.AddDepartment(department);
+            return context.Insert(department);
         }
 
-        public bool EditDepartment(Department department)
+        public bool Update(Department department)
         {
-            return Context.UpdateDepartment(department.Id, department);
+            return context.Update(department);
+        }
+
+        public bool Delete(long id)
+        {
+            return context.Delete(GetById(id));
+        }
+
+        public Department GetById(long id)
+        {
+            return context.GetById(id);
+        }
+
+        public List<Department> GetAll()
+        {
+            return context.GetAll();
         }
     }
 }

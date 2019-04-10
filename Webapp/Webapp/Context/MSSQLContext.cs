@@ -1,17 +1,43 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 using System.Data;
 using System.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 
 namespace Webapp.Context
 {
     public class MSSQLContext : IContext
     {
-        string connectionString = "Server=mssql.fhict.local;Database=dbi409368;User Id=dbi409368;Password=Test123;";
+        /// <summary>
+        /// Datarow to object X parser
+        /// </summary>
+        private readonly IParser parser;
+
+        /// <summary>
+        /// Handler that executes your command or select query
+        /// </summary>
+        private readonly IHandler handler;
+
+        /// <summary>
+        /// Constructor with default parameters
+        /// </summary>
+        /// <param name="parser">Object parser</param>
+        /// <param name="handler">Query handler</param>
+        public MSSQLContext(IParser parser, IHandler handler)
+        {
+            this.parser = parser;
+            this.handler = handler;
+        }
+
+        public bool AddComment(Comment comment)
+        {
+            throw new NotImplementedException();
+        }
 
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
@@ -65,7 +91,26 @@ namespace Webapp.Context
 
         public bool AddTreatmentType(TreatmentType treatmentType)
         {
-            throw new NotImplementedException();
+            try
+            {
+                treatmentType.DepartmentId = 1;
+                string query = "insert into PTS2_TreatmentType(DepartmentId, Name, Description, Active) values(@departmentId, @name, @description, @active)";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("name", treatmentType.Name),
+                    new KeyValuePair<string, object>("departmentId", treatmentType.DepartmentId.ToString()),
+                    new KeyValuePair<string, object>("description", treatmentType.Description),
+                    new KeyValuePair<string, object>("active", treatmentType.Active == true ? "1" : "0"),
+                };
+
+                handler.ExecuteCommand(query, parameters);
+                return true;
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
         }
 
         public Comment GetCommentById(long id)
@@ -140,12 +185,36 @@ namespace Webapp.Context
 
         public TreatmentType GetTreatmentTypeById(long id)
         {
-            throw new NotImplementedException();
+            string query = "select * from PTS2_TreatmentType where Id = @id";
+
+            var dbResult = handler.ExecuteSelect(query, id);
+
+            return default(TreatmentType);
         }
 
+        /// <summary>
+        /// Get all treatment types
+        /// </summary>
+        /// <returns>List of treatmenttypes</returns>
         public List<TreatmentType> GetTreatmentTypes()
         {
-            throw new NotImplementedException();
+            // Create result
+            List<TreatmentType> result = new List<TreatmentType>();
+            // Set query
+            string query = "select * from PTS2_TreatmentType";
+
+            // Tell the handler to execute the query
+            var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+            // Parse all rows
+            foreach(DataRow dr in dbResult.Rows)
+            {
+                // Parse only if succeeded
+                if (parser.TryParse(dr, out TreatmentType treatmentType))
+                    result.Add(treatmentType);
+            }
+
+            return result;
         }
 
         public bool UpdateDepartment(long id, Department department)

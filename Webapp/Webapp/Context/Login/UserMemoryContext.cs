@@ -16,7 +16,7 @@ namespace Webapp.Context.Login
         {
             accounts = new List<BaseAccount>()
             {
-                new Patient(12, "kevinbeye", "k.beye@student.fontys.nl", "Kevin")
+                new Administrator(12, "kevinbeye", "k.beye@student.fontys.nl", "Kevin")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "KEVINBEYE"
