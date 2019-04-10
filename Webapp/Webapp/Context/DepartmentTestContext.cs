@@ -50,5 +50,39 @@ namespace Webapp.Context
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Must be standing here because of Kevins code
+        public List<Department> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalContext<Department>.Insert(Department obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Department obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Department obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

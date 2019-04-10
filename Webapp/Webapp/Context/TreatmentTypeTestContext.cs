@@ -50,5 +50,46 @@ namespace Webapp.Context
         {
             return treatmentTypes.Find(t => t.Id == id);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Must be standing here because of Kevins code
+        public List<TreatmentType> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalContext<TreatmentType>.Insert(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

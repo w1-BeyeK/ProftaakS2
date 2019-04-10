@@ -94,7 +94,7 @@ namespace Webapp.Context
             throw new NotImplementedException();
         }
 
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        public bool AddTreatment(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
         {
             throw new NotImplementedException();
         }

@@ -7,13 +7,13 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public interface ITreatmentTypeContext //: IUniversalContext<TreatmentType>
+    public interface ITreatmentTypeContext : IUniversalContext<TreatmentType>
     {
-        bool Insert(TreatmentType treatmentType);
-        bool Update(long id, TreatmentType treatmentType);
-        bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
-        List<TreatmentType> GetAllActiveTreatmentTypes();
-        List<TreatmentType> GetAllTreatmentTypesByActive(bool active);
-        TreatmentType GetById(long id);
+        //bool Insert(TreatmentType treatmentType);
+        //bool Update(long id, TreatmentType treatmentType);
+        //bool ActiveTreatmentTypeByIdAndActive(long id, bool active);
+        //List<TreatmentType> GetAllActiveTreatmentTypes();
+        //List<TreatmentType> GetAllTreatmentTypesByActive(bool active);
+        //TreatmentType GetById(long id);
     }
 }

@@ -7,12 +7,12 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public interface IInstitutionContext //: IUniversalContext<Institution>
+    public interface IInstitutionContext : IUniversalContext<Institution>
     { 
-        bool Insert(Institution institution);
-        bool AddDepartmentToInstitution(long institutionId, long departmentId);
-        bool Update(long id, Institution institution);
-        List<Institution> GetAllInstitutions();
-        Institution GetById(long id);
+        //bool Insert(Institution institution);
+        //bool AddDepartmentToInstitution(long institutionId, long departmentId);
+        //bool Update(long id, Institution institution);
+        //List<Institution> GetAllInstitutions();
+        //Institution GetById(long id);
     }
 }

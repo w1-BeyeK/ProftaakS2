@@ -31,7 +31,7 @@ namespace Webapp.Context
             if (id != institution.Id)
                 return false;
 
-            Institution oldInstitution = GetInstitutionById(id);
+            Institution oldInstitution = GetById(id);
             oldInstitution = institution;
             return true;
         }
@@ -44,6 +44,48 @@ namespace Webapp.Context
         public Institution GetById(long id)
         {
             return institutions.FirstOrDefault(i => i.Id == id);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //Must be standing here because of Kevins code
+        public List<Institution> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalContext<Institution>.Insert(Institution obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Update(Institution obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Delete(Institution obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }
