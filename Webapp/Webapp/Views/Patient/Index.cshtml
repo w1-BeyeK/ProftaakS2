@@ -23,7 +23,11 @@
            <tr>
                 <td>@item.Name</td>
                 <td>@item.Gender</td>
-                <td>@item.Birth</td>
+                <td>@item.Birth.ToShortDateString()</td>
+                <td>
+                    @Html.ActionLink("Edit Treatment", "Treatment", "Patient", new { id = item.UserId })
+
+                </td>
             </tr>
         }
     </tbody>
@@ -32,13 +36,8 @@
     <script>
         $("document").ready(function () {
             var table = $('#patientTable').DataTable({
-                rowId: 'Id'
-            });
-
-            $('#patientTable tbody').on('click', 'tr', function () {
-                var data = table.row(this).data();
-                alert(' ' + data.rowId);
             });
         });
+        
     </script>
 }

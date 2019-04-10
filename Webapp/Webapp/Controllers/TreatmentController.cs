@@ -50,6 +50,8 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+       
+
 
 
         [HttpGet]
