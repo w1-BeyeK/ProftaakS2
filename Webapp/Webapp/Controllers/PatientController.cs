@@ -19,9 +19,9 @@ namespace Webapp.Controllers
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
         private readonly IContext context;
-        private readonly PatientWithTreatmentsViewModelConverter patientVMC = new PatientWithTreatmentsViewModelConverter();
+        private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
-        private readonly PatientViewModelConverter pVMC = new PatientViewModelConverter();
+        private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
         public PatientController()
         {
@@ -40,7 +40,7 @@ namespace Webapp.Controllers
             }
 
             List<Patient> patienten = patientRepository.GetAllActivePatients();
-            List<PatientListViewModel> vms = pVMC.PatientlistToViewModel(patienten);
+            List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 
             return View(vms);
         }
@@ -51,7 +51,7 @@ namespace Webapp.Controllers
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             try
             {
-                patientDetailViewModel = patientVMC.PatientToViewModel(patientRepository.GetPatientById(id));
+                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetPatientById(id));
             }
             catch (Exception Ex)
             {
