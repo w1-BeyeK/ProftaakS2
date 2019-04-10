@@ -377,12 +377,12 @@ namespace Webapp.Context
 
         public List<Treatment> GetAllTreatmentsByDoctorId(long id)
         {
-            return treatments.FindAll(t => t.Doctor.Id == id);
+            return new List<Treatment>(treatments.FindAll(t => t.Doctor.Id == id));
         }
 
         public List<Treatment> GetAllTreatmentsByPatientId(long id)
         {
-            return treatments.FindAll(t => t.Patient.Id == id);
+            return new List<Treatment>(treatments.FindAll(t => t.Patient.Id == id));
         }
         #endregion
 

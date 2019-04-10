@@ -1,5 +1,5 @@
 ﻿@using Webapp.Models.Data;
-@Model Webapp.Models.PatientDetailViewModel;
+@model Webapp.Models.PatientDetailViewModel;
 @{
     ViewData["Title"] = "Doctor";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -105,7 +105,7 @@
                                 {
                                     @if(treatment.Age <= 90)
                                     {
-                                        <li>@treatment.Name</li>
+                                        <li>@treatment.Name / @treatment.Type.Name / @treatment.EndDate.ToString("dd-MM-yyyy")</li>
                                     }
                                 }
                             </div>

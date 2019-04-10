@@ -50,7 +50,7 @@ namespace Webapp.Converters
             {
                 //The first comment is the description
                 t.Comments.OrderBy(x => x.Date);
-                List<Comment> comments = t.Comments;
+                List<Comment> comments = new List<Comment>(t.Comments);
                 Comment description = comments[0];
                 comments.RemoveAt(0);
 
