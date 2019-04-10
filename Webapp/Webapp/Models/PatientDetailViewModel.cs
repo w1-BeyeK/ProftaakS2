@@ -30,8 +30,7 @@ namespace Webapp.Models
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }
-        public int Age { get {return (int)((DateTime.Now-Birth).Days/365.25); } set {; } }
+        public int Age { get; set; }
         public List<TreatmentDetailViewModel> TreatmentDetailViewModels { get; set; }
-
     }
 }

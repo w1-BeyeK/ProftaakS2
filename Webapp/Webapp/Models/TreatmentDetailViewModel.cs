@@ -18,6 +18,6 @@ namespace Webapp.Models
         public List<Comment> Comments { get; set; } = new List<Comment>();
         public Comment Description { get; set; }
         public PatientDetailViewModel PatientDetailViewModel { get; set; }
-        
+        public int Age { get; set; }
     }
 }
