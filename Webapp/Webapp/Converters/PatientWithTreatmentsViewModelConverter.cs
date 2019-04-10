@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class TreatmentDetailViewModelConverter
+    public class PatientWithTreatmentsViewModelConverter
     {
         public Patient ViewModelToPatient(PatientDetailViewModel vm)
         {
@@ -36,11 +36,6 @@ namespace Webapp.Converters
             return patient;
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="patient"></param>
-        /// <returns></returns>
         public PatientDetailViewModel PatientToViewModel(Patient patient)
         {
             PatientDetailViewModel vm = new PatientDetailViewModel()
