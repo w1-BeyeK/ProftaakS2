@@ -56,7 +56,7 @@ namespace Webapp.Interfaces
         #endregion
 
         #region Treatment
-        bool AddTreatment(Treatment treatment, long doctorId, long patientId);
+        bool AddTreatment(Treatment treatment, long treatmentType, long doctorId, long patientId);
         bool UpdateTreatment(long id, Treatment Treatment);
         List<Treatment> GetAllTreatmentsByDoctorId(long id);
         List<Treatment> GetAllTreatmentsByPatientId(long id);

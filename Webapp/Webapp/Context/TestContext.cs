@@ -472,11 +472,6 @@ namespace Webapp.Context
         {
             return treatmentTypes.Find(t => t.Id == id);
         }
-
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
-        {
-            throw new NotImplementedException();
-        }
         #endregion
     }
 }
