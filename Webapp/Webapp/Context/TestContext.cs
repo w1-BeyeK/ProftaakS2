@@ -139,6 +139,12 @@ namespace Webapp.Context
                     PhoneNumber = "12345"
                 }
             };
+            treatmentTypes = new List<TreatmentType>()
+            {
+                new TreatmentType("Armzagen","Hopsakee arm eraf."),
+                new TreatmentType("RibRemoven","Zin in een spare ribje?"),
+                new TreatmentType("VingerVangen","Beter 10 vingers in je hand dan 500 op de grond."),
+            };
         }
 
         public bool AddDoctorToDepartment(long departmentId, long doctorId)
