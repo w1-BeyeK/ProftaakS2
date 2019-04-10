@@ -9,13 +9,13 @@ namespace Webapp.Converters
 {
     public class TreatmentTypeViewModelConverter
     {
-        public List<TreatmentListViewModel> TreatmentListToViewModel(List<TreatmentType> types)
+        public List<TreatmentTypeDetailViewModel> TreatmentTypeToViewModel(List<TreatmentType> types)
         {
-            List<TreatmentListViewModel> Types = new List<TreatmentListViewModel>();
+            List<TreatmentTypeDetailViewModel> Types = new List<TreatmentTypeDetailViewModel>();
 
             foreach (TreatmentType t in types)
             {
-                TreatmentListViewModel type = new TreatmentListViewModel
+                TreatmentTypeDetailViewModel type = new TreatmentTypeDetailViewModel
                 {
                     Name = t.Name,
                     Description = t.Description
