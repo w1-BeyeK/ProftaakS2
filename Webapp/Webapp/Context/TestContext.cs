@@ -155,7 +155,13 @@ namespace Webapp.Context
 
         public bool ActivePatientByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = patients.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                patients[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public Patient GetPatientById(long id)
@@ -170,7 +176,7 @@ namespace Webapp.Context
 
         public List<Patient> GetAllPatientsByDoctorId(long id)
         {
-            // ??
+            //Is not realy possible in TestContext...
             return patients;
         }
 
@@ -206,7 +212,13 @@ namespace Webapp.Context
         #region Doctor
         public bool ActiveDoctorByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = doctors.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                doctors[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDoctor(Doctor doctor)
@@ -222,11 +234,12 @@ namespace Webapp.Context
 
         public List<Doctor> GetAllDoctors()
         {
-            throw new NotImplementedException();
+            return doctors;
         }
 
         public List<Doctor> GetAllDoctorsByDepartmentId(long id)
         {
+            //By department id!????????
             return doctors;
         }
 
@@ -261,7 +274,13 @@ namespace Webapp.Context
         #region Department
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = departments.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                departments[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public bool AddDepartment(Department department)
@@ -405,12 +424,18 @@ namespace Webapp.Context
         
         public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
         {
-            throw new NotImplementedException();
+            int index = treatmentTypes.FindIndex(t => t.Id == id);
+            if (index >= 0)
+            {
+                treatmentTypes[index].Active = active;
+                return true;
+            }
+            return false;
         }
 
         public List<TreatmentType> GetAllActiveTreatmentTypes()
         {
-            throw new NotImplementedException();
+            return treatmentTypes.FindAll(t => t.Active == true);
         }
 
         public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
