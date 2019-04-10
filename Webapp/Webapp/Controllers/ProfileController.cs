@@ -18,6 +18,7 @@ namespace Webapp.Controllers
         private readonly DoctorRepository doctorRepository;
 
         private readonly PatientViewModelConverter patientConverter;
+        private readonly DoctorViewModelConverter doctorConverter;
 
         public ProfileController(
             PatientRepository patientRepository,
@@ -28,6 +29,7 @@ namespace Webapp.Controllers
             this.doctorRepository = doctorRepository;
 
             patientConverter = new PatientViewModelConverter();
+            doctorConverter = new DoctorViewModelConverter();
         }
 
         public IActionResult Index()
@@ -49,7 +51,7 @@ namespace Webapp.Controllers
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetDoctorById(id);
-                    viewModel.Doctor = doctor;
+                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
                 return View(viewModel);
@@ -80,7 +82,7 @@ namespace Webapp.Controllers
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetDoctorById(id);
-                    viewModel.Doctor = doctor;
+                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
                 return View(viewModel);
@@ -95,15 +97,21 @@ namespace Webapp.Controllers
         public IActionResult Edit(UserViewModel viewModel)
         {
             var id = GetUserId();
-            viewModel.Patient.Id = id;
+            
 
             if (HttpContext.User.IsInRole("patient"))
             {
+                viewModel.Patient.Id = id;
                 //  PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
                 Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
                 patientRepository.UpdatePatient(id,patient);
             }
-
+            else if (HttpContext.User.IsInRole("doctor"))
+            {
+                viewModel.Doctor.EmployeeNumber = id;
+                Doctor doctor = doctorConverter.ViewModelToDoctor(viewModel.Doctor);
+                doctorRepository.UpdateDoctor(id, doctor);
+            }
             return RedirectToAction("index","Profile");
         }
     }

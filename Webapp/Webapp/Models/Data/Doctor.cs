@@ -22,5 +22,10 @@ namespace Webapp.Models.Data
             Role = "doctor";
             EmployeeNumber = Id;
         }
+        public int GetAge()
+        {
+            int age = (int)((DateTime.Today - Birth).Days / 365.25);
+            return age;
+        }
     }
 }

@@ -7,201 +7,286 @@
 
 @if (Model.Patient != null)
 {
-<div class="container bootstrap snippet">
-    <div class="row">
-        <div class="col-sm-10"><h1>Patiënt</h1><hr /></div>
-    </div>
-    <div class="row">
-        <div class="col-sm-9">
-            <ul class="nav nav-tabs">
-                <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
-                <li><a data-toggle="tab" href="#messages">Privacy</a></li>
-            </ul>
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10"><h1>Patiënt</h1><hr /></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
+                    <li><a data-toggle="tab" href="#messages">Privacy</a></li>
+                </ul>
 
-            <div class="tab-content">
-                <div class="tab-pane active" id="home">
-                    <form class="form" action="##" method="post" id="registrationForm">
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="name"><h4>Volledige naam</h4></label>
-                                <p>@Model.Patient.Name</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label><h4>Geslacht</h4></label>
-                                @if (Model.Patient.Gender == Gender.Male)
-                                {
-                                    <p>Man</p>
-                                }
-                                else
-                                {
-                                    <p>Vrouw</p>
-                                }
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="BSN"><h4>BSN</h4></label>
-                                <p>@Model.Patient.BSN</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="Birthday"><h4>Geboortedatum</h4></label>
-                                <p>@Model.Patient.Birth.ToString("dd-MM-yyyy")</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-
-                            <div class="col-xs-6">
-                                <label for="Username"><h4>Gebruikersnaam</h4></label>
-                                <p>@Model.Patient.UserName</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="email"><h4>Email</h4></label>
-                                <p>@Model.Patient.Email</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="phonenumber"><h4>Telefoonnummer</h4></label>
-                                <p>@Model.Patient.PhoneNumber</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
-                                <p>@Model.Patient.PhoneNumber</p>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="Zipcode"><h4>Postcode</h4></label>
-                                <p>@Model.Patient.Zipcode</p>
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label for="HouseNumber"><h4>Huisnummer</h4></label>
-                                <p>@Model.Patient.HouseNumber</p>
-                            </div>
-                        </div>
-
-
-                        <div class="form-group">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <form class="form" action="##" method="post" id="registrationForm">
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="ContactPersonName"><h4>Contactpersoon naam</h4></label>
-                                    <p>@Model.Patient.ContactPersonName</p>
+                                    <label for="name"><h4>Volledige naam</h4></label>
+                                    <p>@Model.Patient.Name</p>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="ContactPersonPhoneNumber"><h4>Contactpersoon telefoonnummer</h4></label>
-                                    <p>@Model.Patient.ContactPersonPhone</p>
+                                    <label><h4>Geslacht</h4></label>
+                                    @if (Model.Patient.Gender == Gender.Male)
+                                    {
+                                        <p>Man</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Vrouw</p>
+                                    }
                                 </div>
                             </div>
-                            <div class="col-xs-12">
-                                <br>
-                                <a asp-controller="profile" asp-action="edit" class="btn btn-primary"><i class="fa fa-edit"></i> Aanpassen</a>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="BSN"><h4>BSN</h4></label>
+                                    <p>@Model.Patient.BSN</p>
+                                </div>
                             </div>
-                        </div>
+                            <div class="form-group">
 
-                    </form>
+                                <div class="col-xs-6">
+                                    <label for="Birthday"><h4>Geboortedatum</h4></label>
+                                    <p>@Model.Patient.Birth.ToString("dd-MM-yyyy")</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
 
-                    <hr>
 
+                                <div class="col-xs-6">
+                                    <label for="Username"><h4>Gebruikersnaam</h4></label>
+                                    <p>@Model.Patient.UserName</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Email</h4></label>
+                                    <p>@Model.Patient.Email</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phonenumber"><h4>Telefoonnummer</h4></label>
+                                    <p>@Model.Patient.PhoneNumber</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
+                                    <p>@Model.Patient.PhoneNumber</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="Zipcode"><h4>Postcode</h4></label>
+                                    <p>@Model.Patient.Zipcode</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="HouseNumber"><h4>Huisnummer</h4></label>
+                                    <p>@Model.Patient.HouseNumber</p>
+                                </div>
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="ContactPersonName"><h4>Contactpersoon naam</h4></label>
+                                        <p>@Model.Patient.ContactPersonName</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="ContactPersonPhoneNumber"><h4>Contactpersoon telefoonnummer</h4></label>
+                                        <p>@Model.Patient.ContactPersonPhone</p>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12">
+                                    <br>
+                                    <a asp-controller="profile" asp-action="edit" class="btn btn-primary"><i class="fa fa-edit"></i> Aanpassen</a>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <hr>
+
+                    </div><!--/tab-pane-->
+                    <div class="tab-pane" id="messages">
+                        <form class="form" action="#" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivMail" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Email
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivGender" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Geslacht
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivBirthDate" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Geboortedatum
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivPhoneNumber" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Telefoonnummer
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivAdress" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Adres
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" disabled>
+
+                                        <span class="slider"></span>
+                                    </label>
+                                    Contact persoon telefoonnummer
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" disabled>
+                                        <span class="slider"></span>
+                                    </label>
+                                    Contact persoon naam
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--/tab-pane-->
                 </div><!--/tab-pane-->
-                <div class="tab-pane" id="messages">
-                    <form class="form" action="#" method="post" id="registrationForm">
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivMail" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Email
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivGender" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Geslacht
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivBirthDate" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Geboortedatum
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivPhoneNumber" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Telefoonnummer
-                            </div>
-                        </div>
-                        <div class="form-group">
-
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivAdress" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Adres
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" disabled>
-
-                                    <span class="slider"></span>
-                                </label>
-                                Contact persoon telefoonnummer
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="col-xs-6">
-                                <label class="switch">
-                                    <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" disabled>
-                                    <span class="slider"></span>
-                                </label>
-                                Contact persoon naam
-                            </div>
-                        </div>
-                    </form>
-                </div><!--/tab-pane-->
-            </div><!--/tab-pane-->
-        </div><!--/tab-content-->
-    </div><!--/col-9-->
-</div><!--/row--> 
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
 }
-else if(Model.Doctor != null)
+else if (Model.Doctor != null)
 {
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10"><h1>Patiënt</h1><hr /></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
+                    <li class="active"><a data-toggle="tab" href="#home">Privacy</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <form class="form" action="##" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name"><h4>Volledige naam</h4></label>
+                                    <p>@Model.Doctor.Name</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label><h4>Geslacht</h4></label>
+                                    @if (Model.Doctor.Gender == Gender.Male)
+                                    {
+                                        <p>Man</p>
+                                    }
+                                    else
+                                    {
+                                        <p>Vrouw</p>
+                                    }
+                                </div>
+                            </div>
+                            <div class="form-group">
 
+                                <div class="col-xs-6">
+                                    <label for="Employeenumber"><h4>Werknemersnummer</h4></label>
+                                    <p>@Model.Doctor.EmployeeNumber</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="Birthday"><h4>Geboortedatum</h4></label>
+                                    <p>@Model.Doctor.Birth.ToString("dd-MM-yyyy")</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+
+                                <div class="col-xs-6">
+                                    <label for="Username"><h4>Gebruikersnaam</h4></label>
+                                    <p>@Model.Doctor.UserName</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="email"><h4>Email</h4></label>
+                                    <p>@Model.Doctor.Email</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <div class="col-xs-6">
+                                    <label for="phonenumber"><h4>Telefoonnummer</h4></label>
+                                    <p>@Model.Doctor.PhoneNumber</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
+                                    <p>@Model.Doctor.PhoneNumber</p>
+                                </div>
+                                <div class="col-xs-12">
+                                    <br>
+                                    <a asp-controller="profile" asp-action="edit" class="btn btn-primary"><i class="fa fa-edit"></i> Aanpassen</a>
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div><!--/tab-pane-->
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
 }
