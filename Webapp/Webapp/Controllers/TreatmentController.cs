@@ -37,11 +37,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetAllTreatmentsByDoctorId(GetUserId());
+                items = repo.GetByDoctor(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetAllTreatmentsByPatientId(GetUserId());
+                items = repo.GetByPatient(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()
@@ -61,7 +61,7 @@ namespace Webapp.Controllers
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
             {
-                Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAllActivePatients()),
+                Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAll()),
                 TreatmentTypes = TypeVMC.ModelsToViewModel(typeRepo.GetAll())
             };
             return View(vm);
@@ -72,14 +72,14 @@ namespace Webapp.Controllers
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            repo.AddTreatment(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
+            repo.Add(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
             return View();
         }
 
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetTreatmentById(id));
+            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetById(id));
 
             return View(vm);
         }
@@ -88,7 +88,7 @@ namespace Webapp.Controllers
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            repo.UpdateTreatment(id, treatment);
+            repo.Update(treatment);
             return RedirectToAction("index", "treatment");
         }
     }

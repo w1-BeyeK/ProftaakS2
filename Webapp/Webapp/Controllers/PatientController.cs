@@ -39,7 +39,7 @@ namespace Webapp.Controllers
                 return RedirectToAction("Index", "Profile");
             }
 
-            List<Patient> patienten = patientRepository.GetAllActivePatients();
+            List<Patient> patienten = patientRepository.GetAll();
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 
             return View(vms);
@@ -51,7 +51,7 @@ namespace Webapp.Controllers
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             try
             {
-                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetPatientById(id));
+                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetById(id));
             }
             catch (Exception Ex)
             {

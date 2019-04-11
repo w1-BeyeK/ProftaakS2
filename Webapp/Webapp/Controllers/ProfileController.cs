@@ -45,12 +45,12 @@ namespace Webapp.Controllers
 
                 if (HttpContext.User.IsInRole("patient"))
                 {
-                    Patient patient = patientRepository.GetPatientById(id);
+                    Patient patient = patientRepository.GetById(id);
                     viewModel.Patient = patientConverter.PatientToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
-                    Doctor doctor = doctorRepository.GetDoctorById(id);
+                    Doctor doctor = doctorRepository.GetById(id);
                     viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
@@ -76,12 +76,12 @@ namespace Webapp.Controllers
 
                 if (HttpContext.User.IsInRole("patient"))
                 {
-                    Patient patient = patientRepository.GetPatientById(id);
+                    Patient patient = patientRepository.GetById(id);
                     viewModel.Patient = patientConverter.PatientToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
-                    Doctor doctor = doctorRepository.GetDoctorById(id);
+                    Doctor doctor = doctorRepository.GetById(id);
                     viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
                 }
 
@@ -104,13 +104,13 @@ namespace Webapp.Controllers
                 viewModel.Patient.Id = id;
                 //  PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
                 Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
-                patientRepository.UpdatePatient(id,patient);
+                patientRepository.Update(patient);
             }
             else if (HttpContext.User.IsInRole("doctor"))
             {
                 viewModel.Doctor.EmployeeNumber = id;
                 Doctor doctor = doctorConverter.ViewModelToDoctor(viewModel.Doctor);
-                doctorRepository.UpdateDoctor(id, doctor);
+                doctorRepository.Update(id, doctor);
             }
             return RedirectToAction("index","Profile");
         }

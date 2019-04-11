@@ -19,7 +19,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Doctor adds a comment
         /// </summary>
-        public bool AddComment(Comment comment, long treatmentId)
+        public bool Add(Comment comment, long treatmentId)
         {
             return context.AddComment(comment, treatmentId);
         }
@@ -27,7 +27,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Get all comments of a treatment
         /// </summary>
-        public List<Comment> GetAllCommentsByTreatmentId(long treatmentId)
+        public List<Comment> GetByTreatment(long treatmentId)
         {
             return context.GetAllCommentsByTreatmentId(treatmentId);
         }

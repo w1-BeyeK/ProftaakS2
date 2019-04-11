@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public class TestContext
+    public class TestContext : IContext
     {
         private List<Patient> patients = new List<Patient>();
         private List<Treatment> treatments = new List<Treatment>();

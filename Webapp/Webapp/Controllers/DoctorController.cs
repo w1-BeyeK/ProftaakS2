@@ -20,7 +20,7 @@ namespace Webapp.Controllers
 
         public IActionResult Index()
         {
-            List<Doctor> items = doctorRepository.GetDoctors();
+            List<Doctor> items = doctorRepository.GetAll();
             return View(items);
         }
     }

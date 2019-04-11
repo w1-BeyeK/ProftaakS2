@@ -19,7 +19,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add a doctor
         /// </summary>
-        public bool AddDoctor(Doctor doctor)
+        public bool Add(Doctor doctor)
         {
             return context.AddDoctor(doctor);
         }
@@ -27,7 +27,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add a doctor to a department
         /// </summary>
-        bool AddDoctorToDepartment(long departmentId, long doctorId)
+        bool AddToDepartment(long departmentId, long doctorId)
         {
             return context.AddDoctorToDepartment(departmentId, doctorId);
         }
@@ -35,23 +35,15 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can update a doctor
         /// </summary>
-        public bool UpdateDoctor(long id, Doctor doctor)
+        public bool Update(long id, Doctor doctor)
         {
             return context.UpdateDoctor(id, doctor);
         }
 
         /// <summary>
-        /// An administrator can activate or deactivate a doctor by its id
-        /// </summary>
-        public bool ActiveDoctorByIdAndActive(long id, bool active)
-        {
-            return context.ActiveDoctorByIdAndActive(id, active);
-        }
-
-        /// <summary>
         /// An administrator can get all doctors
         /// </summary>
-        public List<Doctor> GetAllDoctors()
+        public List<Doctor> GetAll()
         {
             return context.GetAllDoctors();
         }
@@ -59,7 +51,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can get all doctors of a department
         /// </summary>
-        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        public List<Doctor> GetByDepartment(long id)
         {
             return context.GetAllDoctorsByDepartmentId(id);
         }
@@ -67,7 +59,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can get all doctors of an institution
         /// </summary>
-        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        public List<Doctor> GetByInstitution(long id)
         {
             return context.GetAllDoctorsByInstitutionId(id);
         }
@@ -75,14 +67,9 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add a doctor by its id
         /// </summary>
-        public Doctor GetDoctorById(long id)
+        public Doctor GetById(long id)
         {
             return context.GetDoctorById(id);
-        }
-
-        public List<Doctor> GetDoctors()
-        {
-            return default(List<Doctor>);
         }
     }
 }
