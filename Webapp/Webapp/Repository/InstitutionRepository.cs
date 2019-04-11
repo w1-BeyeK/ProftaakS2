@@ -28,7 +28,7 @@ namespace Webapp.Repository
         /// <summary>
         /// A department is added to an institution
         /// </summary>
-        bool AddDepartmentToInstitution(long institutionId, long departmentId)
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
             //return context.AddDepartmentToInstitution(institutionId, departmentId);
             return true;

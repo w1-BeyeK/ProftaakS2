@@ -85,8 +85,8 @@ namespace TestWebapp
         public void AddDepartment()
         {
             Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
-            Department department = new Department("name", "description", true);
-            Department department2 = new Department("name", "description", true);
+            Department department = new Department(1, "name", "description", true);
+            Department department2 = new Department(2, "name", "description", true);
 
             patient.AddDepartment(department);
             patient.AddDepartment(department2);

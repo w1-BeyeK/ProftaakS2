@@ -23,8 +23,8 @@ namespace TestWebapp
         [Fact]
         public void AddDepartment()
         {
-            Department department = new Department("name", "description", true);
-            Department department2 = new Department("name", "description", true);
+            Department department = new Department(1, "name", "description", true);
+            Department department2 = new Department(2, "name", "description", true);
             TreatmentType treatmentType = new TreatmentType("name", "description");
 
             treatmentType.AddDepartment(department);
