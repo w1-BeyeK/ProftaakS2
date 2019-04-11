@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MSSQLContext
 {
     public class MSSQLTreatmentContext : BaseMSSQLContext, ITreatmentContext
     {

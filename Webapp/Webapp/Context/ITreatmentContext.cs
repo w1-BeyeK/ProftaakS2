@@ -12,7 +12,7 @@ namespace Webapp.Context
         //bool Insert(Treatment treatment, long treatmentType, long doctorId, long patientId);
         //Activate??? do we need that???
         //Get all? Can you get ALL treatments of all doctors?
-        List<Treatment> GetAllTreatmentsByDoctorId(long id);
-        List<Treatment> GetAllTreatmentsByPatientId(long id);
+        List<Treatment> GetByDoctorId(long id);
+        List<Treatment> GetByPatientId(long id);
     }
 }

@@ -19,7 +19,7 @@ namespace Webapp.Context
             return false;
         }
 
-        public List<Comment> GetAllCommentsByTreatmentId(long id)
+        public List<Comment> GetByTreatmentId(long id)
         {
             return treatments.Find(t => t.Id == id).Comments;
         }

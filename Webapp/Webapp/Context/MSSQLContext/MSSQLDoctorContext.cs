@@ -6,35 +6,35 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MSSQLContext
 {
-    public class MSSQLPatientContext : BaseMSSQLContext, IPatientContext
+    public class MSSQLDoctorContext : BaseMSSQLContext, IDoctorContext
     {
-        //TODO : Change Queries!!!!
-        public MSSQLPatientContext(IParser parser, IHandler handler) : base(parser, handler)
+        //TODO : Change Queries!!!
+        public MSSQLDoctorContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
-        public Patient GetById(long id)
+        public Doctor GetById(long id)
         {
             string query = $"select * from PTS2_TreatmentType where Id = {id}";
 
             var dbResult = handler.ExecuteSelect(query, id);
 
             var res = (dbResult as DataTable).Rows[0];
-            if (res != null && parser.TryParse(res, out Patient patient))
-                return patient;
+            if (res != null && parser.TryParse(res, out Doctor doctor))
+                return doctor;
             else
-                return default(Patient);
+                return default(Doctor);
         }
 
         /// <summary>
-        /// Get all treatment types
+        /// Get all doctors
         /// </summary>
-        /// <returns>List of treatmenttypes</returns>
-        public List<Patient> GetAll()
+        /// <returns>List of doctors</returns>
+        public List<Doctor> GetAll()
         {
             // Create result
-            List<Patient> result = new List<Patient>();
+            List<Doctor> result = new List<Doctor>();
             // Set query
             string query = "select * from PTS2_TreatmentType where active = 1";
 
@@ -45,14 +45,14 @@ namespace Webapp.Context
             foreach (DataRow dr in dbResult.Rows)
             {
                 // Parse only if succeeded
-                if (parser.TryParse(dr, out Patient patient))
-                    result.Add(patient);
+                if (parser.TryParse(dr, out Doctor doctor))
+                    result.Add(doctor);
             }
 
             return result;
         }
 
-        public long Insert(Patient patient)
+        public long Insert(Doctor doctor)
         {
             try
             {
@@ -60,9 +60,9 @@ namespace Webapp.Context
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    //new KeyValuePair<string, object>("name", patient.Name),
-                    //new KeyValuePair<string, object>("departmentId", patient.DepartmentId),
-                    //new KeyValuePair<string, object>("description", patient.Description),
+                    //new KeyValuePair<string, object>("name", doctor.Name),
+                    //new KeyValuePair<string, object>("departmentId", doctor.DepartmentId),
+                    //new KeyValuePair<string, object>("description", doctor.Description),
                     //new KeyValuePair<string, object>("active", "1"),
                 };
 
@@ -74,7 +74,7 @@ namespace Webapp.Context
             }
         }
 
-        public bool Update(Patient patient)
+        public bool Update(Doctor doctor)
         {
             try
             {
@@ -83,20 +83,20 @@ namespace Webapp.Context
                 string fields = "";
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", patient.Id)
+                    new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
-                if (patient.Name != null)
+                if (doctor.Name != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[name] = @name";
-                    parameters.Add(new KeyValuePair<string, object>("name", patient.Name));
+                    parameters.Add(new KeyValuePair<string, object>("name", doctor.Name));
                 }
                 if (!string.IsNullOrWhiteSpace(fields))
                     fields += ",";
                 fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", patient.Active ? "1" : "0"));
+                parameters.Add(new KeyValuePair<string, object>("active", doctor.Active ? "1" : "0"));
 
                 query = query.Replace("@fields", fields);
 
@@ -109,7 +109,7 @@ namespace Webapp.Context
             }
         }
 
-        public bool Delete(Patient patient)
+        public bool Delete(Doctor doctor)
         {
             try
             {
@@ -117,7 +117,7 @@ namespace Webapp.Context
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", patient.Id)
+                    new KeyValuePair<string, object>("id", doctor.Id)
                 });
                 return true;
             }
@@ -127,7 +127,12 @@ namespace Webapp.Context
             }
         }
 
-        public List<Patient> GetAllPatientsByDoctorId(long id)
+        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
         {
             throw new NotImplementedException();
         }

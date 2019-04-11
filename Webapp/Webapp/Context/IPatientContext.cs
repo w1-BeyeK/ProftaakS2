@@ -9,6 +9,6 @@ namespace Webapp.Context
 {
     public interface IPatientContext : IUniversalContext<Patient>
     {
-        List<Patient> GetAllPatientsByDoctorId(long id);
+        List<Patient> GetByDoctorId(long id);
     }
 }

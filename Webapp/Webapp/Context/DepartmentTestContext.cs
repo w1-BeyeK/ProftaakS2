@@ -26,7 +26,7 @@ namespace Webapp.Context
             return true;
         }
 
-        public List<Department> GetAllDepartmentsByInstitutionId(long id)
+        public List<Department> GetByInstitutionId(long id)
         {
             return institutions.Find(t => t.Id == id).Departments;
         }

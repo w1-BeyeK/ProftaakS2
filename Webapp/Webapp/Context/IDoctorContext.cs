@@ -9,7 +9,7 @@ namespace Webapp.Context
 {
     public interface IDoctorContext : IUniversalContext<Doctor>
     {
-        List<Doctor> GetAllDoctorsByDepartmentId(long id);
-        List<Doctor> GetAllDoctorsByInstitutionId(long id);
+        List<Doctor> GetByDepartmentId(long id);
+        List<Doctor> GetByInstitutionId(long id);
     }
 }
