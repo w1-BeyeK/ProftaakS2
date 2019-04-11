@@ -47,11 +47,13 @@ namespace Webapp
 
             services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
             services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();
             services.AddScoped<DepartmentRepository>();
+            services.AddScoped<InstitutionRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();

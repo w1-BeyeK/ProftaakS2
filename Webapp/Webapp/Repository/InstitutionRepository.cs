@@ -2,23 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class InstitutionRepository : BaseRepository
+    public class InstitutionRepository
     {
-        public InstitutionRepository(IContext context) : base(context)
+        private readonly IInstitutionContext context;
+
+        public InstitutionRepository(IInstitutionContext context)
         {
+            this.context = context;
         }
 
         /// <summary>
         /// An administrator can add an institution
         /// </summary>
-        public bool AddInstitution(Institution institution)
+        public long AddInstitution(Institution institution)
         {
-            return context.AddInstitution(institution);
+            return context.Insert(institution);
         }
 
         /// <summary>
@@ -26,31 +30,32 @@ namespace Webapp.Repository
         /// </summary>
         bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
-            return context.AddDepartmentToInstitution(institutionId, departmentId);
+            //return context.AddDepartmentToInstitution(institutionId, departmentId);
+            return true;
         }
 
         /// <summary>
         /// An administrator can update an institution
         /// </summary>
-        public bool UpdateInstitution(long id, Institution institution)
+        public bool Update(Institution institution)
         {
-            return context.UpdateInstitution(id, institution);
+            return context.Update(institution);
         }
 
         /// <summary>
         /// An administrator or doctor can get all institutions
         /// </summary>
-        public List<Institution> GetAllInstitutions()
+        public List<Institution> GetAll()
         {
-            return context.GetAllInstitutions();
+            return context.GetAll();
         }
 
         /// <summary>
         /// An administrator or doctor can get a institution by its id
         /// </summary>
-        public Institution GetInstitutionById(long id)
+        public Institution GetById(long id)
         {
-            return context.GetInstitutionById(id);
+            return context.GetById(id);
         }
     }
 }

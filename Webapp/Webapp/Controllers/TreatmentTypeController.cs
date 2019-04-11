@@ -18,12 +18,16 @@ namespace Webapp.Controllers
     {
         private readonly TreatmentTypeRepository repository;
         private readonly DepartmentRepository departmentRepository;
+        private readonly InstitutionRepository institutionRepository;
         private readonly IViewModelConverter<TreatmentType, TreatmentTypeDetailViewModel> converter;
 
-        public TreatmentTypeController(TreatmentTypeRepository repository, DepartmentRepository departmentRepository)
+        public TreatmentTypeController(TreatmentTypeRepository repository, 
+            DepartmentRepository departmentRepository,
+            InstitutionRepository institutionRepository)
         {
             this.repository = repository;
             this.departmentRepository = departmentRepository;
+            this.institutionRepository = institutionRepository;
             converter = new TreatmentTypeViewModelConverter();
         }
 
@@ -68,14 +72,32 @@ namespace Webapp.Controllers
         public IActionResult Create()
         {
             List<Department> departments = departmentRepository.GetAll();
+            List<Institution> institutions = institutionRepository.GetAll();
 
-            IEnumerable<SelectListItem> items =
-                from value in departments
-                select new SelectListItem
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach(Institution i in institutions)
+            {
+                SelectListGroup group = new SelectListGroup();
+                group.Name = i.Name;
+
+                foreach(Department dm in departments.Where(d => d.InstitutionId == i.Id))
                 {
-                    Text = value.Name,
-                    Value = value.Id.ToString(),
-                };
+                    items.Add(new SelectListItem
+                    {
+                        Value = dm.Id.ToString(),
+                        Text = dm.Name,
+                        Group = group
+                    });
+                }
+            }
+
+            //IEnumerable < SelectListItem > items =
+            //    from value in departments
+            //    select new SelectListItem
+            //    {
+            //        Text = value.Name,
+            //        Value = value.Id.ToString(),
+            //    };
 
             TreatmentTypeDetailViewModel vm = new TreatmentTypeDetailViewModel
             {

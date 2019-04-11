@@ -11,6 +11,7 @@ namespace Webapp.Models.Data
         public string Name { get; set; }
         public string Description { get; set; }
         public bool Active { get; set; }
+        public long InstitutionId { get; set; }
 
         public Department()
         { }
