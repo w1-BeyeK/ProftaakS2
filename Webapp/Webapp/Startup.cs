@@ -69,6 +69,7 @@ namespace Webapp
             services.AddScoped<DoctorRepository>();
             services.AddScoped<DepartmentRepository>();
             services.AddScoped<InstitutionRepository>();
+            services.AddScoped<TreatmentRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
