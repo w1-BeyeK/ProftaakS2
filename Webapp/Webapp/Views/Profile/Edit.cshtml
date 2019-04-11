@@ -241,6 +241,7 @@ else if (Model.Doctor != null)
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
+                    <li><a data-toggle="tab" href="#privacy">Privacy</a></li>
                 </ul>
 
                 <div class="tab-content">
@@ -287,7 +288,7 @@ else if (Model.Doctor != null)
                             <div class="form-group">
 
                                 <div class="col-xs-6">
-                                    <label for="BSN"><h4>BSN</h4></label>
+                                    <label for="Employeenumber"><h4>Medewerkersnummer</h4></label>
                                     <input type="text" asp-for="Doctor.EmployeeNumber" value="@Model.Doctor.EmployeeNumber" class="form-control" id="BSN" placeholder="BSN" title="Voer hier je BSN in.">
                                 </div>
                             </div>
@@ -339,6 +340,30 @@ else if (Model.Doctor != null)
 
                         <hr>
                     </div><!--/tab-pane-->
+                    <!-- Hier komt de code voor de tab privacy-->
+                    <div class="tab-pane" id="privacy">
+                        <form class="form" action="#" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Doctor.PrivMail">
+                                        <span class="slider"></span>
+                                    </label>
+                                    Email
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label class="switch">
+                                        <input type="checkbox" checked="@Model.Doctor.PrivPhonenumber">
+                                        <span class="slider"></span>
+                                    </label>
+                                    Telefoonnummer
+                                </div>
+                            </div>
+                        </form>
+                    </div><!--/tab-pane-->
+                    <!--     Hier komt de code voor de tab privacy-->
                 </div><!--/tab-pane-->
             </div><!--/tab-content-->
         </div><!--/col-9-->
