@@ -10,15 +10,9 @@ namespace Webapp.Repository
 {
     public class InstitutionRepository
     {
-<<<<<<< HEAD
         private readonly IInstitutionContext context;
 
         public InstitutionRepository(IInstitutionContext context)
-=======
-        private readonly IContext context;
-
-        public InstitutionRepository(IContext context)
->>>>>>> dfe89122b544f7c288d40d77402819a7ba016c86
         {
             this.context = context;
         }
