@@ -43,16 +43,24 @@ namespace Webapp
             });
 
             services.AddScoped<IContext, TestContext>();
-            services.AddScoped<IParser, DataRowParser>();
-            services.AddScoped<IHandler, MSSQLHandler>();
+            services.AddTransient<IParser, DataRowParser>();
+            services.AddTransient<IHandler, MSSQLHandler>();
 
-            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
-            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
-            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
-            services.AddScoped<ICommentContext, MSSQLCommentContext>();
-            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
-            services.AddScoped<IPatientContext, MSSQLPatientContext>();
-            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+            //services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            //services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            //services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            //services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            //services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            //services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+
+            services.AddScoped<ITreatmentTypeContext, TreatmentTypeTestContext>();
+            services.AddScoped<IDepartmentContext, DepartmentTestContext>();
+            services.AddScoped<IInstitutionContext, InstitutionTestContext>();
+            services.AddScoped<ICommentContext, CommentTestContext>();
+            services.AddScoped<IDoctorContext, DoctorTestContext>();
+            services.AddScoped<IPatientContext, PatientTestContext>();
+            services.AddScoped<ITreatmentContext, TreatmentTestContext>();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
