@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DoctorRepository
+    public class DoctorRepository // : ICRUDRepository<T>
     {
-        private readonly IContext context;
+        private readonly IDoctorContext context;
 
-        public DoctorRepository(IContext context)
+        public DoctorRepository(IDoctorContext context)
         {
             this.context = context;
         }
@@ -19,9 +20,9 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add a doctor
         /// </summary>
-        public bool Add(Doctor doctor)
+        public long Add(Doctor doctor)
         {
-            return context.AddDoctor(doctor);
+            return context.Insert(doctor);
         }
 
         /// <summary>
@@ -29,15 +30,15 @@ namespace Webapp.Repository
         /// </summary>
         bool AddToDepartment(long departmentId, long doctorId)
         {
-            return context.AddDoctorToDepartment(departmentId, doctorId);
+            return context.AddToDepartment(departmentId, doctorId);
         }
 
         /// <summary>
         /// An administrator can update a doctor
         /// </summary>
-        public bool Update(long id, Doctor doctor)
+        public bool Update(Doctor doctor)
         {
-            return context.UpdateDoctor(id, doctor);
+            return context.Update(doctor);
         }
 
         /// <summary>
@@ -45,7 +46,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetAll()
         {
-            return context.GetAllDoctors();
+            return context.GetAll();
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetByDepartment(long id)
         {
-            return context.GetAllDoctorsByDepartmentId(id);
+            return context.GetByDepartment(id);
         }
 
         /// <summary>
@@ -61,7 +62,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetByInstitution(long id)
         {
-            return context.GetAllDoctorsByInstitutionId(id);
+            return context.GetByInstitution(id);
         }
 
         /// <summary>
@@ -69,7 +70,7 @@ namespace Webapp.Repository
         /// </summary>
         public Doctor GetById(long id)
         {
-            return context.GetDoctorById(id);
+            return context.GetById(id);
         }
     }
 }

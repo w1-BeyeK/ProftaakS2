@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DepartmentRepository
+    public class DepartmentRepository // : ICRUDRepository<T>
     {
         private readonly IDepartmentContext context;
 

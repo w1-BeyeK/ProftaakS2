@@ -7,12 +7,9 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public interface ITreatmentContext //: IUniversalContext<Treatment>
+    public interface ITreatmentContext : IUniversalContext<Treatment>
     { 
-        bool Insert(Treatment treatment, long treatmentType, long doctorId, long patientId);
-        bool Update(long id, Treatment Treatment);
-        List<Treatment> GetAllTreatmentsByDoctorId(long id);
-        List<Treatment> GetAllTreatmentsByPatientId(long id);
-        Treatment GetById(long id);
+        List<Treatment> GetByDoctor(long id);
+        List<Treatment> GetByPatient(long id);
     }
 }
