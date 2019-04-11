@@ -9,7 +9,13 @@ namespace Webapp.Context
 {
     public class TreatmentTestContext : BaseTestContext, ITreatmentContext
     {
-        public bool Insert(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
+        //TODO : Do we want this???
+        public long Insert(Treatment treatment)
+        {
+            return -1;
+        }
+
+        public long Insert(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
         {
             int patientIndex = patients.FindIndex(t => t.Id == patientId);
             int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
@@ -31,16 +37,13 @@ namespace Webapp.Context
                 treatment.Id = id;
 
                 treatments.Add(treatment);
-                return true;
+                return treatment.Id;
             }
-            return false;
+            return -1;
         }
 
-        public bool Update(long id, Treatment treatment)
+        public bool Update(Treatment treatment)
         {
-            if (id != treatment.Id)
-                return false;
-
             if (treatments.Exists(t => t.Id == treatment.Id))
             {
                 int index = treatments.FindIndex(t => t.Id == treatment.Id);
@@ -60,14 +63,26 @@ namespace Webapp.Context
             return treatments.Where(t => t.Id == id).FirstOrDefault();
         }
 
-        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
+        public List<Treatment> GetByDoctorId(long id)
         {
             return new List<Treatment>(treatments.FindAll(t => t.Doctor.Id == id));
         }
 
-        public List<Treatment> GetAllTreatmentsByPatientId(long id)
+        public List<Treatment> GetByPatientId(long id)
         {
             return new List<Treatment>(treatments.FindAll(t => t.Patient.Id == id));
+        }
+
+        //TODO : Do we want this???
+        public List<Treatment> GetAll()
+        {
+            throw new NotImplementedException();
+        }
+
+        //TODO : Do we want this???
+        public bool Delete(Treatment obj)
+        {
+            throw new NotImplementedException();
         }
     }
 }

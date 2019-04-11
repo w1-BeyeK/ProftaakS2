@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MSSQLContext
 {
     public class MSSQLDoctorContext : BaseMSSQLContext, IDoctorContext
     {
+        //TODO : Change Queries!!!
         public MSSQLDoctorContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
@@ -27,9 +28,9 @@ namespace Webapp.Context
         }
 
         /// <summary>
-        /// Get all treatment types
+        /// Get all doctors
         /// </summary>
-        /// <returns>List of treatmenttypes</returns>
+        /// <returns>List of doctors</returns>
         public List<Doctor> GetAll()
         {
             // Create result

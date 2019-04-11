@@ -9,39 +9,39 @@ namespace Webapp.Context
 {
     public class TreatmentTypeTestContext : BaseTestContext, ITreatmentTypeContext
     {
-        public bool Insert(TreatmentType treatmentType)
+        public long Insert(TreatmentType treatmentType)
         {
+            //TODO : Surch for Id
             treatmentTypes.Add(treatmentType);
-            return true;
+            return treatmentType.Id;
         }
 
-        public bool Update(long id, TreatmentType treatmentType)
+        public bool Update(TreatmentType treatmentType)
         {
-            if (id != treatmentType.Id)
-                return false;
-
-            TreatmentType oldTreatmentType = GetById(id);
+            TreatmentType oldTreatmentType = GetById(treatmentType.Id);
             oldTreatmentType = treatmentType;
             return true;
         }
         
-        public bool ActiveTreatmentTypeByIdAndActive(long id, bool active)
+        public bool Delete(TreatmentType treatmentType)
         {
-            int index = treatmentTypes.FindIndex(t => t.Id == id);
-            if (index >= 0)
+            try
             {
-                treatmentTypes[index].Active = active;
+                treatmentTypes.FirstOrDefault(t => t.Id == treatmentType.Id).Active = treatmentType.Active;
                 return true;
             }
-            return false;
+            catch
+            {
+                return false;
+            }
         }
 
-        public List<TreatmentType> GetAllActiveTreatmentTypes()
+        public List<TreatmentType> GetAll()
         {
             return treatmentTypes.FindAll(t => t.Active == true);
         }
 
-        public List<TreatmentType> GetAllTreatmentTypesByActive(bool active)
+        public List<TreatmentType> GetByActive(bool active)
         {
             return treatmentTypes.FindAll(t => t.Active == active);
         }
@@ -72,22 +72,8 @@ namespace Webapp.Context
 
 
         //Must be standing here because of Kevins code
-        public List<TreatmentType> GetAll()
-        {
-            throw new NotImplementedException();
-        }
 
         long IUniversalContext<TreatmentType>.Insert(TreatmentType obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(TreatmentType obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(TreatmentType obj)
         {
             throw new NotImplementedException();
         }

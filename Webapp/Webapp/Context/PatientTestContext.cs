@@ -9,20 +9,17 @@ namespace Webapp.Context
 {
     public class PatientTestContext : BaseTestContext, IPatientContext
     {
-        public bool Insert(Patient patient)
+        public long Insert(Patient patient)
         {
+            //TODO : surch id
             patients.Add(patient);
-            return true;
+            return patient.Id;
         }
 
-        public bool ActivePatientByIdAndActive(long id, bool active)
+        public bool Delete(Patient patient)
         {
-            int index = patients.FindIndex(t => t.Id == id);
-            if (index >= 0)
-            {
-                patients[index].Active = active;
+                patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
                 return true;
-            }
             return false;
         }
 
@@ -31,12 +28,12 @@ namespace Webapp.Context
             return patients.Find(t => t.Id == id);
         }
 
-        public List<Patient> GetAllActivePatients()
+        public List<Patient> GetAll()
         {
             return patients.FindAll(t => t.Active == true);
         }
 
-        public List<Patient> GetAllPatientsByDoctorId(long id)
+        public List<Patient> GetByDoctorId(long id)
         {
             //throw new NotImplementedException();
             //Is not realy possible in TestContext...
@@ -53,21 +50,17 @@ namespace Webapp.Context
             return patient;
         }
 
-        public bool Update(long id, Patient patient)
+        public bool Update(Patient patient)
         {
-            if (id != patient.Id)
-                return false;
-            
-            foreach (Patient p in patients)
+            try
             {
-                if(p.Id == id)
-                {
-                    patients.Remove(p);
-                    patients.Add(patient);
-                    break;
-                }
+                patients.FirstOrDefault(p => p.Id == patient.Id).Active = patient.Active;
+                return true;
             }
-            return true;
+            catch
+            {
+                return false;
+            }
         }
     }
 }

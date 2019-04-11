@@ -7,12 +7,12 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public interface ITreatmentContext //: IUniversalContext<Treatment>
+    public interface ITreatmentContext : IUniversalContext<Treatment>
     { 
-        bool Insert(Treatment treatment, long treatmentType, long doctorId, long patientId);
-        bool Update(long id, Treatment Treatment);
-        List<Treatment> GetAllTreatmentsByDoctorId(long id);
-        List<Treatment> GetAllTreatmentsByPatientId(long id);
-        Treatment GetById(long id);
+        //bool Insert(Treatment treatment, long treatmentType, long doctorId, long patientId);
+        //Activate??? do we need that???
+        //Get all? Can you get ALL treatments of all doctors?
+        List<Treatment> GetByDoctorId(long id);
+        List<Treatment> GetByPatientId(long id);
     }
 }

@@ -21,11 +21,11 @@ namespace Webapp.Controllers
         private readonly InstitutionRepository institutionRepository;
         private readonly IViewModelConverter<TreatmentType, TreatmentTypeDetailViewModel> converter;
 
-        public TreatmentTypeController(TreatmentTypeRepository repository, 
+        public TreatmentTypeController(TreatmentTypeRepository treatmentRepository, 
             DepartmentRepository departmentRepository,
             InstitutionRepository institutionRepository)
         {
-            this.repository = repository;
+            this.repository = treatmentRepository;
             this.departmentRepository = departmentRepository;
             this.institutionRepository = institutionRepository;
             converter = new TreatmentTypeViewModelConverter();

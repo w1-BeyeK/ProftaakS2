@@ -7,9 +7,9 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public interface ICommentContext //: IUniversalContext<Context>
+    public interface ICommentContext
     {
         bool Insert(Comment comment, long treatmentId);
-        List<Comment> GetAllCommentsByTreatmentId(long treatmentId);
+        List<Comment> GetByTreatmentId(long treatmentId);
     }
 }
