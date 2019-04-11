@@ -15,20 +15,23 @@ namespace Webapp.Controllers
 {
     public class TreatmentController : BaseController
     {
-        private readonly IContext context;
         private readonly TreatmentRepository treatmentRepository;
         private readonly PatientRepository patientRepository;
-        private readonly TreatmentTypeRepository typeRepository;
+        private readonly TreatmentTypeRepository treatmentTypeRepository;
+
         private readonly TreatmentViewModelConverter TreatmentConverter = new TreatmentViewModelConverter();
         private readonly PatientViewModelConverter PatientConverter = new PatientViewModelConverter();
         private readonly TreatmentTypeViewModelConverter TypeConverter = new TreatmentTypeViewModelConverter();
 
-        public TreatmentController(ITreatmentTypeContext ttContext)
+        public TreatmentController(
+            TreatmentRepository treatmentRepository, 
+            PatientRepository patientRepository, 
+            TreatmentTypeRepository treatmentTypeRepository
+            )
         {
-            context = TestContext.GetInstance();
-            treatmentRepository = new TreatmentRepository(context);
-            patientRepository = new PatientRepository(context);
-            typeRepository = new TreatmentTypeRepository(ttContext);
+            this.treatmentRepository = treatmentRepository;
+            this.patientRepository = patientRepository;
+            this.treatmentTypeRepository = treatmentTypeRepository;
         }
 
         [Authorize(Roles = "doctor, patient")]
@@ -62,7 +65,7 @@ namespace Webapp.Controllers
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
             {
                 Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll()),
-                TreatmentTypes = TypeConverter.ModelsToViewModel(typeRepository.GetAll())
+                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll())
             };
             return View(vm);
         }

@@ -110,7 +110,7 @@ namespace Webapp.Controllers
             {
                 viewModel.Doctor.EmployeeNumber = id;
                 Doctor doctor = doctorConverter.ViewModelToDoctor(viewModel.Doctor);
-                doctorRepository.Update(id, doctor);
+                doctorRepository.Update(doctor);
             }
             return RedirectToAction("index","Profile");
         }

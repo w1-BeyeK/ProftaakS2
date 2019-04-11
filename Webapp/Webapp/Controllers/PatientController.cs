@@ -16,19 +16,26 @@ namespace Webapp.Controllers
     //[Route("patient")]
     public class PatientController : BaseController
     {
+        /// <summary>
+        /// Repositories
+        /// </summary>
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
-        private readonly IContext context;
+
+        /// <summary>
+        /// Converters
+        /// </summary>
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
         private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
-        public PatientController()
+        public PatientController(
+            PatientRepository patientRepository, 
+            TreatmentRepository treatmentRepository
+            )
         {
-            //this.treatmentRepository = treatmentRepository;
-            context = TestContext.GetInstance();
-            patientRepository = new PatientRepository(context);
-            treatmentRepository = new TreatmentRepository(context);
+            this.patientRepository = patientRepository;
+            this.treatmentRepository = treatmentRepository;
         }
 
         //[Authorize Roles("doctor")]

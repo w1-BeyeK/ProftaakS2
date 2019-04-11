@@ -19,6 +19,7 @@ using Webapp.Interfaces;
 using Webapp.Models.Data;
 using Webapp.Parsers;
 using Webapp.Repository;
+using Webapp.Context.MSSQLContext;
 
 namespace Webapp
 {
@@ -48,6 +49,10 @@ namespace Webapp
             services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
             services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
             services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
