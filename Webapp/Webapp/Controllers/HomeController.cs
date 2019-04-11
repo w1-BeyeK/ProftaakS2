@@ -46,14 +46,6 @@ namespace Webapp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "patient")]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
         //TODO : Kan dit weg?
         public async Task<IActionResult> Test()
         {
@@ -91,39 +83,12 @@ namespace Webapp.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-           if (HttpContext.User?.Identity.IsAuthenticated == true)
+            if (HttpContext.User?.Identity.IsAuthenticated == true)
             {
                 await signInManager.SignOutAsync();
             }
 
             return RedirectToAction("index");
-        }        
-        
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Dashboard()
-        {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult User()
-        {
-            return View();
-        }
-
-        public IActionResult Doctor()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
