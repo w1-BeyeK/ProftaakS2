@@ -26,17 +26,17 @@ namespace TestWebapp.TestRepositories
         public void Add()
         {
             departmentRepository = new DepartmentRepository(context);
-            Comment comment = new Comment();
+            Department comment = new Department(1, "naam", "beschrijving", true);
 
-            Assert.True(departmentRepository.Add(comment, 1));
+            Assert.Equal(1, departmentRepository.Add(comment));
         }
 
         [Fact]
-        public void GetByTreatment()
+        public void GetById()
         {
             departmentRepository = new DepartmentRepository(context);
             
-            Assert.Equal(3, departmentRepository.GetByTreatment(1).Count);
+            Assert.Equal("naam", departmentRepository.GetById(1).Name);
         }
     }
 }
