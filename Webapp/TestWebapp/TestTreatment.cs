@@ -51,16 +51,5 @@ namespace TestWebapp
 
             Assert.Equal("Webapp.Models.Data.Treatment", treatment.ToString());
         }
-
-        [Fact]
-        public void TestDateTime()
-        {
-            DateTime day = DateTime.Today;
-            TimeSpan span = new TimeSpan(12, 36, 24);
-
-            DateTime jaja = day + span;
-
-            Assert.Equal(new DateTime(), jaja);
-        }
     }
 }
