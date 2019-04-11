@@ -55,7 +55,7 @@ namespace Webapp.Context
             if (id != doctor.Id)
                 return false;
 
-            Doctor oldDoctor = GetDoctorById(id);
+            Doctor oldDoctor = GetById(id);
             oldDoctor = doctor;
             return true;
         }
