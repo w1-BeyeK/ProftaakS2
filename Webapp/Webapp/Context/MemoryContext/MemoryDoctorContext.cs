@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryDoctorContext : BaseTestContext, IDoctorContext
+    public class MemoryDoctorContext : BaseMemoryContext, IDoctorContext
     {
         public bool Delete(Doctor doctor)
         {

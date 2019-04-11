@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public abstract class BaseTestContext
+    public abstract class BaseMemoryContext
     {
         protected List<Patient> patients = new List<Patient>();
         protected List<Treatment> treatments = new List<Treatment>();
@@ -27,7 +27,7 @@ namespace Webapp.Context
             return instance;
         }
 
-        public BaseTestContext()
+        public BaseMemoryContext()
         {
             List<Comment> comments = new List<Comment>
             {

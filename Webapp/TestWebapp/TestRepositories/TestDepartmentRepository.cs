@@ -28,9 +28,9 @@ namespace TestWebapp.TestRepositories
         public void Add()
         {
             departmentRepository = new DepartmentRepository(context);
-            Department department = new Department(1, "naam", "beschrijving", true);
+            Department department = new Department(3, "naam", "beschrijving", true);
 
-            Assert.Equal(1, departmentRepository.Add(department));
+            Assert.Equal(3, departmentRepository.Add(department));
         }
 
         [Fact]

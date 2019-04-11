@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryInstitutionContext : BaseTestContext, IInstitutionContext
+    public class MemoryInstitutionContext : BaseMemoryContext, IInstitutionContext
     {
         public long Insert(Institution institution)
         {

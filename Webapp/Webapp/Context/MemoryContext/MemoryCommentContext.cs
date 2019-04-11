@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryCommentContext : BaseTestContext, ICommentContext
+    public class MemoryCommentContext : BaseMemoryContext, ICommentContext
     {
         public bool Insert(Comment comment, long treatmentId)
         {

@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryTreatmentTypeContext : BaseTestContext, ITreatmentTypeContext
+    public class MemoryTreatmentTypeContext : BaseMemoryContext, ITreatmentTypeContext
     {
         public long Insert(TreatmentType treatmentType)
         {

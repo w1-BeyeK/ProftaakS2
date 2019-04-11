@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryPatientContext : BaseTestContext, IPatientContext
+    public class MemoryPatientContext : BaseMemoryContext, IPatientContext
     {
         public long Insert(Patient patient)
         {

@@ -8,28 +8,23 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryDepartmentContext : BaseTestContext, IDepartmentContext
+    public class MemoryDepartmentContext : BaseMemoryContext, IDepartmentContext
     {
-        public bool ActiveDepartmentByIdAndActive(long id, bool active)
+        public bool Delete(Department department)
         {
-            int index = departments.FindIndex(t => t.Id == id);
-            if (index >= 0)
-            {
-                departments[index].Active = active;
-                return true;
-            }
-            return false;
-        }
-
-        public bool Insert(Department department)
-        {
-            departments.Add(department);
+            departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
             return true;
         }
 
-        public List<Department> GetByInstitutionId(long id)
+        public long Insert(Department department)
         {
-            return institutions.Find(t => t.Id == id).Departments;
+            departments.Add(department);
+            return department.Id;
+        }
+
+        public List<Department> GetByInstitution(long id)
+        {
+            return new List<Department>(institutions.Find(t => t.Id == id).Departments);
         }
 
         public Department GetById(long id)
@@ -37,13 +32,10 @@ namespace Webapp.Context.MemoryContext
             return departments.FirstOrDefault(t => t.Id == id);
         }
 
-        public bool Update(long id, Department department)
+        public bool Update(Department department)
         {
-            if (id != department.Id)
-                return false;
 
-            Department oldDepartment = GetById(id);
-            oldDepartment = department;
+            //
             return true;
         }
 
@@ -52,36 +44,8 @@ namespace Webapp.Context.MemoryContext
             throw new NotImplementedException();
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Must be standing here because of Kevins code
+        //TODO : GetAllByInstitution
         public List<Department> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        long IUniversalContext<Department>.Insert(Department obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Department obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Delete(Department obj)
         {
             throw new NotImplementedException();
         }
