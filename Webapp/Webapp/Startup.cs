@@ -20,6 +20,8 @@ using Webapp.Models.Data;
 using Webapp.Parsers;
 using Webapp.Repository;
 using Webapp.Context.MSSQLContext;
+using Webapp.Context.MemoryContext;
+using Webapp.Context.InterfaceContext;
 
 namespace Webapp
 {
@@ -54,13 +56,13 @@ namespace Webapp
             //services.AddScoped<IPatientContext, MSSQLPatientContext>();
             //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
-            services.AddScoped<ITreatmentTypeContext, TreatmentTypeTestContext>();
-            services.AddScoped<IDepartmentContext, DepartmentTestContext>();
-            services.AddScoped<IInstitutionContext, InstitutionTestContext>();
-            services.AddScoped<ICommentContext, CommentTestContext>();
-            services.AddScoped<IDoctorContext, DoctorTestContext>();
-            services.AddScoped<IPatientContext, PatientTestContext>();
-            services.AddScoped<ITreatmentContext, TreatmentTestContext>();
+            services.AddScoped<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
+            services.AddScoped<IDepartmentContext, MemoryDepartmentContext>();
+            services.AddScoped<IInstitutionContext, MemoryInstitutionContext>();
+            services.AddScoped<ICommentContext, MemoryCommentContext>();
+            services.AddScoped<IDoctorContext, MemoryDoctorContext>();
+            services.AddScoped<IPatientContext, MemoryPatientContext>();
+            services.AddScoped<ITreatmentContext, MemoryTreatmentContext>();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();

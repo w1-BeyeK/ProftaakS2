@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.InterfaceContext
 {
     public interface ICommentContext
     {

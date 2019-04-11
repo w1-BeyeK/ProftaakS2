@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 using Webapp.Repository;
-using Webapp.Context;
 using Webapp.Models.Data;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestTreatmentTypeRepository
     {
-        ITreatmentTypeContext context = new TreatmentTypeTestContext();
+        ITreatmentTypeContext context = new MemoryTreatmentTypeContext();
         TreatmentTypeRepository treatmentTypeRepository;
 
         [Fact]

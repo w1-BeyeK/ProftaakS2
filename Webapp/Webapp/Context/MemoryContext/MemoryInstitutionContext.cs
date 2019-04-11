@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Interfaces;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MemoryContext
 {
-    public class InstitutionTestContext : BaseTestContext, IInstitutionContext
+    public class MemoryInstitutionContext : BaseTestContext, IInstitutionContext
     {
         public long Insert(Institution institution)
         {

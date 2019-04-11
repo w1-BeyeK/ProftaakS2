@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Webapp.Context;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 using Webapp.Repository;
@@ -12,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestDepartmentRepository
     {
-        IDepartmentContext context = new DepartmentTestContext();
+        IDepartmentContext context = new MemoryDepartmentContext();
         DepartmentRepository departmentRepository;
         [Fact]
         public void DepartmentRepositoryConstructor()

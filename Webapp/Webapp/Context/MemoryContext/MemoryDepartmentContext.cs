@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.InterfaceContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MemoryContext
 {
-    public class DepartmentTestContext : BaseTestContext, IDepartmentContext
+    public class MemoryDepartmentContext : BaseTestContext, IDepartmentContext
     {
         public bool ActiveDepartmentByIdAndActive(long id, bool active)
         {

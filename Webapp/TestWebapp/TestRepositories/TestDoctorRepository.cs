@@ -5,13 +5,15 @@ using Xunit;
 using Webapp.Repository;
 using Webapp.Context;
 using Webapp.Models.Data;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestDoctorRepository
     {
-        IDoctorContext context = new DoctorTestContext();
+        IDoctorContext context = new MemoryDoctorContext();
         DoctorRepository doctorRepository;
 
         [Fact]

@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.InterfaceContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MemoryContext
 {
-    public class DoctorTestContext : BaseTestContext, IDoctorContext
+    public class MemoryDoctorContext : BaseTestContext, IDoctorContext
     {
         public bool Delete(Doctor doctor)
         {
