@@ -65,9 +65,10 @@ namespace Webapp.Handlers
             {
                 try
                 {
+                    SqlParameter param;
                     parameters.ForEach(p =>
                     {
-                        SqlParameter param = new SqlParameter
+                        param = new SqlParameter
                         {
                             ParameterName = "@" + p.Key,
                             Value = p.Value.ToString()
