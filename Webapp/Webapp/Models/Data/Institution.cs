@@ -16,7 +16,9 @@ namespace Webapp.Models.Data
         public bool Active { get; set; }
         public Administrator Administrator { get; set; }
         public List<Department> Departments { get; set; }
-       
+
+        public Institution()
+        { }
 
         public Institution(string name, int houseNumber, string zipcode, string phoneNumber, string country, Administrator administrator,bool active = true)
         {

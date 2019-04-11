@@ -92,18 +92,10 @@ namespace Webapp.Controllers
                     });
                 }
             }
-
-            //IEnumerable < SelectListItem > items =
-            //    from value in departments
-            //    select new SelectListItem
-            //    {
-            //        Text = value.Name,
-            //        Value = value.Id.ToString(),
-            //    };
-
+            
             TreatmentTypeDetailViewModel vm = new TreatmentTypeDetailViewModel
             {
-                Departments = items.ToList()
+                Departments = items
             };
 
             return View(vm);
@@ -136,18 +128,29 @@ namespace Webapp.Controllers
                     return BadRequest("User not found.");
 
                 List<Department> departments = departmentRepository.GetAll();
+                List<Institution> institutions = institutionRepository.GetAll();
+
+                List<SelectListItem> items = new List<SelectListItem>();
+                foreach (Institution i in institutions)
+                {
+                    SelectListGroup group = new SelectListGroup
+                    {
+                        Name = i.Name
+                    };
+
+                    foreach (Department dm in departments.Where(d => d.InstitutionId == i.Id))
+                    {
+                        items.Add(new SelectListItem
+                        {
+                            Value = dm.Id.ToString(),
+                            Text = dm.Name,
+                            Group = group
+                        });
+                    }
+                }
 
                 TreatmentTypeDetailViewModel vm = converter.ModelToViewModel(tt);
-                IEnumerable<SelectListItem> items =
-                    from value in departments
-                    select new SelectListItem
-                    {
-                        Text = value.Name,
-                        Value = value.Id.ToString(),
-                        Selected = (value.Id == vm.DepartmentId)
-                    };
-                
-                vm.Departments = items.ToList();
+                vm.Departments = items;
 
                 return View(vm);
             }

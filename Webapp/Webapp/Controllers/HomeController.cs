@@ -73,10 +73,10 @@ namespace Webapp.Controllers
                 }
                 else
                 {
-                    return View();
+                    return RedirectToAction("Index");
                 }
             }
-            return RedirectToAction("User");
+            return RedirectToAction("Index");
         }
 
         [HttpGet]
