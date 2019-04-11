@@ -42,12 +42,37 @@ namespace Webapp.Context.MSSQLContext
 
         public Department GetById(long id)
         {
-            throw new NotImplementedException();
+            string query = $"select * from PTS2_Department where active = 1 and Id = {id}";
+
+            var dbResult = handler.ExecuteSelect(query, id);
+
+            var res = (dbResult as DataTable).Rows[0];
+            if (res != null && parser.TryParse(res, out Department department))
+                return department;
+            else
+                return default(Department);
         }
 
         public long Insert(Department obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = "insert into PTS2_Department(Name, Active, Description, InstitutionId) OUTPUT INSERTED.Id values(@name, @active, @description, @institutionid)";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("name", obj.Name),
+                    new KeyValuePair<string, object>("active", obj.Active),
+                    new KeyValuePair<string, object>("description", obj.Description),
+                    new KeyValuePair<string, object>("institutionid", obj.InstitutionId),
+                };
+
+                return (long)handler.ExecuteCommand(query, parameters);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public bool Update(Department obj)
