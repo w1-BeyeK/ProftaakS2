@@ -8,6 +8,7 @@ namespace Webapp.Interfaces
 {
     public interface IContext
     {
+        //TODO : In welke IContext moet deze???
         bool AddDoctorToDepartment(long departmentId, long doctorId);
 
         #region Patient
@@ -45,7 +46,6 @@ namespace Webapp.Interfaces
         Institution GetInstitutionById(long id);
         #endregion
 
-        //Renovation needed!
         #region TreatmentType
         bool AddTreatmentType(TreatmentType treatmentType);
         bool UpdateTreatmentType(long id, TreatmentType treatmentType);
@@ -56,7 +56,7 @@ namespace Webapp.Interfaces
         #endregion
 
         #region Treatment
-        bool AddTreatment(Treatment treatment, long doctorId, long patientId);
+        bool AddTreatment(Treatment treatment, long treatmentType, long doctorId, long patientId);
         bool UpdateTreatment(long id, Treatment Treatment);
         List<Treatment> GetAllTreatmentsByDoctorId(long id);
         List<Treatment> GetAllTreatmentsByPatientId(long id);

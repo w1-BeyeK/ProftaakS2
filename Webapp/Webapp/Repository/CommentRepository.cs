@@ -7,10 +7,13 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class CommentRepository : BaseRepository
+    public class CommentRepository
     {
-        public CommentRepository(IContext context) : base(context)
+        protected readonly IContext context;
+
+        public CommentRepository(IContext context)
         {
+            this.context = context;
         }
 
         /// <summary>

@@ -8,6 +8,5 @@ using Webapp.Models.Data;
 namespace Webapp.Context
 {
     public interface IInstitutionContext : IUniversalContext<Institution>
-    {
-    }
+    { }
 }

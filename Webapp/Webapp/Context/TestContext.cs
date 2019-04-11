@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context
 {
-    public class TestContext : IContext
+    public class TestContext
     {
         private List<Patient> patients = new List<Patient>();
         private List<Treatment> treatments = new List<Treatment>();
@@ -471,11 +471,6 @@ namespace Webapp.Context
         public TreatmentType GetTreatmentTypeById(long id)
         {
             return treatmentTypes.Find(t => t.Id == id);
-        }
-
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
-        {
-            throw new NotImplementedException();
         }
         #endregion
     }

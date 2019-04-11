@@ -9,16 +9,19 @@ namespace Webapp.Repository
 {
     public class TreatmentRepository : BaseRepository
     {
-        public TreatmentRepository(IContext context) : base(context)
+        private readonly IContext context;
+
+        public TreatmentRepository(IContext context)
         {
+            this.context = context;
         }
 
         /// <summary>
         /// A doctor can add a treatment
         /// </summary>
-        public bool AddTreatment(Treatment treatment, long doctorId, long patientId)
+        public bool AddTreatment(Treatment treatment, long treatmentType, long doctorId, long patientId)
         {
-            return context.AddTreatment(treatment, doctorId, patientId);
+            return context.AddTreatment(treatment, treatmentType, doctorId, patientId);
         }
 
         /// <summary>

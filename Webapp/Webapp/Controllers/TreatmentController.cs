@@ -56,10 +56,6 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
-       
-
-
-
         [HttpGet]
         public IActionResult Add()
         {
@@ -76,7 +72,7 @@ namespace Webapp.Controllers
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            repo.AddTreatment(treatment, GetUserId(), treatment.Patient.Id);
+            repo.AddTreatment(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
             return View();
         }
 

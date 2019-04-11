@@ -7,10 +7,13 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DoctorRepository : BaseRepository
+    public class DoctorRepository
     {
-        public DoctorRepository(IContext context) : base(context)
+        private readonly IContext context;
+
+        public DoctorRepository(IContext context)
         {
+            this.context = context;
         }
 
         /// <summary>

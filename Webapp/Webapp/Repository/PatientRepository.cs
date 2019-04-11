@@ -9,8 +9,11 @@ namespace Webapp.Repository
 {
     public class PatientRepository : BaseRepository
     {
-        public PatientRepository(IContext context) : base(context)
+        private readonly IContext context;
+
+        public PatientRepository(IContext context)
         {
+            this.context = context;
         }
 
         //TODO : This is for testing, but we dont need this!!!
