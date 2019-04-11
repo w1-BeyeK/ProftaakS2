@@ -65,16 +65,15 @@ namespace Webapp.Handlers
             {
                 try
                 {
-                    foreach(KeyValuePair<string, object> parameter in parameters)
+                    parameters.ForEach(p =>
                     {
-                        SqlParameter sqlParam = new SqlParameter
+                        SqlParameter param = new SqlParameter
                         {
-                            ParameterName = "@" + parameter.Key,
-                            Value = parameter.Value.ToString()
+                            ParameterName = "@" + p.Key,
+                            Value = p.Value.ToString()
                         };
-
-                        cmd.Parameters.Add(sqlParam);
-                    }
+                        cmd.Parameters.Add(param);
+                    });
                     cmd.Connection.Open();
                     value = cmd.ExecuteScalar();
                     sqlConnection.Close();
