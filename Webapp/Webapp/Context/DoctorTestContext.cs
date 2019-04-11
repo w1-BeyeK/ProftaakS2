@@ -9,21 +9,22 @@ namespace Webapp.Context
 {
     public class DoctorTestContext : BaseTestContext, IDoctorContext
     {
-        public bool ActiveDoctorByIdAndActive(long id, bool active)
+        public bool Delete(Doctor doctor)
         {
-            int index = doctors.FindIndex(t => t.Id == id);
+            int index = doctors.FindIndex(t => t.Id == doctor.Id);
             if (index >= 0)
             {
-                doctors[index].Active = active;
+                doctors[index].Active = doctor.Active;
                 return true;
             }
             return false;
         }
 
-        public bool Insert(Doctor doctor)
+        public long Insert(Doctor doctor)
         {
+            //TODO : Get last id?!!?!?!?!?
             doctors.Add(doctor);
-            return true;
+            return doctor.Id;
         }
 
         public Doctor GetById(long id)
@@ -31,31 +32,28 @@ namespace Webapp.Context
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
-        public List<Doctor> GetAllDoctors()
+        public List<Doctor> GetAll()
         {
             return doctors;
         }
 
-        public List<Doctor> GetAllDoctorsByDepartmentId(long id)
+        public List<Doctor> GetByDepartmentId(long id)
         {
             //throw new NotImplementedException();
             //By department id!????????
             return doctors;
         }
 
-        public List<Doctor> GetAllDoctorsByInstitutionId(long id)
+        public List<Doctor> GetByInstitutionId(long id)
         {
             List<Department> departmentDoctor = institutions.Find(t => t.Id == id).Departments;
             //Get all doctors of all the departments and distinct all double doctors
             throw new NotImplementedException();
         }
 
-        public bool Update(long id, Doctor doctor)
+        public bool Update(Doctor doctor)
         {
-            if (id != doctor.Id)
-                return false;
-
-            Doctor oldDoctor = GetById(id);
+            Doctor oldDoctor = GetById(doctor.Id);
             oldDoctor = doctor;
             return true;
         }

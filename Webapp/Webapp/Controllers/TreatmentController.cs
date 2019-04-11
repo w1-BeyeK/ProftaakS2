@@ -16,19 +16,19 @@ namespace Webapp.Controllers
     public class TreatmentController : BaseController
     {
         private readonly IContext context;
-        private readonly TreatmentRepository repo;
-        private readonly PatientRepository patientRepo;
-        private readonly TreatmentTypeRepository typeRepo;
-        private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
-        private readonly PatientViewModelConverter PatientVMC = new PatientViewModelConverter();
-        private readonly TreatmentTypeViewModelConverter TypeVMC = new TreatmentTypeViewModelConverter();
+        private readonly TreatmentRepository treatmentRepository;
+        private readonly PatientRepository patientRepository;
+        private readonly TreatmentTypeRepository typeRepository;
+        private readonly TreatmentViewModelConverter TreatmentConverter = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter PatientConverter = new PatientViewModelConverter();
+        private readonly TreatmentTypeViewModelConverter TypeConverter = new TreatmentTypeViewModelConverter();
 
         public TreatmentController(ITreatmentTypeContext ttContext)
         {
             context = TestContext.GetInstance();
-            repo = new TreatmentRepository(context);
-            patientRepo = new PatientRepository(context);
-            typeRepo = new TreatmentTypeRepository(ttContext);
+            treatmentRepository = new TreatmentRepository(context);
+            patientRepository = new PatientRepository(context);
+            typeRepository = new TreatmentTypeRepository(ttContext);
         }
 
         [Authorize(Roles = "doctor, patient")]
@@ -37,11 +37,11 @@ namespace Webapp.Controllers
             List<Treatment> items = new List<Treatment>();
             if (User.IsInRole("doctor"))
             {
-                items = repo.GetByDoctor(GetUserId());
+                items = treatmentRepository.GetByDoctor(GetUserId());
             }
             else if (User.IsInRole("patient"))
             {
-                items = repo.GetByPatient(GetUserId());
+                items = treatmentRepository.GetByPatient(GetUserId());
             }
 
             TreatmentViewModel vm = new TreatmentViewModel()
@@ -50,7 +50,7 @@ namespace Webapp.Controllers
             };
             foreach (Treatment treatment in items)
             {
-                vm.treatments.Add(TreatmentVMC.TreatmentToViewModel(treatment));
+                vm.treatments.Add(TreatmentConverter.TreatmentToViewModel(treatment));
             }
 
             return View(vm.treatments);
@@ -61,8 +61,8 @@ namespace Webapp.Controllers
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
             {
-                Patients = PatientVMC.PatientlistToViewModel(patientRepo.GetAll()),
-                TreatmentTypes = TypeVMC.ModelsToViewModel(typeRepo.GetAll())
+                Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll()),
+                TreatmentTypes = TypeConverter.ModelsToViewModel(typeRepository.GetAll())
             };
             return View(vm);
         }
@@ -71,15 +71,15 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            repo.Add(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
+            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
+            treatmentRepository.Add(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
             return View();
         }
 
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            TreatmentDetailViewModel vm = TreatmentVMC.TreatmentToViewModel(repo.GetById(id));
+            TreatmentDetailViewModel vm = TreatmentConverter.TreatmentToViewModel(treatmentRepository.GetById(id));
 
             return View(vm);
         }
@@ -87,8 +87,8 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentVMC.ViewModelToTreatment(vm);
-            repo.Update(treatment);
+            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
+            treatmentRepository.Update(treatment);
             return RedirectToAction("index", "treatment");
         }
     }

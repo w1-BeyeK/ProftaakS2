@@ -9,10 +9,11 @@ namespace Webapp.Context
 {
     public class InstitutionTestContext : BaseTestContext, IInstitutionContext
     {
-        public bool Insert(Institution institution)
+        public long Insert(Institution institution)
         {
+            //TODO : Give id
             institutions.Add(institution);
-            return true;
+            return institution.Id;
         }
 
         public bool AddDepartmentToInstitution(long institutionId, long departmentId)
@@ -26,17 +27,15 @@ namespace Webapp.Context
             return false;
         }
 
-        public bool Update(long id, Institution institution)
+        public bool Update(Institution institution)
         {
-            if (id != institution.Id)
-                return false;
-
-            Institution oldInstitution = GetById(id);
+            //TODO : Implement
+            Institution oldInstitution = GetById(institution.Id);
             oldInstitution = institution;
             return true;
         }
 
-        public List<Institution> GetAllInstitutions()
+        public List<Institution> GetAll()
         {
             return institutions;
         }
@@ -44,43 +43,6 @@ namespace Webapp.Context
         public Institution GetById(long id)
         {
             return institutions.FirstOrDefault(i => i.Id == id);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Must be standing here because of Kevins code
-        public List<Institution> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        long IUniversalContext<Institution>.Insert(Institution obj)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Update(Institution obj)
-        {
-            throw new NotImplementedException();
         }
 
         public bool Delete(Institution obj)

@@ -8,6 +8,7 @@ namespace Webapp.Controllers
 {
     public class AdministratorController : Controller
     {
+        //misschien kan deze controller weg
         public IActionResult Index()
         {
             return View();
