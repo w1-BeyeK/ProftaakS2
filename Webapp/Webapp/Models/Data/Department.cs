@@ -16,9 +16,8 @@ namespace Webapp.Models.Data
         public Department()
         { }
 
-        public Department(long id, string name, string description, bool active)
+        public Department(string name, string description, bool active)
         {
-            Id = id;
             Name = name;
             Description = description;
             Active = active;
