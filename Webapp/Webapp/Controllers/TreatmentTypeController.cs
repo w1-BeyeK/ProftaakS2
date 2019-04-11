@@ -77,10 +77,12 @@ namespace Webapp.Controllers
             List<SelectListItem> items = new List<SelectListItem>();
             foreach(Institution i in institutions)
             {
-                SelectListGroup group = new SelectListGroup();
-                group.Name = i.Name;
+                SelectListGroup group = new SelectListGroup
+                {
+                    Name = i.Name
+                };
 
-                foreach(Department dm in departments.Where(d => d.InstitutionId == i.Id))
+                foreach (Department dm in departments.Where(d => d.InstitutionId == i.Id))
                 {
                     items.Add(new SelectListItem
                     {

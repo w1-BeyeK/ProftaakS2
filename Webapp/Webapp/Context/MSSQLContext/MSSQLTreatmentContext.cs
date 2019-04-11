@@ -127,12 +127,12 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
-        public List<Treatment> GetAllTreatmentsByDoctorId(long id)
+        public List<Treatment> GetByDoctor(long id)
         {
             throw new NotImplementedException();
         }
 
-        public List<Treatment> GetAllTreatmentsByPatientId(long id)
+        public List<Treatment> GetByPatient(long id)
         {
             throw new NotImplementedException();
         }

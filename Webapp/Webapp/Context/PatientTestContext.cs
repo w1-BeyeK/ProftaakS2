@@ -33,7 +33,7 @@ namespace Webapp.Context
             return patients.FindAll(t => t.Active == true);
         }
 
-        public List<Patient> GetByDoctorId(long id)
+        public List<Patient> GetByDoctor(long id)
         {
             //throw new NotImplementedException();
             //Is not realy possible in TestContext...

@@ -63,14 +63,15 @@ namespace Webapp.Context
             return treatments.Where(t => t.Id == id).FirstOrDefault();
         }
 
-        public List<Treatment> GetByDoctorId(long id)
+        public List<Treatment> GetByDoctor(long id)
         {
             return new List<Treatment>(treatments.FindAll(t => t.Doctor.Id == id));
         }
 
-        public List<Treatment> GetByPatientId(long id)
+        public List<Treatment> GetByPatient(long id)
         {
-            return new List<Treatment>(treatments.FindAll(t => t.Patient.Id == id));
+            //return treatments.Where(t => t.Patient.Id == id).ToList();
+            return treatments.FindAll(t => t.Patient.Id == id);
         }
 
         //TODO : Do we want this???

@@ -37,14 +37,14 @@ namespace Webapp.Context
             return doctors;
         }
 
-        public List<Doctor> GetByDepartmentId(long id)
+        public List<Doctor> GetByDepartment(long id)
         {
             //throw new NotImplementedException();
             //By department id!????????
             return doctors;
         }
 
-        public List<Doctor> GetByInstitutionId(long id)
+        public List<Doctor> GetByInstitution(long id)
         {
             List<Department> departmentDoctor = institutions.Find(t => t.Id == id).Departments;
             //Get all doctors of all the departments and distinct all double doctors
@@ -56,6 +56,11 @@ namespace Webapp.Context
             Doctor oldDoctor = GetById(doctor.Id);
             oldDoctor = doctor;
             return true;
+        }
+
+        public bool AddToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

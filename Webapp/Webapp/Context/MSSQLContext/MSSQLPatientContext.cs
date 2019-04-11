@@ -127,7 +127,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
-        public List<Patient> GetAllPatientsByDoctorId(long id)
+        public List<Patient> GetByDoctor(long id)
         {
             throw new NotImplementedException();
         }
