@@ -20,7 +20,7 @@ namespace Webapp.Controllers
 
             for (int i = 0; i < 23; i++)
             {
-                Department department = new Department(departName[rnd.Next(5)], "Ojaa", true);
+                Department department = new Department(1 , departName[rnd.Next(5)], "Ojaa", true);
                 items.Add(department);
             }
             return View(items);

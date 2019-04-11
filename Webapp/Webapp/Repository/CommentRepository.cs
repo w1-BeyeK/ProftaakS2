@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
@@ -9,9 +10,9 @@ namespace Webapp.Repository
 {
     public class CommentRepository
     {
-        protected readonly IContext context;
+        protected readonly ICommentContext context;
 
-        public CommentRepository(IContext context)
+        public CommentRepository(ICommentContext context)
         {
             this.context = context;
         }
@@ -21,7 +22,7 @@ namespace Webapp.Repository
         /// </summary>
         public bool Add(Comment comment, long treatmentId)
         {
-            return context.AddComment(comment, treatmentId);
+            return context.Insert(comment, treatmentId);
         }
 
         /// <summary>
@@ -29,7 +30,7 @@ namespace Webapp.Repository
         /// </summary>
         public List<Comment> GetByTreatment(long treatmentId)
         {
-            return context.GetAllCommentsByTreatmentId(treatmentId);
+            return context.GetByTreatmentId(treatmentId);
         }
     }
 }
