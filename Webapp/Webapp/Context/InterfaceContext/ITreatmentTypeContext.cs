@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.InterfaceContext
 {
-    public interface ITreatmentTypeContext : IUniversalContext<TreatmentType>
+    public interface ITreatmentTypeContext : IUniversalGenerics<TreatmentType>
     {
         //bool Insert(TreatmentType treatmentType);
         //bool Update(long id, TreatmentType treatmentType);

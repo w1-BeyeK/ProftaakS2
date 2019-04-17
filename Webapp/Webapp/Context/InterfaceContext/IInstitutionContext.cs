@@ -7,6 +7,6 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.InterfaceContext
 {
-    public interface IInstitutionContext : IUniversalContext<Institution>
+    public interface IInstitutionContext : IUniversalGenerics<Institution>
     { }
 }

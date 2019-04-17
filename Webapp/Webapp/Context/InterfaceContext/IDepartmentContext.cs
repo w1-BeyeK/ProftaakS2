@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.InterfaceContext
 {
-    public interface IDepartmentContext : IUniversalContext<Department>
+    public interface IDepartmentContext : IUniversalGenerics<Department>
     {
         //bool Insert(Department department);
         //bool Update(long id, Department department);
