@@ -33,7 +33,7 @@ namespace Webapp.Models.Data
             UserName = userName;
             Email = email;
             Name = name;
-            NormalizedUserName = userName.ToUpper();
+            //NormalizedUserName = userName.ToUpper();
         }
 
         public string RatingPassword()

@@ -14,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestDepartmentRepository
     {
-        IDepartmentContext context = new MemoryDepartmentContext();
+        IDepartmentContext context = new TestMemoryContext();
         DepartmentRepository departmentRepository;
         [Fact]
         public void DepartmentRepositoryConstructor()

@@ -136,7 +136,7 @@ namespace Webapp.Context.MSSQLContext
             //    });
             //    return true;
             //}
-            //catch(Exception e)
+            //catch (Exception e)
             //{
                 return false;
             //}
@@ -144,12 +144,58 @@ namespace Webapp.Context.MSSQLContext
 
         public List<Treatment> GetByDoctor(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+                // Set query
+                string query = $"select * from PTS2_Treatment where DoctorId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Treatment treatment))
+                        result.Add(treatment);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public List<Treatment> GetByPatient(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+                // Set query
+                string query = $"select * from PTS2_Treatment where PatientId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Treatment treatment))
+                        result.Add(treatment);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

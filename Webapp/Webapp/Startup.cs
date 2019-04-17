@@ -48,13 +48,13 @@ namespace Webapp
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
 
-            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
-            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
-            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
-            services.AddScoped<ICommentContext, MSSQLCommentContext>();
-            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
-            services.AddScoped<IPatientContext, MSSQLPatientContext>();
-            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+            //services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            //services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            //services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            //services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            //services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            //services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
             //services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
             //services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
@@ -63,6 +63,14 @@ namespace Webapp
             //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
             //services.AddSingleton<IPatientContext, MemoryPatientContext>();
             //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+
+            services.AddSingleton<ITreatmentTypeContext, TestMemoryContext>();
+            services.AddSingleton<IDepartmentContext, TestMemoryContext>();
+            services.AddSingleton<IInstitutionContext, TestMemoryContext>();
+            services.AddSingleton<ICommentContext, TestMemoryContext>();
+            services.AddSingleton<IDoctorContext, TestMemoryContext>();
+            services.AddSingleton<IPatientContext, TestMemoryContext>();
+            services.AddSingleton<ITreatmentContext, TestMemoryContext>();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();

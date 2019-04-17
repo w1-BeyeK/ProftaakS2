@@ -51,32 +51,5 @@ namespace Webapp.Context.MemoryContext
         {
             return treatmentTypes.Find(t => t.Id == id);
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        //Must be standing here because of Kevins code
-
-        long IUniversalGenerics<TreatmentType>.Insert(TreatmentType obj)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
