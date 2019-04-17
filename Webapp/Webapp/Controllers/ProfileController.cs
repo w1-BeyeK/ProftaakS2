@@ -16,20 +16,25 @@ namespace Webapp.Controllers
     {
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
+        private readonly TreatmentTypeRepository treatmentTypeRepository;
 
         private readonly PatientViewModelConverter patientConverter;
         private readonly DoctorViewModelConverter doctorConverter;
+        private readonly TreatmentTypeViewModelConverter typeConverter;
 
         public ProfileController(
             PatientRepository patientRepository,
-            DoctorRepository doctorRepository
+            DoctorRepository doctorRepository,
+            TreatmentTypeRepository treatmentTypeRepository
             )
         {
             this.patientRepository = patientRepository;
             this.doctorRepository = doctorRepository;
+            this.treatmentTypeRepository = treatmentTypeRepository;
 
             patientConverter = new PatientViewModelConverter();
             doctorConverter = new DoctorViewModelConverter();
+            typeConverter = new TreatmentTypeViewModelConverter();
         }
 
         public IActionResult Index()
@@ -52,6 +57,7 @@ namespace Webapp.Controllers
                 {
                     Doctor doctor = doctorRepository.GetById(id);
                     viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
+                    viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                 }
 
                 return View(viewModel);

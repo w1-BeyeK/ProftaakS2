@@ -52,7 +52,8 @@ namespace Webapp.Context
                       new KeyValuePair<string, object>("treatmentid", comment.TreatmentId),
                 };
 
-                return (long)handler.ExecuteCommand(query, parameters);
+                //return (long)handler.ExecuteCommand(query, parameters);
+                return true;
             }
             catch (Exception e)
             {

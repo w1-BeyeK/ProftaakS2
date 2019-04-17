@@ -16,16 +16,16 @@ namespace Webapp.Context
         protected List<Institution> institutions = new List<Institution>();
         protected List<TreatmentType> treatmentTypes = new List<TreatmentType>();
 
-        protected static TestContext instance = null;
+        //protected static TestContext instance = null;
 
-        public static TestContext GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new TestContext();
-            }
-            return instance;
-        }
+        //public static TestContext GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new TestContext();
+        //    }
+        //    return instance;
+        //}
 
         public BaseMemoryContext()
         {
@@ -197,7 +197,7 @@ namespace Webapp.Context
                     Password = "Test123",
                     PhoneNumber = "12345"
                 },
-                new Doctor(11, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
+                new Doctor(13, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
                 {
                     Active = true,
                     Birth = DateTime.Now,
