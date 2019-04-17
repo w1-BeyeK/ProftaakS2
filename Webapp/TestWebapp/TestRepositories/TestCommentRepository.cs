@@ -58,6 +58,9 @@ namespace TestWebapp.TestRepositories
             Assert.Equal(4, commentRepository.Add(comment));
         }
 
+        //    Assert.Equal(1, commentRepository.Add(comment));
+        //}
+
         [Fact]
         public void GetByTreatment()
         {

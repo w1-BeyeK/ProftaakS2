@@ -16,7 +16,20 @@ namespace Webapp.Context.MSSQLContext
 
         public bool Delete(Department obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = "update PTS2_Department set Active = 0 where Id = @id";
+
+                handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", obj.Id)
+                });
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         public List<Department> GetAll()
@@ -77,7 +90,44 @@ namespace Webapp.Context.MSSQLContext
 
         public bool Update(Department obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = "update PTS2_Department set @fields where Id = @id";
+
+                string fields = "";
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", obj.Id)
+                };
+
+                if (obj.Name != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[name] = @name";
+                    parameters.Add(new KeyValuePair<string, object>("name", obj.Name));
+                }
+                if (obj.Description != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "description = @description";
+                    parameters.Add(new KeyValuePair<string, object>("description", obj.Description));
+                }
+                if (!string.IsNullOrWhiteSpace(fields))
+                    fields += ",";
+                fields += "active = @active";
+                parameters.Add(new KeyValuePair<string, object>("active", obj.Active ? "1" : "0"));
+
+                query = query.Replace("@fields", fields);
+
+                handler.ExecuteCommand(query, parameters);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
+            }
         }
     }
 }

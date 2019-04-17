@@ -368,15 +368,12 @@ namespace Webapp.Context
 
         public bool Delete(TreatmentType treatmentType)
         {
-            try
+            if (treatmentTypes.Exists(t => t.Id == treatmentType.Id))
             {
                 treatmentTypes.FirstOrDefault(t => t.Id == treatmentType.Id).Active = treatmentType.Active;
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         List<TreatmentType> IUniversalGenerics<TreatmentType>.GetAll()
