@@ -18,7 +18,7 @@ namespace Webapp.Context
         /// Get all comments
         /// </summary>
         /// <returns>List of comments</returns>
-        public List<Comment> GetByTreatmentId(long treatmentId)
+        public List<Comment> GetByTreatment(long treatmentId)
         {
             // Create result
             List<Comment> result = new List<Comment>();
