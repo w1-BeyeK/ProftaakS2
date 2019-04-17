@@ -197,7 +197,7 @@ namespace Webapp.Context
                     Password = "Test123",
                     PhoneNumber = "12345"
                 },
-                new Doctor(11, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
+                new Doctor(13, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
                 {
                     Active = true,
                     Birth = DateTime.Now,
