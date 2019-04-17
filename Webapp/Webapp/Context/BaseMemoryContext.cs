@@ -29,11 +29,13 @@ namespace Webapp.Context
 
         public BaseMemoryContext()
         {
+            institutions.Add(new Institution() { Id = 1, Active = true, Name = "instituut", Country = "Zeeland" });
+            institutions.Add(new Institution() { Id = 2, Active = true, Name = "instituutje", Country = "Ruchpen" });
             List<Comment> comments = new List<Comment>
             {
-                new Comment("Arm afzagen", "De arm wordt afgezaagd1", new DateTime(2010 / 22 / 22)),
-                new Comment("Arm afzagen succes", "De arm is afgezaagd2", new DateTime(2011 / 22 / 22)),
-                new Comment("Arm afzagen succes2", "De arm is afgezaagd3", DateTime.Today)
+                new Comment("Arm afzagen", "De arm wordt afgezaagd1", new DateTime(2010 / 22 / 22)) { Id = 1 },
+                new Comment("Arm afzagen succes", "De arm is afgezaagd2", new DateTime(2011 / 22 / 22)) { Id = 2 },
+                new Comment("Arm afzagen succes2", "De arm is afgezaagd3", DateTime.Today) { Id = 3 }
             };
 
             departments = new List<Department>()
@@ -99,7 +101,7 @@ namespace Webapp.Context
                 new Treatment()
                 {
                     Name = "Euthanasie",
-                    Id = 3,
+                    Id = 4,
                     BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
                     EndDate = DateTime.Now,
                     Comments = comments,
