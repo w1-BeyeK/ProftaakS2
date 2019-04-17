@@ -95,6 +95,17 @@ namespace Webapp.Context
                     TreatmentType = new TreatmentType("Formateren", "Die Dikke reboot"),
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
+                },           
+                new Treatment()
+                {
+                    Name = "Euthanasie",
+                    Id = 3,
+                    BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
+                    EndDate = DateTime.Now,
+                    Comments = comments,
+                    TreatmentType = new TreatmentType("Illegale prik", "Vol zwart verf gevuld"),
+                    Doctor = new Doctor(15, "jan", "jan@hotmail.com", "Jan"),
+                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
             };
             patients = new List<Patient>()

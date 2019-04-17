@@ -17,8 +17,15 @@ namespace Webapp.Context
 
             if (treatments.Exists(t => t.Id == treatmentId))
             {
-                comment.Id = 9;
-                //TODO : Give Id mee!!!
+                if (treatments.Find(t => t.Id == treatmentId).Comments.Count > 0)
+                {
+                    treatments.Find(t => t.Id == treatmentId).Comments.OrderBy(c => c.Id);
+                    comment.Id = treatments.Find(t => t.Id == treatmentId).Comments.Last().Id + 1;
+                }
+                else
+                {
+                    comment.Id = 1;
+                }
                 treatments.Find(t => t.Id == treatmentId).Comments.Add(comment);
                 return comment.Id;
             }
@@ -83,7 +90,15 @@ namespace Webapp.Context
 
         public long Insert(Doctor doctor)
         {
-            //TODO : Get last id?!!?!?!?!?
+            if (doctors.Count > 0)
+            {
+                doctors.OrderBy(d => d.Id);
+                doctor.Id = doctors.Last().Id + 1;
+            }
+            else
+            {
+                doctor.Id = 1;
+            }
             doctors.Add(doctor);
             return doctor.Id;
         }
@@ -126,7 +141,15 @@ namespace Webapp.Context
 
         public long Insert(Institution institution)
         {
-            //TODO : Give id
+            if (institutions.Count > 0)
+            {
+                institutions.OrderBy(d => d.Id);
+                institution.Id = institutions.Last().Id + 1;
+            }
+            else
+            {
+                institution.Id = 1;
+            }
             institutions.Add(institution);
             return institution.Id;
         }
@@ -144,10 +167,9 @@ namespace Webapp.Context
 
         public bool Update(Institution institution)
         {
-            //TODO : Implement
             Institution oldInstitution = GetById(institution.Id);
             oldInstitution = institution;
-            return true;
+            return institutions.Exists(i => i == institution);
         }
 
         public List<Institution> GetAll()
@@ -162,12 +184,21 @@ namespace Webapp.Context
 
         public bool Delete(Institution obj)
         {
-            throw new NotImplementedException();
+            institutions.FirstOrDefault(i => i.Id == obj.Id).Active = obj.Active;
+            return true;
         }
 
         public long Insert(Patient patient)
         {
-            //TODO : surch id
+            if (patients.Count > 0)
+            {
+                patients.OrderBy(d => d.Id);
+                patient.Id = patients.Last().Id + 1;
+            }
+            else
+            {
+                patient.Id = 1;
+            }
             patients.Add(patient);
             return patient.Id;
         }
@@ -264,13 +295,8 @@ namespace Webapp.Context
             if (treatments.Exists(t => t.Id == treatment.Id))
             {
                 int index = treatments.FindIndex(t => t.Id == treatment.Id);
-                treatments[index].BeginDate = treatment.BeginDate;
-                treatments[index].Comments = treatment.Comments;
-                treatments[index].EndDate = treatment.EndDate;
-                treatments[index].Patient.Name = treatment.Patient.Name;
-                treatments[index].Name = treatment.Name;
-                treatments[index].TreatmentType = treatment.TreatmentType;
-                return true;
+                treatments[index] = treatment;
+                return treatments.Exists(t => t == treatment);
             }
             return false;
         }
@@ -305,17 +331,28 @@ namespace Webapp.Context
 
         public long Insert(TreatmentType treatmentType)
         {
-            //TODO : Surch for Id
+            if (treatmentTypes.Count > 0)
+            {
+                treatmentTypes.OrderBy(d => d.Id);
+                treatmentType.Id = treatmentTypes.Last().Id + 1;
+            }
+            else
+            {
+                treatmentType.Id = 1;
+            }
             treatmentTypes.Add(treatmentType);
             return treatmentType.Id;
         }
 
         public bool Update(TreatmentType treatmentType)
         {
-            //TODO : Not use otherfunction!!!
-            TreatmentType oldTreatmentType = null;//GetById(treatmentType.Id);
-            oldTreatmentType = treatmentType;
-            return true;
+            int index = treatmentTypes.FindIndex(t => t.Id == treatmentType.Id);
+            if (index >= 0)
+            {
+                treatmentTypes[index] = treatmentType;
+                return treatmentTypes.Exists(t => t == treatmentType);
+            }
+             return false;
         }
 
         public bool Delete(TreatmentType treatmentType)
