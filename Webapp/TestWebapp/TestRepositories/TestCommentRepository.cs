@@ -50,9 +50,12 @@ namespace TestWebapp.TestRepositories
         public void Add()
         {
             commentRepository = new CommentRepository(context);
-            Comment comment = new Comment();
+            Comment comment = new Comment()
+            {
+                TreatmentId = 1
+            };
 
-            Assert.Equal(1, commentRepository.Add(comment));
+            Assert.Equal(4, commentRepository.Add(comment));
         }
 
         [Fact]

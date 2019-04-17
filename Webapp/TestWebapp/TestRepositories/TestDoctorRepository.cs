@@ -27,15 +27,15 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
-            Doctor doctor = new Doctor(1, "een", "een@een.een", "eend");
+            Doctor doctor = new Doctor(0, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(1, doctorRepository.Add(doctor));
+            Assert.Equal(14, doctorRepository.Add(doctor));
         }
 
         [Fact]
         public void Update()
         {
-            Doctor doctor = new Doctor(1, "een", "een@een.een", "eend");
+            Doctor doctor = new Doctor(12, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
             Assert.True(doctorRepository.Update(doctor));
         }
@@ -44,9 +44,10 @@ namespace TestWebapp.TestRepositories
         public void GetAll()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(2, doctorRepository.GetAll().Count);
+            Assert.Equal(3, doctorRepository.GetAll().Count);
         }
 
+        //TODO : Need to be implemented soon
         [Fact]
         public void GetByDepartment()
         {
@@ -54,6 +55,7 @@ namespace TestWebapp.TestRepositories
             Assert.Equal(2, doctorRepository.GetByDepartment(1).Count);
         }
 
+        //TODO : Need to be implemented soon
         [Fact]
         public void GetByInstitution()
         {
@@ -65,7 +67,7 @@ namespace TestWebapp.TestRepositories
         public void GetById()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal("doctor", doctorRepository.GetById(1).UserName);
+            Assert.Equal("Soepeeeee", doctorRepository.GetById(12).UserName);
         }
     }
 }

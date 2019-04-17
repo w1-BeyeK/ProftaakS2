@@ -29,13 +29,17 @@ namespace TestWebapp.TestRepositories
         {
             TreatmentType treatmentType = new TreatmentType();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal(1, treatmentTypeRepository.Add(treatmentType));
+            Assert.Equal(10, treatmentTypeRepository.Add(treatmentType));
         }
 
         [Fact]
         public void Update()
         {
-            TreatmentType treatmentType = new TreatmentType();
+            TreatmentType treatmentType = new TreatmentType()
+            {
+                Id = 9,
+                Name = "doedewas"
+            };
             treatmentTypeRepository = new TreatmentTypeRepository(context);
             Assert.True(treatmentTypeRepository.Update(treatmentType));
         }
@@ -44,21 +48,21 @@ namespace TestWebapp.TestRepositories
         public void Delete()
         {
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.True(treatmentTypeRepository.Delete(1));
+            Assert.True(treatmentTypeRepository.Delete(9));
         }
 
         [Fact]
         public void GetAll()
         {
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal(2, treatmentTypeRepository.GetAll().Count);
+            Assert.Equal(1, treatmentTypeRepository.GetAll().Count);
         }
 
         [Fact]
         public void GetById()
         {
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal("treatmentType", treatmentTypeRepository.GetById(1).Name);
+            Assert.Equal("treatmentType", treatmentTypeRepository.GetById(9).Name);
         }
     }
 }

@@ -32,7 +32,7 @@ namespace TestWebapp.TestRepositories
 
             Patient patient = new Patient();
 
-            Assert.Equal(1, patientRepository.Add(patient));
+            Assert.Equal(16, patientRepository.Add(patient));
         }
 
         [Fact]
@@ -40,7 +40,7 @@ namespace TestWebapp.TestRepositories
         {
             patientRepository = new PatientRepository(context);
 
-            Assert.Equal(3, patientRepository.GetAll().Count);
+            Assert.Equal(5, patientRepository.GetAll().Count);
         }
 
         [Fact]
@@ -49,7 +49,7 @@ namespace TestWebapp.TestRepositories
             patientRepository = new PatientRepository(context);
 
 
-            Assert.Equal("naam", patientRepository.GetById(1).Name);
+            Assert.Equal("Stijn Driedubbels", patientRepository.GetById(15).Name);
         }
 
         [Fact]
@@ -57,7 +57,7 @@ namespace TestWebapp.TestRepositories
         {
             patientRepository = new PatientRepository(context);
 
-            Patient patient = new Patient(1, "naam", "beschrijving", "naam");
+            Patient patient = new Patient(15, "naam", "beschrijving", "naam");
 
             Assert.True(patientRepository.Update(patient));
         }

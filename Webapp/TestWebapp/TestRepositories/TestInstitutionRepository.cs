@@ -37,7 +37,10 @@ namespace TestWebapp.TestRepositories
         public void Update()
         {
             Administrator admin = new Administrator();
-            Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin);
+            Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin)
+            {
+                Id = 1
+            };
             institutionRepository = new InstitutionRepository(context);
             Assert.True(institutionRepository.Update(institution));
         }
@@ -60,7 +63,7 @@ namespace TestWebapp.TestRepositories
         public void GetById()
         {
             institutionRepository = new InstitutionRepository(context);
-            Assert.Equal("institution", institutionRepository.GetById(1).Name);
+            Assert.Equal("instituut", institutionRepository.GetById(1).Name);
         }
     }
 }

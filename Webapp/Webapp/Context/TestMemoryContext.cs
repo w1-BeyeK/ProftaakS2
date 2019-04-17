@@ -61,9 +61,13 @@ namespace Webapp.Context
 
         public bool Update(Department department)
         {
-
-            //
-            return true;
+            if (departments.Exists(t => t.Id == department.Id))
+            {
+                int index = treatments.FindIndex(t => t.Id == department.Id);
+                departments[index] = department;
+                return departments.Exists(d => d == department);
+            }
+            return false;
         }
 
         public bool AddDoctorToDepartment(long departmentId, long doctorId)
@@ -129,9 +133,13 @@ namespace Webapp.Context
 
         public bool Update(Doctor doctor)
         {
-            Doctor oldDoctor = null;// IDoctorContext.GetById(doctor.Id);
-            oldDoctor = doctor;
-            return true;
+            if (doctors.Exists(d => d.Id == doctor.Id))
+            {
+                int index = doctors.FindIndex(d => d.Id == doctor.Id);
+                doctors[index] = doctor;
+                return doctors.Exists(d => d == doctor);
+            }
+            return false;
         }
 
         public bool AddToDepartment(long departmentId, long doctorId)
@@ -167,9 +175,13 @@ namespace Webapp.Context
 
         public bool Update(Institution institution)
         {
-            Institution oldInstitution = GetById(institution.Id);
-            oldInstitution = institution;
-            return institutions.Exists(i => i == institution);
+            if (institutions.Exists(i => i.Id == institution.Id))
+            {
+                int index = institutions.FindIndex(i => i.Id == institution.Id);
+                institutions[index] = institution;
+                return institutions.Exists(i => i == institution);
+            }
+            return false;
         }
 
         public List<Institution> GetAll()
@@ -313,7 +325,6 @@ namespace Webapp.Context
 
         public List<Treatment> GetByPatient(long id)
         {
-            //return treatments.Where(t => t.Patient.Id == id).ToList();
             return treatments.FindAll(t => t.Patient.Id == id);
         }
 

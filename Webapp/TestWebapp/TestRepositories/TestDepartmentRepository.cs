@@ -41,6 +41,7 @@ namespace TestWebapp.TestRepositories
             Assert.True(departmentRepository.Delete(1));
         }
 
+        //TODO : Need to be discussed
         [Fact]
         public void GetAll()
         {
@@ -48,6 +49,7 @@ namespace TestWebapp.TestRepositories
             Assert.Equal(3, departmentRepository.GetAll().Count);
         }
 
+        //TODO : Need to be discussed
         [Fact]
         public void GetById()
         {
