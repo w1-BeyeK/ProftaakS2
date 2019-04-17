@@ -57,14 +57,20 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Doctor(DepartmentId, Name, Description, Active) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
+                //Table in de database moet nog aangepast worden en er moet opgelet worden dat de prive al wordt meegegeven op het moment.
+                string query = "insert into PTS2_Doctor(Username, Password, Name, Gender, Email, Phone, Birthdate, Active, PrivEmail, PrivPhone) OUTPUT INSERTED.Id values(username, password, name, gender, email, phone, birthdate, active, privemail, privphone)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    //new KeyValuePair<string, object>("name", doctor.Name),
-                    //new KeyValuePair<string, object>("departmentId", doctor.DepartmentId),
-                    //new KeyValuePair<string, object>("description", doctor.Description),
-                    //new KeyValuePair<string, object>("active", "1"),
+                    new KeyValuePair<string, object>("username", doctor.UserName),
+                    new KeyValuePair<string, object>("password", doctor.Password),
+                    new KeyValuePair<string, object>("gender", doctor.Gender),
+                    new KeyValuePair<string, object>("email", doctor.Email),
+                    new KeyValuePair<string, object>("privemail", doctor.PrivMail),
+                    new KeyValuePair<string, object>("phone", doctor.PhoneNumber),
+                    new KeyValuePair<string, object>("privphone", doctor.PrivPhoneNumber),
+                    new KeyValuePair<string, object>("birthdate", doctor.Birth),    
+                    new KeyValuePair<string, object>("active", "1"),
                 };
 
                 return (long)handler.ExecuteCommand(query, parameters);
@@ -130,17 +136,79 @@ namespace Webapp.Context.MSSQLContext
 
         public List<Doctor> GetByDepartment(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Doctor> result = new List<Doctor>();
+                // Set query
+                string query = $"select * from PTS2_Doctor where DepartmentId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Doctor doctor))
+                        result.Add(doctor);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                return null;
+            }
         }
 
         public List<Doctor> GetByInstitution(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Doctor> result = new List<Doctor>();
+                // Set query
+                string query = $"select * from PTS2_Doctor where InstitutionId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Doctor doctor))
+                        result.Add(doctor);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public bool AddToDepartment(long departmentId, long doctorId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                string query = "insert into PTS2_Department_Doctor(DepartmentId, DoctorId, Active) values(@departmentId, @doctorId, @active)";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("departmentId", departmentId),
+                    new KeyValuePair<string, object>("doctorId", doctorId),
+                    new KeyValuePair<string, object>("active", "1"),
+                };
+
+                return (bool)handler.ExecuteCommand(query, parameters);
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
