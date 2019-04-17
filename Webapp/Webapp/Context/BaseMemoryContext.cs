@@ -16,16 +16,16 @@ namespace Webapp.Context
         protected List<Institution> institutions = new List<Institution>();
         protected List<TreatmentType> treatmentTypes = new List<TreatmentType>();
 
-        protected static TestContext instance = null;
+        //protected static TestContext instance = null;
 
-        public static TestContext GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new TestContext();
-            }
-            return instance;
-        }
+        //public static TestContext GetInstance()
+        //{
+        //    if (instance == null)
+        //    {
+        //        instance = new TestContext();
+        //    }
+        //    return instance;
+        //}
 
         public BaseMemoryContext()
         {
