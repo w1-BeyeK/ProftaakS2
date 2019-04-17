@@ -14,8 +14,8 @@
     <thead>
         <tr>
             <th>Naam</th>
+            <th>Geslacht</th>
             <th>Functie</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +23,7 @@
         {
             <tr>
                 <td>@item.Name</td>
+                <td>@item.Gender</td>
                 <td>@item.Function</td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeNumber }) |

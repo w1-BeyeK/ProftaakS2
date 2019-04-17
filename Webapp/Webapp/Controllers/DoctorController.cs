@@ -21,7 +21,9 @@ namespace Webapp.Controllers
             this.doctorRepository = doctorRepository;
         }
 
-        //
+        /// <summary>
+        /// Gets all doctors converts them from a class to a viewmodel
+        /// </summary>
         public IActionResult Index()
         {
             List<Doctor> doctors = doctorRepository.GetAll();

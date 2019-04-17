@@ -12,5 +12,6 @@ namespace Webapp.Models
         public string Name { get; set; }
         public Gender Gender { get; set; }
         public DateTime Birth { get; set; }
+        public string Fuction { get; set; }
     }
 }

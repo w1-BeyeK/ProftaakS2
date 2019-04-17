@@ -49,7 +49,8 @@ namespace Webapp.Converters
                     EmployeeNumber = d.EmployeeNumber,
                     Name = d.Name,
                     Gender = d.Gender,
-                    Birth = d.Birth
+                    Birth = d.Birth,
+                    Fuction = d.Function
                 };
 
                 Doctors.Add(doctor);
