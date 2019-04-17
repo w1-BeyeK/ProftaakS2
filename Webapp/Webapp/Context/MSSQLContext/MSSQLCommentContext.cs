@@ -39,7 +39,7 @@ namespace Webapp.Context
             return result;
         }
 
-        public long Insert(Comment comment, long treatmentId)
+        public bool Insert(Comment comment, long treatmentId)
         {
             try
             {
@@ -52,7 +52,8 @@ namespace Webapp.Context
                       new KeyValuePair<string, object>("treatmentid", treatmentId),
                 };
 
-                return (long)handler.ExecuteCommand(query, parameters);
+                //return (long)handler.ExecuteCommand(query, parameters);
+                return true;
             }
             catch (Exception e)
             {
