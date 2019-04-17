@@ -59,21 +59,24 @@ namespace Webapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
-                if (result.Succeeded)
+                if (username != null)
                 {
-                    if (HttpContext.User.IsInRole("admin"))
+                    var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("dashboard");
+                        if (HttpContext.User.IsInRole("admin"))
+                        {
+                            return RedirectToAction("dashboard");
+                        }
+                        else
+                        {
+                            return RedirectToAction("index", "profile");
+                        }
                     }
                     else
                     {
-                        return RedirectToAction("index", "profile");
+                        return RedirectToAction("Index");
                     }
-                }
-                else
-                {
-                    return RedirectToAction("Index");
                 }
             }
             return RedirectToAction("Index");
