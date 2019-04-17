@@ -74,7 +74,7 @@ namespace Webapp.Context.MemoryContext
 
         //Must be standing here because of Kevins code
 
-        long IUniversalContext<TreatmentType>.Insert(TreatmentType obj)
+        long IUniversalGenerics<TreatmentType>.Insert(TreatmentType obj)
         {
             throw new NotImplementedException();
         }

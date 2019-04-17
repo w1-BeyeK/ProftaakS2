@@ -39,7 +39,7 @@ namespace Webapp.Context
             return result;
         }
 
-        public long Insert(Comment comment, long treatmentId)
+        public long Insert(Comment comment)
         {
             try
             {
@@ -49,10 +49,11 @@ namespace Webapp.Context
                 {
                       new KeyValuePair<string, object>("title", comment.Title),
                       new KeyValuePair<string, object>("description", comment.Description),
-                      new KeyValuePair<string, object>("treatmentid", treatmentId),
+                      new KeyValuePair<string, object>("treatmentid", comment.TreatmentId),
                 };
 
-                return (long)handler.ExecuteCommand(query, parameters);
+                //return (long)handler.ExecuteCommand(query, parameters);
+                return true;
             }
             catch (Exception e)
             {

@@ -17,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = $"select * from PTS2_TreatmentType where Id = {id}";
+            string query = $"select * from PTS2_Doctor where Id = {id}";
 
             var dbResult = handler.ExecuteSelect(query, id);
 
@@ -37,7 +37,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "select * from PTS2_TreatmentType where active = 1";
+            string query = "select * from PTS2_Doctor where active = 1";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -57,7 +57,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_TreatmentType(DepartmentId, Name, Description, Active) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
+                string query = "insert into PTS2_Doctor(DepartmentId, Name, Description, Active) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -79,7 +79,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_TreatmentType set @fields where Id = @id";
+                string query = "update PTS2_Doctor set @fields where Id = @id";
 
                 string fields = "";
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
@@ -114,7 +114,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_TreatmentType set Active = 0 where Id = @id";
+                string query = "update PTS2_Doctor set Active = 0 where Id = @id";
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {

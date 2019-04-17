@@ -7,7 +7,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.InterfaceContext
 {
-    public interface ITreatmentContext : IUniversalContext<Treatment>
+    public interface ITreatmentContext : IUniversalGenerics<Treatment>
     { 
         List<Treatment> GetByDoctor(long id);
         List<Treatment> GetByPatient(long id);

@@ -18,27 +18,22 @@ namespace Webapp.Models.Data
         public string Password { get; set; }
         public string Name { get; set; }
         
-        public BaseAccount(long id, string username, string email)
+        public BaseAccount(long id, string userName, string email)
         {
             Id = id;
-            UserName = username;
+            UserName = userName;
             Email = email;
-
-            NormalizedUserName = UserName.ToUpper();
-            NormalizedEmail = email.ToUpper();
+            NormalizedUserName = userName.ToUpper();
         }
         public string NormalizedUserName { get; set; }
-        public string NormalizedEmail { get; set; }
       
         public BaseAccount(long id, string userName, string email, string name)
         {
             Id = id;
             UserName = userName;
             Email = email;
-
-            NormalizedUserName = UserName.ToUpper();
-            NormalizedEmail = email.ToUpper();
             Name = name;
+            NormalizedUserName = userName.ToUpper();
         }
 
         public string RatingPassword()

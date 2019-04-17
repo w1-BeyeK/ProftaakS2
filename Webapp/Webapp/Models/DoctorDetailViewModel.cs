@@ -18,5 +18,6 @@ namespace Webapp.Models
         public int Age { get; set; }
         public bool PrivMail { get; set; }
         public bool PrivPhonenumber { get; set; }
+        public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
     }
 }

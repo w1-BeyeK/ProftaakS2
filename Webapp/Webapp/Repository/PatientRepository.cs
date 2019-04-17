@@ -53,7 +53,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Get all patients which have a treatment with the doctorId
         /// </summary>
-        List<Patient> GetByDoctor(long id)
+        public List<Patient> GetByDoctor(long id)
         {
             return context.GetByDoctor(id);
         }
