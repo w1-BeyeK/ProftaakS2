@@ -21,7 +21,6 @@ namespace Webapp.Context.MemoryContext
         {
                 patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
                 return true;
-            return false;
         }
 
         public Patient GetById(long id)

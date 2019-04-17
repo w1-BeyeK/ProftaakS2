@@ -30,7 +30,7 @@ namespace TestWebapp.TestRepositories
             commentRepository = new CommentRepository(context);
             Comment comment = new Comment();
 
-            Assert.True(commentRepository.Add(comment, 1));
+            Assert.Equal(1, commentRepository.Add(comment));
         }
 
         [Fact]

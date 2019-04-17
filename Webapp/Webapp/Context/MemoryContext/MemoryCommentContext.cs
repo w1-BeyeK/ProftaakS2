@@ -12,12 +12,8 @@ namespace Webapp.Context.MemoryContext
     {
         public long Insert(Comment comment)
         {
-            if (treatments.Exists(t => t.Id == comment.TreatmentId))
-            {
-                treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
-                return true;
-            }
-            return false;
+            treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
+            return comment.Id;
         }
 
         public List<Comment> GetByTreatment(long id)
