@@ -37,5 +37,24 @@ namespace Webapp.Converters
                 PrivPhonenumber = doctor.PrivPhoneNumber
             };
         }
+
+        public List<DoctorListViewModel> DoctorlistToViewModel(List<Doctor> doctors)
+        {
+            List<DoctorListViewModel> Doctors = new List<DoctorListViewModel>();
+
+            foreach (Doctor d in doctors)
+            {
+                DoctorListViewModel doctor = new DoctorListViewModel()
+                {
+                    EmployeeNumber = d.EmployeeNumber,
+                    Name = d.Name,
+                    Gender = d.Gender,
+                    Birth = d.Birth
+                };
+
+                Doctors.Add(doctor);
+            }
+            return Doctors;
+        }
     }
 }

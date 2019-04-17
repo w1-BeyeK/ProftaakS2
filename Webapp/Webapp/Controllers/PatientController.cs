@@ -34,7 +34,7 @@ namespace Webapp.Controllers
         }
 
         /// <summary>
-        /// Gets all patients of a doctor and convert them from a class to a viewmodel
+        /// Gets all patients of a doctor and converts them from a class to a viewmodel
         /// </summary>
         [Authorize(Roles= "doctor")]
         public IActionResult Index()
@@ -51,7 +51,7 @@ namespace Webapp.Controllers
         }
 
         /// <summary>
-        /// Gets a treament with a small amount of data of a patient and convert that to a viewmodel
+        /// Gets a treatment with a small amount of data of the patient with the given id and converts that to a viewmodel
         /// </summary>
         //[HttpGet("{id}")]
         public IActionResult Treatment(long id)
