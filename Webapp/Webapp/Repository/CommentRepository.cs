@@ -10,6 +10,7 @@ namespace Webapp.Repository
 {
     public class CommentRepository
     {
+        //global instances
         protected readonly ICommentContext context;
 
         public CommentRepository(ICommentContext context)

@@ -10,17 +10,17 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryCommentContext : BaseMemoryContext, ICommentContext
     {
-        public bool Insert(Comment comment, long treatmentId)
+        public long Insert(Comment comment)
         {
-            if (treatments.Exists(t => t.Id == treatmentId))
+            if (treatments.Exists(t => t.Id == comment.TreatmentId))
             {
-                treatments.Find(t => t.Id == treatmentId).Comments.Add(comment);
+                treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
                 return true;
             }
             return false;
         }
 
-        public List<Comment> GetByTreatmentId(long id)
+        public List<Comment> GetByTreatment(long id)
         {
             return treatments.Find(t => t.Id == id).Comments;
         }

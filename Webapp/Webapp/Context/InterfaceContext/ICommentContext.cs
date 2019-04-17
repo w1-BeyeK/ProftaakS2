@@ -10,6 +10,6 @@ namespace Webapp.Context.InterfaceContext
     public interface ICommentContext
     {
         long Insert(Comment comment);
-        List<Comment> GetByTreatmentId(long treatmentId);
+        List<Comment> GetByTreatment(long treatmentId);
     }
 }
