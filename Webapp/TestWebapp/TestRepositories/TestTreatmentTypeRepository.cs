@@ -6,13 +6,14 @@ using Webapp.Repository;
 using Webapp.Models.Data;
 using Webapp.Context.InterfaceContext;
 using Webapp.Context.MemoryContext;
+using Webapp.Context;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestTreatmentTypeRepository
     {
-        ITreatmentTypeContext context = new MemoryTreatmentTypeContext();
+        ITreatmentTypeContext context = new TestMemoryContext();
         TreatmentTypeRepository treatmentTypeRepository;
 
         [Fact]

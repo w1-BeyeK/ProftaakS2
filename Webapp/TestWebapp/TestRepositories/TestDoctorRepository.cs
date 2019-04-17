@@ -13,7 +13,7 @@ namespace TestWebapp.TestRepositories
     
     public class TestDoctorRepository
     {
-        IDoctorContext context = new MemoryDoctorContext();
+        IDoctorContext context = new TestMemoryContext();
         DoctorRepository doctorRepository;
 
         [Fact]

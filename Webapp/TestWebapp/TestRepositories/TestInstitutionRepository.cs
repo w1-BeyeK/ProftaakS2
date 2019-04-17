@@ -13,7 +13,7 @@ namespace TestWebapp.TestRepositories
     
     public class TestInstitutionRepository
     {
-        IInstitutionContext context = new MemoryInstitutionContext();
+        IInstitutionContext context = new TestMemoryContext();
         InstitutionRepository institutionRepository;
 
         [Fact]
