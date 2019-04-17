@@ -30,7 +30,7 @@ namespace TestWebapp.TestRepositories
             Administrator admin = new Administrator();
             Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin);
             institutionRepository = new InstitutionRepository(context);
-            Assert.Equal(1, institutionRepository.AddInstitution(institution));
+            Assert.Equal(3, institutionRepository.AddInstitution(institution));
         }
 
         [Fact]

@@ -29,7 +29,7 @@ namespace TestWebapp.TestRepositories
         {
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal(5, treatmentRepository.Add(treatment, 1, 1, 1));
+            Assert.Equal(4, treatmentRepository.Add(treatment, 1, 1, 1));
         }
 
         [Fact]

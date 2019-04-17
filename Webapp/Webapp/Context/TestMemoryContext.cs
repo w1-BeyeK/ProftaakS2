@@ -11,25 +11,23 @@ namespace Webapp.Context
     
     public class TestMemoryContext : BaseMemoryContext, ICommentContext, IDepartmentContext, IDoctorContext, IInstitutionContext, IPatientContext, ITreatmentContext, ITreatmentTypeContext
     {
-        public long Insert(Comment comment)
+        public List<Comment> Insert(Comment comment)
         {
-            long treatmentId = comment.TreatmentId;
-
-            if (treatments.Exists(t => t.Id == treatmentId))
+            if (treatments.Exists(t => t.Id == comment.TreatmentId))
             {
-                if (treatments.Find(t => t.Id == treatmentId).Comments.Count > 0)
+                if (treatments.Find(t => t.Id == comment.TreatmentId).Comments.Count > 0)
                 {
-                    treatments.Find(t => t.Id == treatmentId).Comments.OrderBy(c => c.Id);
-                    comment.Id = treatments.Find(t => t.Id == treatmentId).Comments.Last().Id + 1;
+                    treatments.Find(t => t.Id == comment.TreatmentId).Comments.OrderBy(c => c.Id);
+                    comment.Id = treatments.Find(t => t.Id == comment.TreatmentId).Comments.Last().Id + 1;
                 }
                 else
                 {
                     comment.Id = 1;
                 }
-                treatments.Find(t => t.Id == treatmentId).Comments.Add(comment);
-                return comment.Id;
+                treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
+                return new List<Comment>(treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
             }
-            return -1;
+            return null;
         }
 
         List<Comment> ICommentContext.GetByTreatment(long id)

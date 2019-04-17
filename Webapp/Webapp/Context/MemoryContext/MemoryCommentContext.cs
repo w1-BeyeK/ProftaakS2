@@ -10,10 +10,10 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryCommentContext : BaseMemoryContext, ICommentContext
     {
-        public long Insert(Comment comment)
+        public List<Comment> Insert(Comment comment)
         {
             treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
-            return comment.Id;
+            return new List<Comment>(treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
         }
 
         public List<Comment> GetByTreatment(long id)

@@ -62,7 +62,7 @@ namespace TestWebapp.TestRepositories
         public void GetById()
         {
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal("treatmentType", treatmentTypeRepository.GetById(9).Name);
+            Assert.Equal("kaas", treatmentTypeRepository.GetById(9).Name);
         }
     }
 }

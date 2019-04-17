@@ -60,7 +60,7 @@ namespace TestWebapp.TestRepositories
         public void GetByInstitution()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(2, doctorRepository.GetByInstitution(1).Count);
+            Assert.Equal(3, doctorRepository.GetByInstitution(1).Count);
         }
 
         [Fact]

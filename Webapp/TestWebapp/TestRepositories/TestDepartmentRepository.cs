@@ -55,7 +55,7 @@ namespace TestWebapp.TestRepositories
         {
             departmentRepository = new DepartmentRepository(context);
 
-            Assert.Equal("naam", departmentRepository.GetById(1).Name);
+            Assert.Equal("Soepderpoep", departmentRepository.GetById(1).Name);
         }
 
         [Fact]
