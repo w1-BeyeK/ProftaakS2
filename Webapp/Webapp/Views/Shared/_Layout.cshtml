@@ -68,26 +68,48 @@
                                     <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="behandelingen">
-                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li>
+                                        <a asp-action="index" asp-controller="treatment">
+                                            <i class="fa fa-area-chart fa-lg">
+                                            </i> Overzicht
+                                        </a>
+                                    </li>
+                                    <li >
+                                        <a asp-action="add" asp-controller="treatment">
+                                            <i class="fa fa-medkit fa-lg">
+                                            </i> Nieuwe toevoegen
+                                        </a>
+                                    </li>
                                 </ul>
 
                                 <li>
-                                    <a href="#"><i class="fa fa-bed fa-lg"></i> Patienten</a>
+                                    <a asp-action="index" asp-controller="patient">
+                                        <i class="fa fa-bed fa-lg">
+                                        </i> Patienten
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdeling</a>
+                                    <a asp-action="index" asp-controller="department">
+                                        <i class="fa fa-hospital-o fa-lg">
+                                        </i> Afdeling
+                                    </a>
                                 </li>
                             }
                             else if (Context.User.IsInRole("patient"))
                             {
                                 <li>
-                                    <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen</a>
+                                    <a asp-action="index" asp-controller="treatment">
+                                        <i class="fa fa-medkit fa-lg">
+                                        </i> Behandelingen
+                                    </a>
                                 </li>
                             }
                             <hr style="margin:0;" />
                             <li>
-                                <a asp-action="index" asp-controller="profile"><i class="fa fa-user fa-lg"></i> Profiel</a>
+                                <a asp-action="index" asp-controller="profile">
+                                <i class="fa fa-user fa-lg">
+                                    </i> Profiel
+                                </a>
                             </li>
                             <li>
                                 <a asp-action="Logout" asp-controller="Home" method="get">
