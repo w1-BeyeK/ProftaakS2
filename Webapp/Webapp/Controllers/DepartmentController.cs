@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Webapp.Models.Data;
 
 namespace Webapp.Controllers
 {
+    //[Authorize(Roles = "Administrator")]
     public class DepartmentController : Controller
     {
         public IActionResult Index()

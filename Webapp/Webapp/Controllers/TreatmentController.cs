@@ -59,6 +59,7 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+        [Authorize(Roles = "doctor")]
         [HttpGet]
         public IActionResult Add()
         {
@@ -69,8 +70,9 @@ namespace Webapp.Controllers
             };
             return View(vm);
         }
-
+        
         //TODO : Voeg extra parameters toe! bij AddTreatment
+        [Authorize(Roles = "doctor")]
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
@@ -79,6 +81,7 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "doctor, patient")]
         [HttpGet]
         public IActionResult Edit(long id)
         {
@@ -87,6 +90,7 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "doctor, patient")]
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {

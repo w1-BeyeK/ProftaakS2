@@ -54,6 +54,7 @@ namespace Webapp.Controllers
         /// Gets a treatment with a small amount of data of the patient with the given id and converts that to a viewmodel
         /// </summary>
         //[HttpGet("{id}")]
+        [Authorize(Roles = "doctor, patient")]
         public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
