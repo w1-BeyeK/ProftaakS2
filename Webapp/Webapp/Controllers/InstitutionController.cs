@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Webapp.Controllers
 {
+    //[Authorize(Roles = "admin, doctor")]
     public class InstitutionController : Controller
     {
         public IActionResult Index()
