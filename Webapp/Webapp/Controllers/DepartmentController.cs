@@ -9,7 +9,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Controllers
 {
-    //[Authorize(Roles = "Administrator")]
+    //[Authorize(Roles = "admin")]
     public class DepartmentController : Controller
     {
         public IActionResult Index()

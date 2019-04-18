@@ -12,7 +12,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    //[Authorize(Roles = "admin, doctor, patient")]
+    //[Authorize]
     public class DoctorController : Controller
     {
         private readonly DoctorRepository doctorRepository;
