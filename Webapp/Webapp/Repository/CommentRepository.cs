@@ -21,7 +21,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Doctor adds a comment
         /// </summary>
-        public List<Comment> Add(Comment comment)
+        public List<Comment> Insert(Comment comment)
         {
             return context.Insert(comment);
         }

@@ -106,6 +106,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", patient.Id)
                 };
 
+                //TODO : Remove if(patient.Names!!!)
                 if (patient.Name != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))

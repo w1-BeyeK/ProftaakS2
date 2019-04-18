@@ -45,6 +45,7 @@ namespace Webapp.Context
                     Id = 1,
                     Name = "Soepderpoep",
                     Description = "Hier wordt soep gemaakt",
+                    InstitutionId = 1,
                     Active = true,
                 },
                 new Department()
@@ -52,6 +53,7 @@ namespace Webapp.Context
                     Id = 2,
                     Name = "Toedoe",
                     Description = "Hier worden dingen nog gedaan",
+                    InstitutionId = 2,
                     Active = true,
                 },
                 new Department()

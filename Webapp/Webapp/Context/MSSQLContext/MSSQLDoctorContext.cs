@@ -80,7 +80,6 @@ namespace Webapp.Context.MSSQLContext
                 throw e;
             }
         }
-
         public bool Update(Doctor doctor)
         {
             try
@@ -100,10 +99,29 @@ namespace Webapp.Context.MSSQLContext
                     fields += "[name] = @name";
                     parameters.Add(new KeyValuePair<string, object>("name", doctor.Name));
                 }
+                if (doctor.Email != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[email] = @email";
+                    parameters.Add(new KeyValuePair<string, object>("email", doctor.Email));
+                }
+                if (doctor.Birth != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[birthdate] = @birthdate";
+                    parameters.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
+                }
                 if (!string.IsNullOrWhiteSpace(fields))
                     fields += ",";
-                fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", doctor.Active ? "1" : "0"));
+                fields += "[gender] = @gender";
+                parameters.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                if (!string.IsNullOrWhiteSpace(fields))
+                    fields += ",";
+                fields += "[phone] = @phone";
+                parameters.Add(new KeyValuePair<string, object>("phone", doctor.PhoneNumber));
+
 
                 query = query.Replace("@fields", fields);
 

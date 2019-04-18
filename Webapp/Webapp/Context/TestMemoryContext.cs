@@ -76,7 +76,7 @@ namespace Webapp.Context
         //TODO : GetAllByInstitution
         List<Department> IUniversalGenerics<Department>.GetAll()
         {
-            throw new NotImplementedException();
+            return new List<Department>(departments.Where(p => p.Active));
         }
 
         public bool Delete(Doctor doctor)

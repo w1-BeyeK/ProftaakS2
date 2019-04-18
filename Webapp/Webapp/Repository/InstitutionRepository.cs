@@ -20,7 +20,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add an institution
         /// </summary>
-        public long AddInstitution(Institution institution)
+        public long Insert(Institution institution)
         {
             return context.Insert(institution);
         }
