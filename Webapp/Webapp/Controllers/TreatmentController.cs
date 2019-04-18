@@ -13,6 +13,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
+    [Authorize(Roles = "doctor, patient")]
     public class TreatmentController : BaseController
     {
         private readonly TreatmentRepository treatmentRepository;
@@ -34,7 +35,6 @@ namespace Webapp.Controllers
             this.treatmentTypeRepository = treatmentTypeRepository;
         }
 
-        [Authorize(Roles = "doctor, patient")]
         public IActionResult Index()
         {
             List<Treatment> items = new List<Treatment>();
@@ -81,7 +81,6 @@ namespace Webapp.Controllers
             return View();
         }
 
-        [Authorize(Roles = "doctor, patient")]
         [HttpGet]
         public IActionResult Edit(long id)
         {
@@ -90,7 +89,6 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
-        [Authorize(Roles = "doctor, patient")]
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
