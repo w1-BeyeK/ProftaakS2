@@ -97,7 +97,7 @@ namespace Webapp.Context
                     TreatmentType = new TreatmentType("Formateren", "Die Dikke reboot"),
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
-                },           
+                },
                 new Treatment()
                 {
                     Name = "Euthanasie",
@@ -112,7 +112,7 @@ namespace Webapp.Context
             };
             patients = new List<Patient>()
             {
-                new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
+                new Patient(11, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
@@ -125,9 +125,16 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments
+                    Treatments = treatments,
+                    PrivAdress = false,
+                    PrivBirthDate = true,
+                    PrivContactPersonName = true,
+                    PrivContactPersonPhone = false,
+                    PrivGender = true,
+                    PrivMail = true,
+                    PrivPhoneNumber = false
                 },
-                new Patient(77, "pieterjan", "pieter@jan.nl", "Pieter Jan")
+                new Patient(12, "pieterjan", "pieter@jan.nl", "Pieter Jan")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Other,
@@ -140,9 +147,16 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments
+                    Treatments = treatments,
+                    PrivAdress = true,
+                    PrivBirthDate = true,
+                    PrivContactPersonName = true,
+                    PrivContactPersonPhone = true,
+                    PrivGender = true,
+                    PrivMail = true,
+                    PrivPhoneNumber = false
                 },
-                new Patient(69, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                new Patient(13, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Female,
@@ -155,9 +169,16 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments
+                    Treatments = treatments,
+                    PrivAdress = false,
+                    PrivBirthDate = false,
+                    PrivContactPersonName = true,
+                    PrivContactPersonPhone = false,
+                    PrivGender = false,
+                    PrivMail = true,
+                    PrivPhoneNumber = false
                 },
-                new Patient(25, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                new Patient(14, "michaelv", "michael@catujaspanker.com", "Michaeltje")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
@@ -170,7 +191,14 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments
+                    Treatments = treatments,
+                    PrivAdress = true,
+                    PrivBirthDate = false,
+                    PrivContactPersonName = true,
+                    PrivContactPersonPhone = true,
+                    PrivGender = false,
+                    PrivMail = false,
+                    PrivPhoneNumber = true
                 },
                 new Patient(15, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
                 {
@@ -185,7 +213,14 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments
+                    Treatments = treatments,
+                    PrivAdress = false,
+                    PrivBirthDate = false,
+                    PrivContactPersonName = true,
+                    PrivContactPersonPhone = true,
+                    PrivGender = false,
+                    PrivMail = false,
+                    PrivPhoneNumber = false
                 }
             };
             doctors = new List<Doctor>()
@@ -198,7 +233,9 @@ namespace Webapp.Context
                     Function = "HOI",
                     Gender = Gender.Other,
                     Password = "Test123",
-                    PhoneNumber = "12345"
+                    PhoneNumber = "12345",
+                    PrivMail = true,
+                    PrivPhoneNumber = false
                 },
                 new Doctor(12, "Soepeeeee", "sssssss@hotmail.com", "Soep")
                 {
@@ -208,7 +245,9 @@ namespace Webapp.Context
                     Function = "HOI",
                     Gender = Gender.Male,
                     Password = "Test123",
-                    PhoneNumber = "12345"
+                    PhoneNumber = "12345",
+                    PrivMail = true,
+                    PrivPhoneNumber = true
                 },
                 new Doctor(13, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
                 {
@@ -218,7 +257,9 @@ namespace Webapp.Context
                     Function = "HOI",
                     Gender = Gender.Female,
                     Password = "Test123",
-                    PhoneNumber = "12345"
+                    PhoneNumber = "12345",
+                    PrivMail = false,
+                    PrivPhoneNumber = false
                 },
             };
             treatmentTypes = new List<TreatmentType>()

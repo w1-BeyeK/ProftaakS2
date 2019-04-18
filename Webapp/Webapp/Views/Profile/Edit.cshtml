@@ -25,16 +25,18 @@
                     <div class="tab-pane active" id="home">
                         <hr>
                         <form class="form" method="post" id="registrationForm">
+
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="name"><h4>Volledige naam</h4></label>
-                                    <input type="text" asp-for="Patient.Name" value="@Model.Patient.Name" class="form-control" id="name" placeholder="Voer je naam in" title="Voer je naam in.">
+                                    <label for="name" class="h4">Volledige naam</label>
+                                    <input type="text" value="@Model.Patient.Name" class="form-control" disabled>
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Gender"><h4>Geslacht</h4></label>
-                                    <select tag="option" asp-for="Patient.Gender" class="form-control" id="gender" placeholder="Voer je geslacht in" title="Voer je geslacht in.">
+                                    <label for="Gender" class="h4">Geslacht</label>
+                                    <select tag="option" class="form-control" disabled>
                                         @if (Model.Patient.Gender == Gender.Male)
                                         {
                                             <option selected>Man</option>
@@ -62,82 +64,74 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="BSN"><h4>BSN</h4></label>
-                                    <input type="text" asp-for="Patient.BSN" value="@Model.Patient.BSN" class="form-control" id="BSN" placeholder="BSN" title="Voer hier je BSN in.">
+                                    <label for="BSN" class="h4">BSN</label>
+                                    <input type="text" value="@Model.Patient.BSN" class="form-control" disabled>
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Birthday"><h4>Geboortedatum</h4></label>
-                                    <input type="date" asp-for="Patient.Birth" value="@Model.Patient.Birth.ToString("yyyy-MM-dd")" class="form-control" id="birthday" placeholder="Geboortedatum" title="Voer hier je Geboortedatum in.">
+                                    <label for="Birthday" class="h4">Geboortedatum</label>
+                                    <input type="date" value="@Model.Patient.Birth.ToString("yyyy-MM-dd")" class="form-control" disabled>
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Username"><h4>Gebruikersnaam</h4></label>
+                                    <label for="Username" class="h4">Gebruikersnaam</label>
                                     <input type="text" asp-for="Patient.UserName" value="@Model.Patient.UserName" class="form-control" id="username" placeholder="username" title="voer je gebruikersnaam in">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="email"><h4>Email</h4></label>
+                                    <label for="email" class="h4">Email</label>
                                     <input type="email" asp-for="Patient.Email" value="@Model.Patient.Email" class="form-control" id="email" placeholder="jouw@email.com" title="Voer je email in.">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="phonenumber"><h4>Telefoonnummer</h4></label>
+                                    <label for="phonenumber" class="h4">Telefoonnummer</label>
                                     <input type="tel" asp-for="Patient.PhoneNumber" value="@Model.Patient.PhoneNumber" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
-                                    <input type="tel" asp-for="Patient.PhoneNumber" value="@Model.Patient.PhoneNumber" class="form-control" id="mobile" placeholder="Voer mobiele nummer in" title="Voer mobiele nummer in.">
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-
-                                <div class="col-xs-6">
-                                    <label for="Zipcode"><h4>Postcode</h4></label>
+                                    <label for="Zipcode" class="h4">Postcode</label>
                                     <input type="text" asp-for="Patient.Zipcode" value="@Model.Patient.Zipcode" class="form-control" id="zipcode" placeholder="Postcode" title="Voer hier je postcode in">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="HouseNumber"><h4>Huisnummer</h4></label>
+                                    <label for="HouseNumber" class="h4">Huisnummer</label>
                                     <input type="text" asp-for="Patient.HouseNumber" value="@Model.Patient.HouseNumber" class="form-control" id="address" placeholder="Huisnummer" title="Voer je huisnummer in">
                                 </div>
                             </div>
 
                             <div class="form-group">
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="ContactPersonName"><h4>Contactpersoon naam</h4></label>
-                                        <input type="text" asp-for="Patient.ContactPersonName" value="@Model.Patient.ContactPersonName" class="form-control" id="contactPersonName" placeholder="Contactpersoon naam" title="Voer hier de contactpersoon naam in.">
-                                    </div>
+                                <div class="col-xs-6">
+                                    <label for="ContactPersonName" class="h4">Contactpersoon naam</label>
+                                    <input type="text" asp-for="Patient.ContactPersonName" value="@Model.Patient.ContactPersonName" class="form-control" id="contactPersonName" placeholder="Contactpersoon naam" title="Voer hier de contactpersoon naam in.">
                                 </div>
-                                <div class="form-group">
-                                    <div class="col-xs-6">
-                                        <label for="ContactPersonPhoneNumber"><h4>Contactpersoon telefoonnummer</h4></label>
-                                        <input type="tel" asp-for="Patient.ContactPersonPhone" value="@Model.Patient.ContactPersonPhone" class="form-control" id="contactPersonPhoneNumber" placeholder="Contactpersoon telefoonnummer" title="Voer hier het telefoonnummer van je contactpersoon in.">
-                                    </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="ContactPersonPhoneNumber" class="h4">Contactpersoon telefoonnummer</label>
+                                    <input type="tel" asp-for="Patient.ContactPersonPhone" value="@Model.Patient.ContactPersonPhone" class="form-control" id="contactPersonPhoneNumber" placeholder="Contactpersoon telefoonnummer" title="Voer hier het telefoonnummer van je contactpersoon in.">
                                 </div>
-                                <div class="col-xs-12">
-                                    <br>
-                                    <button class="btn btn-lg btn-success" type="submit" asp-controller="profile" asp-action="Edit"><i class="glyphicon glyphicon-ok-sign"></i> Opslaan</button>
-                                    <button class="btn btn-lg" input type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset gegevens</button>
-                                </div>
+                            </div>
+
+                            <div class="col-xs-12">
+                                <br>
+                                <button class="btn btn-lg btn-success" type="submit" asp-controller="profile" asp-action="Edit"><i class="glyphicon glyphicon-ok-sign"></i> Opslaan</button>
+                                <button class="btn btn-lg" input type="reset"><i class="glyphicon glyphicon-repeat"></i> Reset gegevens</button>
                             </div>
                         </form>
 
@@ -149,7 +143,8 @@
                         <h2></h2>
 
                         <hr>
-                        <form class="form" action="##" method="post" id="registrationForm">
+                        <form class="form" method="post" id="registrationForm">
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
@@ -159,8 +154,8 @@
                                     Email
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
                                         <input asp-for="Patient.PrivGender" type="checkbox" checked="@Model.Patient.PrivGender">
@@ -169,8 +164,8 @@
                                     Geslacht
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
                                         <input type="checkbox" asp-for="Patient.PrivBirthDate" checked="@Model.Patient.PrivBirthDate">
@@ -179,8 +174,8 @@
                                     Geboortedatum
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
                                         <input type="checkbox" asp-for="Patient.PrivPhoneNumber" checked="@Model.Patient.PrivPhoneNumber">
@@ -189,8 +184,8 @@
                                     Telefoonnummer
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
                                         <input type="checkbox" asp-for="Patient.PrivAdress" checked="@Model.Patient.PrivAdress">
@@ -199,16 +194,17 @@
                                     Adres
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
                                         <input type="checkbox" asp-for="Patient.PrivContactPersonPhone" checked="@Model.Patient.PrivContactPersonPhone">
-
                                         <span class="slider"></span>
                                     </label>
                                     Contact persoon telefoonnummer
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
@@ -218,6 +214,7 @@
                                     Contact persoon naam
                                 </div>
                             </div>
+
                             <div class="col-xs-12">
                                 <br>
                                 <button class="btn btn-lg btn-success" type="submit" asp-controller="profile" asp-action="Edit"><i class="glyphicon glyphicon-ok-sign"></i> Opslaan</button>
@@ -248,15 +245,17 @@ else if (Model.Doctor != null)
                     <div class="tab-pane active" id="home">
                         <hr>
                         <form class="form" method="post" id="registrationForm">
+
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="name"><h4>Volledige naam</h4></label>
+                                    <label for="name" class="h4">Volledige naam</label>
                                     <input type="text" asp-for="Doctor.Name" value="@Model.Doctor.Name" class="form-control" id="name" placeholder="Voer je naam in" title="Voer je naam in.">
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Gender"><h4>Geslacht</h4></label>
+                                    <label for="Gender" class="h4">Geslacht</label>
                                     <select tag="option" asp-for="Doctor.Gender" class="form-control" id="gender" placeholder="Voer je geslacht in" title="Voer je geslacht in.">
                                         @if (Model.Doctor.Gender == Gender.Male)
                                         {
@@ -285,49 +284,41 @@ else if (Model.Doctor != null)
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Employeenumber"><h4>Medewerkersnummer</h4></label>
+                                    <label for="Employeenumber" class="h4">Medewerkersnummer</label>
                                     <input type="text" asp-for="Doctor.EmployeeNumber" value="@Model.Doctor.EmployeeNumber" class="form-control" id="BSN" placeholder="BSN" title="Voer hier je BSN in.">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Birthday"><h4>Geboortedatum</h4></label>
+                                    <label for="Birthday" class="h4">Geboortedatum</label>
                                     <input type="date" asp-for="Doctor.Birth" value="@Model.Doctor.Birth.ToString("yyyy-MM-dd")" class="form-control" id="birthday" placeholder="Geboortedatum" title="Voer hier je Geboortedatum in.">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="Username"><h4>Gebruikersnaam</h4></label>
+                                    <label for="Username" class="h4">Gebruikersnaam</label>
                                     <input type="text" asp-for="Doctor.UserName" value="@Model.Doctor.UserName" class="form-control" id="username" placeholder="username" title="voer je gebruikersnaam in">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="email"><h4>Email</h4></label>
+                                    <label for="email" class="h4">Email</label>
                                     <input type="email" asp-for="Doctor.Email" value="@Model.Doctor.Email" class="form-control" id="email" placeholder="jouw@email.com" title="Voer je email in.">
                                 </div>
                             </div>
-                            <div class="form-group">
 
+                            <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="phonenumber"><h4>Telefoonnummer</h4></label>
+                                    <label for="phonenumber" class="h4">Telefoonnummer</label>
                                     <input type="tel" asp-for="Doctor.PhoneNumber" value="@Model.Doctor.PhoneNumber" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
                                 </div>
                             </div>
-
-                            <div class="form-group">
-                                <div class="col-xs-6">
-                                    <label for="mobile"><h4>Mobiele telefoonnummer</h4></label>
-                                    <input type="tel" asp-for="Doctor.PhoneNumber" value="@Model.Doctor.PhoneNumber" class="form-control" id="mobile" placeholder="Voer mobiele nummer in" title="Voer mobiele nummer in.">
-                                </div>
-                            </div>
-
 
                             <div class="form-group">
                                 <div class="col-xs-12">
@@ -342,7 +333,8 @@ else if (Model.Doctor != null)
                     </div><!--/tab-pane-->
                     <!-- Hier komt de code voor de tab privacy-->
                     <div class="tab-pane" id="privacy">
-                        <form class="form" action="#" method="post" id="registrationForm">
+                        <form class="form" method="post" id="registrationForm">
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
@@ -352,6 +344,7 @@ else if (Model.Doctor != null)
                                     Email
                                 </div>
                             </div>
+
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
@@ -361,6 +354,7 @@ else if (Model.Doctor != null)
                                     Telefoonnummer
                                 </div>
                             </div>
+
                         </form>
                     </div><!--/tab-pane-->
                     <!--     Hier komt de code voor de tab privacy-->
