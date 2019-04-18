@@ -8,36 +8,47 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryTreatmentTypeContext : BaseMemoryContext, ITreatmentTypeContext
+    public class MemoryTreatmentTypeContext : ITreatmentTypeContext
     {
+        public List<TreatmentType> treatmentTypes = new List<TreatmentType>();
+
         public long Insert(TreatmentType treatmentType)
         {
-            //TODO : Surch for Id
+            if (treatmentTypes.Count > 0)
+            {
+                treatmentTypes.OrderBy(d => d.Id);
+                treatmentType.Id = treatmentTypes.Last().Id + 1;
+            }
+            else
+            {
+                treatmentType.Id = 1;
+            }
             treatmentTypes.Add(treatmentType);
             return treatmentType.Id;
         }
 
         public bool Update(TreatmentType treatmentType)
         {
-            TreatmentType oldTreatmentType = GetById(treatmentType.Id);
-            oldTreatmentType = treatmentType;
-            return true;
+            int index = treatmentTypes.FindIndex(t => t.Id == treatmentType.Id);
+            if (index >= 0)
+            {
+                treatmentTypes[index] = treatmentType;
+                return treatmentTypes.Exists(t => t == treatmentType);
+            }
+            return false;
         }
-        
+
         public bool Delete(TreatmentType treatmentType)
         {
-            try
+            if (treatmentTypes.Exists(t => t.Id == treatmentType.Id))
             {
                 treatmentTypes.FirstOrDefault(t => t.Id == treatmentType.Id).Active = treatmentType.Active;
                 return true;
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
-        public List<TreatmentType> GetAll()
+        List<TreatmentType> IUniversalGenerics<TreatmentType>.GetAll()
         {
             return treatmentTypes.FindAll(t => t.Active == true);
         }
@@ -47,7 +58,7 @@ namespace Webapp.Context.MemoryContext
             return treatmentTypes.FindAll(t => t.Active == active);
         }
 
-        public TreatmentType GetById(long id)
+        TreatmentType IUniversalGenerics<TreatmentType>.GetById(long id)
         {
             return treatmentTypes.Find(t => t.Id == id);
         }

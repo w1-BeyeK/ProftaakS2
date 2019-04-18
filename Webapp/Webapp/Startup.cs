@@ -63,6 +63,8 @@ namespace Webapp
             //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
             //services.AddSingleton<IPatientContext, MemoryPatientContext>();
             //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+            ////Add testdata! I DONT KNOW WHERE TO ADD
+            //TestData testData = new TestData();
 
             services.AddSingleton<ITreatmentTypeContext, TestMemoryContext>();
             services.AddSingleton<IDepartmentContext, TestMemoryContext>();
@@ -95,7 +97,7 @@ namespace Webapp
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

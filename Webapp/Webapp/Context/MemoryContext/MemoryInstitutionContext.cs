@@ -7,20 +7,31 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryInstitutionContext : BaseMemoryContext, IInstitutionContext
+    public class MemoryInstitutionContext : IInstitutionContext
     {
+        public List<Institution> institutions = new List<Institution>();
+
         public long Insert(Institution institution)
         {
-            //TODO : Give id
+            if (institutions.Count > 0)
+            {
+                institutions.OrderBy(d => d.Id);
+                institution.Id = institutions.Last().Id + 1;
+            }
+            else
+            {
+                institution.Id = 1;
+            }
             institutions.Add(institution);
             return institution.Id;
         }
 
         public bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
-            if (departments.Exists(t => t.Id == departmentId) && institutions.Exists(t => t.Id == institutionId))
+            MemoryDepartmentContext dc = new MemoryDepartmentContext();
+            if (dc.departments.Exists(t => t.Id == departmentId) && institutions.Exists(t => t.Id == institutionId))
             {
-                Department department = departments.Find(t => t.Id == departmentId);
+                Department department = dc.departments.Find(t => t.Id == departmentId);
                 institutions.Find(t => t.Id == institutionId).Departments.Add(department);
                 return true;
             }
@@ -29,10 +40,13 @@ namespace Webapp.Context.MemoryContext
 
         public bool Update(Institution institution)
         {
-            //TODO : Implement
-            Institution oldInstitution = GetById(institution.Id);
-            oldInstitution = institution;
-            return true;
+            if (institutions.Exists(i => i.Id == institution.Id))
+            {
+                int index = institutions.FindIndex(i => i.Id == institution.Id);
+                institutions[index] = institution;
+                return institutions.Exists(i => i == institution);
+            }
+            return false;
         }
 
         public List<Institution> GetAll()
@@ -47,7 +61,8 @@ namespace Webapp.Context.MemoryContext
 
         public bool Delete(Institution obj)
         {
-            throw new NotImplementedException();
+            institutions.FirstOrDefault(i => i.Id == obj.Id).Active = obj.Active;
+            return true;
         }
     }
 }

@@ -8,17 +8,32 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryCommentContext : BaseMemoryContext, ICommentContext
+    public class MemoryCommentContext : ICommentContext
     {
         public List<Comment> Insert(Comment comment)
         {
-            treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
-            return new List<Comment>(treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
+            MemoryTreatmentContext tc = new MemoryTreatmentContext();
+            if (tc.treatments.Exists(t => t.Id == comment.TreatmentId))
+            {
+                if (tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Count > 0)
+                {
+                    tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.OrderBy(c => c.Id);
+                    comment.Id = tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Last().Id + 1;
+                }
+                else
+                {
+                    comment.Id = 1;
+                }
+                tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
+                return new List<Comment>(tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
+            }
+            return null;
         }
 
-        public List<Comment> GetByTreatment(long id)
+        List<Comment> ICommentContext.GetByTreatment(long id)
         {
-            return treatments.Find(t => t.Id == id).Comments;
+            MemoryTreatmentContext tc = new MemoryTreatmentContext();
+            return tc.treatments.Find(t => t.Id == id).Comments;
         }
     }
 }

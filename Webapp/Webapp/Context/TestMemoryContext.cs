@@ -11,6 +11,7 @@ namespace Webapp.Context
     
     public class TestMemoryContext : BaseMemoryContext, ICommentContext, IDepartmentContext, IDoctorContext, IInstitutionContext, IPatientContext, ITreatmentContext, ITreatmentTypeContext
     {
+        #region Comment
         public List<Comment> Insert(Comment comment)
         {
             if (treatments.Exists(t => t.Id == comment.TreatmentId))
@@ -34,7 +35,8 @@ namespace Webapp.Context
         {
             return treatments.Find(t => t.Id == id).Comments;
         }
-
+        #endregion
+        #region Department
         public bool Delete(Department department)
         {
             departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
@@ -78,7 +80,8 @@ namespace Webapp.Context
         {
             return new List<Department>(departments.Where(p => p.Active));
         }
-
+        #endregion
+        #region Doctor
         public bool Delete(Doctor doctor)
         {
             int index = doctors.FindIndex(t => t.Id == doctor.Id);
@@ -144,11 +147,12 @@ namespace Webapp.Context
             }
             return false;
         }
-
         public bool AddToDepartment(long departmentId, long doctorId)
         {
             throw new NotImplementedException();
         }
+        #endregion
+        #region Institution
 
         public long Insert(Institution institution)
         {
@@ -202,7 +206,8 @@ namespace Webapp.Context
             institutions.FirstOrDefault(i => i.Id == obj.Id).Active = obj.Active;
             return true;
         }
-
+        #endregion
+        #region Patient
         public long Insert(Patient patient)
         {
             if (patients.Count > 0)
@@ -270,7 +275,8 @@ namespace Webapp.Context
             }
             return false;
         }
-
+        #endregion
+        #region Treatment
         //TODO : Do we want this???
         public long Insert(Treatment treatment)
         {
@@ -349,7 +355,8 @@ namespace Webapp.Context
         {
             throw new NotImplementedException();
         }
-
+        #endregion
+        #region TreatmentType
         public long Insert(TreatmentType treatmentType)
         {
             if (treatmentTypes.Count > 0)
@@ -400,5 +407,6 @@ namespace Webapp.Context
         {
             return treatmentTypes.Find(t => t.Id == id);
         }
+        #endregion
     }
 }

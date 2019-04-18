@@ -8,8 +8,10 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryDepartmentContext : BaseMemoryContext, IDepartmentContext
+    public class MemoryDepartmentContext : IDepartmentContext
     {
+        public List<Department> departments = new List<Department>();
+
         public bool Delete(Department department)
         {
             departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
@@ -24,19 +26,25 @@ namespace Webapp.Context.MemoryContext
 
         public List<Department> GetByInstitution(long id)
         {
-            return new List<Department>(institutions.Find(t => t.Id == id).Departments);
+            MemoryInstitutionContext ic = new MemoryInstitutionContext();
+            return new List<Department>(ic.institutions.Find(t => t.Id == id).Departments);
         }
 
-        public Department GetById(long id)
+        Department IUniversalGenerics<Department>.GetById(long id)
         {
             return departments.FirstOrDefault(t => t.Id == id);
         }
 
         public bool Update(Department department)
         {
-
-            //
-            return true;
+            MemoryTreatmentContext tc = new MemoryTreatmentContext();
+            if (departments.Exists(t => t.Id == department.Id))
+            {
+                int index = tc.treatments.FindIndex(t => t.Id == department.Id);
+                departments[index] = department;
+                return departments.Exists(d => d == department);
+            }
+            return false;
         }
 
         public bool AddDoctorToDepartment(long departmentId, long doctorId)
@@ -45,9 +53,9 @@ namespace Webapp.Context.MemoryContext
         }
 
         //TODO : GetAllByInstitution
-        public List<Department> GetAll()
+        List<Department> IUniversalGenerics<Department>.GetAll()
         {
-            throw new NotImplementedException();
+            return new List<Department>(departments.Where(p => p.Active));
         }
     }
 }

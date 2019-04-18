@@ -8,8 +8,10 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryDoctorContext : BaseMemoryContext, IDoctorContext
+    public class MemoryDoctorContext : IDoctorContext
     {
+        public List<Doctor> doctors = new List<Doctor>();
+
         public bool Delete(Doctor doctor)
         {
             int index = doctors.FindIndex(t => t.Id == doctor.Id);
@@ -23,17 +25,25 @@ namespace Webapp.Context.MemoryContext
 
         public long Insert(Doctor doctor)
         {
-            //TODO : Get last id?!!?!?!?!?
+            if (doctors.Count > 0)
+            {
+                doctors.OrderBy(d => d.Id);
+                doctor.Id = doctors.Last().Id + 1;
+            }
+            else
+            {
+                doctor.Id = 1;
+            }
             doctors.Add(doctor);
             return doctor.Id;
         }
 
-        public Doctor GetById(long id)
+        Doctor IUniversalGenerics<Doctor>.GetById(long id)
         {
             return doctors.FirstOrDefault(d => d.Id == id);
         }
 
-        public List<Doctor> GetAll()
+        List<Doctor> IUniversalGenerics<Doctor>.GetAll()
         {
             return doctors;
         }
@@ -45,20 +55,29 @@ namespace Webapp.Context.MemoryContext
             return doctors;
         }
 
-        public List<Doctor> GetByInstitution(long id)
+        List<Doctor> IDoctorContext.GetByInstitution(long id)
         {
-            List<Department> departmentDoctor = institutions.Find(t => t.Id == id).Departments;
+            MemoryInstitutionContext ic = new MemoryInstitutionContext();
+            List<Department> departmentDoctor = ic.institutions.Find(t => t.Id == id).Departments;
             //Get all doctors of all the departments and distinct all double doctors
             throw new NotImplementedException();
         }
 
         public bool Update(Doctor doctor)
         {
-            Doctor oldDoctor = GetById(doctor.Id);
-            oldDoctor = doctor;
-            return true;
+            int index = doctors.FindIndex(p => p.Id == doctor.Id);
+            if (index >= 0)
+            {
+                doctors[index].Email = doctor.Email;
+                doctors[index].Password = doctor.Password;
+                doctors[index].PhoneNumber = doctor.PhoneNumber;
+                doctors[index].PrivMail = doctor.PrivMail;
+                doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
+                doctors[index].UserName = doctor.UserName;
+                return doctors.Exists(d => d == doctor);
+            }
+            return false;
         }
-
         public bool AddToDepartment(long departmentId, long doctorId)
         {
             throw new NotImplementedException();

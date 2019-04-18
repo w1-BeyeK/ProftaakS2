@@ -8,27 +8,37 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MemoryContext
 {
-    public class MemoryPatientContext : BaseMemoryContext, IPatientContext
+    public class MemoryPatientContext : IPatientContext
     {
+        public List<Patient> patients = new List<Patient>();
+
         public long Insert(Patient patient)
         {
-            //TODO : surch id
+            if (patients.Count > 0)
+            {
+                patients.OrderBy(d => d.Id);
+                patient.Id = patients.Last().Id + 1;
+            }
+            else
+            {
+                patient.Id = 1;
+            }
             patients.Add(patient);
             return patient.Id;
         }
 
         public bool Delete(Patient patient)
         {
-                patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
-                return true;
+            patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
+            return true;
         }
 
-        public Patient GetById(long id)
+        Patient IUniversalGenerics<Patient>.GetById(long id)
         {
             return patients.Find(t => t.Id == id);
         }
 
-        public List<Patient> GetAll()
+        List<Patient> IUniversalGenerics<Patient>.GetAll()
         {
             return patients.FindAll(t => t.Active == true);
         }
@@ -52,15 +62,22 @@ namespace Webapp.Context.MemoryContext
 
         public bool Update(Patient patient)
         {
-            try
+            int index = patients.FindIndex(p => p.Id == patient.Id);
+            if (index > 0)
             {
-                patients.FirstOrDefault(p => p.Id == patient.Id).Active = patient.Active;
-                return true;
+                patients[index].PhoneNumber = patient.PhoneNumber;
+                patients[index].PrivAdress = patient.PrivAdress;
+                patients[index].PrivBirthDate = patient.PrivBirthDate;
+                patients[index].PrivContactPersonName = patient.PrivContactPersonName;
+                patients[index].PrivContactPersonPhone = patient.PrivContactPersonPhone;
+                patients[index].PrivGender = patient.PrivGender;
+                patients[index].PrivMail = patient.PrivMail;
+                patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
+                patients[index].UserName = patient.UserName;
+                patients[index].Zipcode = patient.Zipcode;
+                return patients.Exists(p => p == patient);
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
     }
 }

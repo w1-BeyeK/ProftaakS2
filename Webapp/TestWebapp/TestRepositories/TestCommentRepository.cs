@@ -20,9 +20,9 @@ namespace TestWebapp.TestRepositories
         //[Fact]
         //public void CommentTest()
         //{
-        //    TestMemoryContext test = new TestMemoryContext();
-        //    ITreatmentContext treatmentContext = test;
-        //    ICommentContext commentContext = test;
+        //    //TestMemoryContext test = new TestMemoryContext();
+        //    ITreatmentContext treatmentContext = new MemoryTreatmentContext();
+        //    ICommentContext commentContext = new MemoryCommentContext();
         //    TreatmentRepository treatmentRepos = new TreatmentRepository(treatmentContext);
         //    CommentRepository commentRepos = new CommentRepository(commentContext);
 
@@ -30,11 +30,11 @@ namespace TestWebapp.TestRepositories
         //    Patient patient = new Patient(15, null, null, null);
         //    TreatmentType treatmentType = new TreatmentType() { Id = 9 };
 
-        //    long id = treatmentRepos.Add(new Treatment(0, "", DateTime.Today, DateTime.Today) { Doctor = doctor, Patient = patient, TreatmentType = treatmentType }, 0, 0, 0);
-        //    long commentId = commentContext.Insert(new Comment() { TreatmentId = id, Description = "viandel"});
+        //    long id = treatmentRepos.Insert(new Treatment(0, "", DateTime.Today, DateTime.Today) { Doctor = doctor, Patient = patient, TreatmentType = treatmentType }, 0, 0, 0);
+        //    List<Comment> comments = commentContext.Insert(new Comment() { TreatmentId = id, Description = "viandel" });
         //    Treatment treat = treatmentRepos.GetById(id);
 
-        //    Assert.NotNull(treat.Comments.Find(t => t.Id == commentId));
+        //    Assert.NotNull(treat.Comments.Find(t => t.Id == comments[0].Id));
         //    Assert.Equal("viandel", treat.Comments[3].Description);
         //}
 
