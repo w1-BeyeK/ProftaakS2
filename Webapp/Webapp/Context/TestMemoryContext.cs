@@ -132,7 +132,7 @@ namespace Webapp.Context
         public bool Update(Doctor doctor)
         {
             int index = doctors.FindIndex(p => p.Id == doctor.Id);
-            if (index > 0)
+            if (index >= 0)
             {
                 doctors[index].Email = doctor.Email;
                 doctors[index].Password = doctor.Password;
