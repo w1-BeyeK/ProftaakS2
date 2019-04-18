@@ -131,10 +131,15 @@ namespace Webapp.Context
 
         public bool Update(Doctor doctor)
         {
-            if (doctors.Exists(d => d.Id == doctor.Id))
+            int index = doctors.FindIndex(p => p.Id == doctor.Id);
+            if (index > 0)
             {
-                int index = doctors.FindIndex(d => d.Id == doctor.Id);
-                doctors[index] = doctor;
+                doctors[index].Email = doctor.Email;
+                doctors[index].Password = doctor.Password;
+                doctors[index].PhoneNumber = doctor.PhoneNumber;
+                doctors[index].PrivMail = doctor.PrivMail;
+                doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
+                doctors[index].UserName = doctor.UserName;
                 return doctors.Exists(d => d == doctor);
             }
             return false;
@@ -248,15 +253,22 @@ namespace Webapp.Context
 
         public bool Update(Patient patient)
         {
-            try
+            int index = patients.FindIndex(p => p.Id == patient.Id);
+            if (index > 0)
             {
-                patients.FirstOrDefault(p => p.Id == patient.Id).Active = patient.Active;
-                return true;
+                patients[index].PhoneNumber = patient.PhoneNumber;
+                patients[index].PrivAdress = patient.PrivAdress;
+                patients[index].PrivBirthDate = patient.PrivBirthDate;
+                patients[index].PrivContactPersonName = patient.PrivContactPersonName;
+                patients[index].PrivContactPersonPhone = patient.PrivContactPersonPhone;
+                patients[index].PrivGender = patient.PrivGender;
+                patients[index].PrivMail = patient.PrivMail;
+                patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
+                patients[index].UserName = patient.UserName;
+                patients[index].Zipcode = patient.Zipcode;
+                return patients.Exists(p => p == patient);
             }
-            catch
-            {
-                return false;
-            }
+            return false;
         }
 
         //TODO : Do we want this???

@@ -134,13 +134,13 @@ namespace Webapp.Context.MSSQLContext
                     fields += "[email] = @email";
                     parameters.Add(new KeyValuePair<string, object>("email", patient.Email));
                 }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[gender] = @gender";
-                    parameters.Add(new KeyValuePair<string, object>("gender", patient.Gender));
-                }
+                //if (patient.Name != null)
+                //{
+                //    if (!string.IsNullOrWhiteSpace(fields))
+                //        fields += ",";
+                //    fields += "[gender] = @gender";
+                //    parameters.Add(new KeyValuePair<string, object>("gender", patient.Gender));
+                //}
                 if (patient.Name != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
@@ -148,13 +148,13 @@ namespace Webapp.Context.MSSQLContext
                     fields += "[houseNumber] = @houseNumber";
                     parameters.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
                 }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[name] = @name";
-                    parameters.Add(new KeyValuePair<string, object>("name", patient.Name));
-                }
+                //if (patient.Name != null)
+                //{
+                //    if (!string.IsNullOrWhiteSpace(fields))
+                //        fields += ",";
+                //    fields += "[name] = @name";
+                //    parameters.Add(new KeyValuePair<string, object>("name", patient.Name));
+                //}
                 if (patient.Name != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
@@ -225,10 +225,6 @@ namespace Webapp.Context.MSSQLContext
                     fields += "[userName] = @userName";
                     parameters.Add(new KeyValuePair<string, object>("userName", patient.UserName));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
-                    fields += ",";
-                fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", patient.Active ? "1" : "0"));
 
                 query = query.Replace("@fields", fields);
 

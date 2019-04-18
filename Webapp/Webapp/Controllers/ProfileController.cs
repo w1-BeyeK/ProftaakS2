@@ -68,12 +68,38 @@ namespace Webapp.Controllers
             }
         }
 
+        public IActionResult Inzie(long id)
+        {
+            try
+            {
+                UserViewModel viewModel = new UserViewModel();
+
+                if (HttpContext.User.IsInRole("doctor"))
+                {
+                    Patient patient = patientRepository.GetById(id);
+                    viewModel.Patient = patientConverter.PatientToViewModel(patient);
+                }
+                else if (HttpContext.User.IsInRole("patient"))
+                {
+                    Doctor doctor = doctorRepository.GetById(id);
+                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
+                    viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                }
+
+                return View(viewModel);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
         [HttpGet]
         public IActionResult Edit()
         {
             try
             {
-                var id = GetUserId();
+                long id = GetUserId();
 
                 if (id < 1)
                     return RedirectToAction("index", "home");
@@ -102,13 +128,11 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(UserViewModel viewModel)
         {
-            var id = GetUserId();
+            long id = GetUserId();
             
-
             if (HttpContext.User.IsInRole("patient"))
             {
                 viewModel.Patient.Id = id;
-                //  PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
                 Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
                 patientRepository.Update(patient);
             }

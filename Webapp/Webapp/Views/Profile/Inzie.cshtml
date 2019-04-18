@@ -1,0 +1,184 @@
+﻿@using Webapp.Models.Data;
+@model Webapp.Models.UserViewModel
+@{
+    ViewData["Title"] = "Patiënt";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (Model.Patient != null)
+{
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10"><h1>Patiënt</h1><hr /></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <form class="form" action="##" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name" class="h4">Volledige naam</label>
+                                    <p>@Model.Patient.Name</p>
+                                </div>
+                            </div>
+
+                            @if (@Model.Patient.PrivGender)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label class="h4">Geslacht</label>
+                                        @if (Model.Patient.Gender == Gender.Male)
+                                        {
+                                            <p>Man</p>
+                                        }
+                                        else
+                                        {
+                                            <p>Vrouw</p>
+                                        }
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="BSN" class="h4">BSN</label>
+                                    <p>@Model.Patient.BSN</p>
+                                </div>
+                            </div>
+
+                            @if (@Model.Patient.PrivBirthDate)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="Birthday" class="h4">Geboortedatum</label>
+                                        <p>@Model.Patient.Birth.ToString("dd-MM-yyyy")</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @*<div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="Username" class="h4">Gebruikersnaam</label>
+                                        <p>@Model.Patient.UserName</p>
+                                    </div>
+                                </div>*@
+
+                            @if (Model.Patient.PrivMail)
+                            {
+                                <div class="form-group">
+
+                                    <div class="col-xs-6">
+                                        <label for="email" class="h4">Email</label>
+                                        <p>@Model.Patient.Email</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.Patient.PrivPhoneNumber)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="phonenumber" class="h4">Telefoonnummer</label>
+                                        <p>@Model.Patient.PhoneNumber</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (@Model.Patient.PrivAdress)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="Zipcode" class="h4">Postcode</label>
+                                        <p>@Model.Patient.Zipcode</p>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="HouseNumber" class="h4">Huisnummer</label>
+                                        <p>@Model.Patient.HouseNumber</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.Patient.PrivContactPersonName)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="ContactPersonName" class="h4">Contactpersoon naam</label>
+                                        <p>@Model.Patient.ContactPersonName</p>
+                                    </div>
+                                </div>
+                            }
+                            @if (Model.Patient.PrivContactPersonPhone)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="ContactPersonPhoneNumber" class="h4">Contactpersoon telefoonnummer</label>
+                                        <p>@Model.Patient.ContactPersonPhone</p>
+                                    </div>
+                                </div>
+                            }
+                        </form>
+                        <hr>
+                    </div>
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
+}
+else if (Model.Doctor != null)
+{
+    <div class="container bootstrap snippet">
+        <div class="row">
+            <div class="col-sm-10"><h1>Doctor</h1><hr /></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-9">
+                <div class="tab-content">
+                    <div class="tab-pane active" id="home">
+                        <form class="form" action="##" method="post" id="registrationForm">
+                            <div class="form-group">
+                                <div class="col-xs-6">
+                                    <label for="name" class="h4">Volledige naam</label>
+                                    <p>@Model.Doctor.Name</p>
+                                </div>
+                            </div>
+
+                            @if (Model.Doctor.PrivMail)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="email" class="h4">Email</label>
+                                        <p>@Model.Doctor.Email</p>
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.Doctor.PrivPhonenumber)
+                            {
+                                <div class="form-group">
+                                    <div class="col-xs-6">
+                                        <label for="phonenumber" class="h4">Telefoonnummer</label>
+                                        <p>@Model.Doctor.PhoneNumber</p>
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="treatments" class="h4">Uitvoerbare behandelingen</label>
+                                    @foreach (var Type in Model.Doctor.TreatmentTypes)
+                                    {
+                                        <option>@Type.Name</option>
+                                    }
+                                </div>
+                            </div>
+                        </form>
+                        <hr>
+                    </div>
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
+}
