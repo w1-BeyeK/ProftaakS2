@@ -24,7 +24,7 @@ namespace Webapp.Repository
         /// </summary>
         /// <param name="treatment"></param>
         /// <returns></returns>
-        public long Add(TreatmentType treatment)
+        public long Insert(TreatmentType treatment)
         {
             // Insert through context
             return context.Insert(treatment);

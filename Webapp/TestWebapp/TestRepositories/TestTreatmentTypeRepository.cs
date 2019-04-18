@@ -29,7 +29,7 @@ namespace TestWebapp.TestRepositories
         {
             TreatmentType treatmentType = new TreatmentType();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal(10, treatmentTypeRepository.Add(treatmentType));
+            Assert.Equal(10, treatmentTypeRepository.Insert(treatmentType));
         }
 
         [Fact]

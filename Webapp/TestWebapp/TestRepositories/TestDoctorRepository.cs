@@ -29,7 +29,7 @@ namespace TestWebapp.TestRepositories
         {
             Doctor doctor = new Doctor(0, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(14, doctorRepository.Add(doctor));
+            Assert.Equal(14, doctorRepository.Insert(doctor));
         }
 
         [Fact]

@@ -55,7 +55,7 @@ namespace TestWebapp.TestRepositories
                 TreatmentId = 1
             };
 
-            Assert.Equal(4, commentRepository.Add(comment).Count);
+            Assert.Equal(4, commentRepository.Insert(comment).Count);
         }
 
         //    Assert.Equal(1, commentRepository.Add(comment));

@@ -30,7 +30,7 @@ namespace TestWebapp.TestRepositories
             departmentRepository = new DepartmentRepository(context);
             Department department = new Department(3, "naam", "beschrijving", true);
 
-            Assert.Equal(3, departmentRepository.Add(department));
+            Assert.Equal(3, departmentRepository.Insert(department));
         }
 
         [Fact]
