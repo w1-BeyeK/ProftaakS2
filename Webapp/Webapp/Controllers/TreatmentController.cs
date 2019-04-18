@@ -77,7 +77,7 @@ namespace Webapp.Controllers
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
-            treatmentRepository.Add(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
+            treatmentRepository.Insert(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
             return View();
         }
 

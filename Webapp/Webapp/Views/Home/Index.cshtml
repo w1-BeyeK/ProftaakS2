@@ -20,7 +20,7 @@
     <div class="grandParentContainer">
         <div class="parentContainer">
             <div align="center">
-                <form class="loginForm" role="form" id="loginForm">
+                <form class="loginForm" id="loginForm" method="post">
                     <h2>LOGIN</h2>
                     <div class="form-group">
 
@@ -35,7 +35,7 @@
                             <input type="password" id="password" placeholder="Password" class="form-control" name="password" value="Test123!">
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" asp-action="Login" formmethod="post">Login</button>
+                    <button type="submit" class="btn btn-primary btn-block" asp-action="Login">Login</button>
                 </form> <!-- /form -->
             </div>
         </div>

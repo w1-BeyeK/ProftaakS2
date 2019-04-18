@@ -20,7 +20,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add a doctor
         /// </summary>
-        public long Add(Doctor doctor)
+        public long Insert(Doctor doctor)
         {
             return context.Insert(doctor);
         }

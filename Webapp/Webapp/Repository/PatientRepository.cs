@@ -21,7 +21,7 @@ namespace Webapp.Repository
         /// <summary>
         /// This is not needed...
         /// </summary>
-        public long Add(Patient patient)
+        public long Insert(Patient patient)
         {
             return context.Insert(patient);
         }

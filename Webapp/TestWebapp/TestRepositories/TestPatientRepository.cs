@@ -32,7 +32,7 @@ namespace TestWebapp.TestRepositories
 
             Patient patient = new Patient();
 
-            Assert.Equal(16, patientRepository.Add(patient));
+            Assert.Equal(16, patientRepository.Insert(patient));
         }
 
         [Fact]

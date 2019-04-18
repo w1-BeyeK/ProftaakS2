@@ -17,7 +17,7 @@ namespace Webapp.Repository
             this.context = context;
         }
 
-        public long Add(Department department)
+        public long Insert(Department department)
         {
             return context.Insert(department);
         }
