@@ -132,7 +132,7 @@ namespace Webapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                TreatmentType tt = converter.ViewModelToModal(vm);
+                TreatmentType tt = converter.ViewModelToModel(vm);
                 long id = repository.Insert(tt);
 
                 return RedirectToAction("details", new { id });
@@ -199,7 +199,7 @@ namespace Webapp.Controllers
         {
             if(ModelState.IsValid)
             {
-                TreatmentType tt = converter.ViewModelToModal(vm);
+                TreatmentType tt = converter.ViewModelToModel(vm);
                 repository.Update(tt);
 
                 if (tt.Active)
