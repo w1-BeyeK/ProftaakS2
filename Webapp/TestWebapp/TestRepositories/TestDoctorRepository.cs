@@ -11,7 +11,7 @@ using Webapp.Context.MemoryContext;
 namespace TestWebapp.TestRepositories
 {
     
-    public class TestDoctorRepository
+    public class TestDoctorRepository : RemoveData
     {
         IDoctorContext context = new MemoryDoctorContext();
         DoctorRepository doctorRepository;
@@ -19,6 +19,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void DoctorRepositoryConstructor()
         {
+            EmptyLists();
             doctorRepository = new DoctorRepository(context);
 
             Assert.NotNull(doctorRepository);
@@ -27,6 +28,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             Doctor doctor = new Doctor(0, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
             Assert.Equal(14, doctorRepository.Insert(doctor));
@@ -35,6 +37,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Update()
         {
+            EmptyLists();
             Doctor doctor = new Doctor(12, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
             Assert.True(doctorRepository.Update(doctor));
@@ -43,6 +46,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetAll()
         {
+            EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Assert.Equal(3, doctorRepository.GetAll().Count);
         }
@@ -51,6 +55,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetByDepartment()
         {
+            EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Assert.Equal(2, doctorRepository.GetByDepartment(1).Count);
         }
@@ -59,6 +64,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetByInstitution()
         {
+            EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Assert.Equal(3, doctorRepository.GetByInstitution(1).Count);
         }
@@ -66,6 +72,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetById()
         {
+            EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Assert.Equal("Soepeeeee", doctorRepository.GetById(12).UserName);
         }

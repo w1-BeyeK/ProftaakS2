@@ -12,13 +12,14 @@ using Xunit;
 namespace TestWebapp.TestRepositories
 {
 
-    public class TestDepartmentRepository
+    public class TestDepartmentRepository : RemoveData
     {
         IDepartmentContext context = new MemoryDepartmentContext();
         DepartmentRepository departmentRepository;
         [Fact]
         public void DepartmentRepositoryConstructor()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
             Assert.NotNull(departmentRepository);
@@ -27,6 +28,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
             Department department = new Department(3, "naam", "beschrijving", true);
 
@@ -36,6 +38,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Delete()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
             Assert.True(departmentRepository.Delete(1));
@@ -45,6 +48,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetAll()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
             Assert.Equal(3, departmentRepository.GetAll().Count);
         }
@@ -53,6 +57,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetById()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
             Assert.Equal("Soepderpoep", departmentRepository.GetById(1).Name);
@@ -61,6 +66,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Update()
         {
+            EmptyLists();
             departmentRepository = new DepartmentRepository(context);
             Department department = new Department(1, "naam", "beschrijving", true);
 
