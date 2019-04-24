@@ -21,8 +21,16 @@ namespace Webapp.Context.Login
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "KEVINBEYE"
                 },
-                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "Kevin"),
-                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "Kevin"),
+                new Patient(13, "stijn", "stijn@student.fontys.nl", "Kevin")
+                                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "STIJN"
+                },
+                new Patient(14, "wang", "w@ng@student.fontys.nl", "Kevin")
+                                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "WANG"
+                },
                 new Patient(12, "patient", "patient", "patient")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
