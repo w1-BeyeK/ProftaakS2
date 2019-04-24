@@ -64,7 +64,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal("Zowarmarollen", treatmentRepository.GetById(1).Name);
+            Assert.Equal("Arm amputeren", treatmentRepository.GetById(1).Name);
         }
     }
 }

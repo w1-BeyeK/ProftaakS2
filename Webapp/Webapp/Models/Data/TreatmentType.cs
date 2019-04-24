@@ -15,6 +15,8 @@ namespace Webapp.Models.Data
         public string Description { get; set; }
         public bool Active { get; set; }
         public List<Department> Departments { get; set; }
+
+        //TODO : Deze lijst moet weg
         public List<Doctor> Doctors { get; set; }
         public List<Treatment> Treatments { get; set; }
         public long DepartmentId { get; internal set; }

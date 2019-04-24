@@ -60,7 +60,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
-            Assert.Equal("Soepderpoep", departmentRepository.GetById(1).Name);
+            Assert.Equal("afdeling 1", departmentRepository.GetById(1).Name);
         }
 
         [Fact]

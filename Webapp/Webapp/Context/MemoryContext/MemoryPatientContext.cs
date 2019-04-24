@@ -73,7 +73,7 @@ namespace Webapp.Context.MemoryContext
                 BaseMemoryContext.patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
                 BaseMemoryContext.patients[index].UserName = patient.UserName;
                 BaseMemoryContext.patients[index].Zipcode = patient.Zipcode;
-                return BaseMemoryContext.patients.Exists(p => p == patient);
+                return true;
             }
             return false;
         }

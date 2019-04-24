@@ -60,7 +60,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal(1, treatmentTypeRepository.GetAll().Count);
+            Assert.Equal(2, treatmentTypeRepository.GetAll().Count);
         }
 
         [Fact]

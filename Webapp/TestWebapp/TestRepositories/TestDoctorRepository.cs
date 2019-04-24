@@ -74,7 +74,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal("Soepeeeee", doctorRepository.GetById(12).UserName);
+            Assert.Equal("Soof", doctorRepository.GetById(12).UserName);
         }
     }
 }

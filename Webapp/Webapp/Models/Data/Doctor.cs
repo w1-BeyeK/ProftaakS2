@@ -14,6 +14,8 @@ namespace Webapp.Models.Data
         public bool PrivMail { get; set; }
         public bool PrivPhoneNumber { get; set; }
 
+        //TODO : Lijst met departments???
+
         public Doctor(long id, string userName, string email, string name) : base((int)id, userName, email, name)
         {
             Role = "doctor";
