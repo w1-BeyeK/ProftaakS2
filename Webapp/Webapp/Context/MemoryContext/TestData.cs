@@ -16,25 +16,31 @@ namespace Webapp.Context.MemoryContext
             BaseMemoryContext.institutions.Add(new Institution() { Id = 2, Active = true, Name = "instituutje", Country = "Ruchpen" });
             List<Comment> comments = new List<Comment>
             {
-                new Comment("Arm afzagen", "De arm wordt afgezaagd1", new DateTime(2010 / 22 / 22)) { Id = 1 },
-                new Comment("Arm afzagen succes", "De arm is afgezaagd2", new DateTime(2011 / 22 / 22)) { Id = 2 },
-                new Comment("Arm afzagen succes2", "De arm is afgezaagd3", DateTime.Today) { Id = 3 }
+                new Comment("Arm amputeren 1", "De arm wordt geamputeerd 1", new DateTime(2010 / 22 / 22)) { Id = 1 },
+                new Comment("Arm amputeren 2", "De arm is geamputeerd 2", new DateTime(2011 / 22 / 22)) { Id = 2 },
+                new Comment("Arm amputeren 3", "De arm is geamputeerd 3", DateTime.Today) { Id = 3 }
             };
+
+            BaseMemoryContext.treatmentTypes = new List<TreatmentType>()
+            {
+                new TreatmentType() { Id = 9, Name = "kaas", Description = "schimmel groeien", Active = true},
+                new TreatmentType() { Id = 8, Name = "Arm amputeren", Description = "Arm gaat eraf", Active = true },
+        };
 
             BaseMemoryContext.departments = new List<Department>()
             {
                 new Department()
                 {
                     Id = 1,
-                    Name = "Soepderpoep",
-                    Description = "Hier wordt soep gemaakt",
+                    Name = "afdeling 1",
+                    Description = "Hier wordt iets gemaakt",
                     InstitutionId = 1,
                     Active = true,
                 },
                 new Department()
                 {
                     Id = 2,
-                    Name = "Toedoe",
+                    Name = "afdeling 2",
                     Description = "Hier worden dingen nog gedaan",
                     InstitutionId = 2,
                     Active = true,
@@ -42,8 +48,8 @@ namespace Webapp.Context.MemoryContext
                 new Department()
                 {
                     Id = 3,
-                    Name = "Slaapbank",
-                    Description = "Hier slaapt de slapende slaper",
+                    Name = "afdeling 3",
+                    Description = "Hier een andere afdeling",
                     Active = true,
                 },
             };
@@ -52,12 +58,12 @@ namespace Webapp.Context.MemoryContext
             {
                 new Treatment()
                 {
-                    Name = "Zowarmarollen",
+                    Name = "Arm amputeren",
                     Id = 1,
                     BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
                     EndDate = DateTime.Now,
                     Comments = comments,
-                    TreatmentType = new TreatmentType("Arm afzagen", "Arm gaat eraf"),
+                    
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 },
@@ -68,18 +74,18 @@ namespace Webapp.Context.MemoryContext
                     BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
                     EndDate = DateTime.Now,
                     Comments = comments,
-                    TreatmentType = new TreatmentType("SmeerSmaren", "Arm gaat erin"),
+                    TreatmentType = BaseMemoryContext.treatmentTypes.Find(t => t.Id == 9),
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 },
                 new Treatment()
                 {
-                    Name = "HersenReset",
+                    Name = "Hersenoperatie",
                     Id = 3,
                     BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
                     EndDate = DateTime.Now,
                     Comments = comments,
-                    TreatmentType = new TreatmentType("Formateren", "Die Dikke reboot"),
+                    TreatmentType = BaseMemoryContext.treatmentTypes.Find(t => t.Id == 8),
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 },
@@ -90,7 +96,7 @@ namespace Webapp.Context.MemoryContext
                     BeginDate = new DateTime(2019, 04, 01, 11, 32, 21),
                     EndDate = DateTime.Now,
                     Comments = comments,
-                    TreatmentType = new TreatmentType("Illegale prik", "Vol zwart verf gevuld"),
+                    TreatmentType = BaseMemoryContext.treatmentTypes.Find(t => t.Id == 8),
                     Doctor = new Doctor(15, "jan", "jan@hotmail.com", "Jan"),
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
@@ -141,9 +147,9 @@ namespace Webapp.Context.MemoryContext
                     PrivMail = true,
                     PrivPhoneNumber = false
                 },
-                new Patient(13, "Catuja", "cat@cykablyat.ru", "Catuja Noboobs")
+                new Patient(13, "Yasmina", "yas@goolge.com", "Yasmina Ashmila")
                 {
-                    Email = "k.beye@student.fontys.nl",
+                    Email = "y.ashmila@student.fontys.nl",
                     Gender = Gender.Female,
                     Password = "Test123",
                     Active = true,
@@ -163,7 +169,7 @@ namespace Webapp.Context.MemoryContext
                     PrivMail = true,
                     PrivPhoneNumber = false
                 },
-                new Patient(14, "michaelv", "michael@catujaspanker.com", "Michaeltje")
+                new Patient(14, "michaelv", "michael@google.com", "Michaeltje")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
@@ -210,7 +216,7 @@ namespace Webapp.Context.MemoryContext
             };
             BaseMemoryContext.doctors = new List<Doctor>()
             {
-                new Doctor(11, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
+                new Doctor(11, "kevin", "kevin.Wouw@hotmail.com", "Kevin")
                 {
                     Active = true,
                     Birth = DateTime.Now,
@@ -222,7 +228,7 @@ namespace Webapp.Context.MemoryContext
                     PrivMail = true,
                     PrivPhoneNumber = false
                 },
-                new Doctor(12, "Soepeeeee", "sssssss@hotmail.com", "Soep")
+                new Doctor(12, "Soof", "sofie@hotmail.com", "Sofie")
                 {
                     Active = true,
                     Birth = DateTime.Now,
@@ -234,7 +240,7 @@ namespace Webapp.Context.MemoryContext
                     PrivMail = true,
                     PrivPhoneNumber = true
                 },
-                new Doctor(13, "Hakker", "Hakmoes@hotmail.com", "Hakkie")
+                new Doctor(13, "Hansja", "hans@hotmail.com", "Hans")
                 {
                     Active = true,
                     Birth = DateTime.Now,
@@ -247,13 +253,6 @@ namespace Webapp.Context.MemoryContext
                     PrivPhoneNumber = false
                 },
             };
-            BaseMemoryContext.treatmentTypes = new List<TreatmentType>()
-            {
-                new TreatmentType() { Id = 9, Name = "kaas", Description = "schimmel groeien", Active = true},
-            //    new TreatmentType("Armzagen","Hopsakee arm eraf."),
-            //    new TreatmentType("RibRemoven","Zin in een spare ribje?"),
-            //    new TreatmentType("VingerVangen","Beter 10 vingers in je hand dan 500 op de grond."),
-        };
         }
     }
 }
