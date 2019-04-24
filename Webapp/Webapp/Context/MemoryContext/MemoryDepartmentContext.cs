@@ -10,39 +10,35 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryDepartmentContext : IDepartmentContext
     {
-        public List<Department> departments = new List<Department>();
-
         public bool Delete(Department department)
         {
-            departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
+            BaseMemoryContext.departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
             return true;
         }
 
         public long Insert(Department department)
         {
-            departments.Add(department);
+            BaseMemoryContext.departments.Add(department);
             return department.Id;
         }
 
         public List<Department> GetByInstitution(long id)
         {
-            MemoryInstitutionContext ic = new MemoryInstitutionContext();
-            return new List<Department>(ic.institutions.Find(t => t.Id == id).Departments);
+            return new List<Department>(BaseMemoryContext.institutions.Find(t => t.Id == id).Departments);
         }
 
         Department IUniversalGenerics<Department>.GetById(long id)
         {
-            return departments.FirstOrDefault(t => t.Id == id);
+            return BaseMemoryContext.departments.FirstOrDefault(t => t.Id == id);
         }
 
         public bool Update(Department department)
         {
-            MemoryTreatmentContext tc = new MemoryTreatmentContext();
-            if (departments.Exists(t => t.Id == department.Id))
+            if (BaseMemoryContext.departments.Exists(t => t.Id == department.Id))
             {
-                int index = tc.treatments.FindIndex(t => t.Id == department.Id);
-                departments[index] = department;
-                return departments.Exists(d => d == department);
+                int index = BaseMemoryContext.treatments.FindIndex(t => t.Id == department.Id);
+                BaseMemoryContext.departments[index] = department;
+                return BaseMemoryContext.departments.Exists(d => d == department);
             }
             return false;
         }
@@ -55,7 +51,7 @@ namespace Webapp.Context.MemoryContext
         //TODO : GetAllByInstitution
         List<Department> IUniversalGenerics<Department>.GetAll()
         {
-            return new List<Department>(departments.Where(p => p.Active));
+            return new List<Department>(BaseMemoryContext.departments.Where(p => p.Active));
         }
     }
 }

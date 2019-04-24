@@ -2,35 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.MemoryContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MemoryContext
 {
-    public abstract class BaseMemoryContext
+    public class TestData
     {
-        protected List<Patient> patients = new List<Patient>();
-        protected List<Treatment> treatments = new List<Treatment>();
-        protected List<Doctor> doctors = new List<Doctor>();
-        protected List<Department> departments = new List<Department>();
-        protected List<Institution> institutions = new List<Institution>();
-        protected List<TreatmentType> treatmentTypes = new List<TreatmentType>();
-
-        //protected static TestContext instance = null;
-
-        //public static TestContext GetInstance()
-        //{
-        //    if (instance == null)
-        //    {
-        //        instance = new TestContext();
-        //    }
-        //    return instance;
-        //}
-
-        public BaseMemoryContext()
+        public TestData()
         {
-            institutions.Add(new Institution() { Id = 1, Active = true, Name = "instituut", Country = "Zeeland" });
-            institutions.Add(new Institution() { Id = 2, Active = true, Name = "instituutje", Country = "Ruchpen" });
+            BaseMemoryContext.institutions.Add(new Institution() { Id = 1, Active = true, Name = "instituut", Country = "Zeeland" });
+            BaseMemoryContext.institutions.Add(new Institution() { Id = 2, Active = true, Name = "instituutje", Country = "Ruchpen" });
             List<Comment> comments = new List<Comment>
             {
                 new Comment("Arm afzagen", "De arm wordt afgezaagd1", new DateTime(2010 / 22 / 22)) { Id = 1 },
@@ -38,7 +21,7 @@ namespace Webapp.Context
                 new Comment("Arm afzagen succes2", "De arm is afgezaagd3", DateTime.Today) { Id = 3 }
             };
 
-            departments = new List<Department>()
+            BaseMemoryContext.departments = new List<Department>()
             {
                 new Department()
                 {
@@ -65,7 +48,7 @@ namespace Webapp.Context
                 },
             };
 
-            treatments = new List<Treatment>()
+            BaseMemoryContext.treatments = new List<Treatment>()
             {
                 new Treatment()
                 {
@@ -112,7 +95,7 @@ namespace Webapp.Context
                     Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                 }
             };
-            patients = new List<Patient>()
+            BaseMemoryContext.patients = new List<Patient>()
             {
                 new Patient(11, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
                 {
@@ -127,7 +110,7 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments,
+                    Treatments = BaseMemoryContext.treatments,
                     PrivAdress = false,
                     PrivBirthDate = true,
                     PrivContactPersonName = true,
@@ -149,7 +132,7 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments,
+                    Treatments = BaseMemoryContext.treatments,
                     PrivAdress = true,
                     PrivBirthDate = true,
                     PrivContactPersonName = true,
@@ -171,7 +154,7 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments,
+                    Treatments = BaseMemoryContext.treatments,
                     PrivAdress = false,
                     PrivBirthDate = false,
                     PrivContactPersonName = true,
@@ -193,7 +176,7 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments,
+                    Treatments = BaseMemoryContext.treatments,
                     PrivAdress = true,
                     PrivBirthDate = false,
                     PrivContactPersonName = true,
@@ -215,7 +198,7 @@ namespace Webapp.Context
                     ContactPersonPhone = "0612345678",
                     HouseNumber = 2,
                     Zipcode = "5258HS",
-                    Treatments = treatments,
+                    Treatments = BaseMemoryContext.treatments,
                     PrivAdress = false,
                     PrivBirthDate = false,
                     PrivContactPersonName = true,
@@ -225,7 +208,7 @@ namespace Webapp.Context
                     PrivPhoneNumber = false
                 }
             };
-            doctors = new List<Doctor>()
+            BaseMemoryContext.doctors = new List<Doctor>()
             {
                 new Doctor(11, "kevin<3Catuja", "kevin.beye1999@hotmail.com", "Kevin")
                 {
@@ -264,7 +247,7 @@ namespace Webapp.Context
                     PrivPhoneNumber = false
                 },
             };
-            treatmentTypes = new List<TreatmentType>()
+            BaseMemoryContext.treatmentTypes = new List<TreatmentType>()
             {
                 new TreatmentType() { Id = 9, Name = "kaas", Description = "schimmel groeien", Active = true},
             //    new TreatmentType("Armzagen","Hopsakee arm eraf."),

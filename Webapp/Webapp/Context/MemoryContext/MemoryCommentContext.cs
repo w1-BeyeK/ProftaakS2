@@ -12,28 +12,26 @@ namespace Webapp.Context.MemoryContext
     {
         public List<Comment> Insert(Comment comment)
         {
-            MemoryTreatmentContext tc = new MemoryTreatmentContext();
-            if (tc.treatments.Exists(t => t.Id == comment.TreatmentId))
+            if (BaseMemoryContext.treatments.Exists(t => t.Id == comment.TreatmentId))
             {
-                if (tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Count > 0)
+                if (BaseMemoryContext.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Count > 0)
                 {
-                    tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.OrderBy(c => c.Id);
-                    comment.Id = tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Last().Id + 1;
+                    BaseMemoryContext.treatments.Find(t => t.Id == comment.TreatmentId).Comments.OrderBy(c => c.Id);
+                    comment.Id = BaseMemoryContext.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Last().Id + 1;
                 }
                 else
                 {
                     comment.Id = 1;
                 }
-                tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
-                return new List<Comment>(tc.treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
+                BaseMemoryContext.treatments.Find(t => t.Id == comment.TreatmentId).Comments.Add(comment);
+                return new List<Comment>(BaseMemoryContext.treatments.Find(t => t.Id == comment.TreatmentId).Comments.ToList());
             }
             return null;
         }
 
         List<Comment> ICommentContext.GetByTreatment(long id)
         {
-            MemoryTreatmentContext tc = new MemoryTreatmentContext();
-            return tc.treatments.Find(t => t.Id == id).Comments;
+            return BaseMemoryContext.treatments.Find(t => t.Id == id).Comments;
         }
     }
 }

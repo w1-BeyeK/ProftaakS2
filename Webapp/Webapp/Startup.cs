@@ -44,7 +44,6 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddScoped<IContext, TestContext>();
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
 
@@ -63,8 +62,6 @@ namespace Webapp
             //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
             //services.AddSingleton<IPatientContext, MemoryPatientContext>();
             //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
-            ////Add testdata! I DONT KNOW WHERE TO ADD
-            //TestData testData = new TestData();
 
             services.AddSingleton<ITreatmentTypeContext, TestMemoryContext>();
             services.AddSingleton<IDepartmentContext, TestMemoryContext>();
