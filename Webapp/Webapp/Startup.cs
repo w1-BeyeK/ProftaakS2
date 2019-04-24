@@ -55,21 +55,15 @@ namespace Webapp
             //services.AddScoped<IPatientContext, MSSQLPatientContext>();
             //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
-            //services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
-            //services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
-            //services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
-            //services.AddSingleton<ICommentContext, MemoryCommentContext>();
-            //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
-            //services.AddSingleton<IPatientContext, MemoryPatientContext>();
-            //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
-
-            services.AddSingleton<ITreatmentTypeContext, TestMemoryContext>();
-            services.AddSingleton<IDepartmentContext, TestMemoryContext>();
-            services.AddSingleton<IInstitutionContext, TestMemoryContext>();
-            services.AddSingleton<ICommentContext, TestMemoryContext>();
-            services.AddSingleton<IDoctorContext, TestMemoryContext>();
-            services.AddSingleton<IPatientContext, TestMemoryContext>();
-            services.AddSingleton<ITreatmentContext, TestMemoryContext>();
+            services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
+            services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
+            services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
+            services.AddSingleton<ICommentContext, MemoryCommentContext>();
+            services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
+            services.AddSingleton<IPatientContext, MemoryPatientContext>();
+            services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+            //Add test data into static lists
+            TestData testData = new TestData();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
