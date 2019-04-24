@@ -51,12 +51,12 @@ namespace Webapp.Controllers
                 if (HttpContext.User.IsInRole("patient"))
                 {
                     Patient patient = patientRepository.GetById(id);
-                    viewModel.Patient = patientConverter.PatientToViewModel(patient);
+                    viewModel.Patient = patientConverter.ModelToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetById(id);
-                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
+                    viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
                     viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                 }
 
@@ -77,12 +77,12 @@ namespace Webapp.Controllers
                 if (HttpContext.User.IsInRole("doctor"))
                 {
                     Patient patient = patientRepository.GetById(id);
-                    viewModel.Patient = patientConverter.PatientToViewModel(patient);
+                    viewModel.Patient = patientConverter.ModelToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("patient"))
                 {
                     Doctor doctor = doctorRepository.GetById(id);
-                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
+                    viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
                     viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                 }
 
@@ -109,12 +109,12 @@ namespace Webapp.Controllers
                 if (HttpContext.User.IsInRole("patient"))
                 {
                     Patient patient = patientRepository.GetById(id);
-                    viewModel.Patient = patientConverter.PatientToViewModel(patient);
+                    viewModel.Patient = patientConverter.ModelToViewModel(patient);
                 }
                 else if (HttpContext.User.IsInRole("doctor"))
                 {
                     Doctor doctor = doctorRepository.GetById(id);
-                    viewModel.Doctor = doctorConverter.DoctorToViewModel(doctor);
+                    viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
                 }
 
                 return View(viewModel);
@@ -133,13 +133,13 @@ namespace Webapp.Controllers
             if (HttpContext.User.IsInRole("patient"))
             {
                 viewModel.Patient.Id = id;
-                Patient patient = patientConverter.ViewModelToPatient(viewModel.Patient);
+                Patient patient = patientConverter.ViewModelToModel(viewModel.Patient);
                 patientRepository.Update(patient);
             }
             else if (HttpContext.User.IsInRole("doctor"))
             {
                 viewModel.Doctor.EmployeeNumber = id;
-                Doctor doctor = doctorConverter.ViewModelToDoctor(viewModel.Doctor);
+                Doctor doctor = doctorConverter.ViewModelToModel(viewModel.Doctor);
                 doctorRepository.Update(doctor);
             }
             return RedirectToAction("index","Profile");
