@@ -22,6 +22,7 @@ using Webapp.Repository;
 using Webapp.Context.MSSQLContext;
 using Webapp.Context.MemoryContext;
 using Webapp.Context.InterfaceContext;
+using Webapp.Models;
 
 namespace Webapp
 {
@@ -44,16 +45,21 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Universal tools
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
 
-            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
-            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
-            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
-            services.AddScoped<ICommentContext, MSSQLCommentContext>();
-            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
-            services.AddScoped<IPatientContext, MSSQLPatientContext>();
-            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+            // Viewmodel converters
+            services.AddTransient<IViewModelConverter<Department, DepartmentDetailViewModel>, DepartmentViewModelConverter>();
+
+            // Sql contexts
+            //services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            //services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            //services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            //services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            //services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            //services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
             services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
             services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
@@ -64,7 +70,8 @@ namespace Webapp
             services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
             //Add test data into static lists
             TestData testData = new TestData();
-
+            
+            // Repositories
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();

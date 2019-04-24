@@ -8,9 +8,9 @@ namespace Webapp.Interfaces
     public interface IViewModelConverter<TModel, TViewModel>
     {
         TViewModel ModelToViewModel(TModel model);
-        TModel ViewModelToModal(TViewModel viewModel);
+        TModel ViewModelToModel(TViewModel viewModel);
 
         List<TViewModel> ModelsToViewModel(List<TModel> models);
-        List<TModel> ViewModelsToModals(List<TViewModel> viewModels);
+        List<TModel> ViewModelsToModels(List<TViewModel> viewModels);
     }
 }

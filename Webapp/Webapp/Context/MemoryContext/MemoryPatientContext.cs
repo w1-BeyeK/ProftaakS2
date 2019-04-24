@@ -73,11 +73,11 @@ namespace Webapp.Context.MemoryContext
                 BaseMemoryContext.patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
                 BaseMemoryContext.patients[index].UserName = patient.UserName;
                 BaseMemoryContext.patients[index].Zipcode = patient.Zipcode;
-                BaseMemoryContext.patients[index].Email = patient.Email;
-                BaseMemoryContext.patients[index].ContactPersonName = patient.ContactPersonName;
-                BaseMemoryContext.patients[index].ContactPersonPhone = patient.ContactPersonPhone;
                 BaseMemoryContext.patients[index].HouseNumber = patient.HouseNumber;
-                return BaseMemoryContext.patients.Exists(p => p == patient);
+                BaseMemoryContext.patients[index].ContactPersonPhone = patient.ContactPersonPhone;
+                BaseMemoryContext.patients[index].ContactPersonName = patient.ContactPersonName;
+                BaseMemoryContext.patients[index].Email = patient.Email;
+                return true;
             }
             return false;
         }
