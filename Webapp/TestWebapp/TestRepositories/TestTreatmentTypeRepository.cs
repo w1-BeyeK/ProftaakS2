@@ -11,14 +11,15 @@ using Webapp.Context;
 namespace TestWebapp.TestRepositories
 {
     
-    public class TestTreatmentTypeRepository
+    public class TestTreatmentTypeRepository : RemoveData
     {
-        ITreatmentTypeContext context = new TestMemoryContext();
+        ITreatmentTypeContext context = new MemoryTreatmentTypeContext();
         TreatmentTypeRepository treatmentTypeRepository;
 
         [Fact]
         public void TreatmentTypeRepositoryConstructor()
         {
+            EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
 
             Assert.NotNull(treatmentTypeRepository);
@@ -27,6 +28,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             TreatmentType treatmentType = new TreatmentType();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
             Assert.Equal(10, treatmentTypeRepository.Insert(treatmentType));
@@ -35,6 +37,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Update()
         {
+            EmptyLists();
             TreatmentType treatmentType = new TreatmentType()
             {
                 Id = 9,
@@ -47,6 +50,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Delete()
         {
+            EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
             Assert.True(treatmentTypeRepository.Delete(9));
         }
@@ -54,13 +58,15 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetAll()
         {
+            EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.Equal(1, treatmentTypeRepository.GetAll().Count);
+            Assert.Equal(2, treatmentTypeRepository.GetAll().Count);
         }
 
         [Fact]
         public void GetById()
         {
+            EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
             Assert.Equal("kaas", treatmentTypeRepository.GetById(9).Name);
         }

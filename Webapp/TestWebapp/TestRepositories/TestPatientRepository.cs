@@ -12,14 +12,15 @@ using Xunit;
 namespace TestWebapp.TestRepositories
 {
 
-    public class TestPatientRepository
+    public class TestPatientRepository : RemoveData
     {
-        IPatientContext context = new TestMemoryContext();
+        IPatientContext context = new MemoryPatientContext();
         PatientRepository patientRepository;
 
         [Fact]
         public void PatientRepositoryConstructor()
         {
+            EmptyLists();
             patientRepository = new PatientRepository(context);
 
             Assert.NotNull(patientRepository);
@@ -28,6 +29,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             patientRepository = new PatientRepository(context);
 
             Patient patient = new Patient();
@@ -38,6 +40,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetAll()
         {
+            EmptyLists();
             patientRepository = new PatientRepository(context);
 
             Assert.Equal(5, patientRepository.GetAll().Count);
@@ -46,6 +49,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetById()
         {
+            EmptyLists();
             patientRepository = new PatientRepository(context);
 
 
@@ -55,6 +59,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Update()
         {
+            EmptyLists();
             patientRepository = new PatientRepository(context);
 
             Patient patient = new Patient(15, "naam", "beschrijving", "naam");
