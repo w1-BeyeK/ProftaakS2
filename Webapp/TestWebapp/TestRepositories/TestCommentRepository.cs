@@ -14,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestCommentRepository
     {
-        ICommentContext context = new TestMemoryContext();
+        ICommentContext context = new MemoryCommentContext();
         CommentRepository commentRepository;
 
         //[Fact]

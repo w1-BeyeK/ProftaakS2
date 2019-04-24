@@ -14,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestPatientRepository
     {
-        IPatientContext context = new TestMemoryContext();
+        IPatientContext context = new MemoryPatientContext();
         PatientRepository patientRepository;
 
         [Fact]

@@ -13,7 +13,7 @@ namespace TestWebapp.TestRepositories
     
     public class TestTreatmentTypeRepository
     {
-        ITreatmentTypeContext context = new TestMemoryContext();
+        ITreatmentTypeContext context = new MemoryTreatmentTypeContext();
         TreatmentTypeRepository treatmentTypeRepository;
 
         [Fact]
