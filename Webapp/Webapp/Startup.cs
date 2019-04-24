@@ -56,16 +56,6 @@ namespace Webapp
             services.AddScoped<IPatientContext, MSSQLPatientContext>();
             services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
             
-            services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
-            services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
-            services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
-            services.AddSingleton<ICommentContext, MemoryCommentContext>();
-            services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
-            services.AddSingleton<IPatientContext, MemoryPatientContext>();
-            services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
-            //Add test data into static lists
-            TestData testData = new TestData();
-
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();
