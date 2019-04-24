@@ -68,27 +68,42 @@
 //            try
 //            {
 //                cancellationToken.ThrowIfCancellationRequested();
-//                string query = $"select * from PTS2_Doctor where Id = {userId}";
+//                /* Add 'left join' naar doctor & patient */
+//                string query = $"select * from PTS2_Account where Id = {userId}";
 
 //                var dbResult = handler.ExecuteSelect(query, userId);
-
 //                var res = (dbResult as DataTable).Rows[0];
 //                if (res != null && parser.TryParse(res, out BaseAccount account))
-//                    return Task.FromResult(account);
-//                else
 //                {
-//                    string patientQuery = $"select * from PTS2_Patient where Id = {userId}";
+//                    if(res.Table.Columns[4] != null)
+//                    {
+//                        string doctorquery = $"select * from PTS2_Doctor where Id = {res.Table.Columns[4]}";
 
-//                    var patientdbResult = handler.ExecuteSelect(query, userId);
+//                        var doctordbResult = handler.ExecuteSelect(query, res.Table.Columns[4]);
 
-//                    var patientres = (dbResult as DataTable).Rows[0];
-//                    if (patientres != null && parser.TryParse(patientres, out BaseAccount patientaccount))
-//                        return Task.FromResult(patientaccount);
+//                        var doctorres = (dbResult as DataTable).Rows[0];
+//                        if (res != null && parser.TryParse(res, out BaseAccount doctoraccount))
+//                            return Task.FromResult(doctoraccount);
+//                        else
+//                            return Task.FromResult(default(BaseAccount));
+//                    }
+//                    else if(res.Table.Columns[5] != null)
+//                    {
+//                        string patientQuery = $"select * from PTS2_Patient where Id = {res.Table.Columns[5]}";
+
+//                        var patientdbResult = handler.ExecuteSelect(query, res.Table.Columns[5]);
+
+//                        var patientres = (dbResult as DataTable).Rows[0];
+//                        if (patientres != null && parser.TryParse(patientres, out BaseAccount patientaccount))
+//                            return Task.FromResult(patientaccount);
+//                        else
+//                            return Task.FromResult(default(BaseAccount));
+//                    }
 //                    else
 //                    {
-//                        string adminQuery = $"select * from PTS2_Admin where Id = {userId}";
+//                        string adminQuery = $"select * from PTS2_Admin where Id = 1";
 
-//                        var admindbResult = handler.ExecuteSelect(query, userId);
+//                        var admindbResult = handler.ExecuteSelect(query, 1);
 
 //                        var adminres = (dbResult as DataTable).Rows[0];
 //                        if (adminres != null && parser.TryParse(res, out BaseAccount adminaccount))
@@ -102,7 +117,7 @@
 //            {
 //                throw;
 //            }
-
+//            return Task.FromResult(default(BaseAccount));
 //        }
 
 //        public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
