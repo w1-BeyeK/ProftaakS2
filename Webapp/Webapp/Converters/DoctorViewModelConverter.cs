@@ -16,6 +16,8 @@ namespace Webapp.Converters
                 Birth = vm.Birth,
                 Gender = vm.Gender,
                 PhoneNumber = vm.PhoneNumber,
+                PrivMail = vm.PrivMail,
+                PrivPhoneNumber = vm.PrivPhonenumber
             };
         }
 
@@ -31,7 +33,29 @@ namespace Webapp.Converters
                 Name = doctor.Name,
                 Age = doctor.GetAge(),
                 PhoneNumber = doctor.PhoneNumber,
+                PrivMail = doctor.PrivMail,
+                PrivPhonenumber = doctor.PrivPhoneNumber
             };
+        }
+
+        public List<DoctorListViewModel> DoctorlistToViewModel(List<Doctor> doctors)
+        {
+            List<DoctorListViewModel> Doctors = new List<DoctorListViewModel>();
+
+            foreach (Doctor d in doctors)
+            {
+                DoctorListViewModel doctor = new DoctorListViewModel()
+                {
+                    EmployeeNumber = d.EmployeeNumber,
+                    Name = d.Name,
+                    Gender = d.Gender,
+                    Birth = d.Birth,
+                    Fuction = d.Function
+                };
+
+                Doctors.Add(doctor);
+            }
+            return Doctors;
         }
     }
 }

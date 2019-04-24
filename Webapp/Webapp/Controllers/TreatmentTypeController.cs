@@ -16,11 +16,18 @@ namespace Webapp.Controllers
     [Authorize(Roles = "admin")]
     public class TreatmentTypeController : Controller
     {
+        //global instances
         private readonly TreatmentTypeRepository repository;
         private readonly DepartmentRepository departmentRepository;
         private readonly InstitutionRepository institutionRepository;
         private readonly IViewModelConverter<TreatmentType, TreatmentTypeDetailViewModel> converter;
 
+        /// <summary>
+        /// Constructor that sets the instances of the repositories and the converters
+        /// </summary>
+        /// <param name="treatmentRepository"></param>
+        /// <param name="departmentRepository"></param>
+        /// <param name="institutionRepository"></param>
         public TreatmentTypeController(TreatmentTypeRepository treatmentRepository, 
             DepartmentRepository departmentRepository,
             InstitutionRepository institutionRepository)
@@ -31,6 +38,10 @@ namespace Webapp.Controllers
             converter = new TreatmentTypeViewModelConverter();
         }
 
+        /// <summary>
+        /// The home screen of treatmenttypes that gets all treatmenttypes and converts them to a list of viewmodels.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             TreatmentTypeViewModel vm = new TreatmentTypeViewModel()
@@ -46,6 +57,11 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// Gets of the specific treatmenttype the requested data and converts them to a viewmodel
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Details(long id)
         {
@@ -69,15 +85,20 @@ namespace Webapp.Controllers
             return View(vm);
         }
         
+        /// <summary>
+        /// Method gets all objects form departments and institutions and coverts them to a viewmodel.
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Create()
         {
             List<Department> departments = departmentRepository.GetAll();
             List<Institution> institutions = institutionRepository.GetAll();
 
             List<SelectListItem> items = new List<SelectListItem>();
-            foreach(Institution i in institutions)
+            SelectListGroup group;
+            foreach (Institution i in institutions)
             {
-                SelectListGroup group = new SelectListGroup
+                group = new SelectListGroup
                 {
                     Name = i.Name
                 };
@@ -101,13 +122,18 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// Method converts a detailviewmodel to an TreatmentType and passes it through.
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Create(TreatmentTypeDetailViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 TreatmentType tt = converter.ViewModelToModal(vm);
-                long id = repository.Add(tt);
+                long id = repository.Insert(tt);
 
                 return RedirectToAction("details", new { id });
             }
@@ -118,6 +144,11 @@ namespace Webapp.Controllers
             
         }
 
+        /// <summary>
+        /// Method gets all objects form departments and institutions and coverts them to a viewmodel.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public IActionResult Edit(long id)
         {
             if(ModelState.IsValid)
@@ -131,9 +162,10 @@ namespace Webapp.Controllers
                 List<Institution> institutions = institutionRepository.GetAll();
 
                 List<SelectListItem> items = new List<SelectListItem>();
+                SelectListGroup group;
                 foreach (Institution i in institutions)
                 {
-                    SelectListGroup group = new SelectListGroup
+                    group = new SelectListGroup
                     {
                         Name = i.Name
                     };
@@ -157,6 +189,11 @@ namespace Webapp.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Method converts a detailviewmodel to an TreatmentType and passes it through to update the treatment.
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Edit(TreatmentTypeDetailViewModel vm)
         {
@@ -173,6 +210,11 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        /// <summary>
+        /// Passes the requested through to delete the treatmentType
+        /// </summary>
+        /// <param name="id"> Id of an TreatmentType</param>
+        /// <returns> Send the user back to the page with all treatmentTypes</returns>
         public IActionResult Delete(long id)
         {
             if(ModelState.IsValid)

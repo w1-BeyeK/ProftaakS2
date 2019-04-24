@@ -5,13 +5,15 @@ using Xunit;
 using Webapp.Repository;
 using Webapp.Context;
 using Webapp.Models.Data;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestDoctorRepository
     {
-        IDoctorContext context = new DoctorTestContext();
+        IDoctorContext context = new TestMemoryContext();
         DoctorRepository doctorRepository;
 
         [Fact]
@@ -25,15 +27,15 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
-            Doctor doctor = new Doctor(1, "een", "een@een.een", "eend");
+            Doctor doctor = new Doctor(0, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(1, doctorRepository.Add(doctor));
+            Assert.Equal(14, doctorRepository.Insert(doctor));
         }
 
         [Fact]
         public void Update()
         {
-            Doctor doctor = new Doctor(1, "een", "een@een.een", "eend");
+            Doctor doctor = new Doctor(12, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
             Assert.True(doctorRepository.Update(doctor));
         }
@@ -42,9 +44,10 @@ namespace TestWebapp.TestRepositories
         public void GetAll()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(2, doctorRepository.GetAll().Count);
+            Assert.Equal(3, doctorRepository.GetAll().Count);
         }
 
+        //TODO : Need to be implemented soon
         [Fact]
         public void GetByDepartment()
         {
@@ -52,18 +55,19 @@ namespace TestWebapp.TestRepositories
             Assert.Equal(2, doctorRepository.GetByDepartment(1).Count);
         }
 
+        //TODO : Need to be implemented soon
         [Fact]
         public void GetByInstitution()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(2, doctorRepository.GetByInstitution(1).Count);
+            Assert.Equal(3, doctorRepository.GetByInstitution(1).Count);
         }
 
         [Fact]
         public void GetById()
         {
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal("doctor", doctorRepository.GetById(1).UserName);
+            Assert.Equal("Soepeeeee", doctorRepository.GetById(12).UserName);
         }
     }
 }

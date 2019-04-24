@@ -2,30 +2,44 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.InterfaceContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.MemoryContext
 {
-    public class TreatmentTestContext : BaseTestContext, ITreatmentContext
+    public class MemoryTreatmentContext : ITreatmentContext
     {
+        public List<Treatment> treatments = new List<Treatment>();
+
         //TODO : Do we want this???
         public long Insert(Treatment treatment)
         {
+            if (treatments.Count > 0)
+            {
+                treatments.OrderBy(t => t.Id);
+                Treatment treat = treatments.Last();
+                treatment.Id = treat.Id;
+                treatments.Add(treatment);
+                return treatment.Id;
+            }
             return -1;
         }
 
         public long Insert(Treatment treatment, long treatmentTypeId, long doctorId, long patientId)
         {
-            int patientIndex = patients.FindIndex(t => t.Id == patientId);
-            int doctorIndex = doctors.FindIndex(t => t.Id == doctorId);
-            int treatmentTypeIndex = treatmentTypes.FindIndex(t => t.Id == treatmentTypeId);
+            MemoryPatientContext pc = new MemoryPatientContext();
+            MemoryDoctorContext dc = new MemoryDoctorContext();
+            MemoryTreatmentTypeContext tc = new MemoryTreatmentTypeContext();
+            int patientIndex = pc.patients.FindIndex(t => t.Id == patientId);
+            int doctorIndex = dc.doctors.FindIndex(t => t.Id == doctorId);
+            int treatmentTypeIndex = tc.treatmentTypes.FindIndex(t => t.Id == treatmentTypeId);
 
             if (patientIndex >= 0 && doctorIndex >= 0 && treatmentTypeId >= 0)
             {
-                treatment.Patient = patients[patientIndex];
-                treatment.Doctor = doctors[doctorIndex];
-                treatment.TreatmentType = treatmentTypes[treatmentTypeIndex];
+                treatment.Patient = pc.patients[patientIndex];
+                treatment.Doctor = dc.doctors[doctorIndex];
+                treatment.TreatmentType = tc.treatmentTypes[treatmentTypeIndex];
 
                 long id = 0;
                 if (treatments.Count > 0)
@@ -47,35 +61,29 @@ namespace Webapp.Context
             if (treatments.Exists(t => t.Id == treatment.Id))
             {
                 int index = treatments.FindIndex(t => t.Id == treatment.Id);
-                treatments[index].BeginDate = treatment.BeginDate;
-                treatments[index].Comments = treatment.Comments;
-                treatments[index].EndDate = treatment.EndDate;
-                treatments[index].Patient.Name = treatment.Patient.Name;
-                treatments[index].Name = treatment.Name;
-                treatments[index].TreatmentType = treatment.TreatmentType;
-                return true;
+                treatments[index] = treatment;
+                return treatments.Exists(t => t == treatment);
             }
             return false;
         }
 
-        public Treatment GetById(long id)
+        Treatment IUniversalGenerics<Treatment>.GetById(long id)
         {
             return treatments.Where(t => t.Id == id).FirstOrDefault();
         }
 
-        public List<Treatment> GetByDoctor(long id)
+        List<Treatment> ITreatmentContext.GetByDoctor(long id)
         {
             return new List<Treatment>(treatments.FindAll(t => t.Doctor.Id == id));
         }
 
         public List<Treatment> GetByPatient(long id)
         {
-            //return treatments.Where(t => t.Patient.Id == id).ToList();
             return treatments.FindAll(t => t.Patient.Id == id);
         }
 
         //TODO : Do we want this???
-        public List<Treatment> GetAll()
+        List<Treatment> IUniversalGenerics<Treatment>.GetAll()
         {
             throw new NotImplementedException();
         }

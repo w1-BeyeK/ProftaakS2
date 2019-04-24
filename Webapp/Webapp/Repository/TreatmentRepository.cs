@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Context;
-using Webapp.Interfaces;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
@@ -21,7 +21,7 @@ namespace Webapp.Repository
         /// <summary>
         /// A doctor can add a treatment
         /// </summary>
-        public long Add(Treatment treatment, long treatmentType, long doctorId, long patientId)
+        public long Insert(Treatment treatment, long treatmentType, long doctorId, long patientId)
         {
             return context.Insert(treatment);
         }

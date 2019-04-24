@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using Webapp.Models.Data;
 
 namespace Webapp.Interfaces
 {
@@ -12,7 +10,8 @@ namespace Webapp.Interfaces
     /// U Update
     /// D Delete
     /// </summary>
-    public interface ICRUDRepository<T>
+    /// 
+    public interface IUniversalGenerics<T> where T : Entity
     {
         List<T> GetAll();
         T GetById(long id);

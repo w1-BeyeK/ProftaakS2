@@ -20,6 +20,8 @@ using Webapp.Models.Data;
 using Webapp.Parsers;
 using Webapp.Repository;
 using Webapp.Context.MSSQLContext;
+using Webapp.Context.MemoryContext;
+using Webapp.Context.InterfaceContext;
 
 namespace Webapp
 {
@@ -42,10 +44,10 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddScoped<IContext, TestContext>();
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
 
+            // Sql contexts
             services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
             services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
             services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
@@ -54,19 +56,23 @@ namespace Webapp
             services.AddScoped<IPatientContext, MSSQLPatientContext>();
             services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
-            //services.AddScoped<ITreatmentTypeContext, TreatmentTypeTestContext>();
-            //services.AddScoped<IDepartmentContext, DepartmentTestContext>();
-            //services.AddScoped<IInstitutionContext, InstitutionTestContext>();
-            //services.AddScoped<ICommentContext, CommentTestContext>();
-            //services.AddScoped<IDoctorContext, DoctorTestContext>();
-            //services.AddScoped<IPatientContext, PatientTestContext>();
-            //services.AddScoped<ITreatmentContext, TreatmentTestContext>();
+            // Memory contexts
+            //services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
+            //services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
+            //services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
+            //services.AddSingleton<ICommentContext, MemoryCommentContext>();
+            //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
+            //services.AddSingleton<IPatientContext, MemoryPatientContext>();
+            //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+            ////Add testdata! I DONT KNOW WHERE TO ADD
+            //TestData testData = new TestData();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();
             services.AddScoped<DepartmentRepository>();
             services.AddScoped<InstitutionRepository>();
+            services.AddScoped<TreatmentRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, UserMemoryContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
@@ -84,7 +90,7 @@ namespace Webapp
                 options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
                 options.SlidingExpiration = true;
             });
-            
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 

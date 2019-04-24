@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Webapp.Context;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 using Webapp.Repository;
@@ -12,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestPatientRepository
     {
-        IPatientContext context = new PatientTestContext();
+        IPatientContext context = new TestMemoryContext();
         PatientRepository patientRepository;
 
         [Fact]
@@ -30,7 +32,7 @@ namespace TestWebapp.TestRepositories
 
             Patient patient = new Patient();
 
-            Assert.Equal(1, patientRepository.Add(patient));
+            Assert.Equal(16, patientRepository.Insert(patient));
         }
 
         [Fact]
@@ -38,7 +40,7 @@ namespace TestWebapp.TestRepositories
         {
             patientRepository = new PatientRepository(context);
 
-            Assert.Equal(3, patientRepository.GetAll().Count);
+            Assert.Equal(5, patientRepository.GetAll().Count);
         }
 
         [Fact]
@@ -47,7 +49,7 @@ namespace TestWebapp.TestRepositories
             patientRepository = new PatientRepository(context);
 
 
-            Assert.Equal("naam", patientRepository.GetById(1).Name);
+            Assert.Equal("Stijn Driedubbels", patientRepository.GetById(15).Name);
         }
 
         [Fact]
@@ -55,7 +57,7 @@ namespace TestWebapp.TestRepositories
         {
             patientRepository = new PatientRepository(context);
 
-            Patient patient = new Patient(1, "naam", "beschrijving", "naam");
+            Patient patient = new Patient(15, "naam", "beschrijving", "naam");
 
             Assert.True(patientRepository.Update(patient));
         }

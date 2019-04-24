@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using Webapp.Context;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 using Webapp.Repository;
@@ -12,7 +14,7 @@ namespace TestWebapp.TestRepositories
 
     public class TestDepartmentRepository
     {
-        IDepartmentContext context = new DepartmentTestContext();
+        IDepartmentContext context = new TestMemoryContext();
         DepartmentRepository departmentRepository;
         [Fact]
         public void DepartmentRepositoryConstructor()
@@ -26,9 +28,9 @@ namespace TestWebapp.TestRepositories
         public void Add()
         {
             departmentRepository = new DepartmentRepository(context);
-            Department department = new Department(1, "naam", "beschrijving", true);
+            Department department = new Department(3, "naam", "beschrijving", true);
 
-            Assert.Equal(1, departmentRepository.Add(department));
+            Assert.Equal(3, departmentRepository.Insert(department));
         }
 
         [Fact]
@@ -39,6 +41,7 @@ namespace TestWebapp.TestRepositories
             Assert.True(departmentRepository.Delete(1));
         }
 
+        //TODO : Need to be discussed
         [Fact]
         public void GetAll()
         {
@@ -46,12 +49,13 @@ namespace TestWebapp.TestRepositories
             Assert.Equal(3, departmentRepository.GetAll().Count);
         }
 
+        //TODO : Need to be discussed
         [Fact]
         public void GetById()
         {
             departmentRepository = new DepartmentRepository(context);
 
-            Assert.Equal("naam", departmentRepository.GetById(1).Name);
+            Assert.Equal("Soepderpoep", departmentRepository.GetById(1).Name);
         }
 
         [Fact]

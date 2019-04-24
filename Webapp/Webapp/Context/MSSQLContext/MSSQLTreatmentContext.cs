@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.InterfaceContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
@@ -16,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Treatment GetById(long id)
         {
-            string query = $"select * from PTS2_TreatmentType where Id = {id}";
+            string query = $"select * from PTS2_Treatment where Id = {id}";
 
             var dbResult = handler.ExecuteSelect(query, id);
 
@@ -36,7 +37,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "select * from PTS2_TreatmentType where active = 1";
+            string query = "select * from PTS2_Treatment where active = 1";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -56,14 +57,16 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_TreatmentType(DepartmentId, Name, Description, Active) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
+                string query = "insert into PTS2_Treatment(Name, BeginDate, EndDate, DoctorId, PatientId, TreatmentTypeId) OUTPUT INSERTED.Id values(@name, @beginDate, @endDate, @doctorId, @patientId, @treatmentTypeId)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    //new KeyValuePair<string, object>("name", treatment.Name),
-                    //new KeyValuePair<string, object>("departmentId", treatment.DepartmentId),
-                    //new KeyValuePair<string, object>("description", treatment.Description),
-                    //new KeyValuePair<string, object>("active", "1"),
+                    new KeyValuePair<string, object>("name", treatment.Name),
+                    new KeyValuePair<string, object>("beginDate", treatment.BeginDate),
+                    new KeyValuePair<string, object>("endDate", treatment.EndDate),
+                    new KeyValuePair<string, object>("doctorId", treatment.Doctor.Id),
+                    new KeyValuePair<string, object>("patientId", treatment.Patient.Id),
+                    new KeyValuePair<string, object>("treatmentTypeId", treatment.TreatmentType.Id),
                 };
 
                 return (long)handler.ExecuteCommand(query, parameters);
@@ -76,65 +79,123 @@ namespace Webapp.Context.MSSQLContext
 
         public bool Update(Treatment treatment)
         {
-            //try
-            //{
-            //    string query = "update PTS2_TreatmentType set @fields where Id = @id";
+            try
+            {
+                string query = "update PTS2_Treatment set @fields where Id = @id";
 
-            //    string fields = "";
-            //    List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
-            //    {
-            //        new KeyValuePair<string, object>("id", treatment.Id)
-            //    };
+                string fields = "";
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", treatment.Id)
+                };
 
-            //    if (treatment.Name != null)
-            //    {
-            //        if (!string.IsNullOrWhiteSpace(fields))
-            //            fields += ",";
-            //        fields += "[name] = @name";
-            //        parameters.Add(new KeyValuePair<string, object>("name", treatment.Name));
-            //    }
-            //    if (!string.IsNullOrWhiteSpace(fields))
-            //        fields += ",";
-            //    fields += "active = @active";
-            //    parameters.Add(new KeyValuePair<string, object>("active", treatment.Active ? "1" : "0"));
+                if (treatment.Name != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[name] = @name";
+                    parameters.Add(new KeyValuePair<string, object>("name", treatment.Name));
+                }
+                if (treatment.BeginDate != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[beginDate] = @beginDate";
+                    parameters.Add(new KeyValuePair<string, object>("beginDate", treatment.BeginDate));
+                }
+                if (treatment.EndDate != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[endDate] = @endDate";
+                    parameters.Add(new KeyValuePair<string, object>("endDate", treatment.EndDate));
+                }
 
-            //    query = query.Replace("@fields", fields);
+                query = query.Replace("@fields", fields);
 
-            //    handler.ExecuteCommand(query, parameters);
-            //    return true;
-            //}
-            //catch(Exception e)
-            //{
+                handler.ExecuteCommand(query, parameters);
+                return true;
+            }
+            catch (Exception e)
+            {
                 return false;
-            //}
+            }
         }
 
         public bool Delete(Treatment treatment)
         {
-            try
-            {
-                string query = "update PTS2_TreatmentType set Active = 0 where Id = @id";
+            //try
+            //{
+            //    string query = "update PTS2_Treatment set Active = @active where Id = @id";
 
-                handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
-                {
-                    new KeyValuePair<string, object>("id", treatment.Id)
-                });
-                return true;
-            }
-            catch(Exception e)
-            {
+            //    handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
+            //    {
+            //        new KeyValuePair<string, object>("id", treatment.Id),
+            //        new KeyValuePair<string, object>("active", treatment.Active),
+
+            //    });
+            //    return true;
+            //}
+            //catch (Exception e)
+            //{
                 return false;
-            }
+            //}
         }
 
         public List<Treatment> GetByDoctor(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+                // Set query
+                string query = $"select * from PTS2_Treatment where DoctorId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Treatment treatment))
+                        result.Add(treatment);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public List<Treatment> GetByPatient(long id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+                // Set query
+                string query = $"select * from PTS2_Treatment where PatientId = {id}";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Treatment treatment))
+                        result.Add(treatment);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

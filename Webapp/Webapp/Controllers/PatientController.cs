@@ -16,15 +16,10 @@ namespace Webapp.Controllers
     //[Route("patient")]
     public class PatientController : BaseController
     {
-        /// <summary>
-        /// Repositories
-        /// </summary>
+        // global instances
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
 
-        /// <summary>
-        /// Converters
-        /// </summary>
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
         private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
@@ -38,21 +33,28 @@ namespace Webapp.Controllers
             this.treatmentRepository = treatmentRepository;
         }
 
-        //[Authorize Roles("doctor")]
+        /// <summary>
+        /// Gets all patients of a doctor and converts them from a class to a viewmodel
+        /// </summary>
+        [Authorize(Roles= "doctor")]
         public IActionResult Index()
         {
-            if (User.IsInRole("patient"))
-            {
-                return RedirectToAction("Index", "Profile");
-            }
+            //if (User.IsInRole("patient"))
+            //{
+            //    return RedirectToAction("Index", "Profile");
+            //}
 
-            List<Patient> patienten = patientRepository.GetAll();
+            List<Patient> patienten = patientRepository.GetByDoctor(GetUserId());
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 
             return View(vms);
         }
 
+        /// <summary>
+        /// Gets a treatment with a small amount of data of the patient with the given id and converts that to a viewmodel
+        /// </summary>
         //[HttpGet("{id}")]
+        [Authorize(Roles = "doctor, patient")]
         public IActionResult Treatment(long id)
         {
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();

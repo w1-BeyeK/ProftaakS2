@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.InterfaceContext
 {
-    public interface IDepartmentContext : IUniversalContext<Department>
+    public interface IDepartmentContext : IUniversalGenerics<Department>
     {
         //bool Insert(Department department);
         //bool Update(long id, Department department);

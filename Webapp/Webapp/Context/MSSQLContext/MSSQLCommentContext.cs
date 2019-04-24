@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Context.InterfaceContext;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
@@ -10,7 +11,6 @@ namespace Webapp.Context
 {
     public class MSSQLCommentContext : BaseMSSQLContext, ICommentContext
     {
-        //TODO : Change Queries!!!
         public MSSQLCommentContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
@@ -18,12 +18,12 @@ namespace Webapp.Context
         /// Get all comments
         /// </summary>
         /// <returns>List of comments</returns>
-        public List<Comment> GetByTreatmentId(long treatmentId)
+        public List<Comment> GetByTreatment(long treatmentId)
         {
             // Create result
             List<Comment> result = new List<Comment>();
             // Set query
-            string query = "select * from PTS2_TreatmentType where active = 1";
+            string query = $"select * from PTS2_Comment where TreatmentId = {treatmentId}";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -39,23 +39,21 @@ namespace Webapp.Context
             return result;
         }
 
-        public bool Insert(Comment comment, long treatmentId)
+        public List<Comment> Insert(Comment comment)
         {
             try
             {
-                string query = "insert into PTS2_TreatmentType(DepartmentId, Name, Description, Active) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
+                string query = "insert into PTS2_Comment(Title, Description, TreatmentId) OUTPUT INSERTED.Id values(@title, @description, @treatmentid)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    //new KeyValuePair<string, object>("name", comment.Name),
-                    //new KeyValuePair<string, object>("departmentId", comment.DepartmentId),
-                    //new KeyValuePair<string, object>("description", comment.Description),
-                    //new KeyValuePair<string, object>("active", "1"),
+                      new KeyValuePair<string, object>("title", comment.Title),
+                      new KeyValuePair<string, object>("description", comment.Description),
+                      new KeyValuePair<string, object>("treatmentid", comment.TreatmentId),
                 };
 
-                //TODO : You don't want an id...
-                return false;
-                long id = (long)handler.ExecuteCommand(query, parameters);
+                handler.ExecuteCommand(query, parameters);
+                return GetByTreatment(comment.TreatmentId);
             }
             catch (Exception e)
             {

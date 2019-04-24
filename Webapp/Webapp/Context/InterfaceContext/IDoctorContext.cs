@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.InterfaceContext
 {
-    public interface IDoctorContext : IUniversalContext<Doctor>
+    public interface IDoctorContext : IUniversalGenerics<Doctor>
     {
         List<Doctor> GetByDepartment(long id);
         List<Doctor> GetByInstitution(long id);

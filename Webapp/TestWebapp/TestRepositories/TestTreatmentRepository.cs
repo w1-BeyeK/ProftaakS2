@@ -5,13 +5,15 @@ using Xunit;
 using Webapp.Repository;
 using Webapp.Context;
 using Webapp.Models.Data;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestTreatmentRepository
     {
-        ITreatmentContext context = new TreatmentTestContext();
+        ITreatmentContext context = new TestMemoryContext();
         TreatmentRepository treatmentRepository;
 
         [Fact]
@@ -27,7 +29,7 @@ namespace TestWebapp.TestRepositories
         {
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal(1, treatmentRepository.Add(treatment, 1, 1, 1));
+            Assert.Equal(4, treatmentRepository.Insert(treatment, 1, 1, 1));
         }
 
         [Fact]
@@ -42,21 +44,21 @@ namespace TestWebapp.TestRepositories
         public void GetByDoctor()
         {
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal(2, treatmentRepository.GetByDoctor(1).Count);
+            Assert.Equal(3, treatmentRepository.GetByDoctor(11).Count);
         }
 
         [Fact]
         public void GetByPatient()
         {
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal(2, treatmentRepository.GetByPatient(1).Count);
+            Assert.Equal(4, treatmentRepository.GetByPatient(12).Count);
         }
 
         [Fact]
         public void GetById()
         {
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal("treatment", treatmentRepository.GetById(1).Name);
+            Assert.Equal("Zowarmarollen", treatmentRepository.GetById(1).Name);
         }
     }
 }

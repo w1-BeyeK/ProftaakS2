@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Context;
-using Webapp.Interfaces;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
@@ -17,7 +17,7 @@ namespace Webapp.Repository
             this.context = context;
         }
 
-        public long Add(Department department)
+        public long Insert(Department department)
         {
             return context.Insert(department);
         }

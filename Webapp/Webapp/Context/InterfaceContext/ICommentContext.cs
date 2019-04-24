@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using Webapp.Interfaces;
 using Webapp.Models.Data;
 
-namespace Webapp.Context
+namespace Webapp.Context.InterfaceContext
 {
     public interface ICommentContext
     {
-        bool Insert(Comment comment, long treatmentId);
-        List<Comment> GetByTreatmentId(long treatmentId);
+        List<Comment> Insert(Comment comment);
+        List<Comment> GetByTreatment(long treatmentId);
     }
 }

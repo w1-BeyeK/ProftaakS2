@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Context;
-using Webapp.Interfaces;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
@@ -20,7 +20,7 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can add an institution
         /// </summary>
-        public long AddInstitution(Institution institution)
+        public long Insert(Institution institution)
         {
             return context.Insert(institution);
         }

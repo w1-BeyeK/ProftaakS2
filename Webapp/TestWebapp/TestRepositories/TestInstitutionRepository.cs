@@ -5,13 +5,15 @@ using Xunit;
 using Webapp.Repository;
 using Webapp.Context;
 using Webapp.Models.Data;
+using Webapp.Context.InterfaceContext;
+using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
     
     public class TestInstitutionRepository
     {
-        IInstitutionContext context = new InstitutionTestContext();
+        IInstitutionContext context = new TestMemoryContext();
         InstitutionRepository institutionRepository;
 
         [Fact]
@@ -28,14 +30,17 @@ namespace TestWebapp.TestRepositories
             Administrator admin = new Administrator();
             Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin);
             institutionRepository = new InstitutionRepository(context);
-            Assert.Equal(1, institutionRepository.AddInstitution(institution));
+            Assert.Equal(3, institutionRepository.Insert(institution));
         }
 
         [Fact]
         public void Update()
         {
             Administrator admin = new Administrator();
-            Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin);
+            Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin)
+            {
+                Id = 1
+            };
             institutionRepository = new InstitutionRepository(context);
             Assert.True(institutionRepository.Update(institution));
         }
@@ -58,7 +63,7 @@ namespace TestWebapp.TestRepositories
         public void GetById()
         {
             institutionRepository = new InstitutionRepository(context);
-            Assert.Equal("institution", institutionRepository.GetById(1).Name);
+            Assert.Equal("instituut", institutionRepository.GetById(1).Name);
         }
     }
 }

@@ -14,8 +14,8 @@
     <thead>
         <tr>
             <th>Naam</th>
+            <th>Geslacht</th>
             <th>Functie</th>
-            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -23,11 +23,12 @@
         {
             <tr>
                 <td>@item.Name</td>
+                <td>@item.Gender</td>
                 <td>@item.Function</td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeNumber }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeNumber })
                 </td>
             </tr>
         }

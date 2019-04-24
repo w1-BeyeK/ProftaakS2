@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Context;
-using Webapp.Interfaces;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
@@ -21,7 +21,7 @@ namespace Webapp.Repository
         /// <summary>
         /// This is not needed...
         /// </summary>
-        public long Add(Patient patient)
+        public long Insert(Patient patient)
         {
             return context.Insert(patient);
         }
@@ -53,7 +53,7 @@ namespace Webapp.Repository
         /// <summary>
         /// Get all patients which have a treatment with the doctorId
         /// </summary>
-        List<Patient> GetByDoctor(long id)
+        public List<Patient> GetByDoctor(long id)
         {
             return context.GetByDoctor(id);
         }
