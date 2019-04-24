@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -47,13 +47,13 @@ namespace Webapp
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
 
-            //services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
-            //services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
-            //services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
-            //services.AddScoped<ICommentContext, MSSQLCommentContext>();
-            //services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
-            //services.AddScoped<IPatientContext, MSSQLPatientContext>();
-            //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
             services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
             services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
