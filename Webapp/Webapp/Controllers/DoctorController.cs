@@ -12,10 +12,11 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    //[Authorize]
-    public class DoctorController : Controller
+    [Authorize(Roles = "doctor")]
+    public class DoctorController : BaseController
     {
         private readonly DoctorRepository doctorRepository;
+        private readonly DepartmentRepository departmentRepository;
         DoctorViewModelConverter doctorViewModelConverter = new DoctorViewModelConverter();
 
         public DoctorController(DoctorRepository doctorRepository)
@@ -29,7 +30,7 @@ namespace Webapp.Controllers
         public IActionResult Index()
         {
             List<Doctor> doctors = doctorRepository.GetAll();
-            List<DoctorListViewModel> vms = doctorViewModelConverter.DoctorlistToViewModel(doctors);
+            List<DoctorDetailViewModel> vms = doctorViewModelConverter.ModelsToViewModel(doctors);
             return View(vms);
         }
     }
