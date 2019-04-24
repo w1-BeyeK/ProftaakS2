@@ -13,7 +13,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    //[Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin")]
     public class DepartmentController : Controller
     {
         //global instances
