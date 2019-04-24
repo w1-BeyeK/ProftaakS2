@@ -55,17 +55,16 @@ namespace Webapp
             services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
             services.AddScoped<IPatientContext, MSSQLPatientContext>();
             services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
-
-            // Memory contexts
-            //services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
-            //services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
-            //services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
-            //services.AddSingleton<ICommentContext, MemoryCommentContext>();
-            //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
-            //services.AddSingleton<IPatientContext, MemoryPatientContext>();
-            //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
-            ////Add testdata! I DONT KNOW WHERE TO ADD
-            //TestData testData = new TestData();
+            
+            services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
+            services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
+            services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
+            services.AddSingleton<ICommentContext, MemoryCommentContext>();
+            services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
+            services.AddSingleton<IPatientContext, MemoryPatientContext>();
+            services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+            //Add test data into static lists
+            TestData testData = new TestData();
 
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();

@@ -10,49 +10,47 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryPatientContext : IPatientContext
     {
-        public List<Patient> patients = new List<Patient>();
-
         public long Insert(Patient patient)
         {
-            if (patients.Count > 0)
+            if (BaseMemoryContext.patients.Count > 0)
             {
-                patients.OrderBy(d => d.Id);
-                patient.Id = patients.Last().Id + 1;
+                BaseMemoryContext.patients.OrderBy(d => d.Id);
+                patient.Id = BaseMemoryContext.patients.Last().Id + 1;
             }
             else
             {
                 patient.Id = 1;
             }
-            patients.Add(patient);
+            BaseMemoryContext.patients.Add(patient);
             return patient.Id;
         }
 
         public bool Delete(Patient patient)
         {
-            patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
+            BaseMemoryContext.patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
             return true;
         }
 
         Patient IUniversalGenerics<Patient>.GetById(long id)
         {
-            return patients.Find(t => t.Id == id);
+            return BaseMemoryContext.patients.Find(t => t.Id == id);
         }
 
         List<Patient> IUniversalGenerics<Patient>.GetAll()
         {
-            return patients.FindAll(t => t.Active == true);
+            return BaseMemoryContext.patients.FindAll(t => t.Active == true);
         }
 
         public List<Patient> GetByDoctor(long id)
         {
             //throw new NotImplementedException();
             //Is not realy possible in TestContext...
-            return patients;
+            return BaseMemoryContext.patients;
         }
 
         public Patient LoginPatient(string username, string password)
         {
-            Patient patient = patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
+            Patient patient = BaseMemoryContext.patients.FirstOrDefault(p => p.UserName == username && p.Password == password);
 
             if (patient == null)
                 throw new KeyNotFoundException("No patient found");
@@ -62,20 +60,20 @@ namespace Webapp.Context.MemoryContext
 
         public bool Update(Patient patient)
         {
-            int index = patients.FindIndex(p => p.Id == patient.Id);
+            int index = BaseMemoryContext.patients.FindIndex(p => p.Id == patient.Id);
             if (index > 0)
             {
-                patients[index].PhoneNumber = patient.PhoneNumber;
-                patients[index].PrivAdress = patient.PrivAdress;
-                patients[index].PrivBirthDate = patient.PrivBirthDate;
-                patients[index].PrivContactPersonName = patient.PrivContactPersonName;
-                patients[index].PrivContactPersonPhone = patient.PrivContactPersonPhone;
-                patients[index].PrivGender = patient.PrivGender;
-                patients[index].PrivMail = patient.PrivMail;
-                patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
-                patients[index].UserName = patient.UserName;
-                patients[index].Zipcode = patient.Zipcode;
-                return patients.Exists(p => p == patient);
+                BaseMemoryContext.patients[index].PhoneNumber = patient.PhoneNumber;
+                BaseMemoryContext.patients[index].PrivAdress = patient.PrivAdress;
+                BaseMemoryContext.patients[index].PrivBirthDate = patient.PrivBirthDate;
+                BaseMemoryContext.patients[index].PrivContactPersonName = patient.PrivContactPersonName;
+                BaseMemoryContext.patients[index].PrivContactPersonPhone = patient.PrivContactPersonPhone;
+                BaseMemoryContext.patients[index].PrivGender = patient.PrivGender;
+                BaseMemoryContext.patients[index].PrivMail = patient.PrivMail;
+                BaseMemoryContext.patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
+                BaseMemoryContext.patients[index].UserName = patient.UserName;
+                BaseMemoryContext.patients[index].Zipcode = patient.Zipcode;
+                return BaseMemoryContext.patients.Exists(p => p == patient);
             }
             return false;
         }

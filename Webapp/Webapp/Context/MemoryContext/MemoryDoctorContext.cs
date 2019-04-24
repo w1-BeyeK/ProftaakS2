@@ -10,14 +10,12 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryDoctorContext : IDoctorContext
     {
-        public List<Doctor> doctors = new List<Doctor>();
-
         public bool Delete(Doctor doctor)
         {
-            int index = doctors.FindIndex(t => t.Id == doctor.Id);
+            int index = BaseMemoryContext.doctors.FindIndex(t => t.Id == doctor.Id);
             if (index >= 0)
             {
-                doctors[index].Active = doctor.Active;
+                BaseMemoryContext.doctors[index].Active = doctor.Active;
                 return true;
             }
             return false;
@@ -25,56 +23,55 @@ namespace Webapp.Context.MemoryContext
 
         public long Insert(Doctor doctor)
         {
-            if (doctors.Count > 0)
+            if (BaseMemoryContext.doctors.Count > 0)
             {
-                doctors.OrderBy(d => d.Id);
-                doctor.Id = doctors.Last().Id + 1;
+                BaseMemoryContext.doctors.OrderBy(d => d.Id);
+                doctor.Id = BaseMemoryContext.doctors.Last().Id + 1;
             }
             else
             {
                 doctor.Id = 1;
             }
-            doctors.Add(doctor);
+            BaseMemoryContext.doctors.Add(doctor);
             return doctor.Id;
         }
 
         Doctor IUniversalGenerics<Doctor>.GetById(long id)
         {
-            return doctors.FirstOrDefault(d => d.Id == id);
+            return BaseMemoryContext.doctors.FirstOrDefault(d => d.Id == id);
         }
 
         List<Doctor> IUniversalGenerics<Doctor>.GetAll()
         {
-            return doctors;
+            return BaseMemoryContext.doctors;
         }
 
         public List<Doctor> GetByDepartment(long id)
         {
             //throw new NotImplementedException();
             //By department id!????????
-            return doctors;
+            return BaseMemoryContext.doctors;
         }
 
         List<Doctor> IDoctorContext.GetByInstitution(long id)
         {
-            MemoryInstitutionContext ic = new MemoryInstitutionContext();
-            List<Department> departmentDoctor = ic.institutions.Find(t => t.Id == id).Departments;
+            List<Department> departmentDoctor = BaseMemoryContext.institutions.Find(t => t.Id == id).Departments;
             //Get all doctors of all the departments and distinct all double doctors
             throw new NotImplementedException();
         }
 
         public bool Update(Doctor doctor)
         {
-            int index = doctors.FindIndex(p => p.Id == doctor.Id);
+            int index = BaseMemoryContext.doctors.FindIndex(p => p.Id == doctor.Id);
             if (index >= 0)
             {
-                doctors[index].Email = doctor.Email;
-                doctors[index].Password = doctor.Password;
-                doctors[index].PhoneNumber = doctor.PhoneNumber;
-                doctors[index].PrivMail = doctor.PrivMail;
-                doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
-                doctors[index].UserName = doctor.UserName;
-                return doctors.Exists(d => d == doctor);
+                BaseMemoryContext.doctors[index].Email = doctor.Email;
+                BaseMemoryContext.doctors[index].Password = doctor.Password;
+                BaseMemoryContext.doctors[index].PhoneNumber = doctor.PhoneNumber;
+                BaseMemoryContext.doctors[index].PrivMail = doctor.PrivMail;
+                BaseMemoryContext.doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
+                BaseMemoryContext.doctors[index].UserName = doctor.UserName;
+                return BaseMemoryContext.doctors.Exists(d => d == doctor);
             }
             return false;
         }
