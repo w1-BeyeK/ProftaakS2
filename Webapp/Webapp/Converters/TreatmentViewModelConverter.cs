@@ -13,8 +13,12 @@ namespace Webapp.Converters
         {
             Patient patient = new Patient()
             {
-                Id = vm.PatientDetailViewModel.Id,
-                Name = vm.PatientDetailViewModel.Name
+                Id = vm.PatientId,
+            };
+
+            TreatmentType treatmenttype = new TreatmentType()
+            {
+                Id = vm.TypeId,
             };
 
             Treatment treatment = new Treatment()
@@ -24,7 +28,7 @@ namespace Webapp.Converters
                 Patient = patient,
                 BeginDate = vm.BeginDate + vm.BeginTime,
                 EndDate = vm.EndDate + vm.EndTime,
-                TreatmentType = vm.Type
+                TreatmentType = treatmenttype,
             };
 
             return treatment;
@@ -32,18 +36,12 @@ namespace Webapp.Converters
 
         public TreatmentDetailViewModel TreatmentToViewModel(Treatment treatment)
         {
-            PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel()
-            {
-                Id = treatment.Patient.Id,
-                Name = treatment.Patient.Name,
-            };
-
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel()
             {
                 Id = treatment.Id,
                 Name = treatment.Name,
-                Type = treatment.TreatmentType,
-                PatientDetailViewModel = patientDetailViewModel,
+                TypeId = treatment.TreatmentTypeId,
+                PatientId = treatment.PatientId,
                 BeginDate = treatment.BeginDate,
                 EndDate = treatment.EndDate,
                 Age = treatment.GetAge()

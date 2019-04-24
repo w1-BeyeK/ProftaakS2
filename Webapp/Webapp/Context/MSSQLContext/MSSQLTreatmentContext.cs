@@ -37,7 +37,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "select * from PTS2_Treatment where active = 1";
+            string query = "select * from PTS2_Treatment";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -57,14 +57,14 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Treatment(Name, BeginDate, EndDate, DoctorId, PatientId, TreatmentTypeId) OUTPUT INSERTED.Id values(@name, @beginDate, @endDate, @doctorId, @patientId, @treatmentTypeId)";
+                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, StartDate, EndDate, TreatmentType) OUTPUT INSERTED.Id values(@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
                     new KeyValuePair<string, object>("name", treatment.Name),
-                    new KeyValuePair<string, object>("beginDate", treatment.BeginDate),
-                    new KeyValuePair<string, object>("endDate", treatment.EndDate),
-                    new KeyValuePair<string, object>("doctorId", treatment.Doctor.Id),
+                    new KeyValuePair<string, object>("beginDate", treatment.BeginDate.ToString("yyyy-MM-dd")),
+                    new KeyValuePair<string, object>("endDate", treatment.EndDate.ToString("yyyy-MM-dd")),
+                    new KeyValuePair<string, object>("doctorId", treatment.DoctorId),
                     new KeyValuePair<string, object>("patientId", treatment.Patient.Id),
                     new KeyValuePair<string, object>("treatmentTypeId", treatment.TreatmentType.Id),
                 };

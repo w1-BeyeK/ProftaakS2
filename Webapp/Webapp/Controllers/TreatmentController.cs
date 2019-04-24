@@ -59,28 +59,40 @@ namespace Webapp.Controllers
             return View(vm.treatments);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"> PatientId </param>
+        /// <returns></returns>
         [Authorize(Roles = "doctor")]
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(long id = 0)
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
             {
                 Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll()),
-                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll())
+                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll()),
+                PatientId = id
             };
             return View(vm);
         }
-        
+
         //TODO : Voeg extra parameters toe! bij AddTreatment
         [Authorize(Roles = "doctor")]
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
             Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
-            treatmentRepository.Insert(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
-            return View();
+            treatment.DoctorId = GetUserId();
+            treatmentRepository.Insert(treatment);
+            return RedirectToAction("index", "treatment");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"> TreatmentId </param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Edit(long id)
         {
