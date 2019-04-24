@@ -36,19 +36,19 @@ namespace Webapp.Converters
             return viewModel;
         }
 
-        public List<TreatmentType> ViewModelsToModals(List<TreatmentTypeDetailViewModel> viewModels)
+        public List<TreatmentType> ViewModelsToModels(List<TreatmentTypeDetailViewModel> viewModels)
         {
             List<TreatmentType> result = new List<TreatmentType>();
 
             foreach(TreatmentTypeDetailViewModel viewModel in viewModels)
             {
-                result.Add(ViewModelToModal(viewModel));
+                result.Add(ViewModelToModel(viewModel));
             }
 
             return result;
         }
 
-        public TreatmentType ViewModelToModal(TreatmentTypeDetailViewModel viewModel)
+        public TreatmentType ViewModelToModel(TreatmentTypeDetailViewModel viewModel)
         {
             TreatmentType model = new TreatmentType()
             {

@@ -12,9 +12,9 @@ using Xunit;
 namespace TestWebapp.TestRepositories
 {
 
-    public class TestCommentRepository
+    public class TestCommentRepository : RemoveData
     {
-        ICommentContext context = new TestMemoryContext();
+        ICommentContext context = new MemoryCommentContext();
         CommentRepository commentRepository;
 
         //[Fact]
@@ -41,6 +41,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void CommentRepositoryConstructor()
         {
+            EmptyLists();
             commentRepository = new CommentRepository(context);
 
             Assert.NotNull(commentRepository);
@@ -49,6 +50,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             commentRepository = new CommentRepository(context);
             Comment comment = new Comment()
             {
@@ -64,6 +66,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetByTreatment()
         {
+            EmptyLists();
             commentRepository = new CommentRepository(context);
             
             Assert.Equal(3, commentRepository.GetByTreatment(1).Count);

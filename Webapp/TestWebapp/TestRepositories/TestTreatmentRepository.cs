@@ -11,14 +11,15 @@ using Webapp.Context.MemoryContext;
 namespace TestWebapp.TestRepositories
 {
     
-    public class TestTreatmentRepository
+    public class TestTreatmentRepository : RemoveData
     {
-        ITreatmentContext context = new TestMemoryContext();
+        ITreatmentContext context = new MemoryTreatmentContext();
         TreatmentRepository treatmentRepository;
 
         [Fact]
         public void TreatmentRepositoryConstructor()
         {
+            EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
 
             Assert.NotNull(treatmentRepository);
@@ -27,6 +28,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Add()
         {
+            EmptyLists();
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal(4, treatmentRepository.Insert(treatment, 1, 1, 1));
@@ -35,6 +37,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void Update()
         {
+            EmptyLists();
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
             Assert.True(treatmentRepository.Update(treatment));
@@ -43,6 +46,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetByDoctor()
         {
+            EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal(3, treatmentRepository.GetByDoctor(11).Count);
         }
@@ -50,6 +54,7 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetByPatient()
         {
+            EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal(4, treatmentRepository.GetByPatient(12).Count);
         }
@@ -57,8 +62,9 @@ namespace TestWebapp.TestRepositories
         [Fact]
         public void GetById()
         {
+            EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal("Zowarmarollen", treatmentRepository.GetById(1).Name);
+            Assert.Equal("Arm amputeren", treatmentRepository.GetById(1).Name);
         }
     }
 }

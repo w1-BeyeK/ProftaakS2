@@ -14,8 +14,7 @@ namespace Webapp.Context.MemoryContext
         {
             if (BaseMemoryContext.treatmentTypes.Count > 0)
             {
-                BaseMemoryContext.treatmentTypes.OrderBy(d => d.Id);
-                treatmentType.Id = BaseMemoryContext.treatmentTypes.Last().Id + 1;
+                treatmentType.Id = BaseMemoryContext.treatmentTypes.OrderBy(t => t.Id).Last().Id + 1;
             }
             else
             {

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class DoctorViewModelConverter
+    public class DoctorViewModelConverter : IViewModelConverter<Doctor, DoctorDetailViewModel>
     {
-        public Doctor ViewModelToDoctor(DoctorDetailViewModel vm)
+        public Doctor ViewModelToModel(DoctorDetailViewModel vm)
         {
             return new Doctor(vm.EmployeeNumber, vm.UserName, vm.Email, vm.Name)
             {
@@ -21,7 +22,7 @@ namespace Webapp.Converters
             };
         }
 
-        public DoctorDetailViewModel DoctorToViewModel(Doctor doctor)
+        public DoctorDetailViewModel ModelToViewModel(Doctor doctor)
         {
             return new DoctorDetailViewModel()
             {
@@ -56,6 +57,16 @@ namespace Webapp.Converters
                 Doctors.Add(doctor);
             }
             return Doctors;
+        }
+
+        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> models)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> ViewModelsToModels(List<DoctorDetailViewModel> viewModels)
+        {
+            throw new NotImplementedException();
         }
     }
 }

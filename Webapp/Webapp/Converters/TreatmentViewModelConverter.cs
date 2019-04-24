@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class TreatmentViewModelConverter
+    public class TreatmentViewModelConverter : IViewModelConverter<Treatment, TreatmentDetailViewModel>
     {
-        public Treatment ViewModelToTreatment(TreatmentDetailViewModel vm)
+        public Treatment ViewModelToModel(TreatmentDetailViewModel vm)
         {
             Patient patient = new Patient()
             {
@@ -34,7 +35,7 @@ namespace Webapp.Converters
             return treatment;
         }
 
-        public TreatmentDetailViewModel TreatmentToViewModel(Treatment treatment)
+        public TreatmentDetailViewModel ModelToViewModel(Treatment treatment)
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel()
             {
@@ -49,15 +50,20 @@ namespace Webapp.Converters
             return vm;
         }
 
-        internal List<TreatmentDetailViewModel> TreatmentsToViewModel(List<Treatment> treatments)
+        public List<TreatmentDetailViewModel> ModelsToViewModel(List<Treatment> models)
         {
             List<TreatmentDetailViewModel> result = new List<TreatmentDetailViewModel>();
 
-            foreach(Treatment treatment in treatments)
+            foreach(Treatment treatment in models)
             {
-                result.Add(TreatmentToViewModel(treatment));
+                result.Add(ModelToViewModel(treatment));
             }
             return result;
+        }
+
+        public List<Treatment> ViewModelsToModels(List<TreatmentDetailViewModel> viewModels)
+        {
+            throw new NotImplementedException();
         }
     }
 }

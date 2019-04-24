@@ -71,7 +71,7 @@ namespace Webapp.Context.MemoryContext
                 BaseMemoryContext.doctors[index].PrivMail = doctor.PrivMail;
                 BaseMemoryContext.doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
                 BaseMemoryContext.doctors[index].UserName = doctor.UserName;
-                return BaseMemoryContext.doctors.Exists(d => d == doctor);
+                return true;
             }
             return false;
         }
