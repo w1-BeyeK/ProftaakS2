@@ -22,6 +22,7 @@ using Webapp.Repository;
 using Webapp.Context.MSSQLContext;
 using Webapp.Context.MemoryContext;
 using Webapp.Context.InterfaceContext;
+using Webapp.Models;
 
 namespace Webapp
 {
@@ -44,8 +45,12 @@ namespace Webapp
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Universal tools
             services.AddTransient<IParser, DataRowParser>();
             services.AddTransient<IHandler, MSSQLHandler>();
+
+            // Viewmodel converters
+            services.AddTransient<IViewModelConverter<Department, DepartmentDetailViewModel>, DepartmentViewModelConverter>();
 
             // Sql contexts
             services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
@@ -56,6 +61,7 @@ namespace Webapp
             services.AddScoped<IPatientContext, MSSQLPatientContext>();
             services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
             
+            // Repositories
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();
             services.AddScoped<DoctorRepository>();
