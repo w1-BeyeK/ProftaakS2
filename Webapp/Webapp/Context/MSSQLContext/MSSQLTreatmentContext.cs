@@ -17,9 +17,14 @@ namespace Webapp.Context.MSSQLContext
 
         public Treatment GetById(long id)
         {
-            string query = $"select * from PTS2_Treatment where Id = {id}";
+            string query = $"select * from PTS2_Treatment where Id = @id";
 
-            var dbResult = handler.ExecuteSelect(query, id);
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id)
+            };
+
+            var dbResult = handler.ExecuteSelect(query, parameters);
 
             var res = (dbResult as DataTable).Rows[0];
             if (res != null && parser.TryParse(res, out Treatment treatment))
@@ -96,14 +101,14 @@ namespace Webapp.Context.MSSQLContext
                     fields += "[name] = @name";
                     parameters.Add(new KeyValuePair<string, object>("name", treatment.Name));
                 }
-                if (treatment.BeginDate != null)
+                if (treatment.BeginDate != DateTime.MinValue)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[beginDate] = @beginDate";
                     parameters.Add(new KeyValuePair<string, object>("beginDate", treatment.BeginDate));
                 }
-                if (treatment.EndDate != null)
+                if (treatment.EndDate != DateTime.MinValue)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
@@ -149,10 +154,15 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = {id}";
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("doctorId", id)
+            };
 
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)
@@ -177,10 +187,15 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = $"select * from PTS2_Treatment where PatientId = {id}";
+                string query = $"select * from PTS2_Treatment where PatientId = @id";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id)
+            };
 
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)
@@ -200,7 +215,37 @@ namespace Webapp.Context.MSSQLContext
 
         public bool CheckTreatmentRelationship(long doctorId, long patientId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("doctorId", doctorId),
+                    new KeyValuePair<string, object>("patientId", patientId)
+                };
+
+                // Set query
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId and EndDate >= convert(date, {DateTime.Today.AddYears(-1)})";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                if(dbResult != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
