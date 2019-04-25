@@ -129,10 +129,6 @@ namespace Webapp.Context.MSSQLContext
                     fields += "description = @description";
                     parameters.Add(new KeyValuePair<string, object>("description", obj.Description));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
-                    fields += ",";
-                fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", obj.Active ? "1" : "0"));
 
                 query = query.Replace("@fields", fields);
 
