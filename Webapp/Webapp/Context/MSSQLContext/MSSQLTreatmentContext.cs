@@ -200,7 +200,37 @@ namespace Webapp.Context.MSSQLContext
 
         public bool CheckTreatmentRelationship(long doctorId, long patientId)
         {
-            throw new NotImplementedException();
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("doctorId", doctorId),
+                    new KeyValuePair<string, object>("patientId", patientId)
+                };
+
+                // Set query
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId AND EndDate >= convert(date, {DateTime.Today.AddYears(-1)})";
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                if(dbResult != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }
