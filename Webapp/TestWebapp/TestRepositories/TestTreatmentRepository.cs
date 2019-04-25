@@ -10,7 +10,7 @@ using Webapp.Context.MemoryContext;
 
 namespace TestWebapp.TestRepositories
 {
-    
+
     public class TestTreatmentRepository : RemoveData
     {
         ITreatmentContext context = new MemoryTreatmentContext();
@@ -65,6 +65,14 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal("Arm amputeren", treatmentRepository.GetById(1).Name);
+        }
+
+        [Fact]
+        public void CheckTreatmentRelationship()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Assert.True(treatmentRepository.CheckTreatmentRelationship(11, 12));
         }
     }
 }

@@ -197,5 +197,10 @@ namespace Webapp.Context.MSSQLContext
                 throw new NotImplementedException();
             }
         }
+
+        public bool CheckTreatmentRelationship(long doctorId, long patientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
