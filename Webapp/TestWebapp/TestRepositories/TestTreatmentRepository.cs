@@ -31,7 +31,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
-            Assert.Equal(4, treatmentRepository.Insert(treatment, 1, 1, 1));
+            Assert.Equal(4, treatmentRepository.Insert(treatment));
         }
 
         [Fact]

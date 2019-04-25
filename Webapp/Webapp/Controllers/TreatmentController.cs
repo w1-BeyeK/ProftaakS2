@@ -53,7 +53,7 @@ namespace Webapp.Controllers
             };
             foreach (Treatment treatment in items)
             {
-                vm.treatments.Add(TreatmentConverter.TreatmentToViewModel(treatment));
+                vm.treatments.Add(TreatmentConverter.ModelToViewModel(treatment));
             }
 
             return View(vm.treatments);
@@ -82,7 +82,7 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
             treatment.DoctorId = GetUserId();
             treatmentRepository.Insert(treatment);
             return RedirectToAction("index", "treatment");
@@ -96,7 +96,7 @@ namespace Webapp.Controllers
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            TreatmentDetailViewModel vm = TreatmentConverter.TreatmentToViewModel(treatmentRepository.GetById(id));
+            TreatmentDetailViewModel vm = TreatmentConverter.ModelToViewModel(treatmentRepository.GetById(id));
 
             return View(vm);
         }
@@ -104,7 +104,7 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
             treatmentRepository.Update(treatment);
             return RedirectToAction("index", "treatment");
         }
