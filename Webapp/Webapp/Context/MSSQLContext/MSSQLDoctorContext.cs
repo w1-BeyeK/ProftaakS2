@@ -69,7 +69,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("privemail", doctor.PrivMail),
                     new KeyValuePair<string, object>("phone", doctor.PhoneNumber),
                     new KeyValuePair<string, object>("privphone", doctor.PrivPhoneNumber),
-                    new KeyValuePair<string, object>("birthdate", doctor.Birth),    
+                    new KeyValuePair<string, object>("birthdate", doctor.Birth),
                     new KeyValuePair<string, object>("active", "1"),
                 };
 
@@ -114,21 +114,30 @@ namespace Webapp.Context.MSSQLContext
                     parameters.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
                 }
                 if (!string.IsNullOrWhiteSpace(fields))
+                {
                     fields += ",";
-                fields += "[gender] = @gender";
-                parameters.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                    fields += "[gender] = @gender";
+                    parameters.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                }
                 if (!string.IsNullOrWhiteSpace(fields))
+                {
                     fields += ",";
-                fields += "[phone] = @phone";
-                parameters.Add(new KeyValuePair<string, object>("phone", doctor.PhoneNumber));
-
+                    fields += "[phone] = @phone";
+                    parameters.Add(new KeyValuePair<string, object>("phone", doctor.PhoneNumber));
+                }
+                if (!string.IsNullOrWhiteSpace(fields))
+                {
+                    fields += ",";
+                    fields += "active = @active";
+                    parameters.Add(new KeyValuePair<string, object>("active", doctor.Active ? "1" : "0"));
+                }
 
                 query = query.Replace("@fields", fields);
 
                 handler.ExecuteCommand(query, parameters);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -138,15 +147,18 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Doctor set Active = 0 where Id = @id";
+                string query = "update PTS2_Doctor set Active = @active where Id = @id";
 
-                handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>("id", doctor.Id)
-                });
+                    new KeyValuePair<string, object>("id", doctor.Id),
+                    new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
+                };
+
+                handler.ExecuteCommand(query, parameters);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -158,11 +170,17 @@ namespace Webapp.Context.MSSQLContext
             {
                 // Create result
                 List<Doctor> result = new List<Doctor>();
+
                 // Set query
-                string query = $"select * from PTS2_Doctor where DepartmentId = {id}";
+                string query = $"select * from PTS2_Doctor where DepartmentId = @id";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id)
+                };
 
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)
@@ -186,11 +204,17 @@ namespace Webapp.Context.MSSQLContext
             {
                 // Create result
                 List<Doctor> result = new List<Doctor>();
+
                 // Set query
-                string query = $"select * from PTS2_Doctor where InstitutionId = {id}";
+                string query = $"select * from PTS2_Doctor where InstitutionId = @id";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id)
+                };
 
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)
@@ -218,7 +242,7 @@ namespace Webapp.Context.MSSQLContext
                 {
                     new KeyValuePair<string, object>("departmentId", departmentId),
                     new KeyValuePair<string, object>("doctorId", doctorId),
-                    new KeyValuePair<string, object>("active", "1"),
+                    new KeyValuePair<string, object>("active", "1")
                 };
 
                 return (bool)handler.ExecuteCommand(query, parameters);

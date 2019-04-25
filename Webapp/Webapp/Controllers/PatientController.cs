@@ -39,11 +39,6 @@ namespace Webapp.Controllers
         [Authorize(Roles= "doctor")]
         public IActionResult Index()
         {
-            //if (User.IsInRole("patient"))
-            //{
-            //    return RedirectToAction("Index", "Profile");
-            //}
-
             List<Patient> patienten = patientRepository.GetByDoctor(GetUserId());
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 

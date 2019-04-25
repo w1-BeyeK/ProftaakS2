@@ -63,6 +63,7 @@ namespace Webapp.Controllers
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpGet]
+        //TODO: Moet een dokter ook niet de treatment details kunnen inzien?
         public IActionResult Details(long id)
         {
             if (id < 1)
