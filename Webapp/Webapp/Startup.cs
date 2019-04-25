@@ -53,21 +53,21 @@ namespace Webapp
             services.AddTransient<IViewModelConverter<Department, DepartmentDetailViewModel>, DepartmentViewModelConverter>();
 
             // Sql contexts
-            //services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
-            //services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
-            //services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
-            //services.AddScoped<ICommentContext, MSSQLCommentContext>();
-            //services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
-            //services.AddScoped<IPatientContext, MSSQLPatientContext>();
-            //services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
+            services.AddScoped<ITreatmentTypeContext, MSSQLTreatmentTypeContext>();
+            services.AddScoped<IDepartmentContext, MSSQLDepartmentContext>();
+            services.AddScoped<IInstitutionContext, MSSQLInstitutionContext>();
+            services.AddScoped<ICommentContext, MSSQLCommentContext>();
+            services.AddScoped<IDoctorContext, MSSQLDoctorContext>();
+            services.AddScoped<IPatientContext, MSSQLPatientContext>();
+            services.AddScoped<ITreatmentContext, MSSQLTreatmentContext>();
 
-            services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
-            services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
-            services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
-            services.AddSingleton<ICommentContext, MemoryCommentContext>();
-            services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
-            services.AddSingleton<IPatientContext, MemoryPatientContext>();
-            services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
+            //services.AddSingleton<ITreatmentTypeContext, MemoryTreatmentTypeContext>();
+            //services.AddSingleton<IDepartmentContext, MemoryDepartmentContext>();
+            //services.AddSingleton<IInstitutionContext, MemoryInstitutionContext>();
+            //services.AddSingleton<ICommentContext, MemoryCommentContext>();
+            //services.AddSingleton<IDoctorContext, MemoryDoctorContext>();
+            //services.AddSingleton<IPatientContext, MemoryPatientContext>();
+            //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
             //Add test data into static lists
             TestData testData = new TestData();
             

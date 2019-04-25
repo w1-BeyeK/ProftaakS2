@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Webapp.Controllers
 {
+    //TODO: Kan deze weg?
+
     public class UserController : Controller
     {
         public IActionResult Index()

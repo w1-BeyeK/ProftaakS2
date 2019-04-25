@@ -17,9 +17,15 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = $"select * from PTS2_Patient where Id = {id}";
+            string query = $"select * from PTS2_Patient where Id = @id";
 
-            var dbResult = handler.ExecuteSelect(query, id);
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id)
+            };
+
+
+            var dbResult = handler.ExecuteSelect(query, parameters);
 
             var res = (dbResult as DataTable).Rows[0];
             if (res != null && parser.TryParse(res, out Patient patient))
@@ -37,10 +43,15 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "select * from PTS2_Patient where active = 1";
+            string query = "select * from PTS2_Patient where active = @active";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
@@ -106,125 +117,84 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", patient.Id)
                 };
 
-                //TODO : Remove if(patient.Names!!!)
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[birth] = @birth";
-                    parameters.Add(new KeyValuePair<string, object>("birth", patient.Birth));
-                }
-                if (patient.Name != null)
+                if (patient.ContactPersonName != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[contactPersonName] = @contactPersonName";
                     parameters.Add(new KeyValuePair<string, object>("contactPersonName", patient.ContactPersonName));
                 }
-                if (patient.Name != null)
+                if (patient.ContactPersonPhone != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[contactPersonPhone] = @contactPersonPhone";
                     parameters.Add(new KeyValuePair<string, object>("contactPersonPhone", patient.ContactPersonPhone));
                 }
-                if (patient.Name != null)
+                if (patient.Email != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[email] = @email";
                     parameters.Add(new KeyValuePair<string, object>("email", patient.Email));
                 }
-                //if (patient.Name != null)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(fields))
-                //        fields += ",";
-                //    fields += "[gender] = @gender";
-                //    parameters.Add(new KeyValuePair<string, object>("gender", patient.Gender));
-                //}
-                if (patient.Name != null)
+                if (patient.HouseNumber > 0)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[houseNumber] = @houseNumber";
                     parameters.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
                 }
-                //if (patient.Name != null)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(fields))
-                //        fields += ",";
-                //    fields += "[name] = @name";
-                //    parameters.Add(new KeyValuePair<string, object>("name", patient.Name));
-                //}
-                if (patient.Name != null)
+                if (patient.UserName != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "[userName] = @userName";
+                    parameters.Add(new KeyValuePair<string, object>("userName", patient.UserName));
+                }
+                if (patient.Password != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[password] = @password";
                     parameters.Add(new KeyValuePair<string, object>("password", patient.Password));
                 }
-                if (patient.Name != null)
+                if (patient.PhoneNumber != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[phoneNumber] = @phoneNumber";
                     parameters.Add(new KeyValuePair<string, object>("phoneNumber", patient.PhoneNumber));
                 }
-                if (patient.Name != null)
+                if (!string.IsNullOrWhiteSpace(fields))
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+                    fields += ",";
                     fields += "[privAdress] = @privAdress";
                     parameters.Add(new KeyValuePair<string, object>("privAdress", patient.PrivAdress));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privBirthDate] = @privBirthDate";
                     parameters.Add(new KeyValuePair<string, object>("privBirthDate", patient.PrivBirthDate));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privContactPersonName] = @privContactPersonName";
                     parameters.Add(new KeyValuePair<string, object>("privContactPersonName", patient.PrivContactPersonName));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privContactPersonPhone] = @privContactPersonPhone";
                     parameters.Add(new KeyValuePair<string, object>("privContactPersonPhone", patient.PrivContactPersonPhone));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privGender] = @privGender";
                     parameters.Add(new KeyValuePair<string, object>("privGender", patient.PrivGender));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privMail] = @privMail";
                     parameters.Add(new KeyValuePair<string, object>("privMail", patient.PrivMail));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
+
+                    fields += ",";
                     fields += "[privPhoneNumber] = @privPhoneNumber";
                     parameters.Add(new KeyValuePair<string, object>("privPhoneNumber", patient.PrivPhoneNumber));
-                }
-                if (patient.Name != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[userName] = @userName";
-                    parameters.Add(new KeyValuePair<string, object>("userName", patient.UserName));
                 }
 
                 query = query.Replace("@fields", fields);
@@ -232,7 +202,7 @@ namespace Webapp.Context.MSSQLContext
                 handler.ExecuteCommand(query, parameters);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -242,15 +212,16 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Patient set Active = 0 where Id = @id";
+                string query = "update PTS2_Patient set Active = @active where Id = @id";
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", patient.Id)
+                    new KeyValuePair<string, object>("id", patient.Id),
+                    new KeyValuePair<string, object>("active", patient.Active? "1" : "0")
                 });
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -262,10 +233,10 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "select * from PTS2_Patient where active = 1";
+            string query = $"SELECT * FROM PTS2_Patient WHERE[Id] IN(SELECT[PatientId] FROM[PTS2_Treatment] WHERE DoctorId = {id}) AND Active = 1;";
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)

@@ -57,5 +57,10 @@ namespace Webapp.Repository
         {
             return context.GetById(id);
         }
+
+        public bool CheckTreatmentRelationship(long doctorId, long patientId)
+        {
+            return context.CheckTreatmentRelationship(doctorId, patientId);
+        }
     }
 }

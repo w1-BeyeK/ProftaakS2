@@ -18,11 +18,12 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Institution set Active = 0 where Id = @id";
+                string query = "update PTS2_Institution set Active = @active where Id = @id";
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", obj.Id)
+                    new KeyValuePair<string, object>("id", obj.Id),
+                    new KeyValuePair<string, object>("active", obj.Active? "1" : "0")
                 });
                 return true;
             }
@@ -37,10 +38,15 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Institution> result = new List<Institution>();
             // Set query
-            string query = "select * from PTS2_Institution order by [name]";
+            string query = "select * from PTS2_Institution where active = @active order by [name]";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
@@ -55,9 +61,15 @@ namespace Webapp.Context.MSSQLContext
 
         public Institution GetById(long id)
         {
-            string query = $"select * from PTS2_Institution where active = 1 and Id = {id}";
+            string query = $"select * from PTS2_Institution where active = @active and Id = @id";
 
-            var dbResult = handler.ExecuteSelect(query, id);
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
+
+            var dbResult = handler.ExecuteSelect(query, parameters);
 
             var res = (dbResult as DataTable).Rows[0];
             if (res != null && parser.TryParse(res, out Institution institution))
