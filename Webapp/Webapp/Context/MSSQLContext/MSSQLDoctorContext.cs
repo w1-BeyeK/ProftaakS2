@@ -17,9 +17,14 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = $"select * from PTS2_Doctor where Id = {id}";
+            string query = $"SELECT * FROM PTS2_Account AS a INNER JOIN PTS2_Doctor AS d ON d.Id = a.DoctorId WHERE doctorId = @id";
 
-            var dbResult = handler.ExecuteSelect(query, id);
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+            {
+                new KeyValuePair<string, object>("id", id)
+            };
+
+            var dbResult = handler.ExecuteSelect(query, parameters);
 
             var res = (dbResult as DataTable).Rows[0];
             if (res != null && parser.TryParse(res, out Doctor doctor))
@@ -37,7 +42,12 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "select * from PTS2_Doctor where active = 1";
+            string query = "select * from PTS2_Doctor where active = @active";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -124,12 +134,6 @@ namespace Webapp.Context.MSSQLContext
                     fields += ",";
                     fields += "[phone] = @phone";
                     parameters.Add(new KeyValuePair<string, object>("phone", doctor.PhoneNumber));
-                }
-                if (!string.IsNullOrWhiteSpace(fields))
-                {
-                    fields += ",";
-                    fields += "active = @active";
-                    parameters.Add(new KeyValuePair<string, object>("active", doctor.Active ? "1" : "0"));
                 }
 
                 query = query.Replace("@fields", fields);

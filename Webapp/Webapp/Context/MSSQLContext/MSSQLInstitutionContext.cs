@@ -140,11 +140,6 @@ namespace Webapp.Context.MSSQLContext
                 fields += "phonenumber = @phonenumber";
                 parameters.Add(new KeyValuePair<string, object>("phonenumber", obj.PhoneNumber));
 
-                if (!string.IsNullOrWhiteSpace(fields))
-                    fields += ",";
-                fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", obj.Active ? "1" : "0"));
-
                 query = query.Replace("@fields", fields);
 
                 handler.ExecuteCommand(query, parameters);
