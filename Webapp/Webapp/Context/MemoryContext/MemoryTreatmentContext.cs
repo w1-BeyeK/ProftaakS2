@@ -88,5 +88,10 @@ namespace Webapp.Context.MemoryContext
         {
             throw new NotImplementedException();
         }
+
+        public bool CheckTreatmentRelationship(long doctorId, long patientId)
+        {
+            return BaseMemoryContext.treatments.Exists(t => t.DoctorId == doctorId && t.PatientId == patientId && t.EndDate >= DateTime.Today.AddMonths(-3));
+        }
     }
 }
