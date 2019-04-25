@@ -227,7 +227,7 @@ namespace Webapp.Context.MSSQLContext
                 };
 
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId and EndDate >= convert(date, {DateTime.Today.AddYears(-1)})";
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId and EndDate >= convert(date, {DateTime.Today.AddYears(-1).ToString("yyyy-mm-dd")})";
 
                 // Tell the handler to execute the query
                 var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
