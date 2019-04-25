@@ -16,7 +16,13 @@ namespace Webapp.Context.MSSQLContext
 
         public TreatmentType GetById(long id)
         {
-            string query = $"select * from PTS2_TreatmentType where Id = {id}";
+            string query = $"select * from PTS2_TreatmentType where Id = @id";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
 
             var dbResult = handler.ExecuteSelect(query, id);
 
@@ -36,10 +42,15 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<TreatmentType> result = new List<TreatmentType>();
             // Set query
-            string query = "select * from PTS2_TreatmentType where active = 1";
+            string query = "select * from PTS2_TreatmentType where active = @active";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
+            };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
@@ -108,9 +119,11 @@ namespace Webapp.Context.MSSQLContext
                     parameters.Add(new KeyValuePair<string, object>("departmentId", treatmentType.DepartmentId));
                 }
                 if (!string.IsNullOrWhiteSpace(fields))
+                {
                     fields += ",";
-                fields += "active = @active";
-                parameters.Add(new KeyValuePair<string, object>("active", treatmentType.Active ? "1" : "0"));
+                    fields += "active = @active";
+                    parameters.Add(new KeyValuePair<string, object>("active", treatmentType.Active ? "1" : "0"));
+                }
 
                 query = query.Replace("@fields", fields);
 
@@ -127,11 +140,12 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_TreatmentType set Active = 0 where Id = @id";
+                string query = "update PTS2_TreatmentType set Active = @active where Id = @id";
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", treatmentType.Id)
+                    new KeyValuePair<string, object>("id", treatmentType.Id),
+                    new KeyValuePair<string, object>("active", treatmentType.Active)
                 });
                 return true;
             }
