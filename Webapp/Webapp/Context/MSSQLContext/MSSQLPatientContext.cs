@@ -262,7 +262,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "select * from PTS2_Patient where active = 1";
+            string query = $"SELECT * FROM PTS2_Patient WHERE[Id] IN(SELECT[PatientId] FROM[PTS2_Treatment] WHERE DoctorId = {id}) AND Active = 1;";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
