@@ -24,6 +24,9 @@ namespace Webapp.Parsers
             {
                 if (result.HasProperty(col.ColumnName))
                 {
+                    if (dr[col] is DBNull)
+                        continue;
+
                     result.SetPropertyByName(col.ColumnName, dr[col]);
                 }
             }

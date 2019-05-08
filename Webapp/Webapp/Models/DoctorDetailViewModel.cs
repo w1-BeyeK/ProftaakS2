@@ -8,6 +8,7 @@ namespace Webapp.Models
 {
     public class DoctorDetailViewModel
     {
+        public long Id { get; set; }
         public long EmployeeNumber { get; set; }
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }

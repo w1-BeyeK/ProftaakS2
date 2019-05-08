@@ -16,11 +16,17 @@ namespace Webapp.Models.Data
 
         //TODO : Lijst met departments???
 
-        public Doctor(long id, string userName, string email, string name) : base((int)id, userName, email, name)
+        public Doctor()
         {
             Role = "doctor";
             PrivMail = true;
             PrivPhoneNumber = true;
+        }
+
+        public Doctor(long id, string userName, string email, string name) : base((int)id, userName, email, name)
+        {
+            Role = "doctor";
+            
         }
 
         public Doctor(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name, birth, phoneNumber, active, gender)
