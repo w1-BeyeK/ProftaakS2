@@ -45,6 +45,12 @@ namespace Webapp.Handlers
             {
                 DataSet ds = new DataSet();
                 SqlConnection sqlConnection = new SqlConnection(conn);
+
+                foreach (KeyValuePair<string, object> parameter in parameters)
+                {
+                    query = query.Replace($"@{parameter.Key}", $"'{parameter.Value.ToString()}'");
+                }
+
                 ds.Clear();
                 using (SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection))
                 {

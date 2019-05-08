@@ -154,12 +154,16 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId";
+                string query = $"select * from PTS2_Treatment AS t " +
+                                "INNER JOIN PTS2_Account AS a ON t.DoctorId = a.DoctorId " +
+                                "WHERE a.Id = @id";
+                                // AND t.EndDate >= '@endDate'";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>("doctorId", id)
-            };
+                    new KeyValuePair<string, object>("id", id),
+                    //new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("yyyy-mm-dd")),
+                };
 
                 // Tell the handler to execute the query
                 var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
@@ -176,7 +180,7 @@ namespace Webapp.Context.MSSQLContext
             }
             catch (Exception e)
             {
-                throw new NotImplementedException();
+                throw e;
             }
         }
 
@@ -192,7 +196,7 @@ namespace Webapp.Context.MSSQLContext
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
                     new KeyValuePair<string, object>("id", id)
-            };
+                };
 
                 // Tell the handler to execute the query
                 var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
@@ -209,7 +213,7 @@ namespace Webapp.Context.MSSQLContext
             }
             catch (Exception e)
             {
-                throw new NotImplementedException();
+                throw e;
             }
         }
 
@@ -245,7 +249,7 @@ namespace Webapp.Context.MSSQLContext
             }
             catch (Exception e)
             {
-                throw new NotImplementedException();
+                throw e;
             }
         }
     }
