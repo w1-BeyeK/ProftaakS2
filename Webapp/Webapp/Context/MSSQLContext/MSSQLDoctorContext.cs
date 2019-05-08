@@ -17,7 +17,10 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = $"SELECT * FROM PTS2_Account AS a INNER JOIN PTS2_Doctor AS d ON d.Id = a.DoctorId WHERE doctorId = @id";
+            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.DoctorId, d.Gender, d.Email, d.Phone, d.BirthDate, d.Active " +
+                           "FROM PTS2_Account AS a " +
+                           "INNER JOIN PTS2_Doctor AS d ON a.DoctorId = d.Id " +
+                           "WHERE doctorId = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             {
@@ -70,12 +73,22 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                //Table in de database moet nog aangepast worden en er moet opgelet worden dat de prive al wordt meegegeven op het moment.
-                string query = "insert into PTS2_Doctor(Username, Password, Name, Gender, Email, Phone, Birthdate, Active, PrivEmail, PrivPhone) OUTPUT INSERTED.Id values(username, password, name, gender, email, phone, birthdate, active, privemail, privphone)";
+                string query = "exec InsertDoctor " +
+                               "@username = @username, " +
+                               "@name = @name, " +
+                               "@password = @password, " +
+                               "@gender = @gender, " +
+                               "@email = @email, " +
+                               "@privEmail = @privEmail, " +
+                               "@phone = @phone, " +
+                               "@privPhone = @privPhone, " +
+                               "@birthdate = @birthdate, " +
+                               "@active = @active";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
                     new KeyValuePair<string, object>("username", doctor.UserName),
+                    new KeyValuePair<string, object>("name", doctor.Name),
                     new KeyValuePair<string, object>("password", doctor.Password),
                     new KeyValuePair<string, object>("gender", doctor.Gender),
                     new KeyValuePair<string, object>("email", doctor.Email),
@@ -83,7 +96,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("phone", doctor.PhoneNumber),
                     new KeyValuePair<string, object>("privphone", doctor.PrivPhoneNumber),
                     new KeyValuePair<string, object>("birthdate", doctor.Birth),
-                    new KeyValuePair<string, object>("active", "1"),
+                    new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
                 };
 
                 return (long)handler.ExecuteCommand(query, parameters);
@@ -154,7 +167,14 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Doctor set Active = @active where Id = @id";
+                string query = "update PTS2_Doctor " +
+                               "set Active = @active " +
+                               "where Id = " +
+                               "( " +
+                               "SELECT a.Id " +
+                               "FROM PTS2_Account AS a " +
+                               "WHERE a.Id = @id " +
+                               ")";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
