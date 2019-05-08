@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="TreatmentType"><h4>Type behandeling</h4></label>
-                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].Type.Name">
+                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TreatmentTypes[0].Name">
                             </div>
                         </div>
                         <div class="form-group">
@@ -107,7 +107,7 @@
                                 {
                                     @if(treatment.Age <= 90)
                                     {
-                                        <li>@treatment.Name / @treatment.Type.Name / @treatment.EndDate.ToString("dd-MM-yyyy")</li>
+                                        <li>@treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy")</li>
                                     }
                                 }
                             </div>

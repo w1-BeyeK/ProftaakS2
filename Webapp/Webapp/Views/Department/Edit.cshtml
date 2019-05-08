@@ -31,7 +31,6 @@
                 </div>
             </div>
             <div class="form-group">
-                @*TODO: fix dat je niet "Select department" als keuze kunt kiezen, geeft crash*@
                 <label asp-for="InstitutionId" class="control-label"></label>
                 @Html.DropDownListFor(model => model.InstitutionId,
                     Model.Institutions,

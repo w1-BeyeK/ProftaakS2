@@ -9,11 +9,14 @@ namespace Webapp.Models.Data
     {
         public string Name { get; set; }
         public long Id { get; set; }
+        public long DoctorId { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public Patient Patient { get; set; }
+        public long PatientId { get; set; }
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
+        public long TreatmentTypeId { get; set; }
         public List<Comment> Comments { get; set; }
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate)

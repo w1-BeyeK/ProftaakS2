@@ -51,5 +51,15 @@ namespace Webapp.Converters
             }
             return result;
         }
+
+        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> models)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Doctor> ViewModelsToModels(List<DoctorDetailViewModel> viewModels)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class PatientViewModelConverter
+    public class PatientViewModelConverter : IViewModelConverter<Patient, PatientDetailViewModel>
     {
-        public Patient ViewModelToPatient(PatientDetailViewModel vm)
+        public Patient ViewModelToModel(PatientDetailViewModel vm)
         {
             return new Patient(vm.Id, vm.UserName, vm.Email, vm.Name)
             {
@@ -31,27 +32,7 @@ namespace Webapp.Converters
             };
         }
 
-        public List<PatientListViewModel> PatientlistToViewModel(List<Patient> patienten)
-        {
-            List<PatientListViewModel> Patienten = new List<PatientListViewModel>();
-
-            foreach (Patient p in patienten)
-            {
-                PatientListViewModel patient = new PatientListViewModel
-                {
-                    UserId = p.Id,
-                    Name = p.Name,
-                    Gender = p.Gender,
-                    Birth = p.Birth
-                };
-
-                Patienten.Add(patient);
-            }
-
-            return Patienten;
-        }
-
-        public PatientDetailViewModel PatientToViewModel(Patient patient)
+        public PatientDetailViewModel ModelToViewModel(Patient patient)
         {
             return new PatientDetailViewModel()
             {
@@ -75,6 +56,36 @@ namespace Webapp.Converters
                 PrivMail = patient.PrivMail,
                 PrivPhoneNumber = patient.PrivPhoneNumber
             };
+        }
+
+        public List<PatientListViewModel> PatientlistToViewModel(List<Patient> patienten)
+        {
+            List<PatientListViewModel> Patienten = new List<PatientListViewModel>();
+
+            foreach (Patient p in patienten)
+            {
+                PatientListViewModel patient = new PatientListViewModel
+                {
+                    UserId = p.Id,
+                    Name = p.Name,
+                    Gender = p.Gender,
+                    Birth = p.Birth
+                };
+
+                Patienten.Add(patient);
+            }
+
+            return Patienten;
+        }
+
+        public List<PatientDetailViewModel> ModelsToViewModel(List<Patient> models)
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Patient> ViewModelsToModels(List<PatientDetailViewModel> viewModels)
+        {
+            throw new NotImplementedException();
         }
     }
 }

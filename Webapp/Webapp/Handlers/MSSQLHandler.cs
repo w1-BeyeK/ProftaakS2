@@ -25,6 +25,7 @@ namespace Webapp.Handlers
             {
                 DataSet ds = new DataSet();
                 SqlConnection sqlConnection = new SqlConnection(conn);
+                //TODO : Why do you clear him?
                 ds.Clear();
                 using (SqlDataAdapter da = new SqlDataAdapter(query, sqlConnection))
                 {

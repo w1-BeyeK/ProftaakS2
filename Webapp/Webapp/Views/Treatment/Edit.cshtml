@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
-                                <input type="text" class="form-control" asp-for="PatientDetailViewModel.Name" value="@Model.PatientDetailViewModel.Name" title="//Naam van de patiënt//">
+                                <input type="text" class="form-control" asp-for="Patients[0].Name" value="@Model.Patients[0].Name" title="//Naam van de patiënt//">
                             </div>
                         </div>
                         <div class="form-group">
@@ -32,10 +32,11 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Behandelingstype</h4></label>
-                                <select type="text" class="form-control" asp-for="Type" value="@Model.Type" title="Type van de behandeling.">
-                                    <option>Behandeling 1</option>
-                                    <option>Behandeling 2</option>
-                                    <option>Behandeling 3</option>
+                                <select asp-for="TypeId" type="text" class="form-control" placeholder="Type van de behandeling" title="Type van de behandeling.">
+                                    @foreach (var Type in Model.TreatmentTypes)
+                                    {
+                                        <option value="@Type.Id">@Type.Name</option>
+                                    }
                                 </select>
                             </div>
                         </div>

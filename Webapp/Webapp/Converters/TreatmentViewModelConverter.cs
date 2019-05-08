@@ -2,19 +2,24 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Interfaces;
 using Webapp.Models;
 using Webapp.Models.Data;
 
 namespace Webapp.Converters
 {
-    public class TreatmentViewModelConverter
+    public class TreatmentViewModelConverter : IViewModelConverter<Treatment, TreatmentDetailViewModel>
     {
-        public Treatment ViewModelToTreatment(TreatmentDetailViewModel vm)
+        public Treatment ViewModelToModel(TreatmentDetailViewModel vm)
         {
             Patient patient = new Patient()
             {
-                Id = vm.PatientDetailViewModel.Id,
-                Name = vm.PatientDetailViewModel.Name
+                Id = vm.PatientId,
+            };
+
+            TreatmentType treatmenttype = new TreatmentType()
+            {
+                Id = vm.TypeId,
             };
 
             Treatment treatment = new Treatment()
@@ -24,26 +29,20 @@ namespace Webapp.Converters
                 Patient = patient,
                 BeginDate = vm.BeginDate + vm.BeginTime,
                 EndDate = vm.EndDate + vm.EndTime,
-                TreatmentType = vm.Type
+                TreatmentType = treatmenttype,
             };
 
             return treatment;
         }
 
-        public TreatmentDetailViewModel TreatmentToViewModel(Treatment treatment)
+        public TreatmentDetailViewModel ModelToViewModel(Treatment treatment)
         {
-            PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel()
-            {
-                Id = treatment.Patient.Id,
-                Name = treatment.Patient.Name,
-            };
-
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel()
             {
                 Id = treatment.Id,
                 Name = treatment.Name,
-                Type = treatment.TreatmentType,
-                PatientDetailViewModel = patientDetailViewModel,
+                TypeId = treatment.TreatmentTypeId,
+                PatientId = treatment.PatientId,
                 BeginDate = treatment.BeginDate,
                 EndDate = treatment.EndDate,
                 Age = treatment.GetAge()
@@ -51,15 +50,20 @@ namespace Webapp.Converters
             return vm;
         }
 
-        internal List<TreatmentDetailViewModel> TreatmentsToViewModel(List<Treatment> treatments)
+        public List<TreatmentDetailViewModel> ModelsToViewModel(List<Treatment> models)
         {
             List<TreatmentDetailViewModel> result = new List<TreatmentDetailViewModel>();
 
-            foreach(Treatment treatment in treatments)
+            foreach(Treatment treatment in models)
             {
-                result.Add(TreatmentToViewModel(treatment));
+                result.Add(ModelToViewModel(treatment));
             }
             return result;
+        }
+
+        public List<Treatment> ViewModelsToModels(List<TreatmentDetailViewModel> viewModels)
+        {
+            throw new NotImplementedException();
         }
     }
 }

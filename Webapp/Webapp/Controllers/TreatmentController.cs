@@ -53,46 +53,60 @@ namespace Webapp.Controllers
             };
             foreach (Treatment treatment in items)
             {
-                vm.treatments.Add(TreatmentConverter.TreatmentToViewModel(treatment));
+                vm.treatments.Add(TreatmentConverter.ModelToViewModel(treatment));
             }
 
             return View(vm.treatments);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"> PatientId </param>
+        /// <returns></returns>
         [Authorize(Roles = "doctor")]
         [HttpGet]
-        public IActionResult Add()
+        public IActionResult Add(long id = 0)
         {
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
             {
                 Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll()),
-                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll())
+                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll()),
+                PatientId = id
             };
             return View(vm);
         }
-        
+
         //TODO : Voeg extra parameters toe! bij AddTreatment
         [Authorize(Roles = "doctor")]
         [HttpPost]
         public IActionResult Add(TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
-            treatmentRepository.Insert(treatment, treatment.TreatmentType.Id, GetUserId(), treatment.Patient.Id);
-            return View();
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
+            treatment.DoctorId = GetUserId();
+            treatmentRepository.Insert(treatment);
+            return RedirectToAction("index", "treatment");
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"> TreatmentId </param>
+        /// <returns></returns>
+        [Authorize(Roles = "doctor")]
         [HttpGet]
         public IActionResult Edit(long id)
         {
-            TreatmentDetailViewModel vm = TreatmentConverter.TreatmentToViewModel(treatmentRepository.GetById(id));
+            TreatmentDetailViewModel vm = TreatmentConverter.ModelToViewModel(treatmentRepository.GetById(id));
 
             return View(vm);
         }
 
+        [Authorize(Roles = "doctor")]
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentConverter.ViewModelToTreatment(vm);
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
             treatmentRepository.Update(treatment);
             return RedirectToAction("index", "treatment");
         }

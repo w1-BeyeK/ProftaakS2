@@ -21,7 +21,7 @@ namespace Webapp.Repository
         /// <summary>
         /// A doctor can add a treatment
         /// </summary>
-        public long Insert(Treatment treatment, long treatmentType, long doctorId, long patientId)
+        public long Insert(Treatment treatment)
         {
             return context.Insert(treatment);
         }
@@ -56,6 +56,11 @@ namespace Webapp.Repository
         public Treatment GetById(long id)
         {
             return context.GetById(id);
+        }
+
+        public bool CheckTreatmentRelationship(long doctorId, long patientId)
+        {
+            return context.CheckTreatmentRelationship(doctorId, patientId);
         }
     }
 }

@@ -10,15 +10,14 @@ namespace Webapp.Models
     {
         public long Id { get; set; }
         public string Name { get; set; }
-        public TreatmentType Type { get; set; }
+        public long TypeId { get; set; }
+        public long PatientId { get; set; }
         public DateTime BeginDate { get; set; }
         public TimeSpan BeginTime { get; set; }
         public DateTime EndDate { get; set; }
         public TimeSpan EndTime { get; set; }
         public List<Comment> Comments { get; set; } = new List<Comment>();
         public Comment Description { get; set; }
-        public PatientDetailViewModel PatientDetailViewModel { get; set; }
-        public TreatmentTypeDetailViewModel TreatmentTypeDetailViewModel { get; set; }
         public int Age { get; set; }
         public List<PatientListViewModel> Patients { get; set; }
         public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
