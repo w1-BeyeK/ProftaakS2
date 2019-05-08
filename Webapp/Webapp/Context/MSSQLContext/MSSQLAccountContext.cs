@@ -18,11 +18,12 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Account set Active = 0 where Id = @id";
+                string query = "update PTS2_Account set Active = @active where Id = @id";
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", obj.Id)
+                    new KeyValuePair<string, object>("id", obj.Id),
+                    new KeyValuePair<string, object>("active", true? "1" : "0")
                 });
                 return true;
             }
@@ -53,11 +54,58 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        public List<UserAccount> GetAllPatients()
+        {
+            // Create result
+            List<UserAccount> result = new List<UserAccount>();
+            // Set query
+            string query = "select * from PTS2_Account where patientId is not null and doctorId is null order by [name]";
+
+            // Tell the handler to execute the query
+            var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+            // Parse all rows
+            foreach (DataRow dr in dbResult.Rows)
+            {
+                // Parse only if succeeded
+                if (parser.TryParse(dr, out UserAccount UserAccount))
+                    result.Add(UserAccount);
+            }
+
+            return result;
+        }
+
+        public List<UserAccount> GetAllDoctors()
+        {
+            // Create result
+            List<UserAccount> result = new List<UserAccount>();
+            // Set query
+            string query = "select * from PTS2_Account where patientId is null and doctorId is not null order by [name]";
+
+            // Tell the handler to execute the query
+            var dbResult = handler.ExecuteSelect(query) as DataTable;
+
+            // Parse all rows
+            foreach (DataRow dr in dbResult.Rows)
+            {
+                // Parse only if succeeded
+                if (parser.TryParse(dr, out UserAccount UserAccount))
+                    result.Add(UserAccount);
+            }
+
+            return result;
+        }
+
         public UserAccount GetById(long id)
         {
-            string query = $"select * from PTS2_Account where Id = {id}";
+            string query = $"select * from PTS2_Account where Id = @id";
 
-            var dbResult = handler.ExecuteSelect(query, id);
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", id.ToString())
+                };
+
+            var dbResult = handler.ExecuteCommand(query, parameters);
 
             var res = (dbResult as DataTable).Rows[0];
             if (res != null && parser.TryParse(res, out UserAccount UserAccount))

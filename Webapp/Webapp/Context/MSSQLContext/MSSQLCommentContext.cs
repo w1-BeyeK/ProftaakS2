@@ -23,10 +23,15 @@ namespace Webapp.Context
             // Create result
             List<Comment> result = new List<Comment>();
             // Set query
-            string query = $"select * from PTS2_Comment where TreatmentId = {treatmentId}";
+            string query = $"select * from PTS2_Comment where TreatmentId = @treatmentId";
+
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                      new KeyValuePair<string, object>("treatmentId", treatmentId.ToString())
+                };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteCommand(query, parameters) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
