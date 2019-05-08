@@ -17,6 +17,7 @@ namespace Webapp.Controllers
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
         private readonly TreatmentTypeRepository treatmentTypeRepository;
+        private readonly TreatmentRepository treatmentRepository;
 
         private readonly PatientViewModelConverter patientConverter;
         private readonly DoctorViewModelConverter doctorConverter;
@@ -25,12 +26,14 @@ namespace Webapp.Controllers
         public ProfileController(
             PatientRepository patientRepository,
             DoctorRepository doctorRepository,
-            TreatmentTypeRepository treatmentTypeRepository
+            TreatmentTypeRepository treatmentTypeRepository,
+            TreatmentRepository treatmentRepository
             )
         {
             this.patientRepository = patientRepository;
             this.doctorRepository = doctorRepository;
             this.treatmentTypeRepository = treatmentTypeRepository;
+            this.treatmentRepository = treatmentRepository;
 
             patientConverter = new PatientViewModelConverter();
             doctorConverter = new DoctorViewModelConverter();
@@ -70,20 +73,39 @@ namespace Webapp.Controllers
 
         public IActionResult Inzie(long id)
         {
+            long userId = GetUserId();
             try
             {
                 UserViewModel viewModel = new UserViewModel();
 
                 if (HttpContext.User.IsInRole("doctor"))
                 {
-                    Patient patient = patientRepository.GetById(id);
-                    viewModel.Patient = patientConverter.ModelToViewModel(patient);
+                    if (treatmentRepository.CheckTreatmentRelationship(userId, id))
+                    {
+                        Patient patient = patientRepository.GetById(id);
+                        viewModel.Patient = patientConverter.ModelToViewModel(patient);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "patient");
+                    }
                 }
                 else if (HttpContext.User.IsInRole("patient"))
                 {
-                    Doctor doctor = doctorRepository.GetById(id);
-                    viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
-                    viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                    if (treatmentRepository.CheckTreatmentRelationship(id, userId))
+                    {
+                        Doctor doctor = doctorRepository.GetById(id);
+                        viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "treatment");
+                    }
+                }
+                else
+                {
+                    return Unauthorized();
                 }
 
                 return View(viewModel);

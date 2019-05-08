@@ -14,6 +14,7 @@ namespace Webapp.Converters
         {
             return new Doctor(vm.EmployeeNumber, vm.UserName, vm.Email, vm.Name)
             {
+                Id = vm.Id,
                 Birth = vm.Birth,
                 Gender = vm.Gender,
                 PhoneNumber = vm.PhoneNumber,
@@ -26,6 +27,7 @@ namespace Webapp.Converters
         {
             return new DoctorDetailViewModel()
             {
+                Id = doctor.Id,
                 EmployeeNumber = doctor.EmployeeNumber,
                 Email = doctor.Email,
                 UserName = doctor.UserName,
@@ -39,24 +41,15 @@ namespace Webapp.Converters
             };
         }
 
-        public List<DoctorListViewModel> DoctorlistToViewModel(List<Doctor> doctors)
+        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> doctors)
         {
-            List<DoctorListViewModel> Doctors = new List<DoctorListViewModel>();
+            List<DoctorDetailViewModel> result = new List<DoctorDetailViewModel>();
 
             foreach (Doctor d in doctors)
             {
-                DoctorListViewModel doctor = new DoctorListViewModel()
-                {
-                    EmployeeNumber = d.EmployeeNumber,
-                    Name = d.Name,
-                    Gender = d.Gender,
-                    Birth = d.Birth,
-                    Fuction = d.Function
-                };
-
-                Doctors.Add(doctor);
+                result.Add(ModelToViewModel(d));
             }
-            return Doctors;
+            return result;
         }
 
         public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> models)

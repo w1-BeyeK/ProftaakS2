@@ -58,8 +58,8 @@
                                     <a href="#"><i class="fa fa-user-md fa-lg"></i> Artsen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="doctors">
-                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li><a asp-controller="Doctor" asp-action="Index"><i class="fa fa-area-chart fa-lg"></i> Overzicht</a></li>
+                                    <li><a asp-controller="Doctor" asp-action="Create"><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</a></li>
                                 </ul>
                             }
                             else if (Context.User.IsInRole("doctor"))

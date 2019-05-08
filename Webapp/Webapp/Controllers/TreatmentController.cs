@@ -94,6 +94,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id"> TreatmentId </param>
         /// <returns></returns>
+        [Authorize(Roles = "doctor")]
         [HttpGet]
         public IActionResult Edit(long id)
         {
@@ -103,6 +104,7 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "doctor")]
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {

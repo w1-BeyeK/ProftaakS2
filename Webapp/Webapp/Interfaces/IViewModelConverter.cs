@@ -11,6 +11,5 @@ namespace Webapp.Interfaces
         TModel ViewModelToModel(TViewModel viewModel);
 
         List<TViewModel> ModelsToViewModel(List<TModel> models);
-        List<TModel> ViewModelsToModels(List<TViewModel> viewModels);
     }
 }
