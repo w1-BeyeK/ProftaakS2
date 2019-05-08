@@ -26,12 +26,30 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void TreatmentRepositoryConstructorFalseInput()
+        {
+            EmptyLists();
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository = new TreatmentRepository(null));
+            Assert.Equal("De behandelingContext is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void Add()
         {
             EmptyLists();
             Treatment treatment = new Treatment(1, "een", DateTime.Today, DateTime.Today);
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal(4, treatmentRepository.Insert(treatment));
+        }
+
+        [Fact]
+        public void AddFalseInput()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.Insert(null));
+            Assert.Equal("De behandeling is leeg.", ex.Message);
         }
 
         [Fact]
@@ -44,11 +62,29 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void UpdateFalseInput()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.Update(null));
+            Assert.Equal("De behandeling is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void GetByDoctor()
         {
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Assert.Equal(3, treatmentRepository.GetByDoctor(11).Count);
+        }
+
+        [Fact]
+        public void GetByDoctorFalseInput()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetByDoctor(-1));
+            Assert.Equal("De dokterId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -60,6 +96,15 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void GetByPatientFalseInput()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetByPatient(-1));
+            Assert.Equal("De patiëntId is leeg.", ex.Message);
+        }
+        
+        [Fact]
         public void GetById()
         {
             EmptyLists();
@@ -68,11 +113,38 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void GetByIdFalseInput()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetById(-1));
+            Assert.Equal("De behandelingId is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void CheckTreatmentRelationship()
         {
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Assert.True(treatmentRepository.CheckTreatmentRelationship(11, 12));
+        }
+
+        [Fact]
+        public void CheckTreatmentRelationshipFalseDoctorId()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.CheckTreatmentRelationship(-1, 1));
+            Assert.Equal("De dokterId is leeg.", ex.Message);
+        }
+
+        [Fact]
+        public void CheckTreatmentRelationshipFalsePatientId()
+        {
+            EmptyLists();
+            treatmentRepository = new TreatmentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.CheckTreatmentRelationship(1, -1));
+            Assert.Equal("De patiëntId is leeg.", ex.Message);
         }
     }
 }

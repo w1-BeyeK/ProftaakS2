@@ -24,7 +24,7 @@ namespace Webapp.Repository
         {
             if (institution == null)
             {
-                throw new NullReferenceException("De instellingId is leeg.");
+                throw new NullReferenceException("De instelling is leeg.");
             }
             return context.Insert(institution);
         }
