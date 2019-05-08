@@ -41,6 +41,7 @@ namespace Webapp.Controllers
             if (User.IsInRole("doctor"))
             {
                 items = treatmentRepository.GetByDoctor(GetUserId());
+                
             }
             else if (User.IsInRole("patient"))
             {
@@ -97,7 +98,8 @@ namespace Webapp.Controllers
         public IActionResult Edit(long id)
         {
             TreatmentDetailViewModel vm = TreatmentConverter.ModelToViewModel(treatmentRepository.GetById(id));
-
+            vm.PatientName = patientRepository.GetById(vm.PatientId).Name;
+            vm.TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
             return View(vm);
         }
 

@@ -12,6 +12,7 @@ namespace Webapp.Models
         public string Name { get; set; }
         public long TypeId { get; set; }
         public long PatientId { get; set; }
+        public string PatientName { get; set; }
         public DateTime BeginDate { get; set; }
         public TimeSpan BeginTime { get; set; }
         public DateTime EndDate { get; set; }

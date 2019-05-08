@@ -23,8 +23,9 @@
     <tbody>
         @foreach (var item in Model)
         {
+            int i = 0;
             <tr>
-                <td>@item.PatientDetailViewModel.Name</td>
+                <td>@item.PatientName</td>
                 <td>@item.Name</td>
                 <td>@item.BeginDate</td>
                 <td>@item.EndDate</td>
@@ -33,7 +34,7 @@
                     {
                         @Html.ActionLink("Edit", "Edit", new { id = item.Id })
                     }
-                    @Html.ActionLink("Detail", "Treatment", "Patient", new { id = item.PatientDetailViewModel.Id })
+                    @Html.ActionLink("Detail", "Treatment", "Patient", new { id = item.PatientId })
                 </td>
             </tr>
         }
