@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public InstitutionRepository(IInstitutionContext context)
         {
-            this.context = context ?? throw new NullReferenceException("De instellingcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De instellingContext is leeg.");
         }
 
         /// <summary>

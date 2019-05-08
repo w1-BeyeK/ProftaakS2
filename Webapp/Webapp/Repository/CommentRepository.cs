@@ -15,7 +15,7 @@ namespace Webapp.Repository
 
         public CommentRepository(ICommentContext context)
         {
-            this.context = context ?? throw new NullReferenceException("Het commentaarcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("Het commentaarContext is leeg.");
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public PatientRepository(IPatientContext context)
         {
-            this.context = context ?? throw new NullReferenceException("De patientcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De patientContext is leeg.");
         }
 
         //TODO : This is for testing, but we dont need this!!!

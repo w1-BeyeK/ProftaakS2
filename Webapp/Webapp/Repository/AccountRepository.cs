@@ -13,7 +13,7 @@ namespace Webapp.Repository
 
         public AccountRepository(IAccountContext context)
         {
-            this.context = context ?? throw new NullReferenceException("De accountcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De accountContext is leeg.");
         }
 
         public UserAccount GetById(long id)

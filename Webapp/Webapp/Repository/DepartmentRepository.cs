@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public DepartmentRepository(IDepartmentContext context)
         {
-            this.context = context ?? throw new NullReferenceException("De afdelingcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De afdelingContext is leeg.");
         }
 
         public long Insert(Department department)
