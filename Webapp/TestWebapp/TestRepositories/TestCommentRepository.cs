@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Authentication;
+using System;
 using System.Collections.Generic;
+using System.Security.Authentication;
 using System.Text;
 using Webapp.Context;
 using Webapp.Context.InterfaceContext;
@@ -17,27 +19,6 @@ namespace TestWebapp.TestRepositories
         ICommentContext context = new MemoryCommentContext();
         CommentRepository commentRepository;
 
-        //[Fact]
-        //public void CommentTest()
-        //{
-        //    //TestMemoryContext test = new TestMemoryContext();
-        //    ITreatmentContext treatmentContext = new MemoryTreatmentContext();
-        //    ICommentContext commentContext = new MemoryCommentContext();
-        //    TreatmentRepository treatmentRepos = new TreatmentRepository(treatmentContext);
-        //    CommentRepository commentRepos = new CommentRepository(commentContext);
-
-        //    Doctor doctor = new Doctor(11, null, null, null);
-        //    Patient patient = new Patient(15, null, null, null);
-        //    TreatmentType treatmentType = new TreatmentType() { Id = 9 };
-
-        //    long id = treatmentRepos.Insert(new Treatment(0, "", DateTime.Today, DateTime.Today) { Doctor = doctor, Patient = patient, TreatmentType = treatmentType }, 0, 0, 0);
-        //    List<Comment> comments = commentContext.Insert(new Comment() { TreatmentId = id, Description = "viandel" });
-        //    Treatment treat = treatmentRepos.GetById(id);
-
-        //    Assert.NotNull(treat.Comments.Find(t => t.Id == comments[0].Id));
-        //    Assert.Equal("viandel", treat.Comments[3].Description);
-        //}
-
         [Fact]
         public void CommentRepositoryConstructor()
         {
@@ -48,20 +29,35 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
-        public void Add()
+        public void CommentRepositoryConstructorFalseinput()
+        {
+            EmptyLists();
+            ICommentContext testContext = null;
+            Exception ex = Assert.Throws<NullReferenceException>(() => commentRepository = new CommentRepository(testContext));
+            Assert.Equal("Het commentaarContext is leeg.", ex.Message);
+        }
+
+        [Fact]
+        public void Insert()
         {
             EmptyLists();
             commentRepository = new CommentRepository(context);
+
             Comment comment = new Comment()
             {
-                TreatmentId = 1
+                TreatmentId = 1,
             };
 
             Assert.Equal(4, commentRepository.Insert(comment).Count);
         }
 
-        //    Assert.Equal(1, commentRepository.Add(comment));
-        //}
+        [Fact]
+        public void InsertFalseInput()
+        {
+            commentRepository = new CommentRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => commentRepository.Insert(null));
+            Assert.Equal("Het commentaar is leeg.", ex.Message);
+        }
 
         [Fact]
         public void GetByTreatment()
@@ -69,6 +65,18 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             commentRepository = new CommentRepository(context);
             
+            Assert.Equal(3, commentRepository.GetByTreatment(1).Count);
+        }
+
+        [Fact]
+        public void GetByTreatmentFalseInput()
+        {
+            EmptyLists();
+            commentRepository = new CommentRepository(context);
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => commentRepository.GetByTreatment(-1));
+            Assert.Equal("De behandelingId is leeg.", ex.Message);
+
             Assert.Equal(3, commentRepository.GetByTreatment(1).Count);
         }
     }

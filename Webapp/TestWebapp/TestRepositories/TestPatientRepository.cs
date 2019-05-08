@@ -27,6 +27,15 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void PatientRepositoryConstructorFalseInput()
+        {
+            EmptyLists();
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => patientRepository = new PatientRepository(null));
+            Assert.Equal("De patiëntContext is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void Add()
         {
             EmptyLists();
@@ -35,6 +44,18 @@ namespace TestWebapp.TestRepositories
             Patient patient = new Patient();
 
             Assert.Equal(16, patientRepository.Insert(patient));
+        }
+
+        [Fact]
+        public void AddFalseInput()
+        {
+            EmptyLists();
+            patientRepository = new PatientRepository(context);
+
+            Patient patient = new Patient();
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => patientRepository.Insert(null));
+            Assert.Equal("De patiënt is leeg.", ex.Message);
         }
 
         [Fact]
@@ -52,8 +73,17 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             patientRepository = new PatientRepository(context);
 
-
             Assert.Equal("Stijn Driedubbels", patientRepository.GetById(15).Name);
+        }
+
+        [Fact]
+        public void GetByIdFalseInput()
+        {
+            EmptyLists();
+            patientRepository = new PatientRepository(context);
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => patientRepository.GetById(-1));
+            Assert.Equal("De patiëntId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -65,6 +95,16 @@ namespace TestWebapp.TestRepositories
             Patient patient = new Patient(15, "naam", "beschrijving", "naam");
 
             Assert.True(patientRepository.Update(patient));
+        }
+
+        [Fact]
+        public void UpdateFalseInput()
+        {
+            EmptyLists();
+            patientRepository = new PatientRepository(context);
+
+            Exception ex = Assert.Throws<NullReferenceException>(() => patientRepository.Update(null));
+            Assert.Equal("De patiënt is leeg.", ex.Message);
         }
     }
 }
