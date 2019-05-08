@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public TreatmentRepository(ITreatmentContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De behandelingcontext is leeg.");
         }
 
         //TODO: Verwerken in 1 object - geen extra parameters
@@ -23,6 +23,10 @@ namespace Webapp.Repository
         /// </summary>
         public long Insert(Treatment treatment)
         {
+            if (treatment == null)
+            {
+                throw new NullReferenceException("De behandeling is leeg.");
+            }
             return context.Insert(treatment);
         }
 
@@ -31,6 +35,10 @@ namespace Webapp.Repository
         /// </summary>
         public bool Update(Treatment treatment)
         {
+            if (treatment == null)
+            {
+                throw new NullReferenceException("De behandeling is leeg.");
+            }
             return context.Update(treatment);
         }
 
@@ -39,6 +47,10 @@ namespace Webapp.Repository
         /// </summary>
         public List<Treatment> GetByDoctor(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De doctorId is leeg.");
+            }
             return context.GetByDoctor(id);
         }
 
@@ -47,6 +59,10 @@ namespace Webapp.Repository
         /// </summary>
         public List<Treatment> GetByPatient(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De patiëntId is leeg.");
+            }
             return context.GetByPatient(id);
         }
 
@@ -55,11 +71,23 @@ namespace Webapp.Repository
         /// </summary>
         public Treatment GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De behandelingId is leeg.");
+            }
             return context.GetById(id);
         }
 
         public bool CheckTreatmentRelationship(long doctorId, long patientId)
         {
+            if (doctorId < 1)
+            {
+                throw new NullReferenceException("De doctorId is leeg.");
+            }
+            if (patientId < 1)
+            {
+                throw new NullReferenceException("De patientId is leeg.");
+            }
             return context.CheckTreatmentRelationship(doctorId, patientId);
         }
     }

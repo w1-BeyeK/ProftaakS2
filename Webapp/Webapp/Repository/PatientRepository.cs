@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public PatientRepository(IPatientContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De patientcontext is leeg.");
         }
 
         //TODO : This is for testing, but we dont need this!!!
@@ -23,6 +23,10 @@ namespace Webapp.Repository
         /// </summary>
         public long Insert(Patient patient)
         {
+            if (patient == null)
+            {
+                throw new NullReferenceException("De patient is leeg.");
+            }
             return context.Insert(patient);
         }
 
@@ -31,6 +35,10 @@ namespace Webapp.Repository
         /// </summary>
         public bool Update(Patient patient)
         {
+            if (patient == null)
+            {
+                throw new NullReferenceException("De patiënt is leeg.");
+            }
             return context.Update(patient);
         }
 
@@ -47,6 +55,10 @@ namespace Webapp.Repository
         /// </summary>
         public Patient GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De patiëntId is leeg.");
+            }
             return context.GetById(id);
         }
 
@@ -55,6 +67,10 @@ namespace Webapp.Repository
         /// </summary>
         public List<Patient> GetByDoctor(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De dokterId is leeg.");
+            }
             return context.GetByDoctor(id);
         }
     }

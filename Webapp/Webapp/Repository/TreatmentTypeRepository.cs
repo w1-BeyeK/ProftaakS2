@@ -16,7 +16,7 @@ namespace Webapp.Repository
 
         public TreatmentTypeRepository(ITreatmentTypeContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("Het behandelingssoortcontext is leeg.");
         }
 
         /// <summary>
@@ -27,6 +27,10 @@ namespace Webapp.Repository
         public long Insert(TreatmentType treatment)
         {
             // Insert through context
+            if (treatment == null)
+            {
+                throw new NullReferenceException("De behandeling is leeg.");
+            }
             return context.Insert(treatment);
         }
         
@@ -38,6 +42,10 @@ namespace Webapp.Repository
         public bool Update(TreatmentType treatment)
         {
             // Update through context
+            if (treatment == null)
+            {
+                throw new NullReferenceException("De behandeling is leeg.");
+            }
             return context.Update(treatment);
         }
 
@@ -49,6 +57,10 @@ namespace Webapp.Repository
         public bool Delete(long id)
         {
             // Set treatmenttype inactive in database
+            if (id < 1)
+            {
+                throw new NullReferenceException("De behandelingId is leeg.");
+            }
             return context.Delete(GetById(id));
         }
 
@@ -68,6 +80,10 @@ namespace Webapp.Repository
         /// <returns></returns>
         public TreatmentType GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De behandelingId is leeg.");
+            }
             return context.GetById(id);
         }
     }

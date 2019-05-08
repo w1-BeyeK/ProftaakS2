@@ -13,11 +13,15 @@ namespace Webapp.Repository
 
         public AccountRepository(IAccountContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De accountcontext is leeg.");
         }
 
         public UserAccount GetById(long id)
         {
+            if(id < 1)
+            {
+                throw new NullReferenceException("De accountId is leeg.");
+            }
             return this.context.GetById(id);
         }
         public List<UserAccount> GetAll()
@@ -26,18 +30,34 @@ namespace Webapp.Repository
         }
         public UserAccount GetForDoctor(long id)
         {
+            if(id < 1)
+            {
+                throw new NullReferenceException("De accountId is leeg.");
+            }
             return GetAll().FirstOrDefault(a => a.DoctorId == id);
         }
         public UserAccount GetForPatient(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De accountId is leeg.");
+            }
             return GetAll().FirstOrDefault(a => a.PatientId == id);
         }
         public long Insert(UserAccount obj)
         {
+            if (obj == null)
+            {
+                throw new NullReferenceException("De account is leeg.");
+            }
             return this.context.Insert(obj);
         }
         public bool Update(UserAccount obj)
         {
+            if (obj == null)
+            {
+                throw new NullReferenceException("De account is leeg.");
+            }
             return this.context.Update(obj);
         }
     }

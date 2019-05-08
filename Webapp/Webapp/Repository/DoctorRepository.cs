@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public DoctorRepository(IDoctorContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De doktercontext is leeg.");
         }
 
         /// <summary>
@@ -22,6 +22,10 @@ namespace Webapp.Repository
         /// </summary>
         public long Insert(Doctor doctor)
         {
+            if (doctor == null)
+            {
+                throw new NullReferenceException("De dokter is leeg.");
+            }
             return context.Insert(doctor);
         }
 
@@ -30,6 +34,14 @@ namespace Webapp.Repository
         /// </summary>
         bool AddToDepartment(long departmentId, long doctorId)
         {
+            if (departmentId < 1)
+            {
+                throw new NullReferenceException("De afdelingId is leeg.");
+            }
+            if(doctorId < 1)
+            {
+                throw new NullReferenceException("De dokterId is leeg.");
+            }
             return context.AddToDepartment(departmentId, doctorId);
         }
 
@@ -38,6 +50,10 @@ namespace Webapp.Repository
         /// </summary>
         public bool Update(Doctor doctor)
         {
+            if (doctor == null)
+            {
+                throw new NullReferenceException("De dokter is leeg.");
+            }
             return context.Update(doctor);
         }
 
@@ -54,6 +70,10 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetByDepartment(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De afdelingId is leeg.");
+            }
             return context.GetByDepartment(id);
         }
 
@@ -62,6 +82,10 @@ namespace Webapp.Repository
         /// </summary>
         public List<Doctor> GetByInstitution(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De instellingId is leeg.");
+            }
             return context.GetByInstitution(id);
         }
 
@@ -70,6 +94,10 @@ namespace Webapp.Repository
         /// </summary>
         public Doctor GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De dokterId is leeg.");
+            }
             return context.GetById(id);
         }
     }

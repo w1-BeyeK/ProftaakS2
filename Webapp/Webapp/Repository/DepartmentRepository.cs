@@ -14,26 +14,42 @@ namespace Webapp.Repository
 
         public DepartmentRepository(IDepartmentContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De afdelingcontext is leeg.");
         }
 
         public long Insert(Department department)
         {
+            if (department == null)
+            {
+                throw new NullReferenceException("De afdeling is leeg.");
+            }
             return context.Insert(department);
         }
 
         public bool Update(Department department)
         {
+            if (department == null)
+            {
+                throw new NullReferenceException("De afdeling is leeg.");
+            }
             return context.Update(department);
         }
 
         public bool Delete(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De afdelingId is leeg.");
+            }
             return context.Delete(GetById(id));
         }
         
         public Department GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De afdelingId is leeg.");
+            }
             return context.GetById(id);
         }
 

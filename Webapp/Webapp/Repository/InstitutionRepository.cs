@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public InstitutionRepository(IInstitutionContext context)
         {
-            this.context = context;
+            this.context = context ?? throw new NullReferenceException("De instellingcontext is leeg.");
         }
 
         /// <summary>
@@ -22,6 +22,10 @@ namespace Webapp.Repository
         /// </summary>
         public long Insert(Institution institution)
         {
+            if (institution == null)
+            {
+                throw new NullReferenceException("De instellingId is leeg.");
+            }
             return context.Insert(institution);
         }
 
@@ -30,6 +34,14 @@ namespace Webapp.Repository
         /// </summary>
         public bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
+            if (institutionId < 1)
+            {
+                throw new NullReferenceException("De instellingId is leeg.");
+            }
+            if (departmentId < 1)
+            {
+                throw new NullReferenceException("De afdelingId is leeg.");
+            }
             //return context.AddDepartmentToInstitution(institutionId, departmentId);
             return true;
         }
@@ -39,6 +51,10 @@ namespace Webapp.Repository
         /// </summary>
         public bool Update(Institution institution)
         {
+            if (institution == null)
+            {
+                throw new NullReferenceException("De instelling is leeg.");
+            }
             return context.Update(institution);
         }
 
@@ -55,6 +71,10 @@ namespace Webapp.Repository
         /// </summary>
         public Institution GetById(long id)
         {
+            if (id < 1)
+            {
+                throw new NullReferenceException("De instellingId is leeg.");
+            }
             return context.GetById(id);
         }
     }
