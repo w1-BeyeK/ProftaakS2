@@ -41,20 +41,15 @@ namespace Webapp.Converters
             };
         }
 
-        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> doctors)
+        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> models)
         {
             List<DoctorDetailViewModel> result = new List<DoctorDetailViewModel>();
 
-            foreach (Doctor d in doctors)
+            foreach (Doctor d in models)
             {
                 result.Add(ModelToViewModel(d));
             }
             return result;
-        }
-
-        public List<DoctorDetailViewModel> ModelsToViewModel(List<Doctor> models)
-        {
-            throw new NotImplementedException();
         }
 
         public List<Doctor> ViewModelsToModels(List<DoctorDetailViewModel> viewModels)
