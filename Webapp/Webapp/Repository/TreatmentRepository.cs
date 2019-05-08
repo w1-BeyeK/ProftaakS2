@@ -14,7 +14,7 @@ namespace Webapp.Repository
 
         public TreatmentRepository(ITreatmentContext context)
         {
-            this.context = context ?? throw new NullReferenceException("De behandelingcontext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De behandelingContext is leeg.");
         }
 
         //TODO: Verwerken in 1 object - geen extra parameters
@@ -49,7 +49,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De doctorId is leeg.");
+                throw new NullReferenceException("De dokterId is leeg.");
             }
             return context.GetByDoctor(id);
         }
@@ -82,11 +82,11 @@ namespace Webapp.Repository
         {
             if (doctorId < 1)
             {
-                throw new NullReferenceException("De doctorId is leeg.");
+                throw new NullReferenceException("De dokterId is leeg.");
             }
             if (patientId < 1)
             {
-                throw new NullReferenceException("De patientId is leeg.");
+                throw new NullReferenceException("De patiëntId is leeg.");
             }
             return context.CheckTreatmentRelationship(doctorId, patientId);
         }

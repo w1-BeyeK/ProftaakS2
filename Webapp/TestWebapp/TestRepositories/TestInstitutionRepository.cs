@@ -26,6 +26,15 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void InstitutionRepositoryConstructorFalseInput()
+        {
+            EmptyLists();
+            
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository = new InstitutionRepository(null));
+            Assert.Equal("De instellingContext is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void AddInstitution()
         {
             EmptyLists();
@@ -33,6 +42,15 @@ namespace TestWebapp.TestRepositories
             Institution institution = new Institution("een", 1, "eend", "696969", "Lichtenstein", admin);
             institutionRepository = new InstitutionRepository(context);
             Assert.Equal(3, institutionRepository.Insert(institution));
+        }
+
+        [Fact]
+        public void AddFalseInput()
+        {
+            EmptyLists();
+            institutionRepository = new InstitutionRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.Insert(null));
+            Assert.Equal("De instelling is leeg.", ex.Message);
         }
 
         [Fact]
@@ -46,6 +64,15 @@ namespace TestWebapp.TestRepositories
             };
             institutionRepository = new InstitutionRepository(context);
             Assert.True(institutionRepository.Update(institution));
+        }
+
+        [Fact]
+        public void UpdateFalseInput()
+        {
+            EmptyLists();
+            institutionRepository = new InstitutionRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.Update(null));
+            Assert.Equal("De instelling is leeg.", ex.Message);
         }
 
         [Fact]
@@ -65,11 +92,38 @@ namespace TestWebapp.TestRepositories
         }
 
         [Fact]
+        public void AddDepartmentToInstitutionFalseInstitutionId()
+        {
+            EmptyLists();
+            institutionRepository = new InstitutionRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.AddDepartmentToInstitution(-1, 1));
+            Assert.Equal("De instellingId is leeg.", ex.Message);
+        }
+
+        [Fact]
+        public void AddDepartmentToInstitutionFalseDepartmentId()
+        {
+            EmptyLists();
+            institutionRepository = new InstitutionRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.AddDepartmentToInstitution(1, -1));
+            Assert.Equal("De afdelingId is leeg.", ex.Message);
+        }
+
+        [Fact]
         public void GetById()
         {
             EmptyLists();
             institutionRepository = new InstitutionRepository(context);
             Assert.Equal("instituut", institutionRepository.GetById(1).Name);
+        }
+
+        [Fact]
+        public void GetByIdFalseInput()
+        {
+            EmptyLists();
+            institutionRepository = new InstitutionRepository(context);
+            Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.GetById(-1));
+            Assert.Equal("De instellingId is leeg.", ex.Message);
         }
     }
 }
