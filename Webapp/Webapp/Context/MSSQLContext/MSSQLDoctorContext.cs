@@ -42,7 +42,10 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "select * from PTS2_Doctor where active = @active";
+            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.DoctorId, d.Gender, d.Email, d.Phone, d.BirthDate, d.Active " +
+                           "FROM PTS2_Account AS a " +
+                           "INNER JOIN PTS2_Doctor AS d ON a.DoctorId = d.Id " +
+                           "WHERE a.DoctorId IS NOT null AND a.PatientId IS NULL AND d.Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
