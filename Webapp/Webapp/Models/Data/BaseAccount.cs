@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public abstract class BaseAccount : Entity
+    public class BaseAccount : Entity
     {
         public BaseAccount()
         { }
@@ -17,7 +17,7 @@ namespace Webapp.Models.Data
         public string Email { get; set; }
         public string Password { get; set; }
         public string Name { get; set; }
-        
+        public string NormalizedEmail { get; set; }
         public BaseAccount(long id, string userName, string email)
         {
             Id = id;

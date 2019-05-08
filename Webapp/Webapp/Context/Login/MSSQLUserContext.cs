@@ -1,262 +1,331 @@
-﻿//using Microsoft.AspNetCore.Identity;
-//using System;
-//using System.Collections.Generic;
-//using System.Data;
-//using System.Linq;
-//using System.Threading;
-//using System.Threading.Tasks;
-//using Webapp.Interfaces;
-//using Webapp.Models.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Configuration;
+using Webapp.Models.Data;
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 
-//namespace Webapp.Context.Login
-//{
-//    public class MSSQLUserContext : BaseMSSQLContext, IUserStore<BaseAccount>, IUserPasswordStore<BaseAccount>, IUserEmailStore<BaseAccount>, IUserRoleStore<BaseAccount>
-//    {
-//        public MSSQLUserContext(IParser parser, IHandler handler) : base(parser, handler)
-//        { }
+namespace MVCWebDemo.Authentication
+{
+    public class MSSQLUserContext : IUserStore<BaseAccount>, IUserPasswordStore<BaseAccount>, IUserEmailStore<BaseAccount>, IUserRoleStore<BaseAccount>
+    {
+        private readonly string _connectionString;
+        public MSSQLUserContext(IConfiguration configuration)
+        {
+            _connectionString = configuration.GetConnectionString("DefaultConnection");
+        }
 
-//        public Task AddToRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
 
-//        public Task<IdentityResult> CreateAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
-//                cancellationToken.ThrowIfCancellationRequested();
 
-//                accounts.Add(user);
-//                return Task.FromResult(IdentityResult.Success);
-//            }
-//            catch (Exception)
-//            {
+        /// <summary>
+        /// Create a user in de DB. The userId (in de database) must be set to auto increment. 
+        /// The password is hashed automatically.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IdentityResult> CreateAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
 
-//                throw;
-//            }
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO [PTS2_Account](username, email, password) OUTPUT INSERTED.ID VALUES (@username,@email,@password)", connection);
+                    sqlCommand.Parameters.AddWithValue("@username", user.UserName);
+                    sqlCommand.Parameters.AddWithValue("@email", user.Email);
+                    sqlCommand.Parameters.AddWithValue("@password", user.Password);
+                    user.Id = Convert.ToInt32(sqlCommand.ExecuteScalar());
+                    return Task.FromResult<IdentityResult>(IdentityResult.Success);
+                }
+            }
+            catch (Exception)
+            {
 
-//        }
+                throw;
+            }
+        }
 
-//        public Task<IdentityResult> DeleteAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
 
-//        public void Dispose()
-//        {
+        /// <summary>
+        ///Delete the user from the database (or make the user obsolete)
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IdentityResult> DeleteAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
 
-//        }
+        public void Dispose()
+        {
+            //nothing to do.
+        }
 
-//        public Task<BaseAccount> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
 
-//                cancellationToken.ThrowIfCancellationRequested();
+        /// <summary>
+        /// Finding a user by Email in the database
+        /// </summary>
+        /// <param name="normalizedEmail"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<BaseAccount> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
+        {
+            cancellationToken.ThrowIfCancellationRequested();
 
-//                BaseAccount account = accounts.FirstOrDefault(a => a.Email == normalizedEmail);
-//                return Task.FromResult(account);
-//            }
-//            catch (Exception)
-//            {
-//                throw;
-//            }
-//        }
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                connection.Open();
+                SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email FROM [PTS2_Account] WHERE email=@email", connection);
+                sqlCommand.Parameters.AddWithValue("@email", normalizedEmail);
+                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                {
+                    BaseAccount user = default(BaseAccount);
+                    if (sqlDataReader.Read())
+                    {
+                        user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString());
 
-//        public Task<BaseAccount> FindByIdAsync(string userId, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
-//                cancellationToken.ThrowIfCancellationRequested();
-//                /* Add 'left join' naar doctor & patient */
-//                string query = $"select * from PTS2_Account where Id = {userId}";
+                    }
+                    return Task.FromResult(user);
+                }
+            }
+        }
 
-//                var dbResult = handler.ExecuteSelect(query, userId);
-//                var res = (dbResult as DataTable).Rows[0];
-//                if (res != null && parser.TryParse(res, out BaseAccount account))
-//                {
-//                    if(res.Table.Columns[4] != null)
-//                    {
-//                        string doctorquery = $"select * from PTS2_Doctor where Id = {res.Table.Columns[4]}";
+        /// <summary>
+        /// Finding a user by id in the datbase
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<BaseAccount> FindByIdAsync(string userId, CancellationToken cancellationToken)
+        {
+            try
+            {
 
-//                        var doctordbResult = handler.ExecuteSelect(query, res.Table.Columns[4]);
+                cancellationToken.ThrowIfCancellationRequested();
 
-//                        var doctorres = (dbResult as DataTable).Rows[0];
-//                        if (res != null && parser.TryParse(res, out BaseAccount doctoraccount))
-//                            return Task.FromResult(doctoraccount);
-//                        else
-//                            return Task.FromResult(default(BaseAccount));
-//                    }
-//                    else if(res.Table.Columns[5] != null)
-//                    {
-//                        string patientQuery = $"select * from PTS2_Patient where Id = {res.Table.Columns[5]}";
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email FROM [PTS2_Account] WHERE id=@id", connection);
+                    sqlCommand.Parameters.AddWithValue("@id", userId);
+                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                    {
+                        BaseAccount user = default(BaseAccount);
+                        if (sqlDataReader.Read())
+                        {
+                            user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString());
 
-//                        var patientdbResult = handler.ExecuteSelect(query, res.Table.Columns[5]);
+                        }
+                        return Task.FromResult(user);
+                    }
+                }
 
-//                        var patientres = (dbResult as DataTable).Rows[0];
-//                        if (patientres != null && parser.TryParse(patientres, out BaseAccount patientaccount))
-//                            return Task.FromResult(patientaccount);
-//                        else
-//                            return Task.FromResult(default(BaseAccount));
-//                    }
-//                    else
-//                    {
-//                        string adminQuery = $"select * from PTS2_Admin where Id = 1";
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
 
-//                        var admindbResult = handler.ExecuteSelect(query, 1);
+        public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
+        {
+            try
+            {
+                cancellationToken.ThrowIfCancellationRequested();
 
-//                        var adminres = (dbResult as DataTable).Rows[0];
-//                        if (adminres != null && parser.TryParse(res, out BaseAccount adminaccount))
-//                            return Task.FromResult(adminaccount);
-//                        else
-//                            return Task.FromResult(default(BaseAccount));
-//                    }
-//                }
-//            }
-//            catch (Exception)
-//            {
-//                throw;
-//            }
-//            return Task.FromResult(default(BaseAccount));
-//        }
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email, password FROM [PTS2_Account] WHERE email=@email", connection);
+                    sqlCommand.Parameters.AddWithValue("@email", normalizedUserName);
+                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                    {
+                        BaseAccount user = default(BaseAccount);
+                        if (sqlDataReader.Read())
+                        {
+                            user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString(), sqlDataReader["password"].ToString());
+                        }
+                        return Task.FromResult(user);
+                    }
+                }
+            }
+            catch (Exception)
+            {
 
-//        public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
-//                cancellationToken.ThrowIfCancellationRequested();
+                throw;
+            }
+        }
 
-//                return Task.FromResult(accounts.FirstOrDefault(a => a.UserName.ToUpper() == normalizedUserName));
-//            }
-//            catch (Exception)
-//            {
-//                throw;
-//            }
-//        }
+        public Task<string> GetEmailAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.Email);
+        }
 
-//        public Task<string> GetEmailAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.Email);
-//        }
+        public Task<bool> GetEmailConfirmedAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public Task<bool> GetEmailConfirmedAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public Task<string> GetNormalizedEmailAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.NormalizedEmail);
+        }
 
-//        public Task<string> GetNormalizedEmailAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.Email);
-//        }
+        public Task<string> GetNormalizedUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.NormalizedUserName);
+        }
 
-//        public Task<string> GetNormalizedUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.NormalizedUserName);
-//        }
+        public Task<string> GetPasswordHashAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.Password);
+        }
 
-//        public Task<string> GetPasswordHashAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.Password);
-//        }
+        public Task<IList<string>> GetRolesAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            try
+            {
 
-//        public Task<IList<string>> GetRolesAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
-//                cancellationToken.ThrowIfCancellationRequested();
 
-//                IList<string> roles = new List<string>
-//                {
-//                    user.Role
-//                };
+                cancellationToken.ThrowIfCancellationRequested();
 
-//                return Task.FromResult(roles);
-//            }
-//            catch (Exception)
-//            {
-//                throw;
-//            }
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
+                    SqlCommand sqlCommand = new SqlCommand("SELECT r.[name] FROM [Role] r INNER JOIN [UserRole] ur ON ur.[roleId] = r.id WHERE ur.userId = @userId", connection);
+                    sqlCommand.Parameters.AddWithValue("@userId", user.Id);
+                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
+                    {
+                        IList<string> roles = new List<string>();
+                        while (sqlDataReader.Read())
+                        {
+                            roles.Add(sqlDataReader["Name"].ToString());
+                        }
 
-//        }
+                        return Task.FromResult(roles);
+                    }
+                }
+            }
+            catch (Exception)
+            {
 
-//        public Task<string> GetUserIdAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.Id.ToString());
-//        }
+                throw;
+            }
+        }
 
-//        public Task<string> GetUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            return Task.FromResult(user.UserName);
-//        }
+        public Task<string> GetUserIdAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.Id.ToString());
+        }
 
-//        public Task<IList<BaseAccount>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public Task<string> GetUserNameAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.UserName);
+        }
 
-//        public Task<bool> HasPasswordAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
+        public Task<IList<BaseAccount>> GetUsersInRoleAsync(string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
 
-//        public Task<bool> IsInRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
-//        {
-//            try
-//            {
-//                cancellationToken.ThrowIfCancellationRequested();
+        public Task<bool> HasPasswordAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            return Task.FromResult(user.Password != null);
+        }
 
-//                return Task.FromResult(user.Role == roleName);
-//            }
-//            catch (Exception)
-//            {
-//                throw;
-//            }
+        public Task<bool> IsInRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
+        {
+            try
+            {
 
-//        }
+                cancellationToken.ThrowIfCancellationRequested();
 
-//        public Task RemoveFromRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
+                using (var connection = new SqlConnection(_connectionString))
+                {
+                    connection.Open();
 
-//        public Task SetEmailAsync(BaseAccount user, string email, CancellationToken cancellationToken)
-//        {
-//            user.Email = email;
-//            return Task.FromResult(0);
-//        }
+                    SqlCommand sqlCommand = new SqlCommand("SELECT [id] FROM [Role] WHERE [name] = @normalizedName", connection);
+                    sqlCommand.Parameters.AddWithValue("@normalizedName", roleName.ToUpper());
+                    int? roleId = sqlCommand.ExecuteScalar() as int?;
 
-//        public Task SetEmailConfirmedAsync(BaseAccount user, bool confirmed, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
+                    SqlCommand sqlCommandUserRole = new SqlCommand("SELECT COUNT(*) FROM [UserRole] WHERE [userId] = @userId AND [roleId] =@roleId", connection);
+                    sqlCommandUserRole.Parameters.AddWithValue("@userId", user.Id);
+                    sqlCommandUserRole.Parameters.AddWithValue("@roleId", roleId);
 
-//        public Task SetNormalizedEmailAsync(BaseAccount user, string Email, CancellationToken cancellationToken)
-//        {
-//            user.Email = Email;
-//            return Task.FromResult(0);
-//        }
+                    int? roleCount = sqlCommandUserRole.ExecuteScalar() as int?;
 
-//        public Task SetNormalizedUserNameAsync(BaseAccount user, string normalizedName, CancellationToken cancellationToken)
-//        {
-//            user.NormalizedUserName = normalizedName;
-//            return Task.FromResult(0);
-//        }
+                    return Task.FromResult(roleCount > 0);
+                }
 
-//        public Task SetPasswordHashAsync(BaseAccount user, string passwordHash, CancellationToken cancellationToken)
-//        {
-//            user.Password = passwordHash;
-//            return Task.FromResult(0);
-//        }
+            }
+            catch (Exception)
+            {
 
-//        public Task SetUserNameAsync(BaseAccount user, string userName, CancellationToken cancellationToken)
-//        {
-//            user.UserName = userName;
-//            return Task.FromResult(0);
-//        }
+                throw;
+            }
 
-//        public Task<IdentityResult> UpdateAsync(BaseAccount user, CancellationToken cancellationToken)
-//        {
-//            throw new NotImplementedException();
-//        }
-//    }
-//}
+        }
+
+        public Task RemoveFromRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task AddToRoleAsync(BaseAccount user, string roleName, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetEmailAsync(BaseAccount user, string email, CancellationToken cancellationToken)
+        {
+            user.Email = email;
+            return Task.FromResult(0);
+        }
+
+        public Task SetEmailConfirmedAsync(BaseAccount user, bool confirmed, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SetNormalizedEmailAsync(BaseAccount user, string normalizedEmail, CancellationToken cancellationToken)
+        {
+            user.NormalizedEmail = normalizedEmail;
+            return Task.FromResult(0);
+        }
+
+        public Task SetNormalizedUserNameAsync(BaseAccount user, string normalizedName, CancellationToken cancellationToken)
+        {
+            user.NormalizedUserName = normalizedName;
+            return Task.FromResult(0);
+        }
+
+        public Task SetPasswordHashAsync(BaseAccount user, string passwordHash, CancellationToken cancellationToken)
+        {
+            user.Password = passwordHash;
+            return Task.FromResult(0);
+        }
+
+        public Task SetUserNameAsync(BaseAccount user, string userName, CancellationToken cancellationToken)
+        {
+            user.UserName = userName;
+            return Task.FromResult(0);
+        }
+        /// <summary>
+        /// Update user in database
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        public Task<IdentityResult> UpdateAsync(BaseAccount user, CancellationToken cancellationToken)
+        {
+            throw new NotImplementedException();
+        }
+    }
+}
