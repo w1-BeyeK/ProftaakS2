@@ -17,7 +17,12 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = $"SELECT * FROM PTS2_Account AS a INNER JOIN PTS2_Patient AS p ON p.Id = a.PatientId WHERE patientId = @id";
+            string query = "SELECT a.Id, a.Name, a.Username, a.[Password], a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
+                           "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
+                           "FROM PTS2_Account AS a " +
+                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
+                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "WHERE a.id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -43,10 +48,12 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.PatientId, p.BSN, p.ContactPersonName, p.ContactPersonPhone, p.BirthDate, p.Phone, a.Email, p.Gender, p.Zipcode, p.HouseNumber, p.Active, p.PBirthDate, p.PPhone, PEmail, PGender, PContactPerson, PAdres " +
+            string query = "SELECT a.Id, a.Name, a.Username, a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
+                           "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
                            "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON a.PatientId = p.Id " +
-                           "WHERE a.DoctorId IS NULL AND a.PatientId IS NOT NULL AND p.Active = @active";
+                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
+                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "WHERE p.Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {

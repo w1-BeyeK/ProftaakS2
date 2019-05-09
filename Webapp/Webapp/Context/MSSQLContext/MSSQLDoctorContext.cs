@@ -17,10 +17,11 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.DoctorId, d.Gender, a.Email, d.Phone, d.BirthDate, d.Active " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Doctor AS d ON a.DoctorId = d.Id " +
-                           "WHERE doctorId = @id";
+            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, r.Name, d.Phone, d.BirthDate, d.Active " +
+                           "FROM PTS2_Account AS a " + 
+                           "INNER JOIN PTS2_Doctor AS d ON a.Id = d.Id " +
+                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "WHERE a.Id = 49";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             {
@@ -45,10 +46,11 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.DoctorId, d.Gender, a.Email, d.Phone, d.BirthDate, d.Active " +
+            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, r.Name, d.Phone, d.BirthDate, d.Active " +
                            "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Doctor AS d ON a.DoctorId = d.Id " +
-                           "WHERE a.DoctorId IS NOT null AND a.PatientId IS NULL AND d.Active = @active";
+                           "INNER JOIN PTS2_Doctor AS d ON a.Id = d.Id " +
+                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "WHERE d.Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {

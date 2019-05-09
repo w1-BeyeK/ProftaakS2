@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Webapp.Interfaces;
 
@@ -18,11 +19,42 @@ namespace Webapp.Handlers
             string connection = config.GetConnectionString("Development");
             conn = connection ?? throw new ArgumentNullException("Missing connection strings");
         }
+        private int[] FindParameter(string query)
+        {
+            if (!query.Contains("@"))
+                throw new IndexOutOfRangeException("Query is missing '@'");
+
+            int begin = query.IndexOf('@') + 1;
+            Regex reg = new Regex(@"^[a-zA-Z]+$");
+
+            int end = 0;
+            for(int i = begin + 1; i < query.Length; i++)
+            {
+                if (!reg.IsMatch(query[i].ToString()))
+                {
+                    end = i;
+
+                    return new int[2] { begin, end };
+                }
+            }
+
+            return new int[2] { begin, query.Length };
+        }
+
+        private string ReplaceParameter(string query, string name, object value)
+        {
+            return query = query.Replace($"@{name}", $"'{value.ToString()}'");
+        }
 
         public object ExecuteSelect(string query, object parameter = null)
         {
             try
             {
+                int[] indexes = FindParameter(query);
+                int length = indexes[1] - indexes[0];
+                string param = query.Substring(indexes[0], length);
+                query = parameter != null ? ReplaceParameter(query, param, parameter) : query;
+
                 DataSet ds = new DataSet();
                 SqlConnection sqlConnection = new SqlConnection(conn);
                 //TODO : Why do you clear him?
@@ -48,7 +80,7 @@ namespace Webapp.Handlers
 
                 foreach (KeyValuePair<string, object> parameter in parameters)
                 {
-                    query = query.Replace($"@{parameter.Key}", $"'{parameter.Value.ToString()}'");
+                    query = ReplaceParameter(query, parameter.Key, parameter.Value);
                 }
 
                 ds.Clear();

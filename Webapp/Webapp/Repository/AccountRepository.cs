@@ -20,7 +20,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De accountId is leeg.");
+                throw new NullReferenceException("Het accountId is leeg.");
             }
             return this.context.GetById(id);
         }
@@ -32,7 +32,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De accountId is leeg.");
+                throw new NullReferenceException("Het accountId is leeg.");
             }
             return GetAll().FirstOrDefault(a => a.DoctorId == id);
         }
@@ -40,7 +40,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De accountId is leeg.");
+                throw new NullReferenceException("Het accountId is leeg.");
             }
             return GetAll().FirstOrDefault(a => a.PatientId == id);
         }
@@ -48,7 +48,7 @@ namespace Webapp.Repository
         {
             if (obj == null)
             {
-                throw new NullReferenceException("De account is leeg.");
+                throw new NullReferenceException("Het account is leeg.");
             }
             return this.context.Insert(obj);
         }
@@ -56,7 +56,7 @@ namespace Webapp.Repository
         {
             if (obj == null)
             {
-                throw new NullReferenceException("De account is leeg.");
+                throw new NullReferenceException("Het account is leeg.");
             }
             return this.context.Update(obj);
         }

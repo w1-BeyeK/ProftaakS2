@@ -34,7 +34,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             ICommentContext testContext = null;
             Exception ex = Assert.Throws<NullReferenceException>(() => commentRepository = new CommentRepository(testContext));
-            Assert.Equal("Het commentaarContext is leeg.", ex.Message);
+            Assert.Equal("De commentaarContext is leeg.", ex.Message);
         }
 
         [Fact]
@@ -75,7 +75,7 @@ namespace TestWebapp.TestRepositories
             commentRepository = new CommentRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => commentRepository.GetByTreatment(-1));
-            Assert.Equal("De behandelingId is leeg.", ex.Message);
+            Assert.Equal("Het behandelingId is leeg.", ex.Message);
 
             Assert.Equal(3, commentRepository.GetByTreatment(1).Count);
         }

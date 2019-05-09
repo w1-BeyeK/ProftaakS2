@@ -73,7 +73,7 @@ namespace TestWebapp.TestRepositories
             departmentRepository = new DepartmentRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => departmentRepository.Delete(-1));
-            Assert.Equal("De afdelingId is leeg.", ex.Message);
+            Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 
         
@@ -102,7 +102,7 @@ namespace TestWebapp.TestRepositories
             departmentRepository = new DepartmentRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => departmentRepository.GetById(-1));
-            Assert.Equal("De afdelingId is leeg.", ex.Message);
+            Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 
         [Fact]

@@ -39,7 +39,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De afdelingId is leeg.");
+                throw new NullReferenceException("Het afdelingId is leeg.");
             }
             return context.Delete(GetById(id));
         }
@@ -48,7 +48,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De afdelingId is leeg.");
+                throw new NullReferenceException("Het afdelingId is leeg.");
             }
             return context.GetById(id);
         }
