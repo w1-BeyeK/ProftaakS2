@@ -109,7 +109,7 @@ namespace Webapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (id != model.Id)
+                if (id != model.EmployeeNumber)
                     return BadRequest("Ids do not match");
 
                 Doctor doctor = converter.ViewModelToModel(model);

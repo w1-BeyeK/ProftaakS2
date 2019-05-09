@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,6 +9,7 @@ namespace Webapp.Models.Data
     public class Patient: UserAccount
     {        
         public long BSN { get; set; }
+        
         public string ContactPersonName { get; set; }
         public string ContactPersonPhone { get; set; }
         public int HouseNumber { get; set; }
@@ -82,7 +84,7 @@ namespace Webapp.Models.Data
             Treatments.Add(treatment);
         }
 
-        public Patient() : base(-1, "", "", "")
+        public Patient()
         {
 
         }

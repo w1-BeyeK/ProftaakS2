@@ -6,26 +6,23 @@ namespace Webapp.Models
 {
     public class DepartmentDetailViewModel
     {
+        [Required]
+        [Range(1, long.MaxValue, ErrorMessage = "AfdelingId is niet binnen de grenzen van 1 en 9223372036854775807")]
         public long Id { get; set; }
 
         [Required]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "De afdelingsnaam moet minimaal 3 en maximaal 100 karakters zijn")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Naam")]
+        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
         public string Name { get; set; }
 
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "De beschrijving moet minimaal 3 en maximaal 100 karakters zijn")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Beschrijving")]
+        [Required]
+        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
         public string Description { get; set; }
 
-        [Required(ErrorMessage = "Actief is een vereiste")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "De beschrijving moet minimaal 3 en maximaal 100 karakters zijn")]
-        [DataType(DataType.Text)]
-        [Display(Name = "Afdeling actief maken")]
+        [Required]
         public bool Active { get; set; }
 
-        [Display(Name = "De institutie, waaronder de afdeling valt")]
+        [Required]
+        [Range(1, long.MaxValue, ErrorMessage = "InstituutId is niet binnen de grenzen van 1 en 9223372036854775807")]
         public long InstitutionId { get; set; }
 
         public List<SelectListItem> Institutions { get; set; }

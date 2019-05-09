@@ -25,6 +25,7 @@
             <div class="form-group">
                 <div class="checkbox">
                     <label>
+                        <span asp-validation-for="Active" class="text-danger"></span>
                         <input asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
                     </label>
                 </div>
