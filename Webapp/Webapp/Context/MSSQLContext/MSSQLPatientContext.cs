@@ -9,13 +9,6 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MSSQLContext
 {
-    //GET VIEW IN QUERIE...
-    //select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId 
-//    from PTS2_Treatment AS t
-//SELECT* FROM GetPatient AS p WHERE p.Id = t.Id
-//SELECT* FROM GetDoctor AS d WHERE p.Id = d.Id
-//where t.Id = 1
-
     public class MSSQLPatientContext : BaseMSSQLContext, IPatientContext
     {
         //TODO : Change Queries!!!!
