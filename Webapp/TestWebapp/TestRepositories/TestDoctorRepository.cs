@@ -93,7 +93,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => doctorRepository.GetByDepartment(-1));
-            Assert.Equal("De afdelingId is leeg.", ex.Message);
+            Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 
         //TODO : Need to be implemented soon
@@ -111,7 +111,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => doctorRepository.GetByInstitution(-1));
-            Assert.Equal("De instellingId is leeg.", ex.Message);
+            Assert.Equal("Het instellingId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -128,7 +128,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => doctorRepository.GetById(-1));
-            Assert.Equal("De dokterId is leeg.", ex.Message);
+            Assert.Equal("Het dokterId is leeg.", ex.Message);
         }
     }
 }

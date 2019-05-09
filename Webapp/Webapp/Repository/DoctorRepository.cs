@@ -36,11 +36,11 @@ namespace Webapp.Repository
         {
             if (departmentId < 1)
             {
-                throw new NullReferenceException("De afdelingId is leeg.");
+                throw new NullReferenceException("Het afdelingId is leeg.");
             }
             if(doctorId < 1)
             {
-                throw new NullReferenceException("De dokterId is leeg.");
+                throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.AddToDepartment(departmentId, doctorId);
         }
@@ -72,7 +72,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De afdelingId is leeg.");
+                throw new NullReferenceException("Het afdelingId is leeg.");
             }
             return context.GetByDepartment(id);
         }
@@ -84,7 +84,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De instellingId is leeg.");
+                throw new NullReferenceException("Het instellingId is leeg.");
             }
             return context.GetByInstitution(id);
         }
@@ -96,7 +96,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De dokterId is leeg.");
+                throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.GetById(id);
         }

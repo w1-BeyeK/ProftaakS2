@@ -97,7 +97,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             institutionRepository = new InstitutionRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.AddDepartmentToInstitution(-1, 1));
-            Assert.Equal("De instellingId is leeg.", ex.Message);
+            Assert.Equal("Het instellingId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -106,7 +106,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             institutionRepository = new InstitutionRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.AddDepartmentToInstitution(1, -1));
-            Assert.Equal("De afdelingId is leeg.", ex.Message);
+            Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -123,7 +123,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             institutionRepository = new InstitutionRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => institutionRepository.GetById(-1));
-            Assert.Equal("De instellingId is leeg.", ex.Message);
+            Assert.Equal("Het instellingId is leeg.", ex.Message);
         }
     }
 }

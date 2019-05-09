@@ -32,7 +32,7 @@ namespace TestWebapp.TestRepositories
             
 
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository = new TreatmentTypeRepository(null));
-            Assert.Equal("Het behandelingsTypeContext is leeg.", ex.Message);
+            Assert.Equal("De behandelingsTypeContext is leeg.", ex.Message);
         }
 
         [Fact]
@@ -51,7 +51,7 @@ namespace TestWebapp.TestRepositories
             treatmentTypeRepository = new TreatmentTypeRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.Insert(null));
-            Assert.Equal("De behandelingsType is leeg.", ex.Message);
+            Assert.Equal("Het behandelingsType is leeg.", ex.Message);
         }
 
         [Fact]
@@ -74,7 +74,7 @@ namespace TestWebapp.TestRepositories
 
             treatmentTypeRepository = new TreatmentTypeRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.Update(null));
-            Assert.Equal("De behandelingsType is leeg.", ex.Message);
+            Assert.Equal("Het behandelingsType is leeg.", ex.Message);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace TestWebapp.TestRepositories
             treatmentTypeRepository = new TreatmentTypeRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.Delete(-1));
-            Assert.Equal("De behandelingsTypeId is leeg.", ex.Message);
+            Assert.Equal("Het behandelingsTypeId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -118,7 +118,7 @@ namespace TestWebapp.TestRepositories
             treatmentTypeRepository = new TreatmentTypeRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.GetById(-1));
-            Assert.Equal("De behandelingsTypeId is leeg.", ex.Message);
+            Assert.Equal("Het behandelingsTypeId is leeg.", ex.Message);
         }
     }
 }

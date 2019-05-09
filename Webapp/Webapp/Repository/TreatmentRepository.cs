@@ -49,7 +49,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De dokterId is leeg.");
+                throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.GetByDoctor(id);
         }
@@ -61,7 +61,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De patiëntId is leeg.");
+                throw new NullReferenceException("Het patiëntId is leeg.");
             }
             return context.GetByPatient(id);
         }
@@ -73,7 +73,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De behandelingId is leeg.");
+                throw new NullReferenceException("Het behandelingId is leeg.");
             }
             return context.GetById(id);
         }
@@ -82,11 +82,11 @@ namespace Webapp.Repository
         {
             if (doctorId < 1)
             {
-                throw new NullReferenceException("De dokterId is leeg.");
+                throw new NullReferenceException("Het dokterId is leeg.");
             }
             if (patientId < 1)
             {
-                throw new NullReferenceException("De patiëntId is leeg.");
+                throw new NullReferenceException("Het patiëntId is leeg.");
             }
             return context.CheckTreatmentRelationship(doctorId, patientId);
         }
