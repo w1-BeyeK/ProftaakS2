@@ -20,7 +20,7 @@ namespace Webapp.Context.MSSQLContext
             string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.DoctorId, d.Gender, a.Email, d.Phone, d.BirthDate, d.Active " +
                            "FROM PTS2_Account AS a " +
                            "INNER JOIN PTS2_Doctor AS d ON a.DoctorId = d.Id " +
-                           "WHERE doctorId = @id";
+                           "WHERE a.Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             {

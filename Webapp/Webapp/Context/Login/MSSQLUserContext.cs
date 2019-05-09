@@ -7,15 +7,22 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Webapp.Interfaces;
+using System.Data;
 
-namespace MVCWebDemo.Authentication
+namespace Webapp.Context.Login
 {
     public class MSSQLUserContext : IUserStore<BaseAccount>, IUserPasswordStore<BaseAccount>, IUserEmailStore<BaseAccount>, IUserRoleStore<BaseAccount>
     {
+        private readonly IHandler handler;
+        private readonly IParser parser;
+
         private readonly string _connectionString;
-        public MSSQLUserContext(IConfiguration configuration)
+        public MSSQLUserContext(IConfiguration configuration, IHandler handler, IParser parser)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _connectionString = configuration.GetConnectionString("Development");
+            this.handler = handler;
+            this.parser = parser;
         }
 
 
@@ -29,26 +36,7 @@ namespace MVCWebDemo.Authentication
         /// <returns></returns>
         public Task<IdentityResult> CreateAsync(BaseAccount user, CancellationToken cancellationToken)
         {
-            try
-            {
-                cancellationToken.ThrowIfCancellationRequested();
-
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("INSERT INTO [PTS2_Account](username, email, password) OUTPUT INSERTED.ID VALUES (@username,@email,@password)", connection);
-                    sqlCommand.Parameters.AddWithValue("@username", user.UserName);
-                    sqlCommand.Parameters.AddWithValue("@email", user.Email);
-                    sqlCommand.Parameters.AddWithValue("@password", user.Password);
-                    user.Id = Convert.ToInt32(sqlCommand.ExecuteScalar());
-                    return Task.FromResult<IdentityResult>(IdentityResult.Success);
-                }
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            throw new NotImplementedException();
         }
 
 
@@ -78,45 +66,19 @@ namespace MVCWebDemo.Authentication
         public Task<BaseAccount> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
-
-            using (var connection = new SqlConnection(_connectionString))
+            try
             {
-                connection.Open();
-                SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email, password, role FROM [PTS2_Account] WHERE email=@email", connection);
-                sqlCommand.Parameters.AddWithValue("@email", normalizedEmail);
-                using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                {
-                    BaseAccount user = default(BaseAccount);
-                    if (sqlDataReader.Read())
-                    {
-                        if (sqlDataReader["role"].ToString() == "admin")
-                        {
-                            user = new Administrator(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                            {
-                                Password = sqlDataReader["password"].ToString()
-                            };
-                        }
-                        else if (sqlDataReader["role"].ToString() == "doctor")
-                        {
-                            user = new Doctor(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                            {
-                                Password = sqlDataReader["password"].ToString()
-                            };
-                        }
-                        else if (sqlDataReader["role"].ToString() == "patient")
-                        {
-                            user = new Patient(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                            {
-                                Password = sqlDataReader["password"].ToString()
-                            };
-                        }
-                        else
-                        {
-                            return null;
-                        }
-                    }
-                    return Task.FromResult(user);
-                }
+                string query = "select * from [PTS2_Account] where email = @email";
+                var result = handler.ExecuteSelect(query, normalizedEmail) as DataTable;
+
+                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
+                    throw new NullReferenceException("Account not found");
+
+                return Task.FromResult(account);
+            }
+            catch
+            {
+                throw;
             }
         }
 
@@ -128,30 +90,18 @@ namespace MVCWebDemo.Authentication
         /// <returns></returns>
         public Task<BaseAccount> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             try
             {
+                string query = "select * from [PTS2_Account] where id = @id";
+                var result = handler.ExecuteSelect(query, userId) as DataTable;
 
-                cancellationToken.ThrowIfCancellationRequested();
+                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
+                    throw new NullReferenceException("Account not found");
 
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email FROM [PTS2_Account] WHERE id=@id", connection);
-                    sqlCommand.Parameters.AddWithValue("@id", userId);
-                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                    {
-                        BaseAccount user = default(BaseAccount);
-                        if (sqlDataReader.Read())
-                        {
-                            user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString());
-
-                        }
-                        return Task.FromResult(user);
-                    }
-                }
-
+                return Task.FromResult(account);
             }
-            catch (Exception)
+            catch
             {
                 throw;
             }
@@ -159,53 +109,19 @@ namespace MVCWebDemo.Authentication
 
         public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
+            cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                cancellationToken.ThrowIfCancellationRequested();
+                string query = "select * from [PTS2_Account] where email = @email";
+                var result = handler.ExecuteSelect(query, normalizedUserName) as DataTable;
 
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email, password FROM [PTS2_Account] WHERE email=@email", connection);
-                    sqlCommand.Parameters.AddWithValue("@email", normalizedUserName);
-                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                    {
-                        BaseAccount user = default(BaseAccount);
-                        if (sqlDataReader.Read())
-                        {
-                            if (sqlDataReader["role"].ToString() == "admin")
-                            {
-                                user = new Administrator(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                                {
-                                    Password = sqlDataReader["password"].ToString()
-                                };
-                            }
-                            else if (sqlDataReader["role"].ToString() == "doctor")
-                            {
-                                user = new Doctor(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                                {
-                                    Password = sqlDataReader["password"].ToString()
-                                };
-                            }
-                            else if (sqlDataReader["role"].ToString() == "patient")
-                            {
-                                user = new Patient(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
-                                {
-                                    Password = sqlDataReader["password"].ToString()
-                                };
-                            }
-                            else
-                            {
-                                return null;
-                            }
-                        }
-                        return Task.FromResult(user);
-                    }
-                }
+                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
+                    throw new NullReferenceException("Account not found");
+
+                return Task.FromResult(account);
             }
-            catch (Exception)
+            catch
             {
-
                 throw;
             }
         }
@@ -239,30 +155,19 @@ namespace MVCWebDemo.Authentication
         {
             try
             {
-
-
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using (var connection = new SqlConnection(_connectionString))
+                IList<string> roles = new List<string>
                 {
-                    connection.Open();
-                    SqlCommand sqlCommand = new SqlCommand("SELECT r.[name] FROM [Role] r INNER JOIN [UserRole] ur ON ur.[roleId] = r.id WHERE ur.userId = @userId", connection);
-                    sqlCommand.Parameters.AddWithValue("@userId", user.Id);
-                    using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
-                    {
-                        IList<string> roles = new List<string>();
-                        while (sqlDataReader.Read())
-                        {
-                            roles.Add(sqlDataReader["Name"].ToString());
-                        }
+                    "doctor",
+                    "patient",
+                    "admin"
+                };
 
-                        return Task.FromResult(roles);
-                    }
-                }
+                return Task.FromResult(roles);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -294,22 +199,23 @@ namespace MVCWebDemo.Authentication
 
                 cancellationToken.ThrowIfCancellationRequested();
 
-                using (var connection = new SqlConnection(_connectionString))
-                {
-                    connection.Open();
+                string query = "select * from [PTS2_Account] where email = @email";
+                var result = handler.ExecuteSelect(query, user.Email) as DataTable;
 
-                    SqlCommand sqlCommand = new SqlCommand("SELECT [id] FROM [Role] WHERE [name] = @normalizedName", connection);
-                    sqlCommand.Parameters.AddWithValue("@normalizedName", roleName.ToUpper());
-                    int? roleId = sqlCommand.ExecuteScalar() as int?;
+                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
+                    throw new NullReferenceException("Account not found");
 
-                    SqlCommand sqlCommandUserRole = new SqlCommand("SELECT COUNT(*) FROM [UserRole] WHERE [userId] = @userId AND [roleId] =@roleId", connection);
-                    sqlCommandUserRole.Parameters.AddWithValue("@userId", user.Id);
-                    sqlCommandUserRole.Parameters.AddWithValue("@roleId", roleId);
+                bool isInRole = false;
 
-                    int? roleCount = sqlCommandUserRole.ExecuteScalar() as int?;
+                if (account.DoctorId > 0 && roleName == "doctor")
+                    isInRole = true;
+                else if (account.PatientId > 0 && roleName == "patient")
+                    isInRole = true;
+                else if (account.PatientId == 0 && account.DoctorId == 0 && roleName == "admin")
+                    isInRole = true;
+                else isInRole = false;
 
-                    return Task.FromResult(roleCount > 0);
-                }
+                return Task.FromResult(isInRole);
 
             }
             catch (Exception)

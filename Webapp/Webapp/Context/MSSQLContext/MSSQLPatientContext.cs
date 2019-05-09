@@ -17,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = $"SELECT * FROM PTS2_Account AS a INNER JOIN PTS2_Patient AS p ON p.Id = a.PatientId WHERE patientId = @id";
+            string query = $"SELECT * FROM PTS2_Account AS a INNER JOIN PTS2_Patient AS p ON p.Id = a.PatientId WHERE a.id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
