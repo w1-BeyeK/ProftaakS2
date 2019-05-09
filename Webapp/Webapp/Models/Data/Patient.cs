@@ -22,6 +22,23 @@ namespace Webapp.Models.Data
         public List<Department> Departments { get; set; }
         public List<Treatment> Treatments { get; set; }
 
+
+        public Patient(long id, string userName, string email) : base(id, userName, email)
+        {
+            Departments = new List<Department>();
+            Treatments = new List<Treatment>();
+
+            Role = "patient";
+
+            PrivAdress = true;
+            PrivBirthDate = true;
+            PrivContactPersonName = true;
+            PrivContactPersonPhone = true;
+            PrivGender = true;
+            PrivMail = true;
+            PrivPhoneNumber = true;
+        }
+
         public Patient(long id, string userName, string email, string name) : base(id, userName, email, name)
         {
             Departments = new List<Department>();

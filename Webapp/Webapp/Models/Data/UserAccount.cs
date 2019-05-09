@@ -19,6 +19,9 @@ namespace Webapp.Models.Data
         public UserAccount()
         { }
 
+        public UserAccount(long id, string userName, string email) : base(id, userName, email)
+        { }
+
         public UserAccount(long id, string userName, string email, string name) : base(id, userName, email, name)
         { }
         

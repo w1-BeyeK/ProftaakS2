@@ -82,15 +82,38 @@ namespace MVCWebDemo.Authentication
             using (var connection = new SqlConnection(_connectionString))
             {
                 connection.Open();
-                SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email FROM [PTS2_Account] WHERE email=@email", connection);
+                SqlCommand sqlCommand = new SqlCommand("SELECT id, username, email, password, role FROM [PTS2_Account] WHERE email=@email", connection);
                 sqlCommand.Parameters.AddWithValue("@email", normalizedEmail);
                 using (SqlDataReader sqlDataReader = sqlCommand.ExecuteReader())
                 {
                     BaseAccount user = default(BaseAccount);
                     if (sqlDataReader.Read())
                     {
-                        user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString());
-
+                        if (sqlDataReader["role"].ToString() == "admin")
+                        {
+                            user = new Administrator(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                            {
+                                Password = sqlDataReader["password"].ToString()
+                            };
+                        }
+                        else if (sqlDataReader["role"].ToString() == "doctor")
+                        {
+                            user = new Doctor(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                            {
+                                Password = sqlDataReader["password"].ToString()
+                            };
+                        }
+                        else if (sqlDataReader["role"].ToString() == "patient")
+                        {
+                            user = new Patient(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                            {
+                                Password = sqlDataReader["password"].ToString()
+                            };
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                     return Task.FromResult(user);
                 }
@@ -150,7 +173,31 @@ namespace MVCWebDemo.Authentication
                         BaseAccount user = default(BaseAccount);
                         if (sqlDataReader.Read())
                         {
-                            user = new BaseAccount(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString(), sqlDataReader["password"].ToString());
+                            if (sqlDataReader["role"].ToString() == "admin")
+                            {
+                                user = new Administrator(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                                {
+                                    Password = sqlDataReader["password"].ToString()
+                                };
+                            }
+                            else if (sqlDataReader["role"].ToString() == "doctor")
+                            {
+                                user = new Doctor(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                                {
+                                    Password = sqlDataReader["password"].ToString()
+                                };
+                            }
+                            else if (sqlDataReader["role"].ToString() == "patient")
+                            {
+                                user = new Patient(Convert.ToInt32(sqlDataReader["id"].ToString()), sqlDataReader["username"].ToString(), sqlDataReader["email"].ToString())
+                                {
+                                    Password = sqlDataReader["password"].ToString()
+                                };
+                            }
+                            else
+                            {
+                                return null;
+                            }
                         }
                         return Task.FromResult(user);
                     }

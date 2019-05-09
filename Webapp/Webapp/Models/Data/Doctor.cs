@@ -23,10 +23,14 @@ namespace Webapp.Models.Data
             PrivPhoneNumber = true;
         }
 
+        public Doctor(long id, string userName, string email) : base((int)id, userName, email)
+        {
+            Role = "doctor";
+        }
+
         public Doctor(long id, string userName, string email, string name) : base((int)id, userName, email, name)
         {
             Role = "doctor";
-            
         }
 
         public Doctor(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, password, name, birth, phoneNumber, active, gender)
