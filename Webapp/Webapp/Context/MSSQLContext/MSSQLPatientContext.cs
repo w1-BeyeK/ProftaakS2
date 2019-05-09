@@ -74,7 +74,6 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
-        //This May not!!!
         public long Insert(Patient patient)
         {
             return -1;
@@ -115,6 +114,7 @@ namespace Webapp.Context.MSSQLContext
             //}
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public bool Update(Patient patient)
         {
             try
@@ -237,7 +237,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
-        //TODO : USE DOCTORID!!!
+        //TODO : WANG WRITES STORED PROCEDURE
         public List<Patient> GetByDoctor(long id)
         {
             // Create result

@@ -108,6 +108,8 @@ namespace Webapp.Context.MSSQLContext
                 throw e;
             }
         }
+
+        //TODO : CHECK THIS QUERY!!!
         public bool Update(Doctor doctor)
         {
             try
@@ -193,6 +195,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public List<Doctor> GetByDepartment(long id)
         {
             try
@@ -227,6 +230,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public List<Doctor> GetByInstitution(long id)
         {
             try
@@ -261,6 +265,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public bool AddToDepartment(long departmentId, long doctorId)
         {
             try

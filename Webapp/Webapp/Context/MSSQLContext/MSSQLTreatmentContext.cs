@@ -11,13 +11,12 @@ namespace Webapp.Context.MSSQLContext
 {
     public class MSSQLTreatmentContext : BaseMSSQLContext, ITreatmentContext
     {
-        //TODO : Change queries!!!
         public MSSQLTreatmentContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
         public Treatment GetById(long id)
         {
-            string query = $"select * from PTS2_Treatment where Id = @id";
+            string query = $"select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t where Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -42,7 +41,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "select * from PTS2_Treatment";
+            string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -58,6 +57,7 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public long Insert(Treatment treatment)
         {
             try
@@ -82,6 +82,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public bool Update(Treatment treatment)
         {
             try
@@ -154,9 +155,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = $"select * from PTS2_Treatment AS t " +
-                                "INNER JOIN PTS2_Account AS a ON t.DoctorId = a.Id " +
-                                "WHERE a.Id = @id";
+                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t " +
+                               "INNER JOIN PTS2_Doctor AS d ON t.DoctorId = d.Id " +
+                               "WHERE d.Id = @id";
                                 // AND t.EndDate >= '@endDate'";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
@@ -191,7 +192,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = $"select * from PTS2_Treatment where PatientId = @id";
+                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t " +
+                               "INNER JOIN PTS2_Patient AS d ON t.DoctorId = p.Id " +
+                               "WHERE p.Id = @id";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -217,6 +220,7 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        //TODO : CHECK THIS QUERY!!!
         public bool CheckTreatmentRelationship(long doctorId, long patientId)
         {
             try
