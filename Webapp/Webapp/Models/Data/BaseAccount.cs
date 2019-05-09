@@ -13,8 +13,7 @@ namespace Webapp.Models.Data
         public string Role { get; set; }
 
         public long Id { get; set; }
-        public long DoctorId { get; set; }
-        public long PatientId { get; set; }
+        public long RoleId { get; set; }
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
@@ -47,11 +46,11 @@ namespace Webapp.Models.Data
         {
             bool isInRole = false;
 
-            if (DoctorId > 0 && roleName == "doctor")
+            if (roleName == "doctor")
                 isInRole = true;
-            else if (PatientId > 0 && roleName == "patient")
+            else if (roleName == "patient")
                 isInRole = true;
-            else if (PatientId == 0 && DoctorId == 0 && roleName == "admin")
+            else if (roleName == "admin")
                 isInRole = true;
 
             return isInRole;
@@ -60,12 +59,17 @@ namespace Webapp.Models.Data
         public string GetRole()
         {
             string role = "";
-            if (DoctorId > 0)
-                role = "doctor";
-            else if (PatientId > 0)
-                role = "patient";
-            else if (PatientId == 0 && DoctorId == 0)
-                role = "admin";
+            switch (RoleId)
+            {
+                case 1: role = "admin";
+                    break;
+                case 2: role = "doctor";
+                    break;
+                case 3: role = "patient";
+                    break;
+                default:
+                    break;
+            }
             return role;
         }
 
