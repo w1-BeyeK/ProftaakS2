@@ -9,6 +9,13 @@ using Webapp.Models.Data;
 
 namespace Webapp.Context.MSSQLContext
 {
+    //GET VIEW IN QUERIE...
+    //select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId 
+//    from PTS2_Treatment AS t
+//SELECT* FROM GetPatient AS p WHERE p.Id = t.Id
+//SELECT* FROM GetDoctor AS d WHERE p.Id = d.Id
+//where t.Id = 1
+
     public class MSSQLPatientContext : BaseMSSQLContext, IPatientContext
     {
         //TODO : Change Queries!!!!
@@ -19,9 +26,7 @@ namespace Webapp.Context.MSSQLContext
         {
             string query = "SELECT a.Id, a.Name, a.Username, a.[Password], a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
                            "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "FROM GetPatient " +
                            "WHERE a.id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
@@ -50,9 +55,7 @@ namespace Webapp.Context.MSSQLContext
             // Set query
             string query = "SELECT a.Id, a.Name, a.Username, a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
                            "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
+                           "FROM GetPatient " +
                            "WHERE p.Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
