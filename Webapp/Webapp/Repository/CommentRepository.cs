@@ -15,7 +15,7 @@ namespace Webapp.Repository
 
         public CommentRepository(ICommentContext context)
         {
-            this.context = context ?? throw new NullReferenceException("Het commentaarContext is leeg.");
+            this.context = context ?? throw new NullReferenceException("De commentaarContext is leeg.");
         }
 
         /// <summary>
@@ -37,7 +37,7 @@ namespace Webapp.Repository
         {
             if(treatmentId < 1)
             {
-                throw new NullReferenceException("De behandelingId is leeg.");
+                throw new NullReferenceException("Het behandelingId is leeg.");
             }
             return context.GetByTreatment(treatmentId);
         }

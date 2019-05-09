@@ -84,7 +84,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetByDoctor(-1));
-            Assert.Equal("De dokterId is leeg.", ex.Message);
+            Assert.Equal("Het dokterId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -101,7 +101,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetByPatient(-1));
-            Assert.Equal("De patiëntId is leeg.", ex.Message);
+            Assert.Equal("Het patiëntId is leeg.", ex.Message);
         }
         
         [Fact]
@@ -118,7 +118,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.GetById(-1));
-            Assert.Equal("De behandelingId is leeg.", ex.Message);
+            Assert.Equal("Het behandelingId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -135,7 +135,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.CheckTreatmentRelationship(-1, 1));
-            Assert.Equal("De dokterId is leeg.", ex.Message);
+            Assert.Equal("Het dokterId is leeg.", ex.Message);
         }
 
         [Fact]
@@ -144,7 +144,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentRepository = new TreatmentRepository(context);
             Exception ex = Assert.Throws<NullReferenceException>(() => treatmentRepository.CheckTreatmentRelationship(1, -1));
-            Assert.Equal("De patiëntId is leeg.", ex.Message);
+            Assert.Equal("Het patiëntId is leeg.", ex.Message);
         }
     }
 }

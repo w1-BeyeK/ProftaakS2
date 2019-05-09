@@ -57,7 +57,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De patiëntId is leeg.");
+                throw new NullReferenceException("Het patiëntId is leeg.");
             }
             return context.GetById(id);
         }
@@ -69,7 +69,7 @@ namespace Webapp.Repository
         {
             if (id < 1)
             {
-                throw new NullReferenceException("De dokterId is leeg.");
+                throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.GetByDoctor(id);
         }

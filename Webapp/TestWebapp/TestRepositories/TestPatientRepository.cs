@@ -83,7 +83,7 @@ namespace TestWebapp.TestRepositories
             patientRepository = new PatientRepository(context);
 
             Exception ex = Assert.Throws<NullReferenceException>(() => patientRepository.GetById(-1));
-            Assert.Equal("De patiëntId is leeg.", ex.Message);
+            Assert.Equal("Het patiëntId is leeg.", ex.Message);
         }
 
         [Fact]
