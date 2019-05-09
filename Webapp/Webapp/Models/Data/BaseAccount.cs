@@ -29,6 +29,7 @@ namespace Webapp.Models.Data
             Email = email;
             NormalizedUserName = userName.ToUpper();
             NormalizedEmail = email.ToUpper();
+            Role = "admin";
         }
         
         public BaseAccount(long id, string userName, string email, string name)
@@ -39,6 +40,33 @@ namespace Webapp.Models.Data
             Name = name;
             NormalizedUserName = userName.ToUpper();
             NormalizedEmail = email.ToUpper();
+            Role = "admin";
+        }
+
+        public bool IsInRole(string roleName)
+        {
+            bool isInRole = false;
+
+            if (DoctorId > 0 && roleName == "doctor")
+                isInRole = true;
+            else if (PatientId > 0 && roleName == "patient")
+                isInRole = true;
+            else if (PatientId == 0 && DoctorId == 0 && roleName == "admin")
+                isInRole = true;
+
+            return isInRole;
+        }
+
+        public string GetRole()
+        {
+            string role = "";
+            if (DoctorId > 0)
+                role = "doctor";
+            else if (PatientId > 0)
+                role = "patient";
+            else if (PatientId == 0 && DoctorId == 0)
+                role = "admin";
+            return role;
         }
 
         public string RatingPassword()

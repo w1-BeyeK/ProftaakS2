@@ -159,9 +159,7 @@ namespace Webapp.Context.Login
 
                 IList<string> roles = new List<string>
                 {
-                    "doctor",
-                    "patient",
-                    "admin"
+                    user.GetRole()
                 };
 
                 return Task.FromResult(roles);
@@ -196,26 +194,9 @@ namespace Webapp.Context.Login
         {
             try
             {
+                cancellationToken.ThrowIfCancellationRequested();                
 
-                cancellationToken.ThrowIfCancellationRequested();
-
-                string query = "select * from [PTS2_Account] where email = @email";
-                var result = handler.ExecuteSelect(query, user.Email) as DataTable;
-
-                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
-                    throw new NullReferenceException("Account not found");
-
-                bool isInRole = false;
-
-                if (account.DoctorId > 0 && roleName == "doctor")
-                    isInRole = true;
-                else if (account.PatientId > 0 && roleName == "patient")
-                    isInRole = true;
-                else if (account.PatientId == 0 && account.DoctorId == 0 && roleName == "admin")
-                    isInRole = true;
-                else isInRole = false;
-
-                return Task.FromResult(isInRole);
+                return Task.FromResult(user.IsInRole(roleName));
 
             }
             catch (Exception)

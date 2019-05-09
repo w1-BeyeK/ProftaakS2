@@ -83,7 +83,6 @@ namespace Webapp
             services.AddScoped<AccountRepository>();
 
             services.AddTransient<IUserStore<BaseAccount>, MSSQLUserContext>();
-            services.AddTransient<IUserRoleStore<BaseAccount>, MSSQLUserContext>();
             services.AddTransient<IRoleStore<Role>, RoleMemoryContext>();
             services.AddIdentity<BaseAccount, Role>()
                 .AddDefaultTokenProviders();
