@@ -15,10 +15,12 @@ namespace Webapp.Models.Data
         public string Description { get; set; }
         public bool Active { get; set; }
         public List<Department> Departments { get; set; }
+        public long DepartmentId { get; set; }
 
         public TreatmentType(string name, string description, bool active = true)
         {
             Name = name;
+            Departments = new List<Department>();
             Description = description;
             Active = active;
         }
