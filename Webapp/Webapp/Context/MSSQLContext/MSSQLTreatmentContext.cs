@@ -155,7 +155,7 @@ namespace Webapp.Context.MSSQLContext
                 List<Treatment> result = new List<Treatment>();
                 // Set query
                 string query = $"select * from PTS2_Treatment AS t " +
-                                "INNER JOIN PTS2_Account AS a ON t.DoctorId = a.DoctorId " +
+                                "INNER JOIN PTS2_Account AS a ON t.DoctorId = a.Id " +
                                 "WHERE a.Id = @id";
                                 // AND t.EndDate >= '@endDate'";
 
