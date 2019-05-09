@@ -45,8 +45,8 @@ namespace Webapp.Context.MSSQLContext
             // Set query
             string query = "SELECT a.Id, a.Username, a.Name, a.[Password], a.PatientId, p.BSN, p.ContactPersonName, p.ContactPersonPhone, p.BirthDate, p.Phone, a.Email, p.Gender, p.Zipcode, p.HouseNumber, p.Active, p.PBirthDate, p.PPhone, PEmail, PGender, PContactPerson, PAdres " +
                            "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON a.PatientId = p.Id " +
-                           "WHERE a.DoctorId IS NULL AND a.PatientId IS NOT NULL AND p.Active = @active";
+                           "INNER JOIN PTS2_Patient AS p ON a.Id = p.Id " +
+                           "WHERE p.Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
