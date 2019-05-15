@@ -118,7 +118,7 @@ namespace Webapp.Context.MemoryContext
                     PatientId = 1,
                     Active = true,
                     Birth = new DateTime(2000, 12, 3),
-                    PhoneNumber = "0611061788",
+                    Phone = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
@@ -131,7 +131,7 @@ namespace Webapp.Context.MemoryContext
                     PrivContactPersonPhone = false,
                     PrivGender = true,
                     PrivMail = true,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 },
                 new Patient(12, "pieterjan", "pieter@jan.nl", "Pieter Jan")
                 {
@@ -140,7 +140,7 @@ namespace Webapp.Context.MemoryContext
                     Password = "Test123",
                     Active = true,
                     Birth = new DateTime(2000, 12, 3),
-                    PhoneNumber = "0611061788",
+                    Phone = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
@@ -153,7 +153,7 @@ namespace Webapp.Context.MemoryContext
                     PrivContactPersonPhone = true,
                     PrivGender = true,
                     PrivMail = true,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 },
                 new Patient(13, "Yasmina", "yas@goolge.com", "Yasmina Ashmila")
                 {
@@ -162,7 +162,7 @@ namespace Webapp.Context.MemoryContext
                     Password = "Test123",
                     Active = true,
                     Birth = new DateTime(1998, 10, 4),
-                    PhoneNumber = "0611061788",
+                    Phone = "0611061788",
                     BSN = 222439355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
@@ -175,7 +175,7 @@ namespace Webapp.Context.MemoryContext
                     PrivContactPersonPhone = false,
                     PrivGender = false,
                     PrivMail = true,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 },
                 new Patient(14, "michaelv", "michael@google.com", "Michaeltje")
                 {
@@ -184,7 +184,7 @@ namespace Webapp.Context.MemoryContext
                     Password = "Test123",
                     Active = true,
                     Birth = new DateTime(1871, 2, 7),
-                    PhoneNumber = "0611061788",
+                    Phone = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
@@ -197,7 +197,7 @@ namespace Webapp.Context.MemoryContext
                     PrivContactPersonPhone = true,
                     PrivGender = false,
                     PrivMail = false,
-                    PrivPhoneNumber = true
+                    PrivPhone = true
                 },
                 new Patient(15, "stijn", "wizz@hotmail.com", "Stijn Driedubbels")
                 {
@@ -206,7 +206,7 @@ namespace Webapp.Context.MemoryContext
                     Password = "Test123",
                     Active = true,
                     Birth = new DateTime(2017, 12, 3),
-                    PhoneNumber = "0611061788",
+                    Phone = "0611061788",
                     BSN = 233619355,
                     ContactPersonName = "Thomas",
                     ContactPersonPhone = "0612345678",
@@ -219,7 +219,7 @@ namespace Webapp.Context.MemoryContext
                     PrivContactPersonPhone = true,
                     PrivGender = false,
                     PrivMail = false,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 }
             };
             BaseMemoryContext.doctors = new List<Doctor>()
@@ -232,9 +232,9 @@ namespace Webapp.Context.MemoryContext
                     Function = "HOI",
                     Gender = Gender.Other,
                     Password = "Test123",
-                    PhoneNumber = "12345",
+                    Phone = "12345",
                     PrivMail = true,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 },
                 new Doctor(12, "Soof", "sofie@hotmail.com", "Sofie")
                 {
@@ -244,9 +244,9 @@ namespace Webapp.Context.MemoryContext
                     Function = "HOI",
                     Gender = Gender.Male,
                     Password = "Test123",
-                    PhoneNumber = "12345",
+                    Phone = "12345",
                     PrivMail = true,
-                    PrivPhoneNumber = true
+                    PrivPhone = true
                 },
                 new Doctor(13, "Hansja", "hans@hotmail.com", "Hans")
                 {
@@ -256,9 +256,9 @@ namespace Webapp.Context.MemoryContext
                     Function = "HOI",
                     Gender = Gender.Female,
                     Password = "Test123",
-                    PhoneNumber = "12345",
+                    Phone = "12345",
                     PrivMail = false,
-                    PrivPhoneNumber = false
+                    PrivPhone = false
                 },
             };
         }

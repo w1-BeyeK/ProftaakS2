@@ -67,9 +67,9 @@ namespace Webapp.Context.MemoryContext
             {
                 BaseMemoryContext.doctors[index].Email = doctor.Email;
                 BaseMemoryContext.doctors[index].Password = doctor.Password;
-                BaseMemoryContext.doctors[index].PhoneNumber = doctor.PhoneNumber;
+                BaseMemoryContext.doctors[index].Phone = doctor.Phone;
                 BaseMemoryContext.doctors[index].PrivMail = doctor.PrivMail;
-                BaseMemoryContext.doctors[index].PrivPhoneNumber = doctor.PrivPhoneNumber;
+                BaseMemoryContext.doctors[index].PrivPhone = doctor.PrivPhone;
                 BaseMemoryContext.doctors[index].UserName = doctor.UserName;
                 return true;
             }
