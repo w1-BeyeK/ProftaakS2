@@ -17,6 +17,7 @@ namespace Webapp.Models.Data
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
         public long TreatmentTypeId { get; set; }
+        public string TreatmentTypeName { get; set; }
         public List<Comment> Comments { get; set; }
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate)
