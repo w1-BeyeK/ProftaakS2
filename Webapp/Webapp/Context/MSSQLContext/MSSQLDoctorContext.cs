@@ -47,14 +47,9 @@ namespace Webapp.Context.MSSQLContext
             string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, a.RoleName, d.Phone, d.BirthDate, d.Active " +
                            "FROM GetDoctor " +
                            "WHERE d.Active = @active";
-
-            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
-                {
-                    new KeyValuePair<string, object>("active", true? "1" : "0")
-            };
-
+            
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, 1) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
