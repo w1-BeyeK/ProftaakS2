@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, PrivPhone, PrivMail, BirthDate, Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, PrivPhone, PrivMail, BirthDate AS Birth, Active " +
                            "FROM GetDoctor " +
                            "WHERE Active = @active";
 
@@ -111,7 +111,7 @@ namespace Webapp.Context.MSSQLContext
             try
             {
                 #region Account
-                string queryAccount = "update PTS2_Doctor set @fields where Id = @id";
+                string queryAccount = "update PTS2_Account set @fields where Id = @id";
 
                 string fieldsAccount = "";
                 List<KeyValuePair<string, object>> parametersAccount = new List<KeyValuePair<string, object>>()
@@ -145,6 +145,7 @@ namespace Webapp.Context.MSSQLContext
 
                 handler.ExecuteCommand(queryAccount, parametersAccount);
                 #endregion
+
                 #region Doctor
                 string queryDoctor = "update PTS2_Doctor set @fields where Id = @id";
 
@@ -154,37 +155,39 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
-                if (doctor.Birth != null)
+                //TODO : ??? Doesnt do anything
+                //if (doctor.Birth != null)
+                //{
+                //    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                //        fieldsDoctor += ",";
+                //    fieldsDoctor += "[birthdate] = @birthdate";
+                //    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
+                //}
+
+                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                { fieldsDoctor += ","; }
+                fieldsDoctor += "[gender] = @gender";
+                parametersDoctor.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                if (doctor.Phone != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                         fieldsDoctor += ",";
-                    fieldsDoctor += "[birthdate] = @birthdate";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
-                }
-                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
-                {
-                    fieldsDoctor += ",";
-                    fieldsDoctor += "[gender] = @gender";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
-                }
-                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
-                {
-                    fieldsDoctor += ",";
                     fieldsDoctor += "[phone] = @phone";
                     parametersDoctor.Add(new KeyValuePair<string, object>("phone", doctor.Phone));
                 }
                 if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                 {
                     fieldsDoctor += ",";
-                    fieldsDoctor += "[privPhone] = @privPhone";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("privPhone", doctor.PrivPhone));
                 }
+                fieldsDoctor += "[privPhone] = @privPhone";
+                parametersDoctor.Add(new KeyValuePair<string, object>("privPhone", doctor.PrivPhone));
+
                 if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                 {
                     fieldsDoctor += ",";
-                    fieldsDoctor += "[privMail] = @privMail";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("privMail", doctor.PrivMail));
                 }
+                fieldsDoctor += "[privMail] = @privMail";
+                parametersDoctor.Add(new KeyValuePair<string, object>("privMail", doctor.PrivMail));
 
                 queryDoctor = queryDoctor.Replace("@fields", fieldsDoctor);
 

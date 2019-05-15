@@ -17,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
+            string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate AS Birth, BSN, ContactPersonName, " +
                            "ContactPersonPhone, Gender, HouseNumber, PrivAdress, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone, PrivMail, PrivGender, PrivPhone, Phone, Zipcode " +
                            "FROM GetPatient " +
                            "WHERE id = @id";
@@ -46,8 +46,8 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
-                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPerson, PrivEmail, PrivGender, PrivPhone, Phone, Zipcode " +
+            string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate AS Birth, BSN, ContactPersonName, " +
+                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone, PrivMail, PrivGender, PrivPhone, Phone, Zipcode " +
                            "FROM GetPatient " +
                            "WHERE Active = @active";
 
@@ -174,12 +174,12 @@ namespace Webapp.Context.MSSQLContext
                     fieldsPatient += "[houseNumber] = @houseNumber";
                     parametersPatient.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
                 }
-                if (patient.HouseNumber > 0)
+                if (patient.Zipcode != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsPatient))
                         fieldsPatient += ",";
                     fieldsPatient += "[zipcode] = @zipcode";
-                    parametersPatient.Add(new KeyValuePair<string, object>("zipcode", patient.HouseNumber));
+                    parametersPatient.Add(new KeyValuePair<string, object>("zipcode", patient.Zipcode));
                 }
                 if (patient.Phone != null)
                 {
