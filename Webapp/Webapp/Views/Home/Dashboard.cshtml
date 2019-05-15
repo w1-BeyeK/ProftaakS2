@@ -3,29 +3,22 @@
     ViewData["Title"] = "Dashboard";
 }
 <link rel="stylesheet" href="~/css/button.css" />
-
-<div class="grandParentContainer">
-    <div class="parentContainer">
-        <form>
-            <div class="container col-md-12" id="buttons">
-                <div class="row">
-                    <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
-                    <button class="btn btn-primary btn-lg col-lg-3" asp-action="Index" asp-controller="Department">Overzicht</button>
-                    <button class="btn btn-primary btn-lg col-lg-3" asp-action="Create" asp-controller="Department">Nieuwe toevoegen</button>
-                </div>
-                <div class="list-group-horizontal row">
-                    <h2><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen</h2>
-                    <button class="btn btn-primary btn-lg" asp-action="Index" asp-controller="TreatmentType">Overzicht</button>
-                    <button class="btn btn-primary btn-lg" asp-action="Create" asp-controller="TreatmentType">Nieuwe toevoegen</button>
-                </div>
-                <div class="list-group-horizontal row">
-                    <h2><i class="fa fa-user-md fa-lg"></i> Artsen</h2>
-                    <button class="btn btn-primary btn-lg" asp-action="Index" asp-controller="Doctor">Overzicht</button>
-                    <button class="btn btn-primary btn-lg" asp-action="Create" asp-controller="Doctor">Nieuwe toevoegen</button>
-                </div>
-
-            </div>
-            
-        </form>
+<form>
+    <div class="container col-md-12" id="buttons">
+        <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
+        <div class="list-group-horizontal row">
+            <button class="btn btn-lg" asp-action="Index" asp-controller="Department">Overzicht</button>
+            <button class="btn btn-lg" asp-action="Create" asp-controller="Department">Nieuwe toevoegen</button>
+        </div>
+        <h2><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen</h2>
+        <div class="list-group-horizontal row">
+            <button class="btn btn-lg" asp-action="Index" asp-controller="TreatmentType">Overzicht</button>
+            <button class="btn btn-lg" asp-action="Create" asp-controller="TreatmentType">Nieuwe toevoegen</button>
+        </div>
+        <h2><i class="fa fa-user-md fa-lg"></i> Artsen</h2>
+        <div class="list-group-horizontal row">
+            <button class="btn btn-lg" asp-action="Index" asp-controller="Doctor">Overzicht</button>
+            <button class="btn btn-lg" asp-action="Create" asp-controller="Doctor">Nieuwe toevoegen</button>
+        </div>
     </div>
-</div>
+</form>

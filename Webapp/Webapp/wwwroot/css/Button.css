@@ -3,15 +3,21 @@
     
 }
 
+.row{
+    display: flex;
+    justify-content:center;
+}
+
 
 .btn {
+    width: 20%;
     background-color: #808080;
     color: #E6E6E6;
     border-color: #BFBFBF;
     border-width: 2px;
     padding: 10px;
-
-
+    margin-bottom:50px;
+    margin-top:20px;
 }
 
     .btn:hover {
@@ -26,4 +32,8 @@
     margin: auto;
     text-align:center;
     
+}
+
+footer{
+    margin-top:56.4%;
 }
