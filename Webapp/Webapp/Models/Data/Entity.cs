@@ -3,11 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using Webapp.Models.Attributes;
 
 namespace Webapp.Models.Data
 {
     public class Entity
     {
+        public PropertyInfo GetPropertyByName(string propName, bool checkProperty = false)
+        {
+            var props = GetType().GetProperties();
+
+            foreach (PropertyInfo prop in props)
+            {
+                if (prop.Name.ToLower() == propName.ToLower() ||
+                    (checkProperty && Attribute.IsDefined(prop, typeof(Property)) &&
+                    ((Property)Attribute.GetCustomAttributes(prop, typeof(Property))[0]).PropertyName == propName))
+                    return prop;
+            }
+            return null;
+        }
+
         public Type GetPropertyType(string propName)
         {
             PropertyInfo prop = GetPropertyByName(propName);

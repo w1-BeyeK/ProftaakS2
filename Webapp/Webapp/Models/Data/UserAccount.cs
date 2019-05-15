@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Models.Attributes;
 
 namespace Webapp.Models.Data
 {
     public enum Gender { Male, Female, Other };
     public class UserAccount : BaseAccount
     {
+        [Property("birthdate")]
         public DateTime Birth { get; set; }
         public string PhoneNumber { get; set; }
         public bool Active { get; set; }
