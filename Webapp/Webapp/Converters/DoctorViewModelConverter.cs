@@ -14,6 +14,7 @@ namespace Webapp.Converters
         {
             return new Doctor(vm.EmployeeNumber, vm.UserName, vm.Email, vm.Name)
             {
+                Id = vm.EmployeeNumber,
                 EmployeeNumber = vm.EmployeeNumber,
                 Birth = vm.Birth,
                 Gender = vm.Gender,
@@ -27,7 +28,7 @@ namespace Webapp.Converters
         {
             return new DoctorDetailViewModel()
             {
-                EmployeeNumber = doctor.EmployeeNumber,
+                EmployeeNumber = doctor.Id,
                 Email = doctor.Email,
                 UserName = doctor.UserName,
                 Birth = doctor.Birth,

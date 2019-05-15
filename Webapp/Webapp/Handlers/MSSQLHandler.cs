@@ -22,7 +22,7 @@ namespace Webapp.Handlers
         private int[] FindParameter(string query)
         {
             if (!query.Contains("@"))
-                throw new IndexOutOfRangeException("Query is missing '@'");
+                return new int[2] { -1, -1 };
 
             int begin = query.IndexOf('@') + 1;
             Regex reg = new Regex(@"^[a-zA-Z]+$");
@@ -50,10 +50,13 @@ namespace Webapp.Handlers
         {
             try
             {
-                int[] indexes = FindParameter(query);
-                int length = indexes[1] - indexes[0];
-                string param = query.Substring(indexes[0], length);
-                query = parameter != null ? ReplaceParameter(query, param, parameter) : query;
+                if (parameter != null)
+                {
+                    int[] indexes = FindParameter(query);
+                    int length = indexes[1] - indexes[0];
+                    string param = query.Substring(indexes[0], length);
+                    query = ReplaceParameter(query, param, parameter);
+                }
 
                 DataSet ds = new DataSet();
                 SqlConnection sqlConnection = new SqlConnection(conn);

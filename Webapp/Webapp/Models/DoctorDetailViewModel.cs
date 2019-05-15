@@ -9,30 +9,28 @@ namespace Webapp.Models
 {
     public class DoctorDetailViewModel
     {
-        [Required]
-        [Range(1, long.MaxValue, ErrorMessage = "ArtsId is niet binnen de grenzen van 1 en 9223372036854775807")]
         public long EmployeeNumber { get; set; }
         [Required]
         [DataType(DataType.Date)]
         public DateTime Birth { get; set; }
 
-        [StringLength(15, ErrorMessage = "{0} telefoonnummer is tussen de {7} en {15} tekens lang.", MinimumLength = 7)]
+        [StringLength(15, ErrorMessage = "Telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
         public string PhoneNumber { get; set; }
 
         public Gender Gender { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
+        [StringLength(200, ErrorMessage = "Username length must be between 1 and 200.", MinimumLength = 1)]
         public string UserName { get; set; }
         
-        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
+        [StringLength(200, ErrorMessage = "Email length must be between 1 and 200.", MinimumLength = 1)]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
+        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
         public string Name { get; set; }
 
-        [Range(0, 150, ErrorMessage = "CommentaarId is niet binnen de grenzen van {0} en {150}")]
+        //[Range(0, 150, ErrorMessage = "CommentaarId is niet binnen de grenzen van {0} en {150}")]
         public int Age { get; set; }
         public bool PrivMail { get; set; }
         public bool PrivPhonenumber { get; set; }
