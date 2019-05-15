@@ -16,7 +16,9 @@ namespace Webapp.Context.MSSQLContext
 
         public Treatment GetById(long id)
         {
-            string query = $"select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t where Id = @id";
+            string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                           "FROM PTS2_Treatment " +
+                           "WHERE Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -41,7 +43,8 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t";
+            string query = "select Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                           "from PTS2_Treatment";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
@@ -155,9 +158,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t " +
-                               "INNER JOIN PTS2_Doctor AS d ON t.DoctorId = d.Id " +
-                               "WHERE d.Id = @id";
+                string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                               "FROM PTS2_Treatment " +
+                               "WHERE DoctorId = @id";
                                 // AND t.EndDate >= '@endDate'";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
@@ -192,10 +195,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId " +
-                               "FROM PTS2_Treatment AS t " +
-                               "INNER JOIN PTS2_Patient AS d ON t.DoctorId = p.Id " +
-                               "WHERE p.Id = @id";
+                string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                               "FROM PTS2_Treatment " +
+                               "WHERE DoctorId = @id";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
