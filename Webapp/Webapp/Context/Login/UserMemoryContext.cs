@@ -31,7 +31,7 @@ namespace Webapp.Context.Login
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "WANG"
                 },
-                new Patient(1, "patient", "patient", "patient")
+                new Patient(12, "patient", "patient", "patient")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "PATIENT"

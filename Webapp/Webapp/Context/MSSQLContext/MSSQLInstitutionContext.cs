@@ -90,7 +90,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("country", obj.Country),
                     new KeyValuePair<string, object>("zipcode", obj.Zipcode),
                     new KeyValuePair<string, object>("housenumber", obj.HouseNumber),
-                    new KeyValuePair<string, object>("phone", obj.PhoneNumber),
+                    new KeyValuePair<string, object>("phone", obj.Phone),
                     new KeyValuePair<string, object>("adminid", obj.Administrator.Id),
                 };
 
@@ -138,7 +138,7 @@ namespace Webapp.Context.MSSQLContext
                 if (!string.IsNullOrWhiteSpace(fields))
                     fields += ",";
                 fields += "phonenumber = @phonenumber";
-                parameters.Add(new KeyValuePair<string, object>("phonenumber", obj.PhoneNumber));
+                parameters.Add(new KeyValuePair<string, object>("phonenumber", obj.Phone));
 
                 query = query.Replace("@fields", fields);
 

@@ -20,7 +20,7 @@ namespace Webapp.Converters
                 ContactPersonPhone = vm.ContactPersonPhone,
                 Gender = vm.Gender,
                 HouseNumber = vm.HouseNumber,
-                PhoneNumber = vm.PhoneNumber,
+                Phone = vm.Phone,
                 Zipcode = vm.Zipcode,
                 PrivAdress = vm.PrivAdress,
                 PrivContactPersonName = vm.PrivContactPersonName,
@@ -28,7 +28,7 @@ namespace Webapp.Converters
                 PrivBirthDate = vm.PrivBirthDate,
                 PrivGender = vm.PrivGender,
                 PrivMail = vm.PrivMail,
-                PrivPhoneNumber = vm.PrivPhoneNumber
+                PrivPhone = vm.PrivPhone
             };
         }
 
@@ -45,7 +45,7 @@ namespace Webapp.Converters
                 ContactPersonPhone = patient.ContactPersonPhone,
                 Gender = patient.Gender,
                 HouseNumber = patient.HouseNumber,
-                PhoneNumber = patient.PhoneNumber,
+                Phone = patient.Phone,
                 Zipcode = patient.Zipcode,
                 Name = patient.Name,
                 PrivAdress = patient.PrivAdress,
@@ -54,7 +54,7 @@ namespace Webapp.Converters
                 PrivBirthDate = patient.PrivBirthDate,
                 PrivGender = patient.PrivGender,
                 PrivMail = patient.PrivMail,
-                PrivPhoneNumber = patient.PrivPhoneNumber
+                PrivPhone = patient.PrivPhone
             };
         }
 

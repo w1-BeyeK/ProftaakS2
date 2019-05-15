@@ -35,7 +35,7 @@ namespace TestWebapp
             Assert.Equal(role, doctor.Role);
             Assert.Equal(name, doctor.Name);
             Assert.Equal(birthDate, doctor.Birth);
-            Assert.Equal(phoneNumber, doctor.PhoneNumber);
+            Assert.Equal(phoneNumber, doctor.Phone);
             Assert.Equal(active, doctor.Active);
             Assert.Equal(gender, doctor.Gender);
             Assert.Equal(function, doctor.Function);

@@ -18,9 +18,9 @@ namespace Webapp.Converters
                 EmployeeNumber = vm.EmployeeNumber,
                 Birth = vm.Birth,
                 Gender = vm.Gender,
-                PhoneNumber = vm.PhoneNumber,
+                Phone = vm.Phone,
                 PrivMail = vm.PrivMail,
-                PrivPhoneNumber = vm.PrivPhonenumber
+                PrivPhone = vm.PrivPhonenumber
             };
         }
 
@@ -35,9 +35,9 @@ namespace Webapp.Converters
                 Gender = doctor.Gender,
                 Name = doctor.Name,
                 Age = doctor.GetAge(),
-                PhoneNumber = doctor.PhoneNumber,
+                Phone = doctor.Phone,
                 PrivMail = doctor.PrivMail,
-                PrivPhonenumber = doctor.PrivPhoneNumber
+                PrivPhonenumber = doctor.PrivPhone
             };
         }
 

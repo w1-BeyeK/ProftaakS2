@@ -1,0 +1,29 @@
+﻿body {
+    color:black;
+    
+}
+
+
+.btn {
+    background-color: #808080;
+    color: #E6E6E6;
+    border-color: #BFBFBF;
+    border-width: 2px;
+    padding: 10px;
+
+
+}
+
+    .btn:hover {
+        background-color: #808080;
+        color: #E6E6E6;
+        border-color: #404040;
+        border-width: 2px;
+    }
+
+#buttons{
+    padding: 0px;
+    margin: auto;
+    text-align:center;
+    
+}

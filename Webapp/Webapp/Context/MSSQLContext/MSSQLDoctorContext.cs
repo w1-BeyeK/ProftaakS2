@@ -48,6 +48,11 @@ namespace Webapp.Context.MSSQLContext
                            "FROM GetDoctor " +
                            "WHERE Active = @active";
 
+            List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("active", true? 1 : 0)
+            };
+
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query, 1) as DataTable;
 
@@ -86,8 +91,8 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("gender", doctor.Gender),
                     new KeyValuePair<string, object>("email", doctor.Email),
                     new KeyValuePair<string, object>("privemail", doctor.PrivMail),
-                    new KeyValuePair<string, object>("phone", doctor.PhoneNumber),
-                    new KeyValuePair<string, object>("privphone", doctor.PrivPhoneNumber),
+                    new KeyValuePair<string, object>("phone", doctor.Phone),
+                    new KeyValuePair<string, object>("privphone", doctor.PrivPhone),
                     new KeyValuePair<string, object>("birthdate", doctor.Birth),
                     new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
                 };
@@ -105,51 +110,67 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Doctor set @fields where Id = @id";
+                #region Account
+                string queryAccount = "update PTS2_Doctor set @fields where Id = @id";
 
-                string fields = "";
-                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                string fieldsAccount = "";
+                List<KeyValuePair<string, object>> parametersAccount = new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
                 if (doctor.Name != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[name] = @name";
-                    parameters.Add(new KeyValuePair<string, object>("name", doctor.Name));
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[name] = @name";
+                    parametersAccount.Add(new KeyValuePair<string, object>("name", doctor.Name));
                 }
                 if (doctor.Email != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[email] = @email";
-                    parameters.Add(new KeyValuePair<string, object>("email", doctor.Email));
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[email] = @email";
+                    parametersAccount.Add(new KeyValuePair<string, object>("email", doctor.Email));
                 }
+
+                queryAccount = queryAccount.Replace("@fields", fieldsAccount);
+
+                handler.ExecuteCommand(queryAccount, parametersAccount);
+                #endregion
+                #region Doctor
+                string queryDoctor = "update PTS2_Doctor set @fields where Id = @id";
+
+                string fieldsDoctor = "";
+                List<KeyValuePair<string, object>> parametersDoctor = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", doctor.Id)
+                };
+
                 if (doctor.Birth != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[birthdate] = @birthdate";
-                    parameters.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
+                    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                        fieldsDoctor += ",";
+                    fieldsDoctor += "[birthdate] = @birthdate";
+                    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
+                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                 {
-                    fields += ",";
-                    fields += "[gender] = @gender";
-                    parameters.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                    fieldsDoctor += ",";
+                    fieldsDoctor += "[gender] = @gender";
+                    parametersDoctor.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
+                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                 {
-                    fields += ",";
-                    fields += "[phone] = @phone";
-                    parameters.Add(new KeyValuePair<string, object>("phone", doctor.PhoneNumber));
+                    fieldsDoctor += ",";
+                    fieldsDoctor += "[phone] = @phone";
+                    parametersDoctor.Add(new KeyValuePair<string, object>("phone", doctor.Phone));
                 }
 
-                query = query.Replace("@fields", fields);
+                queryDoctor = queryDoctor.Replace("@fields", fieldsDoctor);
 
-                handler.ExecuteCommand(query, parameters);
+                handler.ExecuteCommand(queryDoctor, parametersDoctor);
+                #endregion
                 return true;
             }
             catch (Exception e)
