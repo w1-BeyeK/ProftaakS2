@@ -47,21 +47,22 @@ namespace Webapp.Converters
             foreach (Treatment t in patient.Treatments)
             {
                 //The first comment is the description
-                t.Comments.OrderBy(x => x.Date);
-                List<Comment> comments = new List<Comment>(t.Comments);
-                Comment description = comments[0];
-                comments.RemoveAt(0);
+                //t.Comments.OrderBy(x => x.Date);
+                //List<Comment> comments = new List<Comment>(t.Comments);
+                //Comment description = comments[0];
+                //comments.RemoveAt(0);
 
                 TreatmentDetailViewModel treatmentDetailViewModel = new TreatmentDetailViewModel()
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    TypeId = t.TreatmentType.Id,
+                    TypeName = t.TreatmentTypeName,
+                    TypeId = t.TreatmentTypeId,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
-                    Comments = comments,
-                    Description = description,
-                    Age = t.GetAge()
+                    //Comments = comments,
+                    //Description = description,
+                    //Age = t.GetAge()
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }

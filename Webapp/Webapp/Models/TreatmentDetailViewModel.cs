@@ -15,6 +15,7 @@ namespace Webapp.Models
         [StringLength(50, ErrorMessage = "Naam mag maximaal 50 characters zijn.")]
         public string Name { get; set; }
         public long TypeId { get; set; }
+        public string TypeName { get; set; }
         public long PatientId { get; set; }
         public string PatientName { get; set; }
         [Required]

@@ -24,7 +24,7 @@ namespace Webapp.Controllers
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
         private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
-        public PatientController(
+        public PatientController(   
             PatientRepository patientRepository, 
             TreatmentRepository treatmentRepository
             )
@@ -55,7 +55,10 @@ namespace Webapp.Controllers
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             try
             {
-                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patientRepository.GetById(id));
+                Patient patient = patientRepository.GetById(id);
+                patient.Treatments = treatmentRepository.GetByPatient(id);
+
+                patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }
             catch (Exception Ex)
             {

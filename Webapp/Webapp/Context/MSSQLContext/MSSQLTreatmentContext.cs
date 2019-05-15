@@ -199,7 +199,7 @@ namespace Webapp.Context.MSSQLContext
                 // Set query
                 string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
                                "FROM PTS2_Treatment " +
-                               "WHERE DoctorId = @id";
+                               "WHERE PatientId = @id";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {

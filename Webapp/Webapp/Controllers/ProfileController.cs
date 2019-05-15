@@ -92,9 +92,9 @@ namespace Webapp.Controllers
                 }
                 else if (HttpContext.User.IsInRole("patient"))
                 {
-                    if (treatmentRepository.CheckTreatmentRelationship(id, userId))
+                    if (treatmentRepository.CheckTreatmentRelationship(12, userId))
                     {
-                        Doctor doctor = doctorRepository.GetById(id);
+                        Doctor doctor = doctorRepository.GetById(12);
                         viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
                         viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                     }

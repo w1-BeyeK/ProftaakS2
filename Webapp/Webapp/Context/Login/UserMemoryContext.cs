@@ -36,17 +36,17 @@ namespace Webapp.Context.Login
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "PATIENT"
                 },
-                new Doctor(1, "doctor", "doctor", "doctor")
+                new Doctor(15, "doctor", "doctor", "doctor")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "DOCTOR"
                 },
-                new Doctor(12, "soof", "soof", "soof")
+                new Doctor(11, "soof", "soof", "soof")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "SOOF"
                 },
-                new Administrator(12, "admin", "admin", "admin")
+                new Administrator(22, "admin", "admin", "admin")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "ADMIN"
