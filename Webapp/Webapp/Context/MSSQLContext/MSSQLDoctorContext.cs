@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate as Birth, Active " +
                            "FROM GetDoctor " +
                            "WHERE Active = @active";
 

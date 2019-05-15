@@ -16,10 +16,10 @@ namespace Webapp.Context.MSSQLContext
 
         public Treatment GetById(long id)
         {
-            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId, tt.Name AS TreatmentTypeName " +
+            string query = "SELECT t.Id, t.[Name], t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
                            "FROM PTS2_Treatment AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id " +
-                           "WHERE Id = @id";
+                           "WHERE t.Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId, tt.Name AS TreatmentTypeName " +
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
                            "FROM PTS2_Treatment AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id";
 
@@ -67,7 +67,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, StartDate, EndDate, TreatmentTypeId) OUTPUT INSERTED.Id values(@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
+                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, BeginDate, EndDate, TreatmentTypeId) OUTPUT INSERTED.Id values(@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -160,7 +160,7 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId " +
                                "FROM PTS2_Treatment " +
                                "WHERE DoctorId = @id";
                                 // AND t.EndDate >= '@endDate'";
@@ -197,7 +197,7 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
+                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId " +
                                "FROM PTS2_Treatment " +
                                "WHERE PatientId = @id";
 
