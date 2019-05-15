@@ -17,8 +17,8 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate as Birth, BSN, ContactPersonName, " +
-                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPerson, PrivEmail, PrivGender, PrivPhone, Phone, Zipcode " +
+            string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
+                           "ContactPersonPhone, Gender, HouseNumber, PrivAdress, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone, PrivMail, PrivGender, PrivPhone, Phone, Zipcode " +
                            "FROM GetPatient " +
                            "WHERE id = @id";
 
@@ -46,7 +46,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate as Birth, BSN, ContactPersonName, " +
+            string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
                            "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPerson, PrivEmail, PrivGender, PrivPhone, Phone, Zipcode " +
                            "FROM GetPatient " +
                            "WHERE Active = @active";
@@ -124,13 +124,6 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", patient.Id)
                 };
 
-                if (patient.UserName != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
-                        fieldsAccount += ",";
-                    fieldsAccount += "[userName] = @userName";
-                    parametersAccount.Add(new KeyValuePair<string, object>("userName", patient.UserName));
-                }
                 if (patient.Password != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsAccount))
@@ -180,6 +173,13 @@ namespace Webapp.Context.MSSQLContext
                         fieldsPatient += ",";
                     fieldsPatient += "[houseNumber] = @houseNumber";
                     parametersPatient.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
+                }
+                if (patient.HouseNumber > 0)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsPatient))
+                        fieldsPatient += ",";
+                    fieldsPatient += "[zipcode] = @zipcode";
+                    parametersPatient.Add(new KeyValuePair<string, object>("zipcode", patient.HouseNumber));
                 }
                 if (patient.Phone != null)
                 {
