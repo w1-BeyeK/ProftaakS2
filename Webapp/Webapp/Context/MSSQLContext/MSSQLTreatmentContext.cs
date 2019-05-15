@@ -16,8 +16,9 @@ namespace Webapp.Context.MSSQLContext
 
         public Treatment GetById(long id)
         {
-            string query = "SELECT Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
-                           "FROM PTS2_Treatment " +
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId, tt.Name AS TreatmentTypeName " +
+                           "FROM PTS2_Treatment AS t " +
+                           "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id " +
                            "WHERE Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
@@ -43,8 +44,9 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "select Id, Name, PatientId, DoctorId, StartDate, EndDate, TreatmentTypeId " +
-                           "from PTS2_Treatment";
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId, tt.Name AS TreatmentTypeName " +
+                           "FROM PTS2_Treatment AS t " +
+                           "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id";
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteSelect(query) as DataTable;
