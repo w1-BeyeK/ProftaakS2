@@ -115,97 +115,114 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "update PTS2_Patient set @fields where Id = @id";
+                #region UpdateAccount
+                string queryAccount = "update PTS2_Account set @fields where Id = @id";
 
-                string fields = "";
-                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                string fieldsAccount = "";
+                List<KeyValuePair<string, object>> parametersAccount = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", patient.Id)
+                };
+
+                if (patient.UserName != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[userName] = @userName";
+                    parametersAccount.Add(new KeyValuePair<string, object>("userName", patient.UserName));
+                }
+                if (patient.Password != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[password] = @password";
+                    parametersAccount.Add(new KeyValuePair<string, object>("password", patient.Password));
+                }
+                if (patient.Email != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[email] = @email";
+                    parametersAccount.Add(new KeyValuePair<string, object>("email", patient.Email));
+                }
+
+                queryAccount = queryAccount.Replace("@fields", fieldsAccount);
+
+                handler.ExecuteCommand(queryAccount, parametersAccount);
+                #endregion
+
+                #region UpdatePatient
+                string queryPatient = "update PTS2_Patient set @fields where Id = @id";
+
+                string fieldsPatient = "";
+                List<KeyValuePair<string, object>> parametersPatient = new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("id", patient.Id)
                 };
 
                 if (patient.ContactPersonName != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[contactPersonName] = @contactPersonName";
-                    parameters.Add(new KeyValuePair<string, object>("contactPersonName", patient.ContactPersonName));
+                    if (!string.IsNullOrWhiteSpace(fieldsPatient))
+                        fieldsPatient += ",";
+                    fieldsPatient += "[contactPersonName] = @contactPersonName";
+                    parametersPatient.Add(new KeyValuePair<string, object>("contactPersonName", patient.ContactPersonName));
                 }
                 if (patient.ContactPersonPhone != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[contactPersonPhone] = @contactPersonPhone";
-                    parameters.Add(new KeyValuePair<string, object>("contactPersonPhone", patient.ContactPersonPhone));
-                }
-                if (patient.Email != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[email] = @email";
-                    parameters.Add(new KeyValuePair<string, object>("email", patient.Email));
+                    if (!string.IsNullOrWhiteSpace(fieldsPatient))
+                        fieldsPatient += ",";
+                    fieldsPatient += "[contactPersonPhone] = @contactPersonPhone";
+                    parametersPatient.Add(new KeyValuePair<string, object>("contactPersonPhone", patient.ContactPersonPhone));
                 }
                 if (patient.HouseNumber > 0)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[houseNumber] = @houseNumber";
-                    parameters.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
-                }
-                if (patient.UserName != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[userName] = @userName";
-                    parameters.Add(new KeyValuePair<string, object>("userName", patient.UserName));
-                }
-                if (patient.Password != null)
-                {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[password] = @password";
-                    parameters.Add(new KeyValuePair<string, object>("password", patient.Password));
+                    if (!string.IsNullOrWhiteSpace(fieldsPatient))
+                        fieldsPatient += ",";
+                    fieldsPatient += "[houseNumber] = @houseNumber";
+                    parametersPatient.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
                 }
                 if (patient.PhoneNumber != null)
                 {
-                    if (!string.IsNullOrWhiteSpace(fields))
-                        fields += ",";
-                    fields += "[phoneNumber] = @phoneNumber";
-                    parameters.Add(new KeyValuePair<string, object>("phoneNumber", patient.PhoneNumber));
+                    if (!string.IsNullOrWhiteSpace(fieldsPatient))
+                        fieldsPatient += ",";
+                    fieldsPatient += "[phone] = @phone";
+                    parametersPatient.Add(new KeyValuePair<string, object>("phone", patient.PhoneNumber));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
+                if (!string.IsNullOrWhiteSpace(fieldsPatient))
                 {
-                    fields += ",";
-                    fields += "[privAdress] = @privAdress";
-                    parameters.Add(new KeyValuePair<string, object>("privAdress", patient.PrivAdress));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privAdress] = @privAdress";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privAdress", patient.PrivAdress));
 
-                    fields += ",";
-                    fields += "[privBirthDate] = @privBirthDate";
-                    parameters.Add(new KeyValuePair<string, object>("privBirthDate", patient.PrivBirthDate));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privBirthDate] = @privBirthDate";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privBirthDate", patient.PrivBirthDate));
 
-                    fields += ",";
-                    fields += "[privContactPersonName] = @privContactPersonName";
-                    parameters.Add(new KeyValuePair<string, object>("privContactPersonName", patient.PrivContactPersonName));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privContactPersonName] = @privContactPersonName";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privContactPersonName", patient.PrivContactPersonName));
 
-                    fields += ",";
-                    fields += "[privContactPersonPhone] = @privContactPersonPhone";
-                    parameters.Add(new KeyValuePair<string, object>("privContactPersonPhone", patient.PrivContactPersonPhone));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privContactPersonPhone] = @privContactPersonPhone";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privContactPersonPhone", patient.PrivContactPersonPhone));
 
-                    fields += ",";
-                    fields += "[privGender] = @privGender";
-                    parameters.Add(new KeyValuePair<string, object>("privGender", patient.PrivGender));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privGender] = @privGender";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privGender", patient.PrivGender));
 
-                    fields += ",";
-                    fields += "[privMail] = @privMail";
-                    parameters.Add(new KeyValuePair<string, object>("privMail", patient.PrivMail));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privMail] = @privMail";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privMail", patient.PrivMail));
 
-                    fields += ",";
-                    fields += "[privPhoneNumber] = @privPhoneNumber";
-                    parameters.Add(new KeyValuePair<string, object>("privPhoneNumber", patient.PrivPhoneNumber));
+                    fieldsPatient += ",";
+                    fieldsPatient += "[privPhoneNumber] = @privPhoneNumber";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privPhoneNumber", patient.PrivPhoneNumber));
                 }
 
-                query = query.Replace("@fields", fields);
+                queryPatient = queryPatient.Replace("@fields", fieldsPatient);
 
-                handler.ExecuteCommand(query, parameters);
+                handler.ExecuteCommand(queryPatient, parametersPatient);
+                #endregion
                 return true;
             }
             catch (Exception e)
