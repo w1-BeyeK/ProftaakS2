@@ -13,7 +13,7 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, doctor")]
     public class DepartmentController : Controller
     {
         //global instances
@@ -80,6 +80,7 @@ namespace Webapp.Controllers
             return View(vm);
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             DepartmentDetailViewModel vm = new DepartmentDetailViewModel
@@ -90,6 +91,7 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(DepartmentDetailViewModel model)
         {
             if (ModelState.IsValid)
@@ -101,6 +103,7 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id)
         {
             if (id < 1)
@@ -116,6 +119,7 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id, DepartmentDetailViewModel model)
         {
             if(ModelState.IsValid)
@@ -132,7 +136,8 @@ namespace Webapp.Controllers
             }
             return View();
         }
-        
+
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(long id)
         {
 

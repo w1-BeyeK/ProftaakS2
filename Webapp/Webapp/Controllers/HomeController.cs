@@ -92,7 +92,7 @@ namespace Webapp.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        [Authorize(Roles = "admin")]
+        [Authorize]
         public IActionResult Dashboard()
         {
             return View();
