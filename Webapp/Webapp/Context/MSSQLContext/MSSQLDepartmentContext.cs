@@ -90,7 +90,7 @@ namespace Webapp.Context.MSSQLContext
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
                     new KeyValuePair<string, object>("name", obj.Name),
-                    new KeyValuePair<string, object>("active", obj.Active),
+                    new KeyValuePair<string, object>("active", true),
                     new KeyValuePair<string, object>("description", obj.Description),
                     new KeyValuePair<string, object>("institutionid", obj.InstitutionId),
                 };

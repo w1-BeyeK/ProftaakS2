@@ -90,7 +90,7 @@ namespace Webapp
             services.ConfigureApplicationCookie(options =>
             {
                 // TODO: access denied pagina maken
-                options.AccessDeniedPath = new PathString("/");
+                options.AccessDeniedPath = "/Error/AccessDenied";
                 options.Cookie.Name = "Cookie";
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(720);

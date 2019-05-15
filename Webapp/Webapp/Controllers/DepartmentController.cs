@@ -82,8 +82,10 @@ namespace Webapp.Controllers
 
         public IActionResult Create()
         {
-            DepartmentDetailViewModel vm = new DepartmentDetailViewModel();
-            vm.Institutions = GetInstitutionsForDropdown().ToList();
+            DepartmentDetailViewModel vm = new DepartmentDetailViewModel
+            {
+                Institutions = GetInstitutionsForDropdown().ToList()
+            };
             return View(vm);
         }
 

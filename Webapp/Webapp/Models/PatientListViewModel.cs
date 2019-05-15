@@ -14,7 +14,7 @@ namespace Webapp.Models
         [Range(1, long.MaxValue, ErrorMessage = "PatiëntId is niet binnen de grenzen van 1 en 9223372036854775807")]
         public long UserId { get; set; }
         [Required]
-        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
+        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
         public string Name { get; set; }
         [Required]
         public Gender Gender { get; set; }

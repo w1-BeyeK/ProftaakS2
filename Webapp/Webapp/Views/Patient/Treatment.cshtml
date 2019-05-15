@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="TreatmentType"><h4>Type behandeling</h4></label>
-                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TreatmentTypes[0].Name">
+                                <input type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TypeName">
                             </div>
                         </div>
                         <div class="form-group">
@@ -88,7 +88,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Description"><h4>Omschrijving</h4></label>
-                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="@Model.TreatmentDetailViewModels[0].Description.Description">
+                                <input type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="model beschrijving nog toevoegen">
                             </div>
                         </div>
                         @foreach (Comment comment in Model.TreatmentDetailViewModels[0].Comments)

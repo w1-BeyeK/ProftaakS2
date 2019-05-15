@@ -17,12 +17,10 @@ namespace Webapp.Context.MSSQLContext
 
         public Patient GetById(long id)
         {
-            string query = "SELECT a.Id, a.Name, a.Username, a.[Password], a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
-                           "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
-                           "WHERE a.id = @id";
+            string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
+                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPerson, PrivEmail, PrivGender, PrivPhone, Phone, Zipcode " +
+                           "FROM GetPatient " +
+                           "WHERE id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -48,12 +46,10 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = "SELECT a.Id, a.Name, a.Username, a.Email, r.Name, p.Active, p.BirthDate, p.BSN, p.ContactPersonName, " +
-                           "p.ContactPersonPhone, p.Gender, p.HouseNumber, p.PrivAdres, p.PrivBirthDate, p.PrivContactPerson, p.PrivEmail, p.PrivGender, p.PrivPhone, p.Phone, p.Zipcode " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Patient AS p ON p.Id = a.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
-                           "WHERE p.Active = @active";
+            string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate, BSN, ContactPersonName, " +
+                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPerson, PrivEmail, PrivGender, PrivPhone, Phone, Zipcode " +
+                           "FROM GetPatient " +
+                           "WHERE Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {

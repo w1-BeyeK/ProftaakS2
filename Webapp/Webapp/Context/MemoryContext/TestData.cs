@@ -64,9 +64,9 @@ namespace Webapp.Context.MemoryContext
                     EndDate = DateTime.Now,
                     Comments = comments,
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
-                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
+                    Patient = new Patient(1, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                     DoctorId = 11,
-                    PatientId = 12,
+                    PatientId = 1,
                 },
                 new Treatment()
                 {
@@ -77,9 +77,9 @@ namespace Webapp.Context.MemoryContext
                     Comments = comments,
                     TreatmentType = BaseMemoryContext.treatmentTypes.Find(t => t.Id == 9),
                     Doctor = new Doctor(11, "jan", "jan@hotmail.com", "Jan"),
-                    Patient = new Patient(12, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
+                    Patient = new Patient(1, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye"),
                     DoctorId = 11,
-                    PatientId = 12,
+                    PatientId = 1,
                 },
                 new Treatment()
                 {
@@ -110,11 +110,12 @@ namespace Webapp.Context.MemoryContext
             };
             BaseMemoryContext.patients = new List<Patient>()
             {
-                new Patient(11, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
+                new Patient(1, "kevinbeye", "kevin.beye1999@hotmail.com", "Kevin Beye")
                 {
                     Email = "k.beye@student.fontys.nl",
                     Gender = Gender.Male,
                     Password = "Test123",
+                    PatientId = 1,
                     Active = true,
                     Birth = new DateTime(2000, 12, 3),
                     PhoneNumber = "0611061788",

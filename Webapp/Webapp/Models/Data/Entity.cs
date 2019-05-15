@@ -8,7 +8,13 @@ namespace Webapp.Models.Data
 {
     public class Entity
     {
-        internal void SetPropertyByName(string propName, object value)
+        public Type GetPropertyType(string propName)
+        {
+            PropertyInfo prop = GetPropertyByName(propName);
+            return prop.PropertyType;
+        }
+
+        public void SetPropertyByName(string propName, object value)
         {
             PropertyInfo prop = GetPropertyByName(propName);
             prop.SetValue(this, value);

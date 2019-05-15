@@ -41,18 +41,19 @@ namespace Webapp.Controllers
                 return View();
 
             List<UserAccount> accounts = accountRepository.GetAll();
-            vm.Doctors = new List<DoctorDetailViewModel>();
-            foreach(Doctor doctor in doctors)
-            {
-                UserAccount account = accounts.FirstOrDefault(a => a.DoctorId == doctor.Id);
-                if (account == null)
-                {
-                    continue;
-                }
 
-                doctor.Name = account.Name;
-                vm.Doctors.Add(converter.ModelToViewModel(doctor));
-            }
+            vm.Doctors = converter.ModelsToViewModel(doctors);
+            //foreach(Doctor doctor in doctors)
+            //{
+            //    UserAccount account = accounts.FirstOrDefault(a => a.DoctorId == doctor.Id);
+            //    if (account == null)
+            //    {
+            //        continue;
+            //    }
+
+            //    doctor.Name = account.Name;
+            //    vm.Doctors.Add(converter.ModelToViewModel(doctor));
+            //}
             
             return View(vm);
         }

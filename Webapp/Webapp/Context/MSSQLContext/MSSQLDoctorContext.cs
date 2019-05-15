@@ -17,11 +17,9 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, r.Name, d.Phone, d.BirthDate, d.Active " +
-                           "FROM PTS2_Account AS a " + 
-                           "INNER JOIN PTS2_Doctor AS d ON a.Id = d.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
-                           "WHERE a.Id = 49";
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate as Birth, Active " +
+                           "FROM GetDoctor " +
+                           "WHERE Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             {
@@ -46,11 +44,9 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, r.Name, d.Phone, d.BirthDate, d.Active " +
-                           "FROM PTS2_Account AS a " +
-                           "INNER JOIN PTS2_Doctor AS d ON a.Id = d.Id " +
-                           "INNER JOIN PTS2_Role AS r ON a.RoleId = r.Id " +
-                           "WHERE d.Active = @active";
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
+                           "FROM GetDoctor " +
+                           "WHERE Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -58,7 +54,7 @@ namespace Webapp.Context.MSSQLContext
             };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteSelect(query) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, 1) as DataTable;
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)

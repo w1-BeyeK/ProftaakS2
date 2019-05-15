@@ -27,7 +27,10 @@ namespace Webapp.Parsers
                     if (dr[col] is DBNull)
                         continue;
 
-                    result.SetPropertyByName(col.ColumnName, dr[col]);
+                    if (result.GetPropertyType(col.ColumnName) == typeof(DateTime))
+                        result.SetPropertyByName(col.ColumnName, DateTime.Parse(dr[col].ToString()));
+                    else
+                        result.SetPropertyByName(col.ColumnName, dr[col]);
                 }
             }
 
