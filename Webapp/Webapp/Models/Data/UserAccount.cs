@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Models.Attributes;
+using Webapp.Models.Enums;
 
 namespace Webapp.Models.Data
 {
     public enum Gender { Male, Female, Other };
     public class UserAccount : BaseAccount
     {
-        [Property("birthdate")]
+        [Property("birthdate", DataType.DateTime)]
         public DateTime Birth { get; set; }
         public string Phone { get; set; }
         public bool Active { get; set; }

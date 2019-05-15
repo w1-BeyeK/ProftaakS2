@@ -4,7 +4,9 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Webapp.Interfaces;
+using Webapp.Models.Attributes;
 using Webapp.Models.Data;
+using Webapp.Models.Enums;
 
 namespace Webapp.Parsers
 {
@@ -27,10 +29,23 @@ namespace Webapp.Parsers
                     if (dr[col] is DBNull)
                         continue;
 
-                    if (result.GetPropertyType(col.ColumnName) == typeof(DateTime))
-                        result.SetPropertyByName(col.ColumnName, DateTime.Parse(dr[col].ToString()));
-                    else
-                        result.SetPropertyByName(col.ColumnName, dr[col]);
+                    Property[] prop = (Property[])Attribute.GetCustomAttributes(result.GetPropertyByName(col.ColumnName), typeof(Property));
+
+                    if (result.HasProperty(col.ColumnName) || prop?[0].PropertyName == col.ColumnName)
+                    {
+                        DataType type = prop.Length > 0 ? prop[0].DataType : DataType.Character;
+                        object value;
+                        switch (type)
+                        {
+                            case DataType.DateTime:
+                                value = DateTime.Parse(dr[col].ToString());
+                                break;
+                            default:
+                                value = dr[col];
+                                break;
+                        }
+                        result.SetPropertyByName(col.ColumnName, value);
+                    }
                 }
             }
 

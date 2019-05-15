@@ -108,7 +108,8 @@ namespace Webapp.Handlers
                 try
                 {
                     SqlParameter param;
-                    parameters.ForEach(p =>
+
+                    foreach (KeyValuePair<string, object> p in parameters)
                     {
                         param = new SqlParameter
                         {
@@ -116,7 +117,17 @@ namespace Webapp.Handlers
                             Value = p.Value.ToString()
                         };
                         cmd.Parameters.Add(param);
-                    });
+                    }
+
+                    //parameters.ForEach(p =>
+                    //{
+                    //    param = new SqlParameter
+                    //    {
+                    //        ParameterName = "@" + p.Key,
+                    //        Value = p.Value.ToString()
+                    //    };
+                    //    cmd.Parameters.Add(param);
+                    //});
                     cmd.Connection.Open();
                     value = cmd.ExecuteScalar();
                     sqlConnection.Close();
