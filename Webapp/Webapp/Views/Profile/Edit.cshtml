@@ -97,7 +97,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="phonenumber" class="h4">Telefoonnummer</label>
-                                    <input type="tel" asp-for="Patient.PhoneNumber" value="@Model.Patient.PhoneNumber" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
+                                    <input type="tel" asp-for="Patient.Phone" value="@Model.Patient.Phone" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
                                 </div>
                             </div>
 
@@ -124,8 +124,8 @@
 
                             <div class="form-group">
                                 <div class="col-xs-6">
-                                    <label for="ContactPersonPhoneNumber" class="h4">Contactpersoon telefoonnummer</label>
-                                    <input type="tel" asp-for="Patient.ContactPersonPhone" value="@Model.Patient.ContactPersonPhone" class="form-control" id="contactPersonPhoneNumber" placeholder="Contactpersoon telefoonnummer" title="Voer hier het telefoonnummer van je contactpersoon in.">
+                                    <label for="ContactPersonPhone" class="h4">Contactpersoon telefoonnummer</label>
+                                    <input type="tel" asp-for="Patient.ContactPersonPhone" value="@Model.Patient.ContactPersonPhone" class="form-control" id="contactPersonPhone" placeholder="Contactpersoon telefoonnummer" title="Voer hier het telefoonnummer van je contactpersoon in.">
                                 </div>
                             </div>
 
@@ -176,7 +176,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" asp-for="Patient.PrivPhoneNumber" checked="@Model.Patient.PrivPhoneNumber">
+                                        <input type="checkbox" asp-for="Patient.PrivPhone" checked="@Model.Patient.PrivPhone">
                                         <span class="slider"></span>
                                     </label>
                                     Telefoonnummer
@@ -318,7 +318,7 @@ else if (Model.Doctor != null)
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="phonenumber" class="h4">Telefoonnummer</label>
-                                    <input type="tel" asp-for="Doctor.PhoneNumber" value="@Model.Doctor.PhoneNumber" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
+                                    <input type="tel" asp-for="Doctor.Phone" value="@Model.Doctor.Phone" class="form-control" id="phone" placeholder="Voer je telefoonnummer in" title="Voer je telefooonnummer in.">
                                 </div>
                             </div>
 

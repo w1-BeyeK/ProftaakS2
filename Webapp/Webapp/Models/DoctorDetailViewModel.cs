@@ -15,7 +15,7 @@ namespace Webapp.Models
         public DateTime Birth { get; set; }
 
         [StringLength(15, ErrorMessage = "Telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
 
         public Gender Gender { get; set; }
 

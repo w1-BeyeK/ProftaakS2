@@ -63,14 +63,14 @@ namespace Webapp.Context.MemoryContext
             int index = BaseMemoryContext.patients.FindIndex(p => p.Id == patient.Id);
             if (index > 0)
             {
-                BaseMemoryContext.patients[index].PhoneNumber = patient.PhoneNumber;
+                BaseMemoryContext.patients[index].Phone = patient.Phone;
                 BaseMemoryContext.patients[index].PrivAdress = patient.PrivAdress;
                 BaseMemoryContext.patients[index].PrivBirthDate = patient.PrivBirthDate;
                 BaseMemoryContext.patients[index].PrivContactPersonName = patient.PrivContactPersonName;
                 BaseMemoryContext.patients[index].PrivContactPersonPhone = patient.PrivContactPersonPhone;
                 BaseMemoryContext.patients[index].PrivGender = patient.PrivGender;
                 BaseMemoryContext.patients[index].PrivMail = patient.PrivMail;
-                BaseMemoryContext.patients[index].PrivPhoneNumber = patient.PrivPhoneNumber;
+                BaseMemoryContext.patients[index].PrivPhone = patient.PrivPhone;
                 BaseMemoryContext.patients[index].UserName = patient.UserName;
                 BaseMemoryContext.patients[index].Zipcode = patient.Zipcode;
                 BaseMemoryContext.patients[index].HouseNumber = patient.HouseNumber;

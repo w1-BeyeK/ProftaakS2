@@ -11,7 +11,7 @@ namespace Webapp.Models.Data
     {
         [Property("birthdate")]
         public DateTime Birth { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
@@ -30,7 +30,7 @@ namespace Webapp.Models.Data
         public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, name)
         {
             Birth = birth;
-            PhoneNumber = phoneNumber;
+            Phone = phoneNumber;
             Email = email;
             Active = active;
             Gender = gender;

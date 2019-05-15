@@ -16,7 +16,7 @@ namespace Webapp.Context.MSSQLContext
 
         public TreatmentType GetById(long id)
         {
-            string query = $"select * from PTS2_TreatmentType where Id = @id";
+            string query = "select * from PTS2_TreatmentType where Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
