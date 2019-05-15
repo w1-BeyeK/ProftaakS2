@@ -192,7 +192,8 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId from PTS2_Treatment AS t " +
+                string query = "select t.Id, t.Name, t.PatientId, t.DoctorId, t.StartDate, t.EndDate, t.TreatmentTypeId " +
+                               "FROM PTS2_Treatment AS t " +
                                "INNER JOIN PTS2_Patient AS d ON t.DoctorId = p.Id " +
                                "WHERE p.Id = @id";
 

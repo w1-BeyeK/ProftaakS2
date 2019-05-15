@@ -17,9 +17,9 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, RoleName, d.Phone, d.BirthDate, d.Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
                            "FROM GetDoctor " +
-                           "WHERE a.Id = @id";
+                           "WHERE Id = @id";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             {
@@ -44,9 +44,9 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT a.Id, a.Username, a.Name, a.[Password], d.Gender, a.Email, a.RoleName, d.Phone, d.BirthDate, d.Active " +
+            string query = "SELECT Id, a.Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
                            "FROM GetDoctor " +
-                           "WHERE d.Active = @active";
+                           "WHERE Active = @active";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
