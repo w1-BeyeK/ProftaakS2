@@ -22,7 +22,7 @@ namespace TestWebapp
             Assert.Equal(name, institution.Name);
             Assert.Equal(houseNumber, institution.HouseNumber);
             Assert.Equal(zipcode, institution.Zipcode);
-            Assert.Equal(phoneNumber, institution.PhoneNumber);
+            Assert.Equal(phoneNumber, institution.Phone);
             Assert.Equal(country, institution.Country);
             Assert.Equal(administrator, institution.Administrator);
 

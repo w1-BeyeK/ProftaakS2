@@ -26,8 +26,8 @@ namespace Webapp.Models
         [DataType(DataType.Date)]
         public DateTime Birth { get; set; }
 
-        [StringLength(15, ErrorMessage = "PhoneNumber telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
-        public string PhoneNumber { get; set; }
+        [StringLength(15, ErrorMessage = "Phone telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
+        public string Phone { get; set; }
         [Required]
         public Gender Gender { get; set; }
 
@@ -48,7 +48,7 @@ namespace Webapp.Models
         public bool PrivContactPersonName { get; set; }
         public bool PrivContactPersonPhone { get; set; }
         public bool PrivMail { get; set; }
-        public bool PrivPhoneNumber { get; set; }
+        public bool PrivPhone { get; set; }
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }

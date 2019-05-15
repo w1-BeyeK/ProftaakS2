@@ -12,7 +12,7 @@ namespace Webapp.Models.Data
         public string Function { get; set; }
         public long EmployeeNumber { get; set; }
         public bool PrivMail { get; set; }
-        public bool PrivPhoneNumber { get; set; }
+        public bool PrivPhone { get; set; }
 
         //TODO : Lijst met departments???
 
@@ -20,7 +20,7 @@ namespace Webapp.Models.Data
         {
             Role = "doctor";
             PrivMail = true;
-            PrivPhoneNumber = true;
+            PrivPhone = true;
         }
 
         public Doctor(long id, string userName, string email) : base((int)id, userName, email)
@@ -38,7 +38,7 @@ namespace Webapp.Models.Data
             Role = "doctor";
             EmployeeNumber = Id;
             PrivMail = true;
-            PrivPhoneNumber = true;
+            PrivPhone = true;
         }
         public int GetAge()
         {

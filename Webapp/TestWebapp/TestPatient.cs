@@ -48,7 +48,7 @@ namespace TestWebapp
             Assert.True(patient.PrivContactPersonPhone);
             Assert.True(patient.PrivGender);
             Assert.True(patient.PrivMail);
-            Assert.True(patient.PrivPhoneNumber);
+            Assert.True(patient.PrivPhone);
 
             patient = new Patient(1, username, email, password, name, birth, phonenumber, active, gender, bsn)
             {
@@ -63,7 +63,7 @@ namespace TestWebapp
             Assert.Equal(email, patient.Email);
             Assert.Equal(name, patient.Name);
             Assert.Equal(birth, patient.Birth);
-            Assert.Equal(phonenumber, patient.PhoneNumber);
+            Assert.Equal(phonenumber, patient.Phone);
             Assert.Equal(active, patient.Active);
             Assert.Equal(gender, patient.Gender);
             Assert.Equal(bsn, patient.BSN);
@@ -78,7 +78,7 @@ namespace TestWebapp
             Assert.True(patient.PrivContactPersonPhone);
             Assert.True(patient.PrivGender);
             Assert.True(patient.PrivMail);
-            Assert.True(patient.PrivPhoneNumber);
+            Assert.True(patient.PrivPhone);
         }
 
         [Fact]

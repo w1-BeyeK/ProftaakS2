@@ -76,8 +76,8 @@ namespace Webapp.Context.MSSQLContext
             //try
             //{
             //    string query = "insert into PTS2_Patient(Active, Birth, BSN, ContactPersonName, ContactPersonPhone, " +
-            //        "Email, Gender, HouseNumber, Name, UserName, PhoneNumber, PrivAdress, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone" +
-            //        "PrivGender, PrivMail, PrivPhoneNumber, Zipcode) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
+            //        "Email, Gender, HouseNumber, Name, UserName, Phone, PrivAdress, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone" +
+            //        "PrivGender, PrivMail, PrivPhone, Zipcode) OUTPUT INSERTED.Id values(@departmentId, @name, @description, @active)";
 
             //    List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
             //    {
@@ -91,14 +91,14 @@ namespace Webapp.Context.MSSQLContext
             //        new KeyValuePair<string, object>("HouseNumber", patient.HouseNumber),
             //        new KeyValuePair<string, object>("Name", patient.Name),
             //        new KeyValuePair<string, object>("UserName", patient.NormalizedUserName),
-            //        new KeyValuePair<string, object>("PhoneNumber", patient.PhoneNumber),
+            //        new KeyValuePair<string, object>("Phone", patient.Phone),
             //        new KeyValuePair<string, object>("PrivAdress", patient.PrivAdress),
             //        new KeyValuePair<string, object>("PrivBirthDate", patient.PrivBirthDate),
             //        new KeyValuePair<string, object>("PrivContactPersonName", patient.PrivContactPersonName),
             //        new KeyValuePair<string, object>("PrivContactPersonPhone", patient.PrivContactPersonPhone),
             //        new KeyValuePair<string, object>("PrivGender", patient.PrivGender),
             //        new KeyValuePair<string, object>("PrivMail", patient.PrivMail),
-            //        new KeyValuePair<string, object>("PrivPhoneNumber", patient.PrivPhoneNumber),
+            //        new KeyValuePair<string, object>("PrivPhone", patient.PrivPhone),
             //        new KeyValuePair<string, object>("Zipcode", patient.Zipcode)
             //    };
 
@@ -181,12 +181,12 @@ namespace Webapp.Context.MSSQLContext
                     fieldsPatient += "[houseNumber] = @houseNumber";
                     parametersPatient.Add(new KeyValuePair<string, object>("houseNumber", patient.HouseNumber));
                 }
-                if (patient.PhoneNumber != null)
+                if (patient.Phone != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsPatient))
                         fieldsPatient += ",";
                     fieldsPatient += "[phone] = @phone";
-                    parametersPatient.Add(new KeyValuePair<string, object>("phone", patient.PhoneNumber));
+                    parametersPatient.Add(new KeyValuePair<string, object>("phone", patient.Phone));
                 }
                 if (!string.IsNullOrWhiteSpace(fieldsPatient))
                 {
@@ -215,8 +215,8 @@ namespace Webapp.Context.MSSQLContext
                     parametersPatient.Add(new KeyValuePair<string, object>("privMail", patient.PrivMail));
 
                     fieldsPatient += ",";
-                    fieldsPatient += "[privPhoneNumber] = @privPhoneNumber";
-                    parametersPatient.Add(new KeyValuePair<string, object>("privPhoneNumber", patient.PrivPhoneNumber));
+                    fieldsPatient += "[privPhone] = @privPhone";
+                    parametersPatient.Add(new KeyValuePair<string, object>("privPhone", patient.PrivPhone));
                 }
 
                 queryPatient = queryPatient.Replace("@fields", fieldsPatient);

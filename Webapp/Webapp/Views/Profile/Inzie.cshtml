@@ -75,12 +75,12 @@
                                 </div>
                             }
 
-                            @if (Model.Patient.PrivPhoneNumber)
+                            @if (Model.Patient.PrivPhone)
                             {
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="phonenumber" class="h4">Telefoonnummer</label>
-                                        <p>@Model.Patient.PhoneNumber</p>
+                                        <p>@Model.Patient.Phone</p>
                                     </div>
                                 </div>
                             }
@@ -114,7 +114,7 @@
                             {
                                 <div class="form-group">
                                     <div class="col-xs-6">
-                                        <label for="ContactPersonPhoneNumber" class="h4">Contactpersoon telefoonnummer</label>
+                                        <label for="ContactPersonPhone" class="h4">Contactpersoon telefoonnummer</label>
                                         <p>@Model.Patient.ContactPersonPhone</p>
                                     </div>
                                 </div>
@@ -164,7 +164,7 @@ else if (Model.Doctor != null)
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label for="phonenumber" class="h4">Telefoonnummer</label>
-                                        <p>@Model.Doctor.PhoneNumber</p>
+                                        <p>@Model.Doctor.Phone</p>
                                     </div>
                                 </div>
                             }

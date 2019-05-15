@@ -11,7 +11,7 @@ namespace Webapp.Models.Data
         public string Name { get; set; }
         public int HouseNumber { get; set; }
         public string Zipcode { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public string Country { get; set; }
         public bool Active { get; set; }
         public Administrator Administrator { get; set; }
@@ -25,7 +25,7 @@ namespace Webapp.Models.Data
             Name = name;
             HouseNumber = houseNumber;
             Zipcode = zipcode;
-            PhoneNumber = phoneNumber;
+            Phone = phoneNumber;
             Country = country;
             Administrator = administrator;
             Departments = new List<Department>();

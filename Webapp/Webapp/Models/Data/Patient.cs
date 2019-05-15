@@ -17,7 +17,7 @@ namespace Webapp.Models.Data
         public bool PrivContactPersonName { get; set; }
         public bool PrivContactPersonPhone { get; set; }
         public bool PrivMail { get; set; }
-        public bool PrivPhoneNumber { get; set; }
+        public bool PrivPhone { get; set; }
         public bool PrivAdress { get; set; }
         public bool PrivGender { get; set; }
         public bool PrivBirthDate { get; set; }
@@ -38,7 +38,7 @@ namespace Webapp.Models.Data
             PrivContactPersonPhone = true;
             PrivGender = true;
             PrivMail = true;
-            PrivPhoneNumber = true;
+            PrivPhone = true;
         }
 
         public Patient(long id, string userName, string email, string name) : base(id, userName, email, name)
@@ -54,7 +54,7 @@ namespace Webapp.Models.Data
             PrivContactPersonPhone = true;
             PrivGender = true;
             PrivMail = true;
-            PrivPhoneNumber = true;
+            PrivPhone = true;
         }
 
         public Patient(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender, long bSN): base (id, userName, email, password, name, birth, phoneNumber, active, gender)
@@ -71,7 +71,7 @@ namespace Webapp.Models.Data
             PrivContactPersonPhone = true;
             PrivGender = true;
             PrivMail = true;
-            PrivPhoneNumber = true;
+            PrivPhone = true;
         }
 
         public void AddDepartment(Department department)
