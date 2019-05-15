@@ -54,7 +54,7 @@ namespace Webapp.Context.MSSQLContext
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>("active", true? "1" : "0")
+                    new KeyValuePair<string, object>("active", true? 1 : 0)
             };
 
             // Tell the handler to execute the query

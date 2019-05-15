@@ -72,7 +72,7 @@ namespace Webapp
             //services.AddSingleton<ITreatmentContext, MemoryTreatmentContext>();
             //Add test data into static lists
             //TestData testData = new TestData();
-            
+
             // Repositories
             services.AddScoped<PatientRepository>();
             services.AddScoped<TreatmentTypeRepository>();

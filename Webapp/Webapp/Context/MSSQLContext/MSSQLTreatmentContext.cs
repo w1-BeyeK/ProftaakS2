@@ -62,7 +62,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, StartDate, EndDate, TreatmentTypeId) OUTPUT INSERTED.Id values(@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
+                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, StartDate, EndDate, TreatmentTypeId) values (@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId) SELECT Id = SCOPE_IDENTITY()";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -80,6 +80,18 @@ namespace Webapp.Context.MSSQLContext
             {
                 throw e;
             }
+  //          System.Data.SqlClient.SqlException
+  //HResult = 0x80131904
+  //Message = The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Doctor_Treatment".The conflict occurred in database "dbi409368", table "dbo.PTS2_Doctor", column 'Id'.
+  // Source = Core.Net SqlClient Data Provider
+  //  StackTrace:
+  // at Webapp.Context.MSSQLContext.MSSQLTreatmentContext.Insert(Treatment treatment) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Context\MSSQLContext\MSSQLTreatmentContext.cs:line 81
+  // at Webapp.Repository.TreatmentRepository.Insert(Treatment treatment) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Repository\TreatmentRepository.cs:line 30
+  // at Webapp.Controllers.TreatmentController.Add(TreatmentDetailViewModel vm) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Controllers\TreatmentController.cs:line 88
+  // at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
+  // at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+  // at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.< InvokeActionMethodAsync > d__12.MoveNext()
+
         }
 
         //TODO : CHECK THIS QUERY!!!
