@@ -47,7 +47,7 @@ namespace Webapp.Context.MSSQLContext
             List<Patient> result = new List<Patient>();
             // Set query
             string query = "SELECT Id, Name, Username, Email, RoleName, Active, BirthDate AS Birth, BSN, ContactPersonName, " +
-                           "ContactPersonPhone, Gender, HouseNumber, PrivAdres, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone, PrivMail, PrivGender, PrivPhone, Phone, Zipcode " +
+                           "ContactPersonPhone, Gender, HouseNumber, PrivAdress, PrivBirthDate, PrivContactPersonName, PrivContactPersonPhone, PrivMail, PrivGender, PrivPhone, Phone, Zipcode " +
                            "FROM GetPatient " +
                            "WHERE Active = @active";
 

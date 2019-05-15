@@ -119,12 +119,12 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
-                if (doctor.Name != null)
+                if (doctor.UserName != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsAccount))
                         fieldsAccount += ",";
-                    fieldsAccount += "[name] = @name";
-                    parametersAccount.Add(new KeyValuePair<string, object>("name", doctor.Name));
+                    fieldsAccount += "[username] = @username";
+                    parametersAccount.Add(new KeyValuePair<string, object>("username", doctor.UserName));
                 }
                 if (doctor.Password != null)
                 {
@@ -164,10 +164,13 @@ namespace Webapp.Context.MSSQLContext
                 //    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
                 //}
 
-                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
-                { fieldsDoctor += ","; }
-                fieldsDoctor += "[gender] = @gender";
-                parametersDoctor.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                if (Convert.ToInt16(doctor.Gender) >= 0)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                    { fieldsDoctor += ","; }
+                    fieldsDoctor += "[gender] = @gender";
+                    parametersDoctor.Add(new KeyValuePair<string, object>("gender", Convert.ToInt16(doctor.Gender)));
+                }
                 if (doctor.Phone != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsDoctor))
