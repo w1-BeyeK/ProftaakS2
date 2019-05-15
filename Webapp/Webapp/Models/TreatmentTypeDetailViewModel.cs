@@ -9,8 +9,6 @@ namespace Webapp.Models
 {
     public class TreatmentTypeDetailViewModel
     {
-        [Required]
-        [Range(1, long.MaxValue)]
         public long Id { get; set; }
         [Required]
         public string Name { get; set; }
@@ -22,7 +20,7 @@ namespace Webapp.Models
         [Required]
         [Range(1, long.MaxValue)]
         public long DepartmentId { get; set; }
-        [Required]
+
         public List<SelectListItem> Departments { get; set; }
     }
 }

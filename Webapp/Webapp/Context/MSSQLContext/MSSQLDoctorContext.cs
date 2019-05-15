@@ -17,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate as Birth, Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
                            "FROM GetDoctor " +
                            "WHERE Id = @id";
 
@@ -87,8 +87,8 @@ namespace Webapp.Context.MSSQLContext
                 {
                     new KeyValuePair<string, object>("username", doctor.UserName),
                     new KeyValuePair<string, object>("name", doctor.Name),
-                    new KeyValuePair<string, object>("password", doctor.Password),
-                    new KeyValuePair<string, object>("gender", doctor.Gender),
+                    new KeyValuePair<string, object>("password", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q=="),
+                    new KeyValuePair<string, object>("gender", (int)doctor.Gender),
                     new KeyValuePair<string, object>("email", doctor.Email),
                     new KeyValuePair<string, object>("privemail", doctor.PrivMail),
                     new KeyValuePair<string, object>("phone", doctor.Phone),
