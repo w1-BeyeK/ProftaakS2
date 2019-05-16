@@ -67,7 +67,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, BeginDate, EndDate, TreatmentTypeId) values (@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId) SELECT Id = SCOPE_IDENTITY()";
+                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, BeginDate, EndDate, TreatmentTypeId) OUTPUT INSERTED.ID values (@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
