@@ -1,14 +1,13 @@
 ﻿@model Webapp.Models.DoctorViewModel
 
 @{
-    ViewData["Title"] = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Artsenlijst";
 }
 
-<h2>Doctor</h2>
+<h2>Artsenlijst</h2>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Nieuwe toevoegen</a>
 </p>
 <div class="hidden" id="asdfgh">
     <table class="table table-striped table-hover" id="doctorTable" style="width:100%;">
@@ -26,9 +25,9 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Genders[item.GenderId])</td>
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.EmployeeNumber }) |
-                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber }) |
-                        @Html.ActionLink("Delete", "Delete", new { id = item.EmployeeNumber })
+                        @Html.ActionLink("Inzage", "Details", new { id = item.EmployeeNumber }) |
+                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) |
+                        @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
                     </td>
                 </tr>
             }

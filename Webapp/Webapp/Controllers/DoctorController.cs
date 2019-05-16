@@ -97,6 +97,7 @@ namespace Webapp.Controllers
         public IActionResult Create()
         {
             DoctorDetailViewModel vm = new DoctorDetailViewModel();
+            vm.Genders = converter.GetGenders();
             //vm.Institutions = GetInstitutionsForDropdown().ToList();
             return View(vm);
         }

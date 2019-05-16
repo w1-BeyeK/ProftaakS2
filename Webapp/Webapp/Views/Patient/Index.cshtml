@@ -2,7 +2,7 @@
 @model IEnumerable<Webapp.Models.PatientListViewModel>;
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Patiëntenlijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -26,8 +26,8 @@
                     <td>@item.Gender</td>
                     <td>@item.Birth.ToShortDateString()</td>
                     <td>
-                        @Html.ActionLink("Inzien", "Inzie", "Profile", new { id = item.UserId }) |
-                        @Html.ActionLink("Edit Treatment", "Treatment", "Patient", new { id = item.UserId })
+                        @Html.ActionLink("Inzage", "Inzie", "Profile", new { id = item.UserId }) |
+                        @Html.ActionLink("Aanpassen", "Treatment", "Patient", new { id = item.UserId })
                     </td>
                 </tr>
             }
