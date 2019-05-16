@@ -113,7 +113,7 @@ namespace Webapp.Controllers
             // Check if model is valid
             if (ModelState.IsValid)
             {
-                Doctor doctor = converter.ViewModelToModel(model);
+                Doctor doctor = converter.ViewModelToModel(vm);
                 long id = doctorRepository.Insert(doctor);
                 return RedirectToAction("Details", new { id });
             }
