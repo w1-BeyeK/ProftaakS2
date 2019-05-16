@@ -213,13 +213,9 @@ namespace Webapp.Context.MSSQLContext
                                "FROM PTS2_Treatment " +
                                "WHERE PatientId = @id";
 
-                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
-                {
-                    new KeyValuePair<string, object>("id", id)
-                };
-
+              
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, id) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)

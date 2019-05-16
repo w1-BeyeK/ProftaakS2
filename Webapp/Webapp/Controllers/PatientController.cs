@@ -19,6 +19,7 @@ namespace Webapp.Controllers
         // global instances
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
+        private readonly TreatmentTypeRepository treatmentTypeRepository;
         private readonly CommentRepository commentRepository;
 
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
@@ -27,11 +28,13 @@ namespace Webapp.Controllers
 
         public PatientController(   
             PatientRepository patientRepository, 
-            TreatmentRepository treatmentRepository
+            TreatmentRepository treatmentRepository,
+            TreatmentTypeRepository treatmentTypeRepository
             )
         {
             this.patientRepository = patientRepository;
             this.treatmentRepository = treatmentRepository;
+            this.treatmentTypeRepository = treatmentTypeRepository;
         }
 
         /// <summary>
@@ -58,6 +61,12 @@ namespace Webapp.Controllers
             {
                 Patient patient = patientRepository.GetById(id);
                 patient.Treatments = treatmentRepository.GetByPatient(id);
+                
+                foreach (Treatment t in patient.Treatments)
+                {
+                    t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                }
+                
 
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }

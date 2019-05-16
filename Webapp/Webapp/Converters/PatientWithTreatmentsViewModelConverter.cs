@@ -61,8 +61,8 @@ namespace Webapp.Converters
                 {
                     Id = t.Id,
                     Name = t.Name,
-                    TypeName = t.TreatmentTypeName,
-                    TypeId = t.TreatmentTypeId,
+                    TypeName = t.TreatmentType.Name,
+                    TypeId = t.TreatmentType.Id,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
                     //Comments = comments,

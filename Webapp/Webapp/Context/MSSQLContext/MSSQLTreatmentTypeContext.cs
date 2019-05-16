@@ -130,7 +130,7 @@ namespace Webapp.Context.MSSQLContext
                 handler.ExecuteCommand(query, parameters);
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
             }
@@ -149,9 +149,38 @@ namespace Webapp.Context.MSSQLContext
                 });
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return false;
+            }
+        }
+
+        public TreatmentType GetByTreatmentId(long id)
+        {
+            try
+            {
+                // Create result
+                TreatmentType result = new TreatmentType();
+                // Set query
+                string query = "SELECT * FROM PTS2_TreatmentType WHERE [Id] = @id";
+
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, id) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out TreatmentType treatmentType))
+                        result = treatmentType;
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
