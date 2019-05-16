@@ -27,11 +27,16 @@ namespace Webapp.Context
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                      new KeyValuePair<string, object>("treatmentId", treatmentId.ToString())
+                      new KeyValuePair<string, object>("treatmentId", treatmentId)
                 };
 
             // Tell the handler to execute the query
             var dbResult = handler.ExecuteCommand(query, parameters) as DataTable;
+
+            if (dbResult == null)
+            {
+                return new List<Comment>();
+            }
 
             // Parse all rows
             foreach (DataRow dr in dbResult.Rows)
@@ -41,6 +46,8 @@ namespace Webapp.Context
                     result.Add(comment);
             }
 
+            
+
             return result;
         }
 
@@ -48,7 +55,7 @@ namespace Webapp.Context
         {
             try
             {
-                string query = "insert into PTS2_Comment(Title, Description, TreatmentId) OUTPUT INSERTED.Id values(@title, @description, @treatmentid)";
+                string query = "insert into PTS2_Comment(Title, Description, TreatmentId) values(@title, @description, @treatmentid)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
