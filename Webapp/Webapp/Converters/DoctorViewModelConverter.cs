@@ -17,10 +17,10 @@ namespace Webapp.Converters
                 Id = vm.EmployeeNumber,
                 EmployeeNumber = vm.EmployeeNumber,
                 Birth = vm.Birth,
-                Gender = vm.Gender,
                 Phone = vm.Phone,
                 PrivMail = vm.PrivMail,
-                PrivPhone = vm.PrivPhonenumber
+                PrivPhone = vm.PrivPhonenumber,
+                Gender = (Gender)vm.GenderId
             };
         }
 
@@ -32,12 +32,18 @@ namespace Webapp.Converters
                 Email = doctor.Email,
                 UserName = doctor.UserName,
                 Birth = doctor.Birth,
-                Gender = doctor.Gender,
+                GenderId = (int)doctor.Gender,
                 Name = doctor.Name,
                 Age = doctor.GetAge(),
                 Phone = doctor.Phone,
                 PrivMail = doctor.PrivMail,
-                PrivPhonenumber = doctor.PrivPhone
+                PrivPhonenumber = doctor.PrivPhone,
+                Genders = new List<string>()
+                {
+                    "Man",
+                    "Vrouw",
+                    "Anders"
+                }
             };
         }
 

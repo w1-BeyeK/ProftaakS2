@@ -18,7 +18,7 @@ namespace Webapp.Converters
                 BSN = vm.BSN,
                 ContactPersonName = vm.ContactPersonName,
                 ContactPersonPhone = vm.ContactPersonPhone,
-                Gender = vm.Gender,
+                Gender = (Gender)vm.GenderId,
                 HouseNumber = vm.HouseNumber,
                 Phone = vm.Phone,
                 Zipcode = vm.Zipcode,
@@ -43,7 +43,7 @@ namespace Webapp.Converters
                 BSN = patient.BSN,
                 ContactPersonName = patient.ContactPersonName,
                 ContactPersonPhone = patient.ContactPersonPhone,
-                Gender = patient.Gender,
+                GenderId = (int)patient.Gender,
                 HouseNumber = patient.HouseNumber,
                 Phone = patient.Phone,
                 Zipcode = patient.Zipcode,
@@ -54,7 +54,13 @@ namespace Webapp.Converters
                 PrivBirthDate = patient.PrivBirthDate,
                 PrivGender = patient.PrivGender,
                 PrivMail = patient.PrivMail,
-                PrivPhone = patient.PrivPhone
+                PrivPhone = patient.PrivPhone,
+                Genders = new List<string>()
+                {
+                    "Man",
+                    "Vrouw",
+                    "Anders"
+                }
             };
         }
 

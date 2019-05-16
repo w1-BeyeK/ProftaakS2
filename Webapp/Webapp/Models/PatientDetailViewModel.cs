@@ -29,7 +29,7 @@ namespace Webapp.Models
         [StringLength(15, ErrorMessage = "Phone telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
         public string Phone { get; set; }
         [Required]
-        public Gender Gender { get; set; }
+        public int GenderId { get; set; }
 
         [Required]
         [Range(1, long.MaxValue, ErrorMessage = "BSN is niet binnen de grenzen van 1 en 9223372036854775807")]
@@ -54,5 +54,6 @@ namespace Webapp.Models
         public bool PrivBirthDate { get; set; }
         public int Age { get; set; }
         public List<TreatmentDetailViewModel> TreatmentDetailViewModels { get; set; }
+        public List<string> Genders { get; set; }
     }
 }

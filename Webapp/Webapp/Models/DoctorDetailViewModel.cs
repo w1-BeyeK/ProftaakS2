@@ -17,7 +17,7 @@ namespace Webapp.Models
         [StringLength(15, ErrorMessage = "Telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
         public string Phone { get; set; }
 
-        public Gender Gender { get; set; }
+        public int GenderId { get; set; }
 
         [Required]
         [StringLength(200, ErrorMessage = "Username length must be between 1 and 200.", MinimumLength = 1)]
@@ -35,5 +35,6 @@ namespace Webapp.Models
         public bool PrivMail { get; set; }
         public bool PrivPhonenumber { get; set; }
         public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
+        public List<string> Genders { get; set; }
     }
 }

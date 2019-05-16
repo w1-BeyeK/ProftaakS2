@@ -28,14 +28,7 @@
                                 <div class="form-group">
                                     <div class="col-xs-6">
                                         <label class="h4">Geslacht</label>
-                                        @if (Model.Patient.Gender == Gender.Male)
-                                        {
-                                            <p>Man</p>
-                                        }
-                                        else
-                                        {
-                                            <p>Vrouw</p>
-                                        }
+                                        <p>@Model.Patient.Genders[Model.Patient.GenderId]</p>
                                     </div>
                                 </div>
                             }

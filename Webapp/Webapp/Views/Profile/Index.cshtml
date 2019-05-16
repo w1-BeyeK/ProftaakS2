@@ -31,11 +31,11 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="h4">Geslacht</label>
-                                    @if (Model.Patient.Gender == Gender.Male)
+                                    @if (Model.Patient.GenderId == 0)
                                     {
                                         <p>Man</p>
                                     }
-                                    else if (Model.Patient.Gender == Gender.Female)
+                                    else if (Model.Patient.GenderId == 1)
                                     {
                                         <p>Vrouw</p>
                                     }
@@ -226,11 +226,11 @@ else if (Model.Doctor != null)
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="h4">Geslacht</label>
-                                    @if (Model.Doctor.Gender == Gender.Male)
+                                    @if (Model.Doctor.GenderId == 0)
                                     {
                                         <p>Man</p>
                                     }
-                                    else if (Model.Doctor.Gender == Gender.Female)
+                                    else if (Model.Doctor.GenderId == 1)
                                     {
                                         <p>Vrouw</p>
                                     }

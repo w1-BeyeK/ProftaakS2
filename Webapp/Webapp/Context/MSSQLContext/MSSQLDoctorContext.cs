@@ -155,14 +155,14 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
-                //TODO : ??? Doesnt do anything
-                //if (doctor.Birth != null)
-                //{
-                //    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
-                //        fieldsDoctor += ",";
-                //    fieldsDoctor += "[birthdate] = @birthdate";
-                //    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
-                //}
+            //TODO: ??? Doesnt do anything
+                if (doctor.Birth != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                        fieldsDoctor += ",";
+                    fieldsDoctor += "[birthdate] = @birthdate";
+                    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth.ToString("yyyy-MM-dd HH:mm:ss.fff")));
+                }
 
                 if (Convert.ToInt16(doctor.Gender) >= 0)
                 {
