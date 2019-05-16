@@ -13,17 +13,25 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    //[Route("patient")]
+    /// <summary>
+    /// Controller for patient
+    /// </summary>
     public class PatientController : BaseController
     {
-        // global instances
+        // Repos
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
 
+        // Converters
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
         private readonly PatientViewModelConverter patientVMC = new PatientViewModelConverter();
 
+        /// <summary>
+        /// Default constructor for patient controller
+        /// </summary>
+        /// <param name="patientRepository"></param>
+        /// <param name="treatmentRepository"></param>
         public PatientController(   
             PatientRepository patientRepository, 
             TreatmentRepository treatmentRepository
@@ -39,6 +47,7 @@ namespace Webapp.Controllers
         [Authorize(Roles= "doctor")]
         public IActionResult Index()
         {
+            // Retrieve and convert all - active - patients
             List<Patient> patienten = patientRepository.GetAll();
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
 

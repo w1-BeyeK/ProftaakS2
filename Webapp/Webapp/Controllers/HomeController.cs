@@ -17,14 +17,24 @@ namespace Webapp.Controllers
 {
     public class HomeController : BaseController
     {
+        // Repos
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
 
+        // Converter
         private readonly PatientViewModelConverter patientConverter;
 
+        // Account management
         private readonly UserManager<BaseAccount> userManager;
         private readonly SignInManager<BaseAccount> signInManager;
 
+        /// <summary>
+        /// Constructor for homecontroller
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="patientRepository"></param>
+        /// <param name="doctorRepository"></param>
         public HomeController(
                 UserManager<BaseAccount> userManager,
                 SignInManager<BaseAccount> signInManager,
@@ -40,22 +50,38 @@ namespace Webapp.Controllers
 
             this.patientConverter = new PatientViewModelConverter();
         }
+
+        /// <summary>
+        /// Login view
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// Login post
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
+            // Check if is valid
             if (ModelState.IsValid)
             {
                 if (username != null)
                 {
+                    // Check login
                     var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
+
+                    // If success
                     if (result.Succeeded)
                     {
+                        // Send to correct page based on role
                         if (HttpContext.User.IsInRole("admin"))
                         {
                             return RedirectToAction("dashboard");
@@ -74,12 +100,17 @@ namespace Webapp.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
+            // Check if authenticated
             if (HttpContext.User?.Identity.IsAuthenticated == true)
             {
+                // Signout
                 await signInManager.SignOutAsync();
             }
 

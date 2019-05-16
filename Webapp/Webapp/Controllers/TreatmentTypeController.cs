@@ -49,6 +49,7 @@ namespace Webapp.Controllers
                 TreatmentTypes = new List<TreatmentTypeDetailViewModel>()
             };
 
+            // Retrieve all treatmenttypes
             List<TreatmentType> treatmentTypes = repository.GetAll();
             if (treatmentTypes.Count < 1)
                 return View(vm);
@@ -66,12 +67,15 @@ namespace Webapp.Controllers
         //TODO: Moet een dokter ook niet de treatment details kunnen inzien?
         public IActionResult Details(long id)
         {
+            // Check if id is set
             if (id < 1)
                 return BadRequest("No user found");
             
+            // Retrieve from db
             TreatmentType model = repository.GetById(id);
             TreatmentTypeDetailViewModel vm = converter.ModelToViewModel(model);
 
+            // Get all departments for select list
             List<Department> departments = departmentRepository.GetAll();
             IEnumerable<SelectListItem> items =
                 from value in departments
@@ -92,11 +96,14 @@ namespace Webapp.Controllers
         /// <returns></returns>
         public IActionResult Create()
         {
+            // Retrieve for dropdown
             List<Department> departments = departmentRepository.GetAll();
             List<Institution> institutions = institutionRepository.GetAll();
 
             List<SelectListItem> items = new List<SelectListItem>();
             SelectListGroup group;
+            
+            // Create dropdownlist for treatmenttype
             foreach (Institution i in institutions)
             {
                 group = new SelectListGroup
@@ -131,11 +138,14 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Create(TreatmentTypeDetailViewModel vm)
         {
+            // Check if model is valid
             if (ModelState.IsValid)
             {
+                // Push to database
                 TreatmentType tt = converter.ViewModelToModel(vm);
                 long id = repository.Insert(tt);
 
+                // Return details page of just inserted record
                 return RedirectToAction("details", new { id });
             }
             else
@@ -152,13 +162,16 @@ namespace Webapp.Controllers
         /// <returns></returns>
         public IActionResult Edit(long id)
         {
+            // Check if model is valid
             if(ModelState.IsValid)
             {
+                // Get
                 TreatmentType tt = repository.GetById(id);
 
                 if (tt == null)
                     return BadRequest("User not found.");
 
+                // Get dropdown for treatmenttype
                 List<Department> departments = departmentRepository.GetAll();
                 List<Institution> institutions = institutionRepository.GetAll();
 
@@ -182,6 +195,7 @@ namespace Webapp.Controllers
                     }
                 }
 
+                // Convert to vm
                 TreatmentTypeDetailViewModel vm = converter.ModelToViewModel(tt);
                 vm.Departments = items;
 
@@ -198,8 +212,10 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(TreatmentTypeDetailViewModel vm)
         {
+            // Check if model is valid
             if(ModelState.IsValid)
             {
+                // Update in database
                 TreatmentType tt = converter.ViewModelToModel(vm);
                 repository.Update(tt);
 
@@ -218,8 +234,10 @@ namespace Webapp.Controllers
         /// <returns> Send the user back to the page with all treatmentTypes</returns>
         public IActionResult Delete(long id)
         {
+            // Check if is valid
             if(ModelState.IsValid)
             {
+                // Delete treatmenttype
                 repository.Delete(id);
             }
             return RedirectToAction("index");

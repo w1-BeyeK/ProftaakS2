@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Webapp.Controllers
 {
+    /// <summary>
+    /// BaseController containing functionality to retrieve user id
+    /// </summary>
     public abstract class BaseController : Controller
     {
         protected virtual long GetUserId()

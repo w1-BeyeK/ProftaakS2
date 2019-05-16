@@ -11,18 +11,34 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
+    /// <summary>
+    /// Controller for profiles
+    /// </summary>
     [Authorize(Roles = "patient, doctor")]
     public class ProfileController : BaseController
     {
+        /// <summary>
+        /// Repositories
+        /// </summary>
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
         private readonly TreatmentTypeRepository treatmentTypeRepository;
         private readonly TreatmentRepository treatmentRepository;
 
+        /// <summary>
+        /// Converters
+        /// </summary>
         private readonly PatientViewModelConverter patientConverter;
         private readonly DoctorViewModelConverter doctorConverter;
         private readonly TreatmentTypeViewModelConverter typeConverter;
 
+        /// <summary>
+        /// Default constructor for profiles
+        /// </summary>
+        /// <param name="patientRepository"></param>
+        /// <param name="doctorRepository"></param>
+        /// <param name="treatmentTypeRepository"></param>
+        /// <param name="treatmentRepository"></param>
         public ProfileController(
             PatientRepository patientRepository,
             DoctorRepository doctorRepository,
@@ -40,17 +56,24 @@ namespace Webapp.Controllers
             typeConverter = new TreatmentTypeViewModelConverter();
         }
 
+        /// <summary>
+        /// Standard method
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             try
             {
+                // Get user id
                 var id = GetUserId();
-
+                
+                // Check if it exists
                 if (id < 1)
                     return RedirectToAction("index", "home");
 
                 UserViewModel viewModel = new UserViewModel();
 
+                // Redirect user based on role
                 if (HttpContext.User.IsInRole("patient"))
                 {
                     Patient patient = patientRepository.GetById(id);
@@ -71,6 +94,8 @@ namespace Webapp.Controllers
             }
         }
 
+        // No bloody idea what this does...
+        // TODO: someone tell me what this is
         public IActionResult Inzie(long id)
         {
             long userId = GetUserId();
@@ -116,11 +141,16 @@ namespace Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit profile
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Edit()
         {
             try
             {
+                // Get and validate user id
                 long id = GetUserId();
 
                 if (id < 1)
@@ -147,11 +177,18 @@ namespace Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// Post for update user
+        /// </summary>
+        /// <param name="viewModel">Model to update</param>
+        /// <returns></returns>
         [HttpPost]
         public IActionResult Edit(UserViewModel viewModel)
         {
+            // Get user id
             long id = GetUserId();
             
+            // Execute correct action based on role
             if (HttpContext.User.IsInRole("patient"))
             {
                 viewModel.Patient.Id = id;
