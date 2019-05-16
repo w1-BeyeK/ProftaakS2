@@ -46,7 +46,13 @@ namespace Webapp.Converters
                 Id = patient.Id,
                 Name = patient.Name,
                 Birth = patient.Birth,
-                Age = patient.GetAge()
+                Age = patient.GetAge(),
+                Genders = new List<string>
+                {
+                    "Man",
+                    "Vrouw",
+                    "Anders"
+                }
             };
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
