@@ -9,6 +9,7 @@ namespace Webapp.Models
 {
     public class DoctorDetailViewModel
     {
+        [Display(Name = "Werknemersnummer")]
         public long EmployeeNumber { get; set; }
 
         [Required]
