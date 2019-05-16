@@ -154,8 +154,6 @@ namespace Webapp.Context.MSSQLContext
                 {
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
-
-            //TODO: ??? Doesnt do anything
                 if (doctor.Birth != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsDoctor))

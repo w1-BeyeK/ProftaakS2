@@ -1,11 +1,11 @@
 ﻿@model Webapp.Models.DepartmentViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Afdeling";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Afdeling</h2>
 
 @if (User.IsInRole("admin"))
 {
@@ -29,14 +29,11 @@
                         <td>@Html.DisplayFor(modelItem => vm.Name)</td>
                         <td>@Html.DisplayFor(modelItem => vm.Description)</td>
                         <td>
+                            @Html.ActionLink("Inzage", "Details", new { id = vm.Id })
                             @if (User.IsInRole("admin"))
                             {
-                                @Html.ActionLink("Edit", "Edit", new { id = vm.Id }); @: |
-                            }
-                            @Html.ActionLink("Details", "Details", new { id = vm.Id })
-                            @if (User.IsInRole("admin"))
-                            {
-                                @: | @Html.ActionLink("Delete", "Delete", new { id = vm.Id })
+                                @Html.ActionLink("Aanpassen", "Edit", new { id = vm.Id }); @: | 
+                                @Html.ActionLink("Verwijderen", "Delete", new { id = vm.Id })
                             }
                         </td>
                     </tr>

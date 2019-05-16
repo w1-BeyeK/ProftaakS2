@@ -1,14 +1,13 @@
 ﻿@model Webapp.Models.DoctorDetailViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Artsgegevens";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Artsgegevens</h2>
 
 <div>
-    <h4>DoctorDetailViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -74,6 +73,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeNumber }) |
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.EmployeeNumber }) |
     <a asp-action="Index">Terug naar lijst</a>
 </div>

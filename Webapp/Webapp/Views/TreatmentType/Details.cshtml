@@ -1,14 +1,13 @@
 ﻿@model Webapp.Models.TreatmentTypeDetailViewModel
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Behandelingsgegevens";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Behandelingsgegevens</h2>
 
 <div>
-    <h4>TreatmentTypeDetailViewModel</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -47,6 +46,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Terug naar lijst</a>
 </div>

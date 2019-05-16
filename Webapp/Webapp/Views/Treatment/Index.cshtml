@@ -1,14 +1,14 @@
 ﻿@{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Behandelingenlijst";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Treatment</h2>
+<h2>Behandelingenlijst</h2>
 
 @if (User.IsInRole("doctor"))
 {
     <p>
-        <a asp-action="create">Create New</a>
+        <a asp-action="create">Nieuwe toevoegen</a>
     </p>
 }
     <div id="treatmentContainer">
@@ -25,19 +25,19 @@
                 @foreach (var item in Model)
                 {
                     int i = 0;
-                    <tr>
-                        <td>@item.PatientName</td>
-                        <td>@item.Name</td>
-                        <td>@item.BeginDate</td>
-                        <td>@item.EndDate</td>
-                        <td>
-                            @if (User.IsInRole("doctor"))
-                            {
-                                @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                            }
-                            @Html.ActionLink("Detail", "Treatment", "Patient", new { id = item.PatientId })
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@item.PatientName</td>
+                    <td>@item.Name</td>
+                    <td>@item.BeginDate</td>
+                    <td>@item.EndDate</td>
+                    <td>
+                        @Html.ActionLink("Inzage", "Treatment", "Patient", new { id = item.PatientId })
+                        @if (User.IsInRole("doctor"))
+                        {
+                           @: | @Html.ActionLink("Aanpassen", "Edit", new { id = item.Id })
+                        }
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
