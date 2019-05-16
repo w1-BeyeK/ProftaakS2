@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName" +
                            "FROM PTS2_Treatment AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id";
 
@@ -172,8 +172,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId " +
-                               "FROM PTS2_Treatment " +
+                string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, a.[Name] AS PatientName " +
+                               "FROM PTS2_Treatment AS t " +
+                               "INNER JOIN PTS2_Account AS a ON t.PatientId = a.Id " +
                                "WHERE DoctorId = @id";
                                 // AND t.EndDate >= '@endDate'";
 
