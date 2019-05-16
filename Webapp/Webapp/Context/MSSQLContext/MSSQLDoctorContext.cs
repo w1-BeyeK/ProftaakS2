@@ -17,7 +17,7 @@ namespace Webapp.Context.MSSQLContext
 
         public Doctor GetById(long id)
         {
-            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate, Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, PrivPhone, PrivMail, BirthDate as Birth, Active " +
                            "FROM GetDoctor " +
                            "WHERE Id = @id";
 
@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Doctor> result = new List<Doctor>();
             // Set query
-            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, BirthDate as Birth, Active " +
+            string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, PrivPhone, PrivMail, BirthDate AS Birth, Active " +
                            "FROM GetDoctor " +
                            "WHERE Active = @active";
 
@@ -77,7 +77,7 @@ namespace Webapp.Context.MSSQLContext
                                "@password = @password, " +
                                "@gender = @gender, " +
                                "@email = @email, " +
-                               "@privEmail = @privEmail, " +
+                               "@privMail = @privMail, " +
                                "@phone = @phone, " +
                                "@privPhone = @privPhone, " +
                                "@birthdate = @birthdate, " +
@@ -90,7 +90,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("password", "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q=="),
                     new KeyValuePair<string, object>("gender", (int)doctor.Gender),
                     new KeyValuePair<string, object>("email", doctor.Email),
-                    new KeyValuePair<string, object>("privemail", doctor.PrivMail),
+                    new KeyValuePair<string, object>("privmail", doctor.PrivMail),
                     new KeyValuePair<string, object>("phone", doctor.Phone),
                     new KeyValuePair<string, object>("privphone", doctor.PrivPhone),
                     new KeyValuePair<string, object>("birthdate", doctor.Birth),
@@ -111,7 +111,7 @@ namespace Webapp.Context.MSSQLContext
             try
             {
                 #region Account
-                string queryAccount = "update PTS2_Doctor set @fields where Id = @id";
+                string queryAccount = "update PTS2_Account set @fields where Id = @id";
 
                 string fieldsAccount = "";
                 List<KeyValuePair<string, object>> parametersAccount = new List<KeyValuePair<string, object>>()
@@ -119,12 +119,19 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
-                if (doctor.Name != null)
+                if (doctor.UserName != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsAccount))
                         fieldsAccount += ",";
-                    fieldsAccount += "[name] = @name";
-                    parametersAccount.Add(new KeyValuePair<string, object>("name", doctor.Name));
+                    fieldsAccount += "[username] = @username";
+                    parametersAccount.Add(new KeyValuePair<string, object>("username", doctor.UserName));
+                }
+                if (doctor.Password != null)
+                {
+                    if (!string.IsNullOrWhiteSpace(fieldsAccount))
+                        fieldsAccount += ",";
+                    fieldsAccount += "[password] = @password";
+                    parametersAccount.Add(new KeyValuePair<string, object>("password", doctor.Password));
                 }
                 if (doctor.Email != null)
                 {
@@ -138,6 +145,7 @@ namespace Webapp.Context.MSSQLContext
 
                 handler.ExecuteCommand(queryAccount, parametersAccount);
                 #endregion
+
                 #region Doctor
                 string queryDoctor = "update PTS2_Doctor set @fields where Id = @id";
 
@@ -147,25 +155,42 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
 
+            //TODO: ??? Doesnt do anything
                 if (doctor.Birth != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsDoctor))
                         fieldsDoctor += ",";
                     fieldsDoctor += "[birthdate] = @birthdate";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth));
+                    parametersDoctor.Add(new KeyValuePair<string, object>("birthdate", doctor.Birth.ToString("yyyy-MM-dd HH:mm:ss.fff")));
                 }
-                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+
+                if (Convert.ToInt16(doctor.Gender) >= 0)
                 {
-                    fieldsDoctor += ",";
+                    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                    { fieldsDoctor += ","; }
                     fieldsDoctor += "[gender] = @gender";
-                    parametersDoctor.Add(new KeyValuePair<string, object>("gender", doctor.Gender));
+                    parametersDoctor.Add(new KeyValuePair<string, object>("gender", Convert.ToInt16(doctor.Gender)));
                 }
-                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                if (doctor.Phone != null)
                 {
-                    fieldsDoctor += ",";
+                    if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                        fieldsDoctor += ",";
                     fieldsDoctor += "[phone] = @phone";
                     parametersDoctor.Add(new KeyValuePair<string, object>("phone", doctor.Phone));
                 }
+                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                {
+                    fieldsDoctor += ",";
+                }
+                fieldsDoctor += "[privPhone] = @privPhone";
+                parametersDoctor.Add(new KeyValuePair<string, object>("privPhone", doctor.PrivPhone));
+
+                if (!string.IsNullOrWhiteSpace(fieldsDoctor))
+                {
+                    fieldsDoctor += ",";
+                }
+                fieldsDoctor += "[privMail] = @privMail";
+                parametersDoctor.Add(new KeyValuePair<string, object>("privMail", doctor.PrivMail));
 
                 queryDoctor = queryDoctor.Replace("@fields", fieldsDoctor);
 

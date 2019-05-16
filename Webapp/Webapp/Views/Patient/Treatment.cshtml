@@ -23,13 +23,13 @@
                             <div class="col-xs-6">
                                 <label for="name"><h4>Volledige naam</h4></label>
                                 <input type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name">
-                               
+
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="Gender"><h4>Geslacht</h4></label>
-                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht." value="@Model.Gender">
+                                <input type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht." value="@Model.GenderId">
                             </div>
                         </div>
                         <div class="form-group">
@@ -83,7 +83,7 @@
                                 <label for="EndTime"><h4>Eindtijd</h4></label>
                                 <input type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()"><br />
                             </div>
-                            
+
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
@@ -100,12 +100,25 @@
                                 </div>
                             </div>
                         }
+                        @if (User.IsInRole("doctor"))
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Nieuw Commentaar</h4></label>
+                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Title" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                    <br />
+                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                    <br />
+                                    <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Edit">Plaats Comment</button>
+                                </div>
+                            </div>
+                        }
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
-                               @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
+                                @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                 {
-                                    @if(treatment.Age <= 90)
+                                    @if (treatment.Age <= 90)
                                     {
                                         <li>@treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy")</li>
                                     }

@@ -86,5 +86,15 @@ namespace Webapp.Repository
             }
             return context.GetById(id);
         }
+
+        public TreatmentType GetByTreatmentId(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het behandelingsId is leeg.");
+            }
+
+            return context.GetByTreatmentId(id);
+        }
     }
 }

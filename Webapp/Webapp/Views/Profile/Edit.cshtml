@@ -37,32 +37,15 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Gender" class="h4">Geslacht</label>
-                                    <select tag="option" class="form-control" disabled>
-                                        @if (Model.Patient.Gender == Gender.Male)
+                                    <label typeof="text" class="form-control" asp-for="@Model.Patient.GenderId">
+                                        @foreach (string gender in Model.Patient.Genders)
                                         {
-                                            <option selected>Man</option>
-                                            <option>Vrouw</option>
-                                            <option>Anders</option>
+                                            if (Model.Patient.Genders.IndexOf(gender) == Model.Patient.GenderId)
+                                            {
+                                               @gender
+                                            }
                                         }
-                                        else if (Model.Patient.Gender == Gender.Female)
-                                        {
-                                            <option>Man</option>
-                                            <option selected>Vrouw</option>
-                                            <option>Anders</option>
-                                        }
-                                        else if (Model.Patient.Gender == Gender.Other)
-                                        {
-                                            <option>Man</option>
-                                            <option>Vrouw</option>
-                                            <option selected>Anders</option>
-                                        }
-                                        else
-                                        {
-                                            <option>Man</option>
-                                            <option>Vrouw</option>
-                                            <option>Anders</option>
-                                        }
-                                    </select>
+                                    </label>
                                 </div>
                             </div>
 
@@ -258,31 +241,11 @@ else if (Model.Doctor != null)
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Gender" class="h4">Geslacht</label>
-                                    <select tag="option" asp-for="Doctor.Gender" class="form-control" id="gender" placeholder="Voer je geslacht in" title="Voer je geslacht in.">
-                                        @if (Model.Doctor.Gender == Gender.Male)
-                                        {
-                                            <option selected>Man</option>
-                                            <option>Vrouw</option>
-                                            <option>Anders</option>
-                                        }
-                                        else if (Model.Doctor.Gender == Gender.Female)
-                                        {
-                                            <option>Man</option>
-                                            <option selected>Vrouw</option>
-                                            <option>Anders</option>
-                                        }
-                                        else if (Model.Doctor.Gender == Gender.Other)
-                                        {
-                                            <option>Man</option>
-                                            <option>Vrouw</option>
-                                            <option selected>Anders</option>
-                                        }
-                                        else
-                                        {
-                                            <option>Man</option>
-                                            <option>Vrouw</option>
-                                            <option>Anders</option>
-                                        }
+                                    <select tag="option" input asp-for="Doctor.GenderId" class="form-control" id="gender" placeholder="Voer je geslacht in" title="Voer je geslacht in.">
+                                        @foreach (string gender in Model.Doctor.Genders)
+                                         {
+                                            <option value="@Model.Doctor.Genders.IndexOf(gender)">@gender</option>
+                                         }
                                     </select>
                                 </div>
                             </div>

@@ -90,7 +90,7 @@ namespace Webapp.Controllers
         /// <returns></returns>
         [Authorize(Roles = "doctor")]
         [HttpGet]
-        public IActionResult Add(long id = 0)
+        public IActionResult Create(long id = 0)
         {
             // Get and convert treatment
             TreatmentDetailViewModel vm = new TreatmentDetailViewModel
@@ -109,7 +109,7 @@ namespace Webapp.Controllers
         /// <returns></returns>
         [Authorize(Roles = "doctor")]
         [HttpPost]
-        public IActionResult Add(TreatmentDetailViewModel vm)
+        public IActionResult Create(TreatmentDetailViewModel vm)
         {
             // Convert back and create treatment
             Treatment treatment = TreatmentConverter.ViewModelToModel(vm);

@@ -9,6 +9,7 @@ namespace Webapp.Context.InterfaceContext
 {
     public interface ITreatmentTypeContext : IUniversalGenerics<TreatmentType>
     {
+        TreatmentType GetByTreatmentId(long id);
         //bool Insert(TreatmentType treatmentType);
         //bool Update(long id, TreatmentType treatmentType);
         //bool ActiveTreatmentTypeByIdAndActive(long id, bool active);

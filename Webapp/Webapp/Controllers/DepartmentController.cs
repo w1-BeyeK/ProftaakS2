@@ -16,7 +16,7 @@ namespace Webapp.Controllers
     /// <summary>
     /// Controller to maintain departments
     /// </summary>
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin, doctor")]
     public class DepartmentController : Controller
     {
         // Repos
@@ -121,6 +121,7 @@ namespace Webapp.Controllers
         /// Get request to create department
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             // Setup VM
@@ -137,6 +138,7 @@ namespace Webapp.Controllers
         /// <param name="model">Model to insert</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(DepartmentDetailViewModel model)
         {
             // Check if is valid
@@ -157,6 +159,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id">Id filter</param>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id)
         {
             // Check if id is set
@@ -181,6 +184,7 @@ namespace Webapp.Controllers
         /// <param name="model">Model to update</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id, DepartmentDetailViewModel model)
         {
             // Check if model is valid
@@ -207,6 +211,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(long id)
         {
             // Check if model is valid

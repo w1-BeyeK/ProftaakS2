@@ -4,11 +4,6 @@ namespace Webapp.Models
 {
     public class DepartmentViewModel
     {
-        public DepartmentViewModel()
-        {
-            Departments = new List<DepartmentDetailViewModel>();
-        }
-
-        public List<DepartmentDetailViewModel> Departments { get; set; }
+        public List<DepartmentDetailViewModel> Departments { get; set; } = new List<DepartmentDetailViewModel>();
     }
 }

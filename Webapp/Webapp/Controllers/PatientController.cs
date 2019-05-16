@@ -21,6 +21,8 @@ namespace Webapp.Controllers
         // Repos
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
+        private readonly TreatmentTypeRepository treatmentTypeRepository;
+        private readonly CommentRepository commentRepository;
 
         // Converters
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
@@ -34,11 +36,13 @@ namespace Webapp.Controllers
         /// <param name="treatmentRepository"></param>
         public PatientController(   
             PatientRepository patientRepository, 
-            TreatmentRepository treatmentRepository
+            TreatmentRepository treatmentRepository,
+            TreatmentTypeRepository treatmentTypeRepository
             )
         {
             this.patientRepository = patientRepository;
             this.treatmentRepository = treatmentRepository;
+            this.treatmentTypeRepository = treatmentTypeRepository;
         }
 
         /// <summary>
@@ -66,6 +70,12 @@ namespace Webapp.Controllers
             {
                 Patient patient = patientRepository.GetById(id);
                 patient.Treatments = treatmentRepository.GetByPatient(id);
+                
+                foreach (Treatment t in patient.Treatments)
+                {
+                    t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                }
+                
 
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }
@@ -74,6 +84,17 @@ namespace Webapp.Controllers
                 return BadRequest(Ex.Message);
             }
             return View(patientDetailViewModel);
+        }
+
+        [Authorize(Roles = "doctor")]
+        [HttpPost]
+        public IActionResult Treatment(PatientDetailViewModel vm)
+        {
+            Patient patient = patientWithTreatmentsVMC.ViewModelToPatient(vm);
+            Comment comment = patient.Treatments[0].Comments[0];
+            comment.TreatmentId = patient.Treatments[0].Id;
+            commentRepository.Insert(comment);
+            return RedirectToAction("treatment", "patient");
         }
     }
 }

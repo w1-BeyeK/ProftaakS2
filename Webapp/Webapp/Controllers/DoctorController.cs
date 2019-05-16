@@ -82,6 +82,7 @@ namespace Webapp.Controllers
         /// Get for create
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             DoctorDetailViewModel vm = new DoctorDetailViewModel();
@@ -94,6 +95,7 @@ namespace Webapp.Controllers
         /// <param name="model">Model to insert</param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles ="admin")]
         public IActionResult Create(DoctorDetailViewModel model)
         {
             // Check if model is valid
@@ -107,6 +109,7 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id)
         {
             if (id < 1)
@@ -122,6 +125,7 @@ namespace Webapp.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id, DoctorDetailViewModel model)
         {
             if (ModelState.IsValid)
@@ -139,6 +143,7 @@ namespace Webapp.Controllers
             return View();
         }
 
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(long id)
         {
 
