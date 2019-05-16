@@ -9,35 +9,38 @@
 <h2>Patiëntenlijst</h2>
 
 
-<table class="table table-striped table-hover" id="patientTable" style="width:100%;">
-    <thead>
-        <tr>
-            <th>Naam</th>
-            <th>Geslacht</th>
-            <th>Geboortedatum</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-           <tr>
-                <td>@item.Name</td>
-                <td>@item.Gender</td>
-                <td>@item.Birth.ToShortDateString()</td>
-                <td>
-                    @Html.ActionLink("Inzien", "Inzie", "Profile", new { id = item.UserId }) |
-                    @Html.ActionLink("Edit Treatment", "Treatment", "Patient", new { id = item.UserId })
-                </td>
+<div class="hidden" id="asdfgh">
+    <table class="table table-striped table-hover" id="patientTable" style="width:100%;">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Geslacht</th>
+                <th>Geboortedatum</th>
             </tr>
-        }
-    </tbody>
-</table>
-@section Scripts {
-    <script>
-        $("document").ready(function () {
-            var table = $('#patientTable').DataTable({
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Birth.ToShortDateString()</td>
+                    <td>
+                        @Html.ActionLink("Inzien", "Inzie", "Profile", new { id = item.UserId }) |
+                        @Html.ActionLink("Edit Treatment", "Treatment", "Patient", new { id = item.UserId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+    @section Scripts {
+        <script>
+            $("document").ready(function () {
+                var table = $('#patientTable').DataTable({
+                });
+                $("#asdfgh").removeClass("hidden");
             });
-        });
-        
-    </script>
-}
+
+        </script>
+    }

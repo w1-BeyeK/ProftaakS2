@@ -38,12 +38,7 @@ namespace Webapp.Converters
                 Phone = doctor.Phone,
                 PrivMail = doctor.PrivMail,
                 PrivPhonenumber = doctor.PrivPhone,
-                Genders = new List<string>()
-                {
-                    "Man",
-                    "Vrouw",
-                    "Anders"
-                }
+                Genders = GetGenders()
             };
         }
 
@@ -61,6 +56,17 @@ namespace Webapp.Converters
         public List<Doctor> ViewModelsToModels(List<DoctorDetailViewModel> viewModels)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> GetGenders()
+        {
+            List<string> genders = new List<string>()
+            {
+                "Man",
+                "Vrouw",
+                "Anders"
+            };
+            return genders;
         }
     }
 }
