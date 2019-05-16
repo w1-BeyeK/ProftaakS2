@@ -13,38 +13,42 @@
         <a asp-action="Create">Create New</a>
     </p>
 }
-<table class="table table-striped table-hover" id="departmentTable" style="width:100%;">
-    <thead>
-        <tr>
-            <th>Naam</th>
-            <th>Omschrijving</th>
-            <th>Acties</th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (DepartmentDetailViewModel vm in Model.Departments) {
-        <tr>
-            <td>@Html.DisplayFor(modelItem => vm.Name)</td>
-            <td>@Html.DisplayFor(modelItem => vm.Description)</td>
-            <td>
-                @if (User.IsInRole("admin"))
+    <div class="hidden" id="asdfgh">
+        <table class="table table-striped table-hover" id="departmentTable" style="width:100%;">
+            <thead>
+                <tr>
+                    <th>Naam</th>
+                    <th>Omschrijving</th>
+                    <th>Acties</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (DepartmentDetailViewModel vm in Model.Departments)
                 {
-                    @Html.ActionLink("Edit", "Edit", new { id = vm.Id }); @: | 
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => vm.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => vm.Description)</td>
+                        <td>
+                            @if (User.IsInRole("admin"))
+                            {
+                                @Html.ActionLink("Edit", "Edit", new { id = vm.Id }); @: |
+                            }
+                            @Html.ActionLink("Details", "Details", new { id = vm.Id })
+                            @if (User.IsInRole("admin"))
+                            {
+                                @: | @Html.ActionLink("Delete", "Delete", new { id = vm.Id })
+                            }
+                        </td>
+                    </tr>
                 }
-                @Html.ActionLink("Details", "Details", new { id = vm.Id })
-                @if (User.IsInRole("admin"))
-                {
-                    @: | @Html.ActionLink("Delete", "Delete", new { id = vm.Id }) 
-                }
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </tbody>
+        </table>
+    </div>
 @section Scripts {
 <script>
     $("document").ready(function () {
         initDataTable();
+        $("#asdfgh").removeClass("hidden");
     });
 
     function initDataTable() {
