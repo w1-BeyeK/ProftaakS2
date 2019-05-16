@@ -16,6 +16,11 @@ namespace Webapp.Converters
                 Id = vm.Id,
             };
 
+            Comment comment = new Comment()
+            {
+
+            };
+
             foreach (TreatmentDetailViewModel t in vm.TreatmentDetailViewModels)
             {
                 Treatment treatment = new Treatment()

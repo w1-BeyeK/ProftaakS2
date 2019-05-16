@@ -19,6 +19,7 @@ namespace Webapp.Controllers
         // global instances
         private readonly PatientRepository patientRepository;
         private readonly TreatmentRepository treatmentRepository;
+        private readonly CommentRepository commentRepository;
 
         private readonly PatientWithTreatmentsViewModelConverter patientWithTreatmentsVMC = new PatientWithTreatmentsViewModelConverter();
         private readonly TreatmentViewModelConverter treatmentVMC = new TreatmentViewModelConverter();
@@ -65,6 +66,17 @@ namespace Webapp.Controllers
                 return BadRequest(Ex.Message);
             }
             return View(patientDetailViewModel);
+        }
+
+        [Authorize(Roles = "doctor")]
+        [HttpPost]
+        public IActionResult Treatment(PatientDetailViewModel vm)
+        {
+            Patient patient = patientWithTreatmentsVMC.ViewModelToPatient(vm);
+            Comment comment = patient.Treatments[0].Comments[0];
+            comment.TreatmentId = patient.Treatments[0].Id;
+            commentRepository.Insert(comment);
+            return RedirectToAction("treatment", "patient");
         }
     }
 }
