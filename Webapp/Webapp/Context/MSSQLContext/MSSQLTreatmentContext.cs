@@ -242,13 +242,13 @@ namespace Webapp.Context.MSSQLContext
                 List<Treatment> result = new List<Treatment>();
 
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId and EndDate >= '@endDate'";
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("doctorId", doctorId),
                     new KeyValuePair<string, object>("patientId", patientId),
-                    new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("yyyy-mm-dd")),
+                    //new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("dd-mm-yyyy")),
                 };
 
                 // Tell the handler to execute the query
