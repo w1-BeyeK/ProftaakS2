@@ -7,6 +7,6 @@ namespace Webapp.Models
 {
     public class TreatmentTypeViewModel
     {
-        public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
+        public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; } = new List<TreatmentTypeDetailViewModel>();
     }
 }

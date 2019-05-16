@@ -7,6 +7,6 @@ namespace Webapp.Models
 {
     public class DoctorViewModel
     {
-        public List<DoctorDetailViewModel> Doctors { get; set; }
+        public List<DoctorDetailViewModel> Doctors { get; set; } = new List<DoctorDetailViewModel>();
     }
 }

@@ -54,6 +54,10 @@ namespace Webapp.Context.MemoryContext
         {
             return BaseMemoryContext.treatmentTypes.FindAll(t => t.Active == active);
         }
+        public TreatmentType GetByTreatmentId(long id)
+        {
+            return BaseMemoryContext.treatmentTypes.Find(t => t.Id == id);
+        }
 
         TreatmentType IUniversalGenerics<TreatmentType>.GetById(long id)
         {
