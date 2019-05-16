@@ -88,13 +88,12 @@ namespace Webapp.Controllers
 
         [Authorize(Roles = "doctor")]
         [HttpPost]
-        public IActionResult Treatment(PatientDetailViewModel vm)
+        public IActionResult Treatment(long id, PatientDetailViewModel vm)
         {
-            Patient patient = patientWithTreatmentsVMC.ViewModelToPatient(vm);
-            Comment comment = patient.Treatments[0].Comments[0];
-            comment.TreatmentId = patient.Treatments[0].Id;
+            Comment comment = vm.TreatmentDetailViewModels[0].Description;
+            comment.TreatmentId = vm.TreatmentDetailViewModels[0].Id;
             commentRepository.Insert(comment);
-            return RedirectToAction("treatment", "patient");
+            return RedirectToAction("index", "patient");
         }
     }
 }
