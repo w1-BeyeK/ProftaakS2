@@ -83,6 +83,7 @@ namespace Webapp.Controllers
                 {
                     Doctor doctor = doctorRepository.GetById(id);
                     viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                    //TODO : BY DOCTORID!!!!!!
                     viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                 }
 
@@ -95,56 +96,10 @@ namespace Webapp.Controllers
         }
 
         /// <summary>
-        /// 
+        /// Get details from doctor
         /// </summary>
-        /// <param name="id"> id is the docter id if you are a patient and id is from patient if you are a docter</param>
+        /// <param name="id"> id is docterId</param>
         /// <returns></returns>
-        public IActionResult Inzie(long id)
-        {
-            long userId = GetUserId();
-            try
-            {
-                UserViewModel viewModel = new UserViewModel();
-
-                if (HttpContext.User.IsInRole("doctor"))
-                {
-                    if (treatmentRepository.CheckTreatmentRelationship(userId, id))
-                    {
-                        Patient patient = patientRepository.GetById(id);
-                        viewModel.Patient = patientConverter.ModelToViewModel(patient);
-                    }
-                    else
-                    {
-                        return RedirectToAction("index", "patient");
-                    }
-                }
-                else if (HttpContext.User.IsInRole("patient"))
-                {
-                    if (treatmentRepository.CheckTreatmentRelationship(id, userId))
-                    {
-                        Doctor doctor = doctorRepository.GetById(id);
-                        viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
-                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
-                    }
-                    else
-                    {
-                        return RedirectToAction("index", "treatment");
-                    }
-                }
-                else
-                {
-                    return Unauthorized();
-                }
-
-                return View(viewModel);
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
-        }
-        
-
         public IActionResult DoctorDetails(long id)
         {
             long userId = GetUserId();
@@ -154,7 +109,7 @@ namespace Webapp.Controllers
 
                 if (HttpContext.User.IsInRole("doctor"))
                 {
-                    if (treatmentRepository.CheckTreatmentRelationship(userId, id))
+                    if (doctorRepository.CheckDoctorRelationship(userId, id))
                     {
                         Doctor doctor = doctorRepository.GetById(id);
                         viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
@@ -190,6 +145,11 @@ namespace Webapp.Controllers
             }
         }
 
+        /// <summary>
+        /// Get details from patient
+        /// </summary>
+        /// <param name="id"> id is patientId</param>
+        /// <returns></returns>
         [Authorize(Roles = "doctor")]
         public IActionResult PatientDetails(long id)
         {

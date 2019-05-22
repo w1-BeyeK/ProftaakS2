@@ -1,6 +1,22 @@
 ﻿@{
-    ViewData["Title"] = "Access denied";
+    ViewData["Title"] = "Toegang geweigerd";
 }
+<link rel="stylesheet" href="~/css/button.css" />
+<div class="text-center alert-danger col-md-12">
+    <h3>
+        Toegang geweigerd
+    </h3>
+    <h3>
+        U heeft geen permissie om deze pagina te betreden
+    </h3>
+</div>
 
+<form>
+    <div class="container col-md-12" id="buttons">
 
-Access denied
+        <h2><i class="fa fa-dashboard fa-lg"></i> Dashboard</h2>
+        <div class="list-group-horizontal row">
+            <button class="btn btn-lg" asp-action="Dashboard" asp-controller="Home">Dashboard</button>
+        </div>
+    </div>
+</form>

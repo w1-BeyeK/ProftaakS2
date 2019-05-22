@@ -56,7 +56,7 @@ namespace Webapp.Controllers
             else if(User.IsInRole("doctor"))
             {
                 long userId = GetUserId();
-                doctors = doctorRepository.GetByDepartment(userId);
+                doctors = doctorRepository.GetByDoctorWithDepartment(userId);
                 if (doctors.Count < 1)
                     return View();
             }
@@ -108,7 +108,6 @@ namespace Webapp.Controllers
         {
             DoctorDetailViewModel vm = new DoctorDetailViewModel();
             vm.Genders = converter.GetGenders();
-            //vm.Institutions = GetInstitutionsForDropdown().ToList();
             return View(vm);
         }
 
