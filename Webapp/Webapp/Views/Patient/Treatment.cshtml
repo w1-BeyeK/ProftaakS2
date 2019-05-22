@@ -147,7 +147,15 @@
             </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
-
-    <div>
-        <a asp-action="Index">Terug naar lijst</a>
-    </div>
+    @if (User.IsInRole("doctor"))
+    {
+        <div>
+            <a asp-action="Index">Terug naar lijst</a>
+        </div>
+    }
+    else if (User.IsInRole("patient"))
+    {
+        <div>
+            <a asp-action="Index" asp-controller="treatment">Terug naar lijst</a>
+        </div>
+    }

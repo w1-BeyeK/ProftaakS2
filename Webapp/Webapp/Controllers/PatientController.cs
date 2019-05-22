@@ -69,15 +69,24 @@ namespace Webapp.Controllers
         {
             
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
+            Patient patient = new Patient();
             try
             {
-                Patient patient = patientRepository.GetById(id);
-                patient.Treatments = treatmentRepository.GetByPatient(id);
-                
-                foreach (Treatment t in patient.Treatments)
+                if (User.IsInRole("doctor"))
                 {
-                    t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                    patient = patientRepository.GetById(id);
+                    patient.Treatments = treatmentRepository.GetByPatient(id);
                 }
+                else if(User.IsInRole("patient"))
+                {
+                    long patientId = patientRepository.GetPatientIdByTreatmentId(id);
+                    patient = patientRepository.GetById(patientId);
+                    patient.Treatments = treatmentRepository.GetByPatient(patientId);
+                }
+                    foreach (Treatment t in patient.Treatments)
+                    {
+                        t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                    }
                 
 
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);

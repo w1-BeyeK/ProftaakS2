@@ -15,18 +15,24 @@
         <table class="table table-striped table-hover" id="treatmentTable" style="width:100%;">
             <thead>
                 <tr>
-                    <th>Patient</th>
+                    @if (User.IsInRole("doctor"))
+                    {
+                        <th>Patient</th>
+                    }
                     <th>Naam</th>
                     <th>StartDatum</th>
                     <th>EindDatum</th>
-                </tr>
+                    </tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     int i = 0;
                 <tr>
+                    @if(User.IsInRole("doctor"))
+                    { 
                     <td>@item.PatientName</td>
+                    }
                     <td>@item.Name</td>
                     <td>@item.BeginDate</td>
                     <td>@item.EndDate</td>
