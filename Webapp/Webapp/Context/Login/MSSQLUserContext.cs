@@ -116,19 +116,21 @@ namespace Webapp.Context.Login
         public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
+
+            string query = "select * from [PTS2_Account] where email = @email";
+            BaseAccount account = default(BaseAccount);
+
             try
             {
-                string query = "select * from [PTS2_Account] where email = @email";
                 var result = handler.ExecuteSelect(query, normalizedUserName) as DataTable;
 
-                if (!parser.TryParse(result.Rows[0], out BaseAccount account))
+                if (!parser.TryParse(result.Rows[0], out account))
                     throw new NullReferenceException("Account not found");
-
                 return Task.FromResult(account);
             }
             catch
             {
-                throw;
+                return Task.FromResult(account);
             }
         }
 
