@@ -25,6 +25,7 @@ namespace Webapp.Controllers
         private readonly TreatmentRepository treatmentRepository;
         private readonly PatientRepository patientRepository;
         private readonly TreatmentTypeRepository treatmentTypeRepository;
+        private readonly CommentRepository commentRepository;
 
         /// <summary>
         /// Converters
@@ -42,12 +43,14 @@ namespace Webapp.Controllers
         public TreatmentController(
             TreatmentRepository treatmentRepository, 
             PatientRepository patientRepository, 
-            TreatmentTypeRepository treatmentTypeRepository
+            TreatmentTypeRepository treatmentTypeRepository,
+            CommentRepository commentRepository
             )
         {
             this.treatmentRepository = treatmentRepository;
             this.patientRepository = patientRepository;
             this.treatmentTypeRepository = treatmentTypeRepository;
+            this.commentRepository = commentRepository;
         }
 
         /// <summary>
@@ -114,7 +117,9 @@ namespace Webapp.Controllers
             // Convert back and create treatment
             Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
             treatment.DoctorId = GetUserId();
-            treatmentRepository.Insert(treatment);
+            Comment comment = vm.Description;
+            comment.TreatmentId = treatmentRepository.Insert(treatment);
+            commentRepository.Insert(comment);
             return RedirectToAction("index", "treatment");
         }
 
