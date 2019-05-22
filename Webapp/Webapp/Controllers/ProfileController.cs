@@ -83,6 +83,7 @@ namespace Webapp.Controllers
                 {
                     Doctor doctor = doctorRepository.GetById(id);
                     viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                    //TODO : BY DOCTORID!!!!!!
                     viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                 }
 
