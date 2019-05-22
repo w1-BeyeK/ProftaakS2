@@ -74,7 +74,7 @@
                                             </i> Overzicht
                                         </a>
                                     </li>
-                                    <li >
+                                    <li>
                                         <a asp-action="create" asp-controller="treatment">
                                             <i class="fa fa-medkit fa-lg">
                                             </i> Nieuwe toevoegen
@@ -87,6 +87,11 @@
                                         <i class="fa fa-bed fa-lg">
                                         </i> Patiënten
                                     </a>
+                                </li>
+                                    <li><a asp-controller="Doctor" asp-action="Index">
+                                    <i class="fa fa-user-md fa-lg">
+                                        </i> Artsen
+                                     </a>
                                 </li>
                                 <li>
                                     <a asp-action="index" asp-controller="department">
@@ -107,7 +112,7 @@
                             <hr style="margin:0;" />
                             <li>
                                 <a asp-action="index" asp-controller="profile">
-                                <i class="fa fa-user fa-lg">
+                                    <i class="fa fa-user fa-lg">
                                     </i> Profiel
                                 </a>
                             </li>

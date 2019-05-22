@@ -9,8 +9,9 @@ namespace Webapp.Context.InterfaceContext
 {
     public interface IDoctorContext : IUniversalGenerics<Doctor>
     {
-        List<Doctor> GetByDepartment(long id);
+        List<Doctor> GetByDoctorWithDepartment(long id);
         List<Doctor> GetByInstitution(long id);
         bool AddToDepartment(long departmentId, long doctorId);
+        bool CheckDoctorRelationship(long userId, long doctorId);
     }
 }

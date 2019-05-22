@@ -46,7 +46,7 @@ namespace Webapp.Context.MemoryContext
             return BaseMemoryContext.doctors;
         }
 
-        public List<Doctor> GetByDepartment(long id)
+        public List<Doctor> GetByDoctorWithDepartment(long id)
         {
             //throw new NotImplementedException();
             //By department id!????????
@@ -76,6 +76,11 @@ namespace Webapp.Context.MemoryContext
             return false;
         }
         public bool AddToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool CheckDoctorRelationship(long userId, long doctorId)
         {
             throw new NotImplementedException();
         }

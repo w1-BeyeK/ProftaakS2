@@ -68,13 +68,13 @@ namespace Webapp.Repository
         /// <summary>
         /// An administrator can get all doctors of a department
         /// </summary>
-        public List<Doctor> GetByDepartment(long id)
+        public List<Doctor> GetByDoctorWithDepartment(long id)
         {
             if (id < 1)
             {
                 throw new NullReferenceException("Het afdelingId is leeg.");
             }
-            return context.GetByDepartment(id);
+            return context.GetByDoctorWithDepartment(id);
         }
 
         /// <summary>
@@ -99,6 +99,15 @@ namespace Webapp.Repository
                 throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.GetById(id);
+        }
+
+        public bool CheckDoctorRelationship(long userId, long doctorId)
+        {
+            if (userId < 1 || doctorId < 1)
+            {
+                throw new NullReferenceException("Het dokterId is leeg.");
+            }
+            return context.CheckDoctorRelationship(userId, doctorId);
         }
     }
 }
