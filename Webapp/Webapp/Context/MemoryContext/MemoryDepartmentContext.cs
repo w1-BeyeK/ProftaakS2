@@ -53,5 +53,10 @@ namespace Webapp.Context.MemoryContext
         {
             return new List<Department>(BaseMemoryContext.departments.Where(p => p.Active));
         }
+
+        public List<Department> GetForDoctor(long doctorId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -9,12 +9,6 @@ namespace Webapp.Context.InterfaceContext
 {
     public interface IDepartmentContext : IUniversalGenerics<Department>
     {
-        //bool Insert(Department department);
-        //bool Update(long id, Department department);
-        //bool ActiveDepartmentByIdAndActive(long id, bool active);
-        //List<Department> GetAllDepartmentsByInstitutionId(long id);
-        //Department GetById(long id);
-        ////TODO : In welke IContext moet deze???
-        //bool AddDoctorToDepartment(long departmentId, long doctorId);
+        List<Department> GetForDoctor(long doctorId);
     }
 }

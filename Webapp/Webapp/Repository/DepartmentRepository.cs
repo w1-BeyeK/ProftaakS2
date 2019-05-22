@@ -57,5 +57,10 @@ namespace Webapp.Repository
         {
             return context.GetAll();
         }
+
+        internal List<Department> GetForDoctor(long doctorId)
+        {
+            return context.GetForDoctor(doctorId);
+        }
     }
 }
