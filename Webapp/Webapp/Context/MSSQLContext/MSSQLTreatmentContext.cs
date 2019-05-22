@@ -14,6 +14,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLTreatmentContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Get a Treatment by Id
+        /// </summary>
+        /// <param name="id"> TreatmentId </param>
+        /// <returns> Treatment </returns>
         public Treatment GetById(long id)
         {
             string query = "SELECT t.Id, t.[Name], t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
@@ -36,7 +41,7 @@ namespace Webapp.Context.MSSQLContext
         }
 
         /// <summary>
-        /// Get all treatment types
+        /// Get all Treatments (Not used)   
         /// </summary>
         /// <returns>List of treatmenttypes</returns>
         public List<Treatment> GetAll()
@@ -62,6 +67,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Insert a treatment and returns its Id
+        /// </summary>
+        /// <param name="treatment"> Treatment </param>
+        /// <returns> Inserted Id </returns>
         //TODO : CHECK THIS QUERY!!!
         public long Insert(Treatment treatment)
         {
@@ -85,20 +95,13 @@ namespace Webapp.Context.MSSQLContext
             {
                 throw e;
             }
-  //          System.Data.SqlClient.SqlException
-  //HResult = 0x80131904
-  //Message = The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Doctor_Treatment".The conflict occurred in database "dbi409368", table "dbo.PTS2_Doctor", column 'Id'.
-  // Source = Core.Net SqlClient Data Provider
-  //  StackTrace:
-  // at Webapp.Context.MSSQLContext.MSSQLTreatmentContext.Insert(Treatment treatment) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Context\MSSQLContext\MSSQLTreatmentContext.cs:line 81
-  // at Webapp.Repository.TreatmentRepository.Insert(Treatment treatment) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Repository\TreatmentRepository.cs:line 30
-  // at Webapp.Controllers.TreatmentController.Add(TreatmentDetailViewModel vm) in D:\Desktop\Proftaak\PT20\ProftaakS2\Webapp\Webapp\Controllers\TreatmentController.cs:line 88
-  // at Microsoft.Extensions.Internal.ObjectMethodExecutor.Execute(Object target, Object[] parameters)
-  // at Microsoft.AspNetCore.Mvc.Internal.ActionMethodExecutor.SyncActionResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
-  // at Microsoft.AspNetCore.Mvc.Internal.ControllerActionInvoker.< InvokeActionMethodAsync > d__12.MoveNext()
-
         }
 
+        /// <summary>
+        /// Update a Treatment
+        /// </summary>
+        /// <param name="treatment"> Treatment </param>
+        /// <returns> Bool </returns>
         //TODO : CHECK THIS QUERY!!!
         public bool Update(Treatment treatment)
         {
@@ -145,6 +148,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Deactivates a Treatment (not used because treatments expire on their own)
+        /// </summary>
+        /// <param name="treatment"> Treatment </param>
+        /// <returns> Bool </returns>
         public bool Delete(Treatment treatment)
         {
             //try
@@ -165,6 +173,11 @@ namespace Webapp.Context.MSSQLContext
             //}
         }
 
+        /// <summary>
+        /// Get all Treatments by DoctorId
+        /// </summary>
+        /// <param name="id"> DoctorId </param>
+        /// <returns> Lost of Treatments </returns>
         public List<Treatment> GetByDoctor(long id)
         {
             try
@@ -203,6 +216,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get all Treatments by PatientId
+        /// </summary>
+        /// <param name="id"> PatientId </param>
+        /// <returns> List of Treatments </returns>
         public List<Treatment> GetByPatient(long id)
         {
             try
@@ -234,6 +252,12 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Check if the Doctor and Patient are related by a Treatment
+        /// </summary>
+        /// <param name="doctorId"> DoctorId </param>
+        /// <param name="patientId"> PatientId </param>
+        /// <returns> Bool </returns>
         //TODO : CHECK THIS QUERY!!!
         public bool CheckTreatmentRelationship(long doctorId, long patientId)
         {

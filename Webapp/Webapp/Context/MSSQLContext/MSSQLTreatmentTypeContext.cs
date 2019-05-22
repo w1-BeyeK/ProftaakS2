@@ -14,6 +14,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLTreatmentTypeContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Get a TreatmentType by Id
+        /// </summary>
+        /// <param name="id"> TreatmentTypeId </param>
+        /// <returns> TreatmentType </returns>
         public TreatmentType GetById(long id)
         {
             string query = "select * from PTS2_TreatmentType where Id = @id";
@@ -36,7 +41,7 @@ namespace Webapp.Context.MSSQLContext
         /// <summary>
         /// Get all treatment types
         /// </summary>
-        /// <returns>List of treatmenttypes</returns>
+        /// <returns> List of treatmenttypes </returns>
         public List<TreatmentType> GetAll()
         {
             // Create result
@@ -63,6 +68,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Insert a Treatments and returns its Id
+        /// </summary>
+        /// <param name="treatmentType"> TreatmentType </param>
+        /// <returns> InsertedId </returns>
         public long Insert(TreatmentType treatmentType)
         {
             try
@@ -85,6 +95,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Update a TreatmentType
+        /// </summary>
+        /// <param name="treatmentType"> TreatmentType </param>
+        /// <returns> Bool </returns>
         public bool Update(TreatmentType treatmentType)
         {
             try
@@ -136,6 +151,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Deactivate a TreatmentType
+        /// </summary>
+        /// <param name="treatmentType"> TreatmentType </param>
+        /// <returns> Bool </returns>
         public bool Delete(TreatmentType treatmentType)
         {
             try
@@ -155,6 +175,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get a TreatmentType by TreatmentId
+        /// </summary>
+        /// <param name="id" > TreatmentId </param>
+        /// <returns> TreatmentType </returns>
         public TreatmentType GetByTreatmentId(long id)
         {
             try

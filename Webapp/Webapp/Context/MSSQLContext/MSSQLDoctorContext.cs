@@ -15,6 +15,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLDoctorContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Get a Doctor by Id
+        /// </summary>
+        /// <param name="id"> DoctorId </param>
+        /// <returns> Doctor </returns>
         public Doctor GetById(long id)
         {
             string query = "SELECT Id, Username, Name, [Password], Gender, Email, RoleName, Phone, PrivPhone, PrivMail, BirthDate as Birth, Active " +
@@ -38,7 +43,7 @@ namespace Webapp.Context.MSSQLContext
         /// <summary>
         /// Get all doctors
         /// </summary>
-        /// <returns>List of doctors</returns>
+        /// <returns> List of Doctors </returns>
         public List<Doctor> GetAll()
         {
             // Create result
@@ -67,6 +72,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Inserts a new doctor and returns its Id
+        /// </summary>
+        /// <param name="doctor"> Doctor </param>
+        /// <returns> Inserted Long </returns>
         public long Insert(Doctor doctor)
         {
             try
@@ -105,6 +115,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Update a Doctor
+        /// </summary>
+        /// <param name="doctor"> Doctor </param>
+        /// <returns> Bool </returns>
         //TODO : CHECK THIS QUERY!!!
         public bool Update(Doctor doctor)
         {
@@ -202,6 +217,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Deactivates a Doctor
+        /// </summary>
+        /// <param name="doctor"> Doctor </param>
+        /// <returns> Bool </returns>
         public bool Delete(Doctor doctor)
         {
             try
@@ -230,6 +250,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get a list of Doctors from a Department
+        /// </summary>
+        /// <param name="id"> DepartmentId </param>
+        /// <returns> List of Doctors </returns>
         //TODO : CHECK THIS QUERY!!!
         public List<Doctor> GetByDepartment(long id)
         {
@@ -265,6 +290,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get a list of Doctors from an Institution
+        /// </summary>
+        /// <param name="id"> InstitutionId </param>
+        /// <returns> List of Doctors </returns>
         //TODO : CHECK THIS QUERY!!!
         public List<Doctor> GetByInstitution(long id)
         {
@@ -300,6 +330,12 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Add a Doctor to a Department
+        /// </summary>
+        /// <param name="departmentId"> DepartmentId </param>
+        /// <param name="doctorId"> DoctorId </param>
+        /// <returns> Bool </returns>
         //TODO : CHECK THIS QUERY!!!
         public bool AddToDepartment(long departmentId, long doctorId)
         {

@@ -14,6 +14,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLAccountContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Deactivates the designated user account
+        /// </summary>
+        /// <param name="obj"> UserAccount </param>
+        /// <returns> Bool </returns>
         public bool Delete(UserAccount obj)
         {
             try
@@ -33,6 +38,10 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get all accounts
+        /// </summary>
+        /// <returns> List of UserAccounts </returns>
         public List<UserAccount> GetAll()
         {
             // Create result
@@ -54,6 +63,10 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Get all patients
+        /// </summary>
+        /// <returns> List of Patients </returns>
         public List<UserAccount> GetAllPatients()
         {
             // Create result
@@ -75,6 +88,10 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Get all doctors
+        /// </summary>
+        /// <returns> List of Doctors </returns>
         public List<UserAccount> GetAllDoctors()
         {
             // Create result
@@ -96,6 +113,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Get a UserAccount by Id
+        /// </summary>
+        /// <param name="id"> UserAccountId</param>
+        /// <returns> UserAccount </returns>
         public UserAccount GetById(long id)
         {
             string query = $"select * from PTS2_Account where Id = @id";
@@ -114,6 +136,11 @@ namespace Webapp.Context.MSSQLContext
                 return default(UserAccount);
         }
 
+        /// <summary>
+        /// Insert a UserAccount and returns its Id
+        /// </summary>
+        /// <param name="obj"> UserAccount </param>
+        /// <returns> Id of inserted account </returns>
         public long Insert(UserAccount obj)
         {
             try
@@ -137,6 +164,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Update a UserAccount
+        /// </summary>
+        /// <param name="obj"> UserAccount </param>
+        /// <returns> Bool </returns>
         public bool Update(UserAccount obj)
         {
             try

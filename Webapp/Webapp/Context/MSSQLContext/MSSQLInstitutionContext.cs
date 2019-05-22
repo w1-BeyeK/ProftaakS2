@@ -14,6 +14,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLInstitutionContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Deactivates an Institution
+        /// </summary>
+        /// <param name="obj"> Institution </param>
+        /// <returns> Bool </returns>
         public bool Delete(Institution obj)
         {
             try
@@ -33,6 +38,10 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Gets all Institution
+        /// </summary>
+        /// <returns></returns>
         public List<Institution> GetAll()
         {
             // Create result
@@ -59,6 +68,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Get an Institution by Id
+        /// </summary>
+        /// <param name="id"> InstitutionId </param>
+        /// <returns> Institution </returns>
         public Institution GetById(long id)
         {
             string query = $"select * from PTS2_Institution where active = @active and Id = @id";
@@ -78,6 +92,11 @@ namespace Webapp.Context.MSSQLContext
                 return default(Institution);
         }
 
+        /// <summary>
+        /// Inserts a new Institution and returns its Id
+        /// </summary>
+        /// <param name="obj"> Institution </param>
+        /// <returns> Inserted Long </returns>
         public long Insert(Institution obj)
         {
             try
@@ -102,6 +121,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Update an Institution
+        /// </summary>
+        /// <param name="obj"> Institution </param>
+        /// <returns> Bool </returns>
         public bool Update(Institution obj)
         {
             try

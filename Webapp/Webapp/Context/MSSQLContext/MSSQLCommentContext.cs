@@ -15,9 +15,10 @@ namespace Webapp.Context
         { }
 
         /// <summary>
-        /// Get all comments
+        /// Gets all coments from a treatment
         /// </summary>
-        /// <returns>List of comments</returns>
+        /// <param name="treatmentId"> TreatmentId </param>
+        /// <returns> List of comments </returns>
         public List<Comment> GetByTreatment(long treatmentId)
         {
             // Create result
@@ -51,6 +52,11 @@ namespace Webapp.Context
             return result;
         }
 
+        /// <summary>
+        /// Inserts a Comment
+        /// </summary>
+        /// <param name="comment"> Comment </param>
+        /// <returns> List of Comments </returns>
         public List<Comment> Insert(Comment comment)
         {
             try

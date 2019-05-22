@@ -15,6 +15,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLPatientContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Get a Patient by Id
+        /// </summary>
+        /// <param name="id"> PatientId </param>
+        /// <returns> Patient </returns>
         public Patient GetById(long id)
         {
             string query = "SELECT Id, Name, Username, [Password], Email, RoleName, Active, BirthDate AS Birth, BSN, ContactPersonName, " +
@@ -40,7 +45,7 @@ namespace Webapp.Context.MSSQLContext
         /// <summary>
         /// Get all treatment types
         /// </summary>
-        /// <returns>List of treatmenttypes</returns>
+        /// <returns>List of Treatmenttypes</returns>
         public List<Patient> GetAll()
         {
             // Create result
@@ -70,6 +75,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Insert a new Patient and returns its Id (is not a used function because all patient "start" in database)
+        /// </summary>
+        /// <param name="patient"> Patient </param>
+        /// <returns> InsertedId </returns>
         public long Insert(Patient patient)
         {
             return -1;
@@ -110,6 +120,11 @@ namespace Webapp.Context.MSSQLContext
             //}
         }
 
+        /// <summary>
+        /// Update a Patient
+        /// </summary>
+        /// <param name="patient"> Patient </param>
+        /// <returns> Bool </returns>
         //TODO : CHECK THIS QUERY!!!
         public bool Update(Patient patient)
         {
@@ -231,6 +246,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Deactivates a Patient
+        /// </summary>
+        /// <param name="patient"> Patient </param>
+        /// <returns> Bool </returns>
         public bool Delete(Patient patient)
         {
             try
@@ -250,6 +270,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Get all Patients from a Doctor
+        /// </summary>
+        /// <param name="id"> DoctorId </param>
+        /// <returns> List of Patients </returns>
         //TODO : WANG WRITES STORED PROCEDURE
         public List<Patient> GetByDoctor(long id)
         {
@@ -278,6 +303,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Get a PatientId using a TreatmentId
+        /// </summary>
+        /// <param name="id"> TreatmentId </param>
+        /// <returns> Long </returns>
         public long GetPatientIdByTreatmentId(long id)
         {
             // Set query

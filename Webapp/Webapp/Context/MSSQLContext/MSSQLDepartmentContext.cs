@@ -14,6 +14,11 @@ namespace Webapp.Context.MSSQLContext
         public MSSQLDepartmentContext(IParser parser, IHandler handler) : base(parser, handler)
         { }
 
+        /// <summary>
+        /// Deactivites designated Department
+        /// </summary>
+        /// <param name="obj"> Department </param>
+        /// <returns> Bool </returns>
         public bool Delete(Department obj)
         {
             try
@@ -35,6 +40,10 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Gets all Departments
+        /// </summary>
+        /// <returns> List of Departments </returns>
         public List<Department> GetAll()
         {
             // Create result
@@ -62,6 +71,11 @@ namespace Webapp.Context.MSSQLContext
             return result;
         }
 
+        /// <summary>
+        /// Gets a Department by Id
+        /// </summary>
+        /// <param name="id"> DepartmentId </param>
+        /// <returns> Department </returns>
         public Department GetById(long id)
         {
             string query = $"select * from PTS2_Department where active = @active and Id = @id";
@@ -81,6 +95,11 @@ namespace Webapp.Context.MSSQLContext
                 return default(Department);
         }
 
+        /// <summary>
+        /// Inserts a Department and returns the Id
+        /// </summary>
+        /// <param name="obj"> Department </param>
+        /// <returns> Inserted Long </returns>
         public long Insert(Department obj)
         {
             try
@@ -103,6 +122,11 @@ namespace Webapp.Context.MSSQLContext
             }
         }
 
+        /// <summary>
+        /// Update a Department
+        /// </summary>
+        /// <param name="obj"> Department </param>
+        /// <returns> Bool </returns>
         public bool Update(Department obj)
         {
             try

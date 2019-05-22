@@ -41,9 +41,9 @@ namespace Webapp.Context.Login
 
 
         /// <summary>
-        ///Delete the user from the database (or make the user obsolete)
+        /// Delete the user from the database (or make the user obsolete)
         /// </summary>
-        /// <param name="user"></param>
+        /// <param name="user"> BaseAccount</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
         public Task<IdentityResult> DeleteAsync(BaseAccount user, CancellationToken cancellationToken)
@@ -58,11 +58,11 @@ namespace Webapp.Context.Login
 
 
         /// <summary>
-        /// Finding a user by Email in the database
+        /// Get a User by Email
         /// </summary>
-        /// <param name="normalizedEmail"></param>
+        /// <param name="normalizedEmail"> NormalizedEmail </param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns> BaseAccount </returns>
         public Task<BaseAccount> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -83,11 +83,11 @@ namespace Webapp.Context.Login
         }
 
         /// <summary>
-        /// Finding a user by id in the datbase
+        /// Get a User by Id
         /// </summary>
-        /// <param name="userId"></param>
+        /// <param name="userId"> UserId </param>
         /// <param name="cancellationToken"></param>
-        /// <returns></returns>
+        /// <returns> BaseAccount </returns>
         public Task<BaseAccount> FindByIdAsync(string userId, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
@@ -107,6 +107,12 @@ namespace Webapp.Context.Login
             }
         }
 
+        /// <summary>
+        /// Get a user by name
+        /// </summary>
+        /// <param name="normalizedUserName"> NormalizedUsername </param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public Task<BaseAccount> FindByNameAsync(string normalizedUserName, CancellationToken cancellationToken)
         {
             cancellationToken.ThrowIfCancellationRequested();
