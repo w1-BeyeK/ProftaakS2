@@ -173,6 +173,14 @@ namespace Webapp.Context.MSSQLContext
                     parameters.Add(new KeyValuePair<string, object>("description", obj.Description));
                 }
 
+                if(obj.InstitutionId > 0)
+                {
+                    if (!string.IsNullOrWhiteSpace(fields))
+                        fields += ",";
+                    fields += "institutionId = @institutionId";
+                    parameters.Add(new KeyValuePair<string, object>("institutionId", obj.InstitutionId));
+                }
+
                 query = query.Replace("@fields", fields);
 
                 handler.ExecuteCommand(query, parameters);
