@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Nieuwe toevoegen</a>
 </p>
-<div class="hidden" id="asdfgh">
+<div class="hidden" id="doctorTable">
     <table class="table table-striped table-hover" id="doctorTable" style="width:100%;">
         <thead>
             <tr>
@@ -26,8 +26,11 @@
                     <td>@Html.DisplayFor(modelItem => item.Genders[item.GenderId])</td>
                     <td>
                         @Html.ActionLink("Inzage", "Details", new { id = item.EmployeeNumber }) |
-                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) |
+                        @if (User.IsInRole("admin"))
+                        {
+                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) @: | 
                         @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
+                        }
                     </td>
                 </tr>
             }
@@ -38,7 +41,7 @@
         <script>
             $("document").ready(function () {
                 initDataTable();
-                $("#asdfgh").removeClass("hidden");
+                $("#doctorTable").removeClass("hidden");
             });
 
             function initDataTable() {

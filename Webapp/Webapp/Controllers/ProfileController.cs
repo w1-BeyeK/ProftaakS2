@@ -143,6 +143,78 @@ namespace Webapp.Controllers
                 return BadRequest(e.Message);
             }
         }
+        
+
+        public IActionResult DoctorDetails(long id)
+        {
+            long userId = GetUserId();
+            try
+            {
+                UserViewModel viewModel = new UserViewModel();
+
+                if (HttpContext.User.IsInRole("doctor"))
+                {
+                    if (treatmentRepository.CheckTreatmentRelationship(userId, id))
+                    {
+                        Doctor doctor = doctorRepository.GetById(id);
+                        viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "doctor");
+                    }
+                }
+                else if (HttpContext.User.IsInRole("patient"))
+                {
+                    if (treatmentRepository.CheckTreatmentRelationship(id, userId))
+                    {
+                        Doctor doctor = doctorRepository.GetById(id);
+                        viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "treatment");
+                    }
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+
+                return View(viewModel);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = "doctor")]
+        public IActionResult PatientDetails(long id)
+        {
+            long userId = GetUserId();
+            try
+            {
+                UserViewModel viewModel = new UserViewModel();
+
+                if (treatmentRepository.CheckTreatmentRelationship(userId, id))
+                {
+                    Patient patient = patientRepository.GetById(id);
+                    viewModel.Patient = patientConverter.ModelToViewModel(patient);
+                }
+                else
+                {
+                    return RedirectToAction("index", "patient");
+                }
+                return View(viewModel);
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
 
         /// <summary>
         /// Edit profile

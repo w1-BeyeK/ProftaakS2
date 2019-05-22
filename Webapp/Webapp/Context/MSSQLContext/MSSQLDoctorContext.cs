@@ -238,8 +238,10 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Doctor> result = new List<Doctor>();
 
+                string query1 = $"";
+
                 // Set query
-                string query = $"select * from PTS2_Doctor where DepartmentId = @id";
+                string query = $"select * from PTS2_Doctor d INNER JOIN PTS2_DoctorDepartment dd ON d.Id = dd.doctorId where dd.DepartmentId IN (select departmentId from PTS2_DoctorDepartment dd inner join PTS2_Doctor doctor on dd.doctorID = @id)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {

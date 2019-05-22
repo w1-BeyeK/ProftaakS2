@@ -45,11 +45,21 @@ namespace Webapp.Controllers
         public IActionResult Index()
         {
             DoctorViewModel vm = new DoctorViewModel();
-
-            // Retrieve doctors
-            List<Doctor> doctors = doctorRepository.GetAll();
-            if (doctors.Count < 1)
-                return View();
+            List<Doctor> doctors = new List<Doctor>();
+            if (User.IsInRole("admin"))
+            {
+                // Retrieve doctors
+                doctors = doctorRepository.GetAll();
+                if (doctors.Count < 1)
+                    return View();
+            }
+            else if(User.IsInRole("doctor"))
+            {
+                long userId = GetUserId();
+                doctors = doctorRepository.GetByDepartment(userId);
+                if (doctors.Count < 1)
+                    return View();
+            }
             
             // Convert to viewmodels
             vm.Doctors = converter.ModelsToViewModel(doctors);
