@@ -125,7 +125,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivMail" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivMail" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Email
@@ -135,7 +135,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivGender" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivGender" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Geslacht
@@ -145,7 +145,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivBirthDate" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivBirthDate" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Geboortedatum
@@ -155,7 +155,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivPhone" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivPhone" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Telefoonnummer
@@ -165,7 +165,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivAdress" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivAdress" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Adres
@@ -175,7 +175,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivContactPersonPhone" disabled>
 
                                         <span class="slider"></span>
                                     </label>
@@ -186,7 +186,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" disabled>
+                                        <input type="checkbox" value="@Model.Patient.PrivContactPersonName" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Contact persoon naam
@@ -301,7 +301,7 @@ else if (User.IsInRole("doctor"))
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Doctor.PrivMail" disabled>
+                                        <input type="checkbox" value="@Model.Doctor.PrivMail" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Email
@@ -311,7 +311,7 @@ else if (User.IsInRole("doctor"))
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" checked="@Model.Doctor.PrivPhonenumber" disabled>
+                                        <input type="checkbox" value="@Model.Doctor.PrivPhonenumber" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Telefoonnummer
