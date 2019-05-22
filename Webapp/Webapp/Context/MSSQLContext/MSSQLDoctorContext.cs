@@ -103,7 +103,7 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("privmail", doctor.PrivMail),
                     new KeyValuePair<string, object>("phone", doctor.Phone),
                     new KeyValuePair<string, object>("privphone", doctor.PrivPhone),
-                    new KeyValuePair<string, object>("birthdate", doctor.Birth),
+                    new KeyValuePair<string, object>("birthdate", doctor.Birth.ToString("dd-MM-yyyy")),
                     new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
                 };
 
