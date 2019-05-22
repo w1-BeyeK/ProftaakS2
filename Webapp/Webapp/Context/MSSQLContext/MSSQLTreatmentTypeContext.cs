@@ -145,7 +145,7 @@ namespace Webapp.Context.MSSQLContext
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("id", treatmentType.Id),
-                    new KeyValuePair<string, object>("active", treatmentType.Active)
+                    new KeyValuePair<string, object>("active", false)
                 });
                 return true;
             }
