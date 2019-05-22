@@ -82,7 +82,7 @@ namespace Webapp.Controllers
                     if (result.Succeeded)
                     {
                         // Send to correct page based on role
-                        if (HttpContext.User.IsInRole("admin"))
+                        if (User.IsInRole("admin"))
                         {
                             return RedirectToAction("dashboard");
                         }
