@@ -67,14 +67,12 @@ namespace Webapp.Controllers
         [Authorize(Roles = "doctor, patient")]
         public IActionResult Treatment(long id)
         {
-
-            long patientId = patientRepository.GetPatientIdByTreatmentId(id);
-
+            
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             try
             {
-                Patient patient = patientRepository.GetById(patientId);
-                patient.Treatments = treatmentRepository.GetByPatient(patientId);
+                Patient patient = patientRepository.GetById(id);
+                patient.Treatments = treatmentRepository.GetByPatient(id);
                 
                 foreach (Treatment t in patient.Treatments)
                 {

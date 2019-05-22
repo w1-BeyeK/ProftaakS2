@@ -33,7 +33,7 @@
                                     @for (int i = 0; i < Model.Genders.Count; i++)
                                     {
                                         if (!(i == Model.GenderId))
-                                        {   
+                                        {
                                             <option value="@i">@Model.Genders[i]</option>
                                         }
                                         else
@@ -128,13 +128,17 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
-                                @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
-                                {
-                                    @if (treatment.Age <= 90)
+                                <ul>
+
+
+                                    @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                     {
-                                        < li > @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </ li >
+                                        @if (treatment.Age <= 90)
+                                        {
+                                            <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
+                                        }
                                     }
-                                }
+                                </ul>
                             </div>
                         </div>
                     </form>
@@ -143,3 +147,7 @@
             </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
+
+    <div>
+        <a asp-action="Index">Terug naar lijst</a>
+    </div>
