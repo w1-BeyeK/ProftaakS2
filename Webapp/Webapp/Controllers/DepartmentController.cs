@@ -17,11 +17,12 @@ namespace Webapp.Controllers
     /// Controller to maintain departments
     /// </summary>
     [Authorize(Roles = "admin, doctor")]
-    public class DepartmentController : Controller
+    public class DepartmentController : BaseController
     {
         // Repos
         private readonly DepartmentRepository departmentRepository;
         private readonly InstitutionRepository institutionRepository;
+        private readonly DoctorRepository doctorRepository;
         // Converter
         private readonly IViewModelConverter<Department, DepartmentDetailViewModel> converter;
 
@@ -33,10 +34,12 @@ namespace Webapp.Controllers
         /// <param name="converter">Converter</param>
         public DepartmentController(DepartmentRepository departmentRepository,
             InstitutionRepository institutionRepository,
+            DoctorRepository doctorRepository,
             IViewModelConverter<Department, DepartmentDetailViewModel> converter)
         {
             this.departmentRepository = departmentRepository;
             this.institutionRepository = institutionRepository;
+            this.doctorRepository = doctorRepository;
             this.converter = converter;
         }
 
@@ -82,8 +85,18 @@ namespace Webapp.Controllers
         {
             DepartmentViewModel vm = new DepartmentViewModel();
 
+            List<KeyValuePair<string, object>> filters = new List<KeyValuePair<string, object>>();
+
             // Retrieve all departments
-            List<Department> departments = departmentRepository.GetAll();
+            List<Department> departments;
+            if (User.IsInRole("doctor"))
+            {
+                departments = departmentRepository.GetForDoctor(GetUserId());
+            }
+            else
+            {
+                departments = departmentRepository.GetAll();
+            }
 
             // If none exist return empty view
             if (departments.Count < 1)

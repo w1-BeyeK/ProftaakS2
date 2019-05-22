@@ -25,26 +25,32 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Genders[item.GenderId])</td>
                     <td>
-                        @Html.ActionLink("Inzage", "Details", new { id = item.EmployeeNumber }) |
-                        @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) |
-                        @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
+                        @Html.ActionLink("Inzage", "Details", new { id = item.EmployeeNumber })
+
+                        @{ if (User.IsInRole("admin"))
+                           {
+                            @:| @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber })
+                           } 
+                         }
+
+                        | @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </div>
-    @section Scripts {
-        <script>
-            $("document").ready(function () {
-                initDataTable();
-                $("#asdfgh").removeClass("hidden");
+@section Scripts {
+    <script>
+        $("document").ready(function () {
+            initDataTable();
+            $("#asdfgh").removeClass("hidden");
+        });
+
+        function initDataTable() {
+            $("#doctorTable").DataTable({
+
             });
-
-            function initDataTable() {
-                $("#doctorTable").DataTable({
-
-                });
-            }
-        </script>
-    }
+        }
+    </script>
+}
