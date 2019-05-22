@@ -137,7 +137,6 @@ namespace Webapp.Controllers
                 return BadRequest("Department could not be found");
 
             DoctorDetailViewModel vm = converter.ModelToViewModel(doctor);
-            //vm.Institutions = GetInstitutionsForDropdown(vm.Id).ToList();
             return View(vm);
         }
 
