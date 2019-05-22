@@ -7,7 +7,7 @@
 
 }
 
-@if (Model.Patient != null)
+@if (User.IsInRole("patient"))
 {
     <link rel="stylesheet" href="~/css/Slider.css" />
     <div class="container bootstrap snippet">
@@ -211,7 +211,7 @@
     </div><!--/row-->
     
 }
-else if (Model.Doctor != null)
+else if (User.IsInRole("doctor"))
 {
     <link rel="stylesheet" href="~/css/User.css" />
     <div class="container bootstrap snippet">
@@ -253,7 +253,7 @@ else if (Model.Doctor != null)
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Employeenumber" class="h4">Medewerkersnummer</label>
-                                    <input type="text" asp-for="Doctor.EmployeeNumber" value="@Model.Doctor.EmployeeNumber" class="form-control" id="BSN" placeholder="BSN" title="Voer hier je BSN in.">
+                                    <input type="text" asp-for="Doctor.EmployeeNumber" value="@Model.Doctor.EmployeeNumber" readonly class="form-control" id="Employeenumber" placeholder="EmployeeNumber" title="Voer hier je EmployeeNumber in.">
                                 </div>
                             </div>
 
