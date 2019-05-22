@@ -1,11 +1,11 @@
 ﻿@using Webapp.Models.Data;
 @model Webapp.Models.UserViewModel
 @{
-    ViewData["Title"] = "Patiënt";
+    ViewData["Title"] = "Profiel";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@if (Model.Patient != null)
+@if (User.IsInRole("patient"))
 {
     <div class="container bootstrap snippet">
         <div class="row">
@@ -200,7 +200,7 @@
         </div><!--/col-9-->
     </div><!--/row-->
 }
-else if (Model.Doctor != null)
+else if (User.IsInRole("doctor"))
 {
     <div class="container bootstrap snippet">
         <div class="row">

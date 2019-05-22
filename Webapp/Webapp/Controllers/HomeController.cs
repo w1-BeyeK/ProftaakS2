@@ -105,6 +105,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
             // Check if authenticated

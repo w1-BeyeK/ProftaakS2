@@ -44,7 +44,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName" +
                            "FROM PTS2_Treatment AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id";
 
@@ -67,7 +67,7 @@ namespace Webapp.Context.MSSQLContext
         {
             try
             {
-                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, BeginDate, EndDate, TreatmentTypeId) values (@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId) SELECT Id = SCOPE_IDENTITY()";
+                string query = "insert into PTS2_Treatment(Name, DoctorId, PatientId, BeginDate, EndDate, TreatmentTypeId) OUTPUT INSERTED.ID values (@name, @doctorId, @patientId, @beginDate, @endDate, @treatmentTypeId)";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -172,8 +172,9 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId " +
-                               "FROM PTS2_Treatment " +
+                string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, a.[Name] AS PatientName " +
+                               "FROM PTS2_Treatment AS t " +
+                               "INNER JOIN PTS2_Account AS a ON t.PatientId = a.Id " +
                                "WHERE DoctorId = @id";
                                 // AND t.EndDate >= '@endDate'";
 
@@ -242,13 +243,13 @@ namespace Webapp.Context.MSSQLContext
                 List<Treatment> result = new List<Treatment>();
 
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId and EndDate >= '@endDate'";
+                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("doctorId", doctorId),
                     new KeyValuePair<string, object>("patientId", patientId),
-                    new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("yyyy-mm-dd")),
+                    //new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("dd-mm-yyyy")),
                 };
 
                 // Tell the handler to execute the query

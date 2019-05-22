@@ -277,5 +277,18 @@ namespace Webapp.Context.MSSQLContext
 
             return result;
         }
+
+        public long GetPatientIdByTreatmentId(long id)
+        {
+            // Set query
+            string query = $"SELECT PatientId from PTS2_Treatment WHERE [Id] = @id";
+
+            // Tell the handler to execute the query
+            var dbResult = handler.ExecuteSelect(query, id) as DataTable;
+
+            if(long.TryParse(dbResult?.Rows[0][0].ToString(), out long result))
+                return result;
+            return -1;
+        }
     }
 }

@@ -79,6 +79,7 @@ namespace Webapp
             services.AddScoped<DoctorRepository>();
             services.AddScoped<DepartmentRepository>();
             services.AddScoped<InstitutionRepository>();
+            services.AddScoped<CommentRepository>();
             services.AddScoped<TreatmentRepository>();
             services.AddScoped<AccountRepository>();
 

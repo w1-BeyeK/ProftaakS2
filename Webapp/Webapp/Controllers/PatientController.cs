@@ -37,12 +37,14 @@ namespace Webapp.Controllers
         public PatientController(   
             PatientRepository patientRepository, 
             TreatmentRepository treatmentRepository,
-            TreatmentTypeRepository treatmentTypeRepository
+            TreatmentTypeRepository treatmentTypeRepository,
+            CommentRepository commentRepository
             )
         {
             this.patientRepository = patientRepository;
             this.treatmentRepository = treatmentRepository;
             this.treatmentTypeRepository = treatmentTypeRepository;
+            this.commentRepository = commentRepository;
         }
 
         /// <summary>
@@ -65,11 +67,14 @@ namespace Webapp.Controllers
         [Authorize(Roles = "doctor, patient")]
         public IActionResult Treatment(long id)
         {
+
+            long patientId = patientRepository.GetPatientIdByTreatmentId(id);
+
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
             try
             {
-                Patient patient = patientRepository.GetById(id);
-                patient.Treatments = treatmentRepository.GetByPatient(id);
+                Patient patient = patientRepository.GetById(patientId);
+                patient.Treatments = treatmentRepository.GetByPatient(patientId);
                 
                 foreach (Treatment t in patient.Treatments)
                 {
@@ -88,13 +93,12 @@ namespace Webapp.Controllers
 
         [Authorize(Roles = "doctor")]
         [HttpPost]
-        public IActionResult Treatment(PatientDetailViewModel vm)
+        public IActionResult Treatment(long id, PatientDetailViewModel vm)
         {
-            Patient patient = patientWithTreatmentsVMC.ViewModelToPatient(vm);
-            Comment comment = patient.Treatments[0].Comments[0];
-            comment.TreatmentId = patient.Treatments[0].Id;
+            Comment comment = vm.TreatmentDetailViewModels[0].Description;
+            comment.TreatmentId = id;
             commentRepository.Insert(comment);
-            return RedirectToAction("treatment", "patient");
+            return RedirectToAction("index", "patient");
         }
     }
 }

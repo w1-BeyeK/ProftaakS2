@@ -73,5 +73,14 @@ namespace Webapp.Repository
             }
             return context.GetByDoctor(id);
         }
+
+        public long GetPatientIdByTreatmentId(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("TreatmentId is leeg.");
+            }
+            return context.GetPatientIdByTreatmentId(id);
+        }
     }
 }

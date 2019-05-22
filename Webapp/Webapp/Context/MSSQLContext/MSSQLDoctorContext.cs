@@ -72,16 +72,16 @@ namespace Webapp.Context.MSSQLContext
             try
             {
                 string query = "exec InsertDoctor " +
-                               "@username = @username, " +
-                               "@name = @name, " +
-                               "@password = @password, " +
-                               "@gender = @gender, " +
-                               "@email = @email, " +
-                               "@privMail = @privMail, " +
-                               "@phone = @phone, " +
-                               "@privPhone = @privPhone, " +
-                               "@birthdate = @birthdate, " +
-                               "@active = @active";
+                               "@Username = @username, " +
+                               "@Name = @name, " +
+                               "@Password = @password, " +
+                               "@Gender = @gender, " +
+                               "@Email = @email, " +
+                               "@PrivMail = @privMail, " +
+                               "@Phone = @phone, " +
+                               "@PrivPhone = @privPhone, " +
+                               "@Birthdate = @birthdate, " +
+                               "@Active = @active";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -154,8 +154,6 @@ namespace Webapp.Context.MSSQLContext
                 {
                     new KeyValuePair<string, object>("id", doctor.Id)
                 };
-
-            //TODO: ??? Doesnt do anything
                 if (doctor.Birth != null)
                 {
                     if (!string.IsNullOrWhiteSpace(fieldsDoctor))

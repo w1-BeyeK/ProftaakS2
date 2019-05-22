@@ -9,6 +9,7 @@ namespace Webapp.Models
 {
     public class DoctorDetailViewModel
     {
+        [Display(Name = "Werknemersnummer")]
         public long EmployeeNumber { get; set; }
 
         [Required]
@@ -39,7 +40,7 @@ namespace Webapp.Models
 
         [Required]
         [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
-        [Display(Name = "Geboortedatum")]
+        [Display(Name = "Naam")]
         public string Name { get; set; }
 
         [Display(Name = "Leeftijd")]

@@ -81,5 +81,11 @@ namespace Webapp.Context.MemoryContext
             }
             return false;
         }
+
+        public long GetPatientIdByTreatmentId(long id)
+        {
+            var treatment = BaseMemoryContext.treatments.Find(t => t.Id == id);
+            return BaseMemoryContext.patients.Find(p => p.Id == treatment.Id).Id;
+        }
     }
 }

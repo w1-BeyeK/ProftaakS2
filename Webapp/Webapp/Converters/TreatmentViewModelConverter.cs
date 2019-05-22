@@ -30,6 +30,7 @@ namespace Webapp.Converters
                 BeginDate = vm.BeginDate + vm.BeginTime,
                 EndDate = vm.EndDate + vm.EndTime,
                 TreatmentType = treatmenttype,
+                PatientName = vm.PatientName
             };
 
             return treatment;
@@ -43,6 +44,7 @@ namespace Webapp.Converters
                 Name = treatment.Name,
                 TypeId = treatment.TreatmentTypeId,
                 PatientId = treatment.PatientId,
+                PatientName = treatment.PatientName,
                 BeginDate = treatment.BeginDate,
                 EndDate = treatment.EndDate,
                 Age = treatment.GetAge()

@@ -94,8 +94,11 @@ namespace Webapp.Controllers
             }
         }
 
-        // No bloody idea what this does...
-        // TODO: someone tell me what this is
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"> id is the docter id if you are a patient and id is from patient if you are a docter</param>
+        /// <returns></returns>
         public IActionResult Inzie(long id)
         {
             long userId = GetUserId();
@@ -117,9 +120,9 @@ namespace Webapp.Controllers
                 }
                 else if (HttpContext.User.IsInRole("patient"))
                 {
-                    if (treatmentRepository.CheckTreatmentRelationship(12, userId))
+                    if (treatmentRepository.CheckTreatmentRelationship(id, userId))
                     {
-                        Doctor doctor = doctorRepository.GetById(12);
+                        Doctor doctor = doctorRepository.GetById(id);
                         viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
                         viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
                     }

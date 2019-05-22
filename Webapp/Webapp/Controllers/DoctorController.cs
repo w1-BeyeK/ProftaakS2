@@ -24,17 +24,18 @@ namespace Webapp.Controllers
         private readonly AccountRepository accountRepository;
         private readonly DepartmentRepository departmentRepository;
         // Converter
-        private readonly IViewModelConverter<Doctor, DoctorDetailViewModel> converter;
+        private readonly DoctorViewModelConverter converter = new DoctorViewModelConverter();
 
-        public DoctorController(DoctorRepository doctorRepository,
-            AccountRepository accountRepository,
-            DepartmentRepository departmentRepository,
-            IViewModelConverter<Doctor, DoctorDetailViewModel> converter)
+        public DoctorController
+            (
+                DoctorRepository doctorRepository,
+                AccountRepository accountRepository,
+                DepartmentRepository departmentRepository
+            )
         {
             this.doctorRepository = doctorRepository;
             this.accountRepository = accountRepository;
             this.departmentRepository = departmentRepository;
-            this.converter = converter;
         }
 
         /// <summary>
@@ -52,8 +53,18 @@ namespace Webapp.Controllers
             
             // Convert to viewmodels
             vm.Doctors = converter.ModelsToViewModel(doctors);
+            //foreach(Doctor doctor in doctors)
+            //{
+            //    UserAccount account = accounts.FirstOrDefault(a => a.DoctorId == doctor.Id);
+            //    if (account == null)
+            //    {
+            //        continue;
+            //    }
+
+            //    doctor.Name = account.Name;
+            //    vm.Doctors.Add(converter.ModelToViewModel(doctor));
+            //}
             
-            // Return view
             return View(vm);
         }
 
@@ -86,6 +97,8 @@ namespace Webapp.Controllers
         public IActionResult Create()
         {
             DoctorDetailViewModel vm = new DoctorDetailViewModel();
+            vm.Genders = converter.GetGenders();
+            //vm.Institutions = GetInstitutionsForDropdown().ToList();
             return View(vm);
         }
 
@@ -95,20 +108,24 @@ namespace Webapp.Controllers
         /// <param name="model">Model to insert</param>
         /// <returns></returns>
         [HttpPost]
-        [Authorize(Roles ="admin")]
-        public IActionResult Create(DoctorDetailViewModel model)
+        [Authorize(Roles = "admin")]
+        public IActionResult Create(DoctorDetailViewModel vm)
         {
             // Check if model is valid
             if (ModelState.IsValid)
             {
-                Doctor doctor = converter.ViewModelToModel(model);
-                // Create the doctor
+                Doctor doctor = converter.ViewModelToModel(vm);
                 long id = doctorRepository.Insert(doctor);
                 return RedirectToAction("Details", new { id });
             }
-            return View();
+            else
+            {
+                vm.Genders = converter.GetGenders();
+                return View();
+            }
         }
 
+        [HttpGet]
         [Authorize(Roles = "admin")]
         public IActionResult Edit(long id)
         {
@@ -126,21 +143,32 @@ namespace Webapp.Controllers
 
         [HttpPost]
         [Authorize(Roles = "admin")]
-        public IActionResult Edit(long id, DoctorDetailViewModel model)
+        public IActionResult Edit(long id, DoctorDetailViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                if (id != model.EmployeeNumber)
+                if (id != vm.EmployeeNumber)
+                {
                     return BadRequest("Ids do not match");
+                }
 
-                Doctor doctor = converter.ViewModelToModel(model);
+                Doctor doctor = converter.ViewModelToModel(vm);
 
                 if (doctorRepository.Update(doctor))
+                {
                     return RedirectToAction("Details", new { doctor.Id });
+                }
                 else
-                    return View(model);
+                {
+                    vm.Genders = converter.GetGenders();
+                    return View(vm);
+                }
             }
-            return View();
+            else
+            {
+                vm.Genders = converter.GetGenders();
+                return View(vm);
+            }
         }
 
         [Authorize(Roles = "admin")]
