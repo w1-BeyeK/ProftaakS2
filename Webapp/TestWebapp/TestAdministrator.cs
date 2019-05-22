@@ -10,7 +10,7 @@ namespace TestWebapp
         [Fact]
         public void AdministratorConstructor()
         {
-            string username = "Henk";
+            string username = "HENK";
             string email = "Henk@gmail.com";
             string role = "admin";
             string name = "Henk";

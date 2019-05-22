@@ -84,7 +84,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(2, doctorRepository.GetByDepartment(1).Count);
+            Assert.Equal(2, doctorRepository.GetByDoctorWithDepartment(1).Count);
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
-            Exception ex = Assert.Throws<NullReferenceException>(() => doctorRepository.GetByDepartment(-1));
+            Exception ex = Assert.Throws<NullReferenceException>(() => doctorRepository.GetByDoctorWithDepartment(-1));
             Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 
@@ -119,7 +119,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal("Soof", doctorRepository.GetById(12).UserName);
+            Assert.Equal("SOOF", doctorRepository.GetById(12).UserName);
         }
 
         [Fact]

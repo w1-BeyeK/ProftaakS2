@@ -10,7 +10,7 @@ namespace TestWebapp
         [Fact]
         public void DoctorConstructor()
         {
-            string username = "Sjaak";
+            string username = "SJAAK";
             string password = "Loeki";
             string email = "sk@gmail.com";
             string name = "Piotr";
