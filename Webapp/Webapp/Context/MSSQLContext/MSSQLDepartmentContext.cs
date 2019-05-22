@@ -95,6 +95,11 @@ namespace Webapp.Context.MSSQLContext
                 return default(Department);
         }
 
+        /// <summary>
+        /// Inserts a Department and returns the Id
+        /// </summary>
+        /// <param name="obj"> Department </param>
+        /// <returns> Inserted Long </returns>
         public List<Department> GetForDoctor(long doctorId)
         {
             List<Department> result = new List<Department>();
