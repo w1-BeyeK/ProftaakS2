@@ -10,6 +10,7 @@
 <p>
     <a asp-action="Create">Nieuwe toevoegen</a>
 </p>
+<div class="hidden" id="treatmentTypeContainer">
 <table class="table table-striped table-hover" id="treatmentTypeTable" style="width:100%;">
     <thead>
         <tr>
@@ -51,6 +52,7 @@
     <script>
     $("document").ready(function () {
         initDataTable();
+        $("#treatmentTypeContainer").removeClass("hidden");
     });
 
     function initDataTable() {
