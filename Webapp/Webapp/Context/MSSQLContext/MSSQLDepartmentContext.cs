@@ -95,6 +95,25 @@ namespace Webapp.Context.MSSQLContext
                 return default(Department);
         }
 
+        public List<Department> GetForDoctor(long doctorId)
+        {
+            List<Department> result = new List<Department>();
+
+            string query = $"select * from PTS2_Department where Id in (select dd.DepartmentId FROM PTS2_Department_Doctor dd where dd.DoctorId = @doctorId)";
+
+            var dbResult = handler.ExecuteSelect(query, doctorId) as DataTable;
+
+            // Parse all rows
+            foreach (DataRow dr in dbResult.Rows)
+            {
+                // Parse only if succeeded
+                if (parser.TryParse(dr, out Department department))
+                    result.Add(department);
+            }
+
+            return result;
+        }
+
         /// <summary>
         /// Inserts a Department and returns the Id
         /// </summary>
