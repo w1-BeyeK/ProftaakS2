@@ -260,14 +260,14 @@ else if (User.IsInRole("doctor"))
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Birthday" class="h4">Geboortedatum</label>
-                                    <input type="date" asp-for="Doctor.Birth" value="@Model.Doctor.Birth.ToString("yyyy-MM-dd")" class="form-control" id="birthday" placeholder="Geboortedatum" title="Voer hier je Geboortedatum in.">
+                                    <input type="date" asp-for="Doctor.Birth" value="@Model.Doctor.Birth.ToString("yyyy-MM-dd")" readonly class="form-control" id="birthday" placeholder="Geboortedatum" title="Voer hier je Geboortedatum in.">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Username" class="h4">Gebruikersnaam</label>
-                                    <input type="text" asp-for="Doctor.UserName" value="@Model.Doctor.UserName" class="form-control" id="username" placeholder="username" title="voer je gebruikersnaam in">
+                                    <input type="text" asp-for="Doctor.UserName" value="@Model.Doctor.UserName" readonly class="form-control" id="username" placeholder="username" title="voer je gebruikersnaam in">
                                 </div>
                             </div>
 

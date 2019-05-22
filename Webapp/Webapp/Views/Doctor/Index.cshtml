@@ -30,13 +30,11 @@
                     <td>
                         @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber })
 
-                        @{ if (User.IsInRole("admin"))
+                        @if (User.IsInRole("admin"))
                            {
-                            @:| @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber })
+                            @: | @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) | 
+                            @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
                            } 
-                         }
-
-                        | @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
                     </td>
                 </tr>
             }

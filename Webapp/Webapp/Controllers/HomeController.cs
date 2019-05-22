@@ -81,15 +81,8 @@ namespace Webapp.Controllers
                     // If success
                     if (result.Succeeded)
                     {
-                        // Send to correct page based on role
-                        if (User.IsInRole("admin"))
-                        {
-                            return RedirectToAction("dashboard");
-                        }
-                        else
-                        {
-                            return RedirectToAction("index", "profile");
-                        }
+                        // Send to dashboard
+                        return RedirectToAction("dashboard");
                     }
                     else
                     {
