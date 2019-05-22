@@ -81,7 +81,7 @@ namespace Webapp.Context.MSSQLContext
                                "@Phone = @phone, " +
                                "@PrivPhone = @privPhone, " +
                                "@Birthdate = @birthdate, " +
-                               "@Active = @active";
+                               "@Active = 1";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
