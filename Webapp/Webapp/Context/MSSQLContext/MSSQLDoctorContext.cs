@@ -231,17 +231,15 @@ namespace Webapp.Context.MSSQLContext
         }
 
         //TODO : CHECK THIS QUERY!!!
-        public List<Doctor> GetByDepartment(long id)
+        public List<Doctor> GetByDoctorWithDepartment(long id)
         {
             try
             {
                 // Create result
                 List<Doctor> result = new List<Doctor>();
 
-                string query1 = $"";
-
                 // Set query
-                string query = $"select * from PTS2_Doctor d INNER JOIN PTS2_DoctorDepartment dd ON d.Id = dd.doctorId where dd.DepartmentId IN (select departmentId from PTS2_DoctorDepartment dd inner join PTS2_Doctor doctor on dd.doctorID = @id)";
+                string query = $"select distinct d.Id, a.Name, d.Gender, d.Phone, d.BirthDate, d.PrivMail, d.PrivPhone from PTS2_Doctor d right join PTS2_Department_Doctor dd ON d.Id = dd.doctorId right join PTS2_Account a ON d.Id = a.Id where dd.DepartmentId IN (select departmentId from PTS2_Department_Doctor dd WHERE dd.doctorId = @id) and d.Id != @id";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
@@ -321,6 +319,41 @@ namespace Webapp.Context.MSSQLContext
             catch (Exception e)
             {
                 throw new NotImplementedException();
+            }
+        }
+
+        public bool CheckDoctorRelationship(long userId, long doctorId)
+        {
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+
+                // Set query
+                string query = $"select distinct d.Id from PTS2_Doctor d inner join PTS2_Department_Doctor dd ON d.Id = dd.doctorId where dd.DepartmentId IN (select departmentId from PTS2_Department_Doctor dd WHERE dd.doctorId = @userId) and d.Id = @doctorId";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("userId", userId),
+                    new KeyValuePair<string, object>("doctorId", doctorId)
+                };
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                if (dbResult != null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
     }
