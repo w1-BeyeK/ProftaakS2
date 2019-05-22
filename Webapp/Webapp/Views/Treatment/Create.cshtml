@@ -24,7 +24,7 @@
                             <select asp-for="PatientId" type="text" class="form-control" placeholder="Naam van de patiënt" title="Naam van de patiënt.">
                                 @foreach (var Patient in Model.Patients)
                                 {
-                                <option value="@Patient.UserId">@Patient.Name</option>
+                                    <option value="@Patient.UserId">@Patient.Name</option>
                                 }
                             </select>
                         </div>
@@ -70,14 +70,17 @@
                             <input type="time" class="form-control" asp-for="EndTime" title="Eindtijd behandeling">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <div class="col-xs-12">
-                            <label for="Comments"><h4>Bericht</h4></label>
-                            <input type="text" class="form-control" asp-for="Description" placeholder="Bericht" title="Bericht.">
-                            <br />
-                            <br />
+                    @if (User.IsInRole("doctor"))
+                    {
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="Comments"><h4>Nieuw Commentaar</h4></label>
+                                <input type="text" class="form-control" asp-for="Description.Title" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                <br />
+                                <input type="text" class="form-control" asp-for="Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                            </div>
                         </div>
-                    </div>
+                    }
                     <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Create">Maak Aan</button>
                 </form>
                 <hr>
