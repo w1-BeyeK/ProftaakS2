@@ -28,7 +28,7 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Genders[item.GenderId])</td>
                     <td>
-                        @Html.ActionLink("Inzage", "Details", new { id = item.EmployeeNumber })
+                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber })
 
                         @{ if (User.IsInRole("admin"))
                            {

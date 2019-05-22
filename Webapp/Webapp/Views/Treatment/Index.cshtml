@@ -31,7 +31,7 @@
                     <td>@item.BeginDate</td>
                     <td>@item.EndDate</td>
                     <td>
-                        @Html.ActionLink("Inzage", "Treatment", "Patient", new { id = item.Id })
+                        @Html.ActionLink("Details", "Treatment", "Patient", new { id = item.Id })
                         @if (User.IsInRole("doctor"))
                         {
                            @: | @Html.ActionLink("Aanpassen", "Edit", new { id = item.Id })

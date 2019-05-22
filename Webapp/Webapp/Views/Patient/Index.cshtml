@@ -26,7 +26,7 @@
                     <td>@item.Gender</td>
                     <td>@item.Birth.ToShortDateString()</td>
                     <td>
-                        @Html.ActionLink("Inzage", "PatientDetails", "Profile", new { id = item.UserId }) |
+                        @Html.ActionLink("Details", "PatientDetails", "Profile", new { id = item.UserId }) |
                         @Html.ActionLink("Aanpassen", "Treatment", "Patient", new { id = item.UserId })
                     </td>
                 </tr>
