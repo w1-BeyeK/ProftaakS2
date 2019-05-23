@@ -84,7 +84,7 @@ namespace Webapp.Context.MemoryContext
         }
 
         //TODO : Do we want this???
-        public bool Delete(Treatment obj)
+        public bool Delete(long id, bool active)
         {
             throw new NotImplementedException();
         }

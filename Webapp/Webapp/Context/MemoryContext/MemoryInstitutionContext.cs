@@ -56,9 +56,9 @@ namespace Webapp.Context.MemoryContext
             return BaseMemoryContext.institutions.FirstOrDefault(i => i.Id == id);
         }
 
-        public bool Delete(Institution obj)
+        public bool Delete(long id, bool active)
         {
-            BaseMemoryContext.institutions.FirstOrDefault(i => i.Id == obj.Id).Active = obj.Active;
+            BaseMemoryContext.institutions.FirstOrDefault(i => i.Id == id).Active = active;
             return true;
         }
     }

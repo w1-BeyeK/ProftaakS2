@@ -82,7 +82,7 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
-            Assert.True(treatmentTypeRepository.Delete(9));
+            Assert.True(treatmentTypeRepository.Delete(9, false));
         }
 
         [Fact]
@@ -91,7 +91,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             treatmentTypeRepository = new TreatmentTypeRepository(context);
 
-            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.Delete(-1));
+            Exception ex = Assert.Throws<NullReferenceException>(() => treatmentTypeRepository.Delete(-1, false));
             Assert.Equal("Het behandelingsTypeId is leeg.", ex.Message);
         }
 

@@ -35,13 +35,13 @@ namespace Webapp.Repository
             return context.Update(department);
         }
 
-        public bool Delete(long id)
+        public bool Delete(long id, bool active)
         {
             if (id < 1)
             {
                 throw new NullReferenceException("Het afdelingId is leeg.");
             }
-            return context.Delete(GetById(id));
+            return context.Delete(id, active);
         }
         
         public Department GetById(long id)
