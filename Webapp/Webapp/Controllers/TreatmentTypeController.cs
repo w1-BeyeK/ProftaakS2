@@ -13,8 +13,8 @@ using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    [Authorize(Roles = "admin")]
-    public class TreatmentTypeController : Controller
+    [Authorize(Roles = "admin, doctor")]
+    public class TreatmentTypeController : BaseController
     {
         //global instances
         private readonly TreatmentTypeRepository repository;
@@ -48,9 +48,17 @@ namespace Webapp.Controllers
             {
                 TreatmentTypes = new List<TreatmentTypeDetailViewModel>()
             };
-
-            // Retrieve all treatmenttypes
-            List<TreatmentType> treatmentTypes = repository.GetAll();
+            List<TreatmentType> treatmentTypes = new List<TreatmentType>();
+            if (User.IsInRole("admin"))
+            {
+                // Retrieve all treatmenttypes
+                treatmentTypes = repository.GetAll();
+            }
+            else if (User.IsInRole("doctor"))
+            {
+                long id = GetUserId();
+                treatmentTypes = repository.GetTreatmentTypesByDoctorId(GetUserId());
+            }
             if (treatmentTypes.Count < 1)
                 return View(vm);
 
@@ -94,6 +102,7 @@ namespace Webapp.Controllers
         /// Method gets all objects form departments and institutions and coverts them to a viewmodel.
         /// </summary>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Create()
         {
             // Retrieve for dropdown
@@ -136,6 +145,7 @@ namespace Webapp.Controllers
         /// <param name="vm"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Create(TreatmentTypeDetailViewModel vm)
         {
             // Check if model is valid
@@ -160,6 +170,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(long id)
         {
             // Check if model is valid
@@ -210,6 +221,7 @@ namespace Webapp.Controllers
         /// <param name="vm"></param>
         /// <returns></returns>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public IActionResult Edit(TreatmentTypeDetailViewModel vm)
         {
             // Check if model is valid
@@ -232,6 +244,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id"> Id of an TreatmentType</param>
         /// <returns> Send the user back to the page with all treatmentTypes</returns>
+        [Authorize(Roles = "admin")]
         public IActionResult Delete(long id)
         {
             // Check if is valid

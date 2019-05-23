@@ -20,7 +20,7 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="name"><h4>Patiënt</h4></label>
-                                <input type="text" class="form-control" asp-for="PatientName" value="@Model.PatientName" title="//Naam van de patiënt//">
+                                <input type="text" class="form-control" value="@Model.PatientName" readonly title="//Naam van de patiënt//">
                             </div>
                         </div>
                         <div class="form-group">
@@ -32,7 +32,7 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label for="nameTreatment"><h4>Behandelingstype</h4></label>
-                                <select asp-for="TypeId" type="text" class="form-control" placeholder="Type van de behandeling" title="Type van de behandeling.">
+                                <select asp-for="TypeId" type="text" class="form-control" placeholder="Type van de behandeling" disabled     title="Type van de behandeling.">
                                     @foreach (var Type in Model.TreatmentTypes)
                                     {
                                         if (@Model.TypeId == Type.Id)
@@ -73,11 +73,8 @@
                         </div>
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label for="Comments"><h4>Bericht</h4></label>
-                                <input type="text" class="form-control" asp-for="Description" value="@Model.Description" title="Bericht.">
                                 <br />
-                                <br />
-                                <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Edit">Pas Aan</button>
+                                <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Edit">Pas Aan</button> 
                             </div>
                         </div>
                     </form>
@@ -86,6 +83,7 @@
             </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
+    <br />
     <div>
         <a asp-action="Index">Terug naar lijst</a>
     </div>

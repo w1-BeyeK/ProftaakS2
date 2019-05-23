@@ -125,7 +125,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivMail" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivMail" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Email
@@ -135,7 +135,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivGender" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivGender" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Geslacht
@@ -145,7 +145,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivBirthDate" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivBirthDate" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Geboortedatum
@@ -155,7 +155,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivPhone" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivPhone" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Telefoonnummer
@@ -165,7 +165,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivAdress" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivAdress" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Adres
@@ -175,7 +175,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivContactPersonPhone" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonPhone" readonly>
 
                                         <span class="slider"></span>
                                     </label>
@@ -186,7 +186,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Patient.PrivContactPersonName" readonly>
+                                        <input type="checkbox" checked="@Model.Patient.PrivContactPersonName" readonly>
                                         <span class="slider"></span>
                                     </label>
                                     Contact persoon naam
@@ -204,7 +204,7 @@ else if (User.IsInRole("doctor"))
 {
     <div class="container bootstrap snippet">
         <div class="row">
-            <div class="col-sm-10"><h1>Doctor</h1><hr /></div>
+            <div class="col-sm-10"><h1>Arts</h1><hr /></div>
         </div>
         <div class="row">
             <div class="col-sm-9">
@@ -301,7 +301,7 @@ else if (User.IsInRole("doctor"))
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Doctor.PrivMail" disabled>
+                                        <input type="checkbox" checked="@Model.Doctor.PrivMail" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Email
@@ -311,7 +311,7 @@ else if (User.IsInRole("doctor"))
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label class="switch">
-                                        <input type="checkbox" value="@Model.Doctor.PrivPhonenumber" disabled>
+                                        <input type="checkbox" checked="@Model.Doctor.PrivPhonenumber" disabled>
                                         <span class="slider"></span>
                                     </label>
                                     Telefoonnummer

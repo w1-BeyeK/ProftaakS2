@@ -73,6 +73,11 @@ namespace Webapp.Repository
             return context.GetAll();
         }
 
+        public List<TreatmentType> GetTreatmentTypesByDoctorId(long id)
+        {
+            return context.GetTreatmentTypesByDoctorId(id);
+        }
+
         /// <summary>
         /// Returns single instance of TreatmentType based on primary key (id)
         /// </summary>

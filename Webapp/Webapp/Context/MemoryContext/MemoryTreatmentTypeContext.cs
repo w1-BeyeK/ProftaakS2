@@ -63,5 +63,30 @@ namespace Webapp.Context.MemoryContext
         {
             return BaseMemoryContext.treatmentTypes.Find(t => t.Id == id);
         }
+
+        TreatmentType ITreatmentTypeContext.GetByTreatmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<TreatmentType> ITreatmentTypeContext.GetTreatmentTypesByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalGenerics<TreatmentType>.Insert(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<TreatmentType>.Update(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<TreatmentType>.Delete(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

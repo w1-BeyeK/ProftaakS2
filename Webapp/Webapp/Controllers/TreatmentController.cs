@@ -114,13 +114,18 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Create(TreatmentDetailViewModel vm)
         {
-            // Convert back and create treatment
-            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
-            treatment.DoctorId = GetUserId();
-            Comment comment = vm.Description;
-            comment.TreatmentId = treatmentRepository.Insert(treatment);
-            commentRepository.Insert(comment);
-            return RedirectToAction("index", "treatment");
+            if (ModelState.IsValid)
+            {
+                // Convert back and create treatment
+                Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
+                treatment.DoctorId = GetUserId();
+                Comment comment = vm.Description;
+                comment.TreatmentId = treatmentRepository.Insert(treatment);
+                commentRepository.Insert(comment);
+                return RedirectToAction("index", "treatment");
+            }
+            else
+                return RedirectToAction(nameof(Create));
         }
 
         /// <summary>
