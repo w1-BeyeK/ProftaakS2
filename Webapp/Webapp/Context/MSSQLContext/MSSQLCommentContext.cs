@@ -32,7 +32,7 @@ namespace Webapp.Context
                 };
 
             // Tell the handler to execute the query
-            var dbResult = handler.ExecuteCommand(query, parameters) as DataTable;
+            var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
             if (dbResult == null)
             {
