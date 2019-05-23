@@ -50,15 +50,11 @@ namespace Webapp.Controllers
             {
                 // Retrieve doctors
                 doctors = doctorRepository.GetAll();
-                if (doctors.Count < 1)
-                    return View();
             }
             else if(User.IsInRole("doctor"))
             {
                 long userId = GetUserId();
                 doctors = doctorRepository.GetByDoctorWithDepartment(userId);
-                if (doctors.Count < 1)
-                    return View();
             }
             
             // Convert to viewmodels

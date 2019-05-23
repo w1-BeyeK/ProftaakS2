@@ -30,14 +30,17 @@ namespace Webapp.Models.Data
             NormalizedEmail = email.ToUpper();
             Role = "admin";
         }
-        
+
         public BaseAccount(long id, string userName, string email, string name)
         {
             Id = id;
             UserName = userName;
             Email = email;
             Name = name;
+            if (userName != null)
+            { 
             NormalizedUserName = userName.ToUpper();
+            }
             NormalizedEmail = email.ToUpper();
             Role = "admin";
         }

@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Gender" class="h4">Geslacht</label>
-                                    <label typeof="text" class="form-control" asp-for="@Model.Patient.GenderId">
+                                    <label typeof="text" class="form-control">
                                         @foreach (string gender in Model.Patient.Genders)
                                         {
                                             if (Model.Patient.Genders.IndexOf(gender) == Model.Patient.GenderId)
@@ -66,7 +66,7 @@
                             <div class="form-group">
                                 <div class="col-xs-6">
                                     <label for="Username" class="h4">Gebruikersnaam</label>
-                                    <input type="text" asp-for="Patient.UserName" value="@Model.Patient.UserName" class="form-control" id="username" placeholder="username" title="voer je gebruikersnaam in">
+                                    <input type="text" value="@Model.Patient.UserName" class="form-control" disabled id="username" placeholder="username" title="voer je gebruikersnaam in">
                                 </div>
                             </div>
 
