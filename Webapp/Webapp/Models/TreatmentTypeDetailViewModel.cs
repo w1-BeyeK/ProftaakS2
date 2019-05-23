@@ -16,7 +16,7 @@ namespace Webapp.Models
         public string Name { get; set; }
 
         [Required]
-        [StringLength(65535)]
+        [StringLength(300, ErrorMessage = "Beschrijving mag maximaal 300 karakters zijn.")]
         [Display(Name = "Beschrijving")]
         public string Description { get; set; }
 

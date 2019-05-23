@@ -15,7 +15,7 @@ namespace Webapp.Models
         public long UserId { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(75, ErrorMessage = "Name length must be between 1 and 75.", MinimumLength = 1)]
         [Display(Name = "Naam")]
         public string Name { get; set; }
 

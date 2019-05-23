@@ -14,17 +14,17 @@ namespace Webapp.Models
         public long Id { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Username length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(50, ErrorMessage = "Username length must be between 1 and 50.", MinimumLength = 1)]
         [Display(Name = "Gebruikersnaam")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Email length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(255, ErrorMessage = "Email length must be between 1 and 255.", MinimumLength = 1)]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(50, ErrorMessage = "Name length must be between 1 and 50.", MinimumLength = 1)]
         [Display(Name = "Naam")]
         public string Name { get; set; }
 
@@ -47,12 +47,12 @@ namespace Webapp.Models
         public long BSN { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "ContactPersonName length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(75, ErrorMessage = "ContactPersonName length must be between 1 and 75.", MinimumLength = 1)]
         [Display(Name = "Naam van de contactpersoon")]
         public string ContactPersonName { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "ContactPersonPhone length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(50, ErrorMessage = "ContactPersonPhone length must be between 1 and 50.", MinimumLength = 1)]
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "Telefoonnummer van de contactpersoon")]
         public string ContactPersonPhone { get; set; }
