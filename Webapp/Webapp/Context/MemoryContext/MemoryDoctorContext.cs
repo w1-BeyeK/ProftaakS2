@@ -10,12 +10,12 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryDoctorContext : IDoctorContext
     {
-        public bool Delete(Doctor doctor)
+        public bool Delete(long id, bool active)
         {
-            int index = BaseMemoryContext.doctors.FindIndex(t => t.Id == doctor.Id);
+            int index = BaseMemoryContext.doctors.FindIndex(t => t.Id == id);
             if (index >= 0)
             {
-                BaseMemoryContext.doctors[index].Active = doctor.Active;
+                BaseMemoryContext.doctors[index].Active = active;
                 return true;
             }
             return false;

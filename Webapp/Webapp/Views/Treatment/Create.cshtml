@@ -80,11 +80,10 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="Comments"><h4>Nieuw Commentaar</h4></label>
-                                <input type="text" class="form-control" asp-for="Description.Title" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                <input type="text" class="form-control" asp-for="Description.Title" placeholder="Nieuwe Opmerking" title="Commentaar op behandeling.">
                                 <br />
-                                <input type="text" class="form-control" asp-for="Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
-                                <span asp-validation-for="Description" class="text-danger"></span>
+                                @Html.TextAreaFor(e => e.Description.Description, new { @class = "form-control", @placeholder="Inhoud van opmerking" })
+                                @*<input type="text" class="form-control" asp-for="Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">*@
                             </div>
                         </div>
                     }

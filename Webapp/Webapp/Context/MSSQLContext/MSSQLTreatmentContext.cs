@@ -154,7 +154,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="treatment"> Treatment </param>
         /// <returns> Bool </returns>
-        public bool Delete(Treatment treatment)
+        public bool Delete(long id, bool active)
         {
             //try
             //{

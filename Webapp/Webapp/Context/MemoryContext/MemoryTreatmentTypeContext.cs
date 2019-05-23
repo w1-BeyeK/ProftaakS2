@@ -35,11 +35,11 @@ namespace Webapp.Context.MemoryContext
             return false;
         }
 
-        public bool Delete(TreatmentType treatmentType)
+        public bool Delete(long id, bool active)
         {
-            if (BaseMemoryContext.treatmentTypes.Exists(t => t.Id == treatmentType.Id))
+            if (BaseMemoryContext.treatmentTypes.Exists(t => t.Id == id))
             {
-                BaseMemoryContext.treatmentTypes.FirstOrDefault(t => t.Id == treatmentType.Id).Active = treatmentType.Active;
+                BaseMemoryContext.treatmentTypes.FirstOrDefault(t => t.Id == id).Active = active;
                 return true;
             }
             return false;

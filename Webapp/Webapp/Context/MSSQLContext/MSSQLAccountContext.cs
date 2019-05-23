@@ -19,7 +19,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="obj"> UserAccount </param>
         /// <returns> Bool </returns>
-        public bool Delete(UserAccount obj)
+        public bool Delete(long id, bool active)
         {
             try
             {
@@ -27,8 +27,8 @@ namespace Webapp.Context.MSSQLContext
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", obj.Id),
-                    new KeyValuePair<string, object>("active", true? "1" : "0")
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", active? "1" : "0")
                 });
                 return true;
             }

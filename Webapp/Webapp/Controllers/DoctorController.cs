@@ -126,7 +126,7 @@ namespace Webapp.Controllers
             else
             {
                 vm.Genders = converter.GetGenders();
-                return View();
+                return View(vm);
             }
         }
 
@@ -181,7 +181,7 @@ namespace Webapp.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!departmentRepository.Delete(id))
+                if (!doctorRepository.Delete(id, false))
                     return BadRequest("Something went wrong deleting object");
             }
             return RedirectToAction("Index");

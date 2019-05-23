@@ -8,7 +8,7 @@ using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DoctorRepository // : ICRUDRepository<T>
+    public class DoctorRepository //: ICRUDRepository<Doctor>
     {
         private readonly IDoctorContext context;
 
@@ -108,6 +108,15 @@ namespace Webapp.Repository
                 throw new NullReferenceException("Het dokterId is leeg.");
             }
             return context.CheckDoctorRelationship(userId, doctorId);
+        }
+
+        public bool Delete(long id, bool active)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het docterId is leeg.");
+            }
+            return context.Delete(id, active);
         }
     }
 }

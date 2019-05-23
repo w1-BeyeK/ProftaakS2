@@ -9,11 +9,11 @@ namespace Webapp.Models
         public long Id { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(75, ErrorMessage = "Name length must be between 1 and 75.", MinimumLength = 1)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Description length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(300, ErrorMessage = "Description length must be between 1 and 300.", MinimumLength = 1)]
         public string Description { get; set; }
 
         [Required]

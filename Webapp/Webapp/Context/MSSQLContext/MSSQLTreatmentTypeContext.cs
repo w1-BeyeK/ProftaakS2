@@ -156,7 +156,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="treatmentType"> TreatmentType </param>
         /// <returns> Bool </returns>
-        public bool Delete(TreatmentType treatmentType)
+        public bool Delete(long id, bool active)
         {
             try
             {
@@ -164,8 +164,8 @@ namespace Webapp.Context.MSSQLContext
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", treatmentType.Id),
-                    new KeyValuePair<string, object>("active", treatmentType.Active)
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", active)
                 });
                 return true;
             }

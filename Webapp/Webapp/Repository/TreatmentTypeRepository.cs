@@ -54,14 +54,14 @@ namespace Webapp.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public bool Delete(long id)
+        public bool Delete(long id, bool active)
         {
             // Set treatmenttype inactive in database
             if (id < 1)
             {
                 throw new NullReferenceException("Het behandelingsTypeId is leeg.");
             }
-            return context.Delete(GetById(id));
+            return context.Delete(id, active);
         }
 
         /// <summary>

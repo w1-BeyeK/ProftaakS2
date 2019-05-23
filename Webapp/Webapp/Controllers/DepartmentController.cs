@@ -231,7 +231,7 @@ namespace Webapp.Controllers
             if(ModelState.IsValid)
             {
                 // Delete the department
-                if (!departmentRepository.Delete(id))
+                if (!departmentRepository.Delete(id, false))
                     return BadRequest("Something went wrong deleting object");
             }
             return RedirectToAction("Index");

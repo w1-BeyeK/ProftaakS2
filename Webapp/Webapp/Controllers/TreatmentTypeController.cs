@@ -251,7 +251,7 @@ namespace Webapp.Controllers
             if(ModelState.IsValid)
             {
                 // Delete treatmenttype
-                repository.Delete(id);
+                repository.Delete(id, false);
             }
             return RedirectToAction("index");
         }

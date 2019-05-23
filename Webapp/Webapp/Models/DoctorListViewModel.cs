@@ -15,7 +15,7 @@ namespace Webapp.Models
         public long EmployeeNumber { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "{0} length must be between {1} and {200}.", MinimumLength = 1)]
+        [StringLength(75, ErrorMessage = "Naam lengte moet tussen 1 and 75 karakters.", MinimumLength = 1)]
         [Display(Name = "Naam")]
         public string Name { get; set; }
 

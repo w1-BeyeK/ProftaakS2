@@ -18,7 +18,7 @@ namespace Webapp.Models
         public DateTime Birth { get; set; }
 
         [Required]
-        [StringLength(15, ErrorMessage = "Telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
+        [StringLength(15, ErrorMessage = "Telefoonnummer moet tussen de 7 en 15 tekens lang zijn.", MinimumLength = 7)]
         [Phone]
         [Display(Name = "Telefoonnummer")]
         public string Phone { get; set; }
@@ -28,18 +28,18 @@ namespace Webapp.Models
         public int GenderId { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Username length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(75, ErrorMessage = "Gebruikersnaam moet minimaal 1 en maximaal 75 karakters lang zijn.", MinimumLength = 1)]
         [Display(Name = "Gebruikersnaam")]
         public string UserName { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Email length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(255, ErrorMessage = "Email moet minimaal 1 en maximaal 255 karakters lang zijn.", MinimumLength = 1)]
         [EmailAddress]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
         [Required]
-        [StringLength(200, ErrorMessage = "Name length must be between 1 and 200.", MinimumLength = 1)]
+        [StringLength(50, ErrorMessage = "Naam moet minimaal 1 en maximaal 50 karakters lang zijn.", MinimumLength = 1)]
         [Display(Name = "Naam")]
         public string Name { get; set; }
 

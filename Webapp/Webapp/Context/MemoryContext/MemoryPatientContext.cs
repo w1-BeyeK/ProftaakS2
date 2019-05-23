@@ -25,9 +25,9 @@ namespace Webapp.Context.MemoryContext
             return patient.Id;
         }
 
-        public bool Delete(Patient patient)
+        public bool Delete(long id, bool active)
         {
-            BaseMemoryContext.patients.FirstOrDefault(t => t.Id == patient.Id).Active = patient.Active;
+            BaseMemoryContext.patients.FirstOrDefault(t => t.Id == id).Active = active;
             return true;
         }
 
