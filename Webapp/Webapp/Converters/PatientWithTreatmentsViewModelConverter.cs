@@ -57,6 +57,7 @@ namespace Webapp.Converters
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
             {
+
                 //The first comment is the description
                 //t.Comments.OrderBy(x => x.Date);
                 //List<Comment> comments = new List<Comment>(t.Comments);
@@ -71,6 +72,8 @@ namespace Webapp.Converters
                     TypeId = t.TreatmentType.Id,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
+                    Comments = t.Comments
+
                     //Comments = comments,
                     //Description = description,
                     //Age = t.GetAge()

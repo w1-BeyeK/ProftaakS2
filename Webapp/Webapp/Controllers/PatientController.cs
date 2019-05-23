@@ -75,9 +75,11 @@ namespace Webapp.Controllers
                     long patientId = patientRepository.GetPatientIdByTreatmentId(id);
                     patient = patientRepository.GetById(patientId);
                     patient.Treatments = treatmentRepository.GetByPatient(patientId);
+                    
                     foreach (Treatment t in patient.Treatments)
                     {
                         t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                        t.Comments = commentRepository.GetByTreatment(id);
                     }
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }
