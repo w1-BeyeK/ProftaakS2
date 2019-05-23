@@ -392,5 +392,40 @@ namespace Webapp.Context.MSSQLContext
                 throw e;
             }
         }
+
+        public List<Doctor> GetByPatientWithTreatment(long id)
+        {
+            try
+            {
+                // Create result
+                List<Doctor> result = new List<Doctor>();
+                // Set query
+                string query = "select distinct d.Id, a.Name, d.Gender, d.Phone, d.BirthDate, d.PrivMail, d.PrivPhone from PTS2_Doctor d inner join PTS2_Treatment t ON t.doctorId = d.Id inner join PTS2_Account a ON d.Id = a.Id where t.Id IN (select Id from PTS2_Treatment t WHERE t.patientId = @id) and d.Active = @active";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", "1")
+                };
+
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Doctor doctor))
+                        result.Add(doctor);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }

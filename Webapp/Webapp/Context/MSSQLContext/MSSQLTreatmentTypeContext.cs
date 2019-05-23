@@ -216,10 +216,17 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<TreatmentType> result = new List<TreatmentType>();
                 // Set query
-                string query = "select t.Id, t.DepartmentId, t.Name, t.Description, t.Active from PTS2_TreatmentType t right join PTS2_Department_Doctor dd ON t.DepartmentId = dd.DepartmentId right join PTS2_doctor d ON dd.doctorId = d.Id where dd.DepartmentId IN (select departmentId from PTS2_Department_Doctor dd WHERE dd.doctorId = @id) and d.Id = @id";
+                string query = "select t.Id, t.DepartmentId, t.Name, t.Description, t.Active from PTS2_TreatmentType t inner join PTS2_Department_Doctor dd ON t.DepartmentId = dd.DepartmentId inner join PTS2_doctor d ON dd.doctorId = d.Id where dd.DepartmentId IN (select departmentId from PTS2_Department_Doctor dd WHERE dd.doctorId = @id) and d.Id = @id and t.Active = @active";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", "1")
+                };
+
 
                 // Tell the handler to execute the query
-                var dbResult = handler.ExecuteSelect(query, id) as DataTable;
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
                 foreach (DataRow dr in dbResult.Rows)

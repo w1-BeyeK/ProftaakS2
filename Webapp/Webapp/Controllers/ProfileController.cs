@@ -106,13 +106,13 @@ namespace Webapp.Controllers
             try
             {
                 UserViewModel viewModel = new UserViewModel();
-
                 if (HttpContext.User.IsInRole("doctor"))
                 {
                     if (doctorRepository.CheckDoctorRelationship(userId, id))
                     {
                         Doctor doctor = doctorRepository.GetById(id);
                         viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetTreatmentTypesByDoctorId(id));
                     }
                     else
                     {
@@ -125,7 +125,7 @@ namespace Webapp.Controllers
                     {
                         Doctor doctor = doctorRepository.GetById(id);
                         viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
-                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                        viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetTreatmentTypesByDoctorId(id));
                     }
                     else
                     {

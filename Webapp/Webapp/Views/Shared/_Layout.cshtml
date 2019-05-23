@@ -83,20 +83,14 @@
                                 </ul>
                                 <li>
                                     <a asp-controller="TreatmentType" asp-action="Index">
-                                        <i class="fa fa-stethoscope" aria-hidden="true">
-                                        </i> Behandelingstypes
+                                        <i class="fa fa-heartbeat" aria-hidden="true">
+                                        </i> Type behandelingen
                                     </a>
                                 </li>
                                 <li>
                                     <a asp-action="index" asp-controller="patient">
                                         <i class="fa fa-bed fa-lg">
                                         </i> Patiënten
-                                    </a>
-                                </li>
-                                <li>
-                                    <a asp-controller="Doctor" asp-action="Index">
-                                        <i class="fa fa-user-md fa-lg">
-                                        </i> Artsen
                                     </a>
                                 </li>
                                 <li>
@@ -112,6 +106,15 @@
                                     <a asp-action="index" asp-controller="treatment">
                                         <i class="fa fa-medkit fa-lg">
                                         </i> Behandelingen
+                                    </a>
+                                </li>
+                            }
+                            @if (!User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a asp-controller="Doctor" asp-action="Index">
+                                        <i class="fa fa-user-md fa-lg">
+                                        </i> Artsen
                                     </a>
                                 </li>
                             }

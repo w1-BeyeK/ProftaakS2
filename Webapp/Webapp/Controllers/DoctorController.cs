@@ -16,7 +16,7 @@ namespace Webapp.Controllers
     /// <summary>
     /// Doctor controller
     /// </summary>
-    [Authorize(Roles = "doctor, admin")]
+    [Authorize]
     public class DoctorController : BaseController
     {
         // Repos
@@ -56,6 +56,11 @@ namespace Webapp.Controllers
                 long userId = GetUserId();
                 doctors = doctorRepository.GetByDoctorWithDepartment(userId);
             }
+            else if(User.IsInRole("patient"))
+            {
+                long userId = GetUserId();
+                doctors = doctorRepository.GetByPatientWithTreatment(userId);
+            }
             
             // Convert to viewmodels
             vm.Doctors = converter.ModelsToViewModel(doctors);
@@ -79,6 +84,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id">Id filter</param>
         /// <returns></returns>
+        [Authorize(Roles = "doctor, admin")]
         public IActionResult Details(long id)
         {
             // Check if id is set

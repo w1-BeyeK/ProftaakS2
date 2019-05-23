@@ -84,5 +84,40 @@ namespace Webapp.Context.MemoryContext
         {
             throw new NotImplementedException();
         }
+
+        List<Doctor> IDoctorContext.GetByDoctorWithDepartment(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Doctor> IDoctorContext.GetByPatientWithTreatment(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDoctorContext.AddToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDoctorContext.CheckDoctorRelationship(long userId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalGenerics<Doctor>.Insert(Doctor obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<Doctor>.Update(Doctor obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<Doctor>.Delete(long id, bool active)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

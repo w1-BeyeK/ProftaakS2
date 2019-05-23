@@ -7,37 +7,37 @@
     <div class="container col-md-12" id="buttons">
         @if (Context.User.IsInRole("admin"))
         {
-                    <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="Department">Overzicht</button>
-                        <button class="btn btn-lg" asp-action="Create" asp-controller="Department">Nieuwe toevoegen</button>
-                    </div>
-                    <h2><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="TreatmentType">Overzicht</button>
-                        <button class="btn btn-lg" asp-action="Create" asp-controller="TreatmentType">Nieuwe toevoegen</button>
-                    </div>
-                    <h2><i class="fa fa-user-md fa-lg"></i> Artsen</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="Doctor">Overzicht</button>
-                        <button class="btn btn-lg" asp-action="Create" asp-controller="Doctor">Nieuwe toevoegen</button>
-                    </div>
+            <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="Department">Overzicht</button>
+                <button class="btn btn-lg" asp-action="Create" asp-controller="Department">Nieuwe toevoegen</button>
+            </div>
+            <h2><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="TreatmentType">Overzicht</button>
+                <button class="btn btn-lg" asp-action="Create" asp-controller="TreatmentType">Nieuwe toevoegen</button>
+            </div>
         }
         else if (Context.User.IsInRole("doctor"))
         {
-                    <h2><i class="fa fa-medkit fa-lg"></i> Behandelingen</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="Treatment">Overzicht</button>
-                        <button class="btn btn-lg" asp-action="Create" asp-controller="Treatment">Nieuwe toevoegen</button>
-                    </div>
-                    <h2><i class="fa fa-bed fa-lg"></i> Patiënten</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="Patient">Overzicht</button>
-                    </div>
-                    <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
-                    <div class="list-group-horizontal row">
-                        <button class="btn btn-lg" asp-action="Index" asp-controller="Department">Overzicht</button>
-                    </div>
+            <h2><i class="fa fa-medkit fa-lg"></i> Behandelingen</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="Treatment">Overzicht</button>
+                <button class="btn btn-lg" asp-action="Create" asp-controller="Treatment">Nieuwe toevoegen</button>
+            </div>
+            <h2><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="TreatmentType">Overzicht</button>
+            </div>
+            <h2><i class="fa fa-bed fa-lg"></i> Patiënten</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="Patient">Overzicht</button>
+            </div>
+            <h2><i class="fa fa-hospital-o fa-lg"></i> Afdelingen</h2>
+            <div class="list-group-horizontal row">
+                <button class="btn btn-lg" asp-action="Index" asp-controller="Department">Overzicht</button>
+            </div>
+
         }
         else if (Context.User.IsInRole("patient"))
         {
@@ -46,5 +46,13 @@
                 <button class="btn btn-lg" asp-action="Index" asp-controller="Treatment">Overzicht</button>
             </div>
         }
+        <h2><i class="fa fa-user-md fa-lg"></i> Artsen</h2>
+        <div class="list-group-horizontal row">
+            <button class="btn btn-lg" asp-action="Index" asp-controller="Doctor">Overzicht</button>
+            @if (User.IsInRole("admin"))
+            {
+                <button class="btn btn-lg" asp-action="Create" asp-controller="Doctor">Nieuwe toevoegen</button>
+            }
+        </div>
     </div>
 </form>

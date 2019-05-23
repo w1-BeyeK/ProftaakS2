@@ -28,13 +28,19 @@
                     <td>@Html.DisplayFor(modelItem => item.Name)</td>
                     <td>@Html.DisplayFor(modelItem => item.Genders[item.GenderId])</td>
                     <td>
-                        @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber })
-
+                        @if (User.IsInRole("admin, doctor"))
+                        {
+                            @Html.ActionLink("Details", "Details", new { id = item.EmployeeNumber })
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Details", "DoctorDetails", "Profile", new { id = item.EmployeeNumber })
+                        }
                         @if (User.IsInRole("admin"))
-                           {
-                            @: | @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) | 
+                        {
+                            @: | @Html.ActionLink("Aanpassen", "Edit", new { id = item.EmployeeNumber }) |
                             @Html.ActionLink("Verwijderen", "Delete", new { id = item.EmployeeNumber })
-                           } 
+                        }
                     </td>
                 </tr>
             }

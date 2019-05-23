@@ -84,7 +84,7 @@ namespace Webapp.Context.MemoryContext
             throw new NotImplementedException();
         }
 
-        bool IUniversalGenerics<TreatmentType>.Delete(TreatmentType obj)
+        bool IUniversalGenerics<TreatmentType>.Delete(long id, bool active)
         {
             throw new NotImplementedException();
         }
