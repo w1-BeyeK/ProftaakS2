@@ -5,20 +5,24 @@ using System.Threading.Tasks;
 
 namespace Webapp.Models.Data
 {
-    public class Treatment
+    public class Treatment : Entity
     {
         public string Name { get; set; }
-        public int Id { get; set; }
+        public long Id { get; set; }
+        public long DoctorId { get; set; }
         public DateTime BeginDate { get; set; }
         public DateTime EndDate { get; set; }
         public Patient Patient { get; set; }
+        public long PatientId { get; set; }
         public Doctor Doctor { get; set; }
         public TreatmentType TreatmentType { get; set; }
+        public long TreatmentTypeId { get; set; }
         public List<Comment> Comments { get; set; }
+        public string PatientName { get; set; }
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate)
         {
-            Id = (int)id;
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
@@ -28,7 +32,7 @@ namespace Webapp.Models.Data
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate, Patient patient, Doctor doctor, TreatmentType treatmentType)
         {
-            Id = (int)id;
+            Id = id;
             Name = name;
             BeginDate = beginDate;
             EndDate = endDate;
@@ -51,6 +55,12 @@ namespace Webapp.Models.Data
         public int DaysUntilTreatment()
         {
             throw new NotImplementedException();
+        }
+
+        public int GetAge()
+        {
+            int age = DateTime.Now.Day - EndDate.Day;
+            return age;
         }
 
         public override string ToString()

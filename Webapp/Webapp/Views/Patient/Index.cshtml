@@ -1,15 +1,52 @@
-﻿
+﻿@using Webapp.Models.Data;
+@model IEnumerable<Webapp.Models.PatientListViewModel>;
+
 @{
-    Layout = null;
+    ViewData["Title"] = "Patiëntenlijst";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<!DOCTYPE html>
+<h2>Patiëntenlijst</h2>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-</body>
-</html>
+
+<div id="patientContainer">
+    <table class="table table-striped table-hover" id="patientTable" style="width:100%;">
+        <thead>
+            <tr>
+                <th>Naam</th>
+                <th>Geslacht</th>
+                <th>Geboortedatum</th>
+                <th>Acties</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Birth.ToShortDateString()</td>
+                    <td>
+                        @Html.ActionLink("Details", "PatientDetails", "Profile", new { id = item.UserId }) |
+                        @Html.ActionLink("Aanpassen", "Treatment", "Patient", new { id = item.UserId })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+<script>
+    $("document").ready(function () {
+        initDataTable();
+        $("#patientContainer").removeClass("hidden");
+    });
+
+    function initDataTable() {
+        $("#patientTable").DataTable({
+
+        });
+    }
+
+</script>
+}

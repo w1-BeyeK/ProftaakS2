@@ -7,10 +7,17 @@ namespace Webapp.Models.Data
 {
     public class Administrator : BaseAccount
     {
-        public long EmployeeNumber { get; set; }
-        
+        public Administrator(): base()
+        { }
 
-        public Administrator(int id, string username, string email, string password,string name) : base(id, username, email, name)
+        public long EmployeeNumber { get; set; }
+
+        public Administrator(long id, string username, string email) : base(id, username, email)
+        {
+            Role = "admin";
+        }
+
+        public Administrator(long id, string username, string email, string name) : base(id, username, email, name)
         {
             Role = "admin";
         }

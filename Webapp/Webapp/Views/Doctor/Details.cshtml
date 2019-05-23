@@ -1,0 +1,84 @@
+﻿@model Webapp.Models.DoctorDetailViewModel
+
+@{
+    ViewData["Title"] = "Artsgegevens";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Artsgegevens</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Birth)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Birth)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.GenderId)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Genders[Model.GenderId])
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UserName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.UserName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Age)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Age)
+        </dd>
+        @if (User.IsInRole("admin"))
+        {
+        <dt>
+            @Html.DisplayNameFor(model => model.PrivMail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrivMail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PrivPhonenumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PrivPhonenumber)
+        </dd>
+        }
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("admin"))
+     {
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.EmployeeNumber }) @: | 
+     }
+    <a asp-action="Index">Terug naar lijst</a>
+</div>

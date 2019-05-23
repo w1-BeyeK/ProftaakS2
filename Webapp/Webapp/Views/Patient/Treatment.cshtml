@@ -1,0 +1,161 @@
+﻿@using Webapp.Models.Data;
+@model Webapp.Models.PatientDetailViewModel;
+@{
+    ViewData["Title"] = "Doctor";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<h2>Doctor</h2>
+
+<link rel="stylesheet" href="~/css/User.css" />
+<div class="container bootstrap snippet col-lg-offset-0" id="container">
+    <div class="row">
+        <div class="col-sm-10"><h1>Gegevens patiënt</h1></div>
+    </div>
+    <div class="row">
+        <div class="col-sm-9">
+            <div class="tab-content">
+                <div class="tab-pane active" id="home">
+                    <hr>
+                    <form class="form" action="##" method="post" id="registrationForm">
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label asp-for="Name"><h4>Volledige naam</h4></label>
+                                <input asp-for="Name" type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label asp-for="GenderId" for="Gender"><h4>Geslacht</h4></label>
+                                <select asp-for="GenderId" type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht.">
+                                    @for (int i = 0; i < Model.Genders.Count; i++)
+                                    {
+                                        if (!(i == Model.GenderId))
+                                        {
+                                            <option value="@i">@Model.Genders[i]</option>
+                                        }
+                                        else
+                                        {
+                                            <option selected value="@i">@Model.Genders[i]</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label asp-for="Birth" for="Birthday"><h4>Geboortedatum</h4></label>
+                                <input asp-for="Birth" type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+
+                            <div class="col-xs-6">
+                                <label asp-for="Age" for="Age"><h4>Leeftijd</h4></label>
+                                <input asp-for="Age" type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age">
+
+                                <br />
+                                <br />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label asp-for="TreatmentDetailViewModels[0].Name" for="nameTreatment"><h4>Naam behandeling</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].Name" type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling." value="@Model.TreatmentDetailViewModels[0].Name">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-6">
+                                <label asp-for="TreatmentDetailViewModels[0].TypeName" for="TreatmentType"><h4>Type behandeling</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].TypeName" type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TypeName">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label asp-for="TreatmentDetailViewModels[0].BeginDate" for="Begindate"><h4>Begindatum</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].BeginDate" type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label asp-for="TreatmentDetailViewModels[0].BeginTime" for="BeginTime"><h4>Begintijd</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].BeginTime" type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToShortTimeString()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label asp-for="TreatmentDetailViewModels[0].EndDate" for="Enddate"><h4>Einddatum</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].EndDate" type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToString("yyyy-MM-dd")">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-xs-3">
+                                <label asp-for="TreatmentDetailViewModels[0].EndTime" for="EndTime"><h4>Eindtijd</h4></label>
+                                <input asp-for="TreatmentDetailViewModels[0].EndTime" type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()"><br />
+                            </div>
+
+                        </div>
+                        @*<div class="form-group">
+                                <div class="col-xs-12">
+                                    <label asp-for="TreatmentDetailViewModels[0].TreatmentTypeDescription" for="Description"><h4>Omschrijving</h4></label>
+                                    <input asp-for="TreatmentDetailViewModels[0].TreatmentTypeDescription" type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="model beschrijving nog toevoegen">
+                                </div>
+                            </div>*@
+                        @foreach (Comment comment in Model.TreatmentDetailViewModels[0].Comments)
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Commentaar</h4></label>
+                                    <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@comment.Description">
+                                </div>
+                            </div>
+                        }
+                        @if (User.IsInRole("doctor"))
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="Comments"><h4>Nieuw Commentaar</h4></label>
+                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Title" placeholder="Nieuw Titel" title="Titel van commentaar.">
+                                    <br />
+                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                    <br />
+                                    <button type="submit" class="btn btn-primary" asp-controller="Patient" asp-action="Treatment">Plaats Comment</button>
+                                </div>
+                            </div>
+                        }
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
+                                <ul>
+
+
+                                    @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
+                                    {
+                                        @if (treatment.Age <= 90)
+                                        {
+                                            <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                    <hr>
+                </div><!--/tab-pane-->
+            </div><!--/tab-content-->
+        </div><!--/col-9-->
+    </div><!--/row-->
+    @if (User.IsInRole("doctor"))
+    {
+        <div>
+            <a asp-action="Index">Terug naar lijst</a>
+        </div>
+    }
+    else if (User.IsInRole("patient"))
+    {
+        <div>
+            <a asp-action="Index" asp-controller="treatment">Terug naar lijst</a>
+        </div>
+    }

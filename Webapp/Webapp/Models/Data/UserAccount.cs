@@ -2,24 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Models.Attributes;
+using Webapp.Models.Enums;
 
 namespace Webapp.Models.Data
 {
     public enum Gender { Male, Female, Other };
-    public abstract class UserAccount : BaseAccount
+    public class UserAccount : BaseAccount
     {
+        [Property("birthdate", DataType.DateTime)]
         public DateTime Birth { get; set; }
-        public string PhoneNumber { get; set; }
+        public string Phone { get; set; }
         public bool Active { get; set; }
         public Gender Gender { get; set; }
 
-        public UserAccount(int id, string userName, string email, string name) : base(id, userName, email, name)
+        public long PatientId { get; set; }
+        public long DoctorId { get; set; }
+
+        public UserAccount()
+        { }
+
+        public UserAccount(long id, string userName, string email) : base(id, userName, email)
+        { }
+
+        public UserAccount(long id, string userName, string email, string name) : base(id, userName, email, name)
         { }
         
         public UserAccount(long id, string userName, string email, string password, string name, DateTime birth, string phoneNumber, bool active, Gender gender) : base(id, userName, email, name)
         {
             Birth = birth;
-            PhoneNumber = phoneNumber;
+            Phone = phoneNumber;
             Email = email;
             Active = active;
             Gender = gender;

@@ -2,67 +2,112 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Interfaces;
+using Webapp.Context;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DoctorRepository
+    public class DoctorRepository // : ICRUDRepository<T>
     {
-        IContext context;
+        private readonly IDoctorContext context;
 
-        public DoctorRepository(IContext context)
+        public DoctorRepository(IDoctorContext context)
         {
-            this.context = context;
-        }
-
-        public Doctor LoginDoctor(string username, string password)
-        {
-            return context.LoginDoctor(username, password);
-        }
-
-        public bool AddDoctor(Doctor doctor)
-        {
-            return context.AddDoctor();
-        }
-
-        public bool EditDoctor(Doctor doctor)
-        {
-            return context.EditDoctor(doctor);
-        }
-
-        public bool EditDoctorPrivacy(Doctor doctor)
-        {
-            return context.EditDoctorPrivacy(doctor);
+            this.context = context ?? throw new NullReferenceException("De dokterContext is leeg.");
         }
 
         /// <summary>
-        /// Used both to activate and deactive doctors.
+        /// An administrator can add a doctor
         /// </summary>
-        public bool ActivateDoctor(Doctor doctor, bool activate)
+        public long Insert(Doctor doctor)
         {
-            return context.ActivateDoctor(doctor, activate);
-        }
-
-        public Doctor GetDoctorById(long id)
-        {
-            return context.GetDoctorById(id);
-        }
-
-        /// <summary>
-        /// Shows all doctors from one of its department(s)
-        /// </summary>
-        public List<Doctor> ShowDoctors(Department department)
-        {
-            return context.ShowDoctors(department);
+            if (doctor == null)
+            {
+                throw new NullReferenceException("De dokter is leeg.");
+            }
+            return context.Insert(doctor);
         }
 
         /// <summary>
-        /// Shows all patients of a doctor.
+        /// An administrator can add a doctor to a department
         /// </summary>
-        public List<Patient> ShowPatients(Doctor doctor)
+        bool AddToDepartment(long departmentId, long doctorId)
         {
-            return context.ShowPatients(doctor);
+            if (departmentId < 1)
+            {
+                throw new NullReferenceException("Het afdelingId is leeg.");
+            }
+            if(doctorId < 1)
+            {
+                throw new NullReferenceException("Het dokterId is leeg.");
+            }
+            return context.AddToDepartment(departmentId, doctorId);
+        }
+
+        /// <summary>
+        /// An administrator can update a doctor
+        /// </summary>
+        public bool Update(Doctor doctor)
+        {
+            if (doctor == null)
+            {
+                throw new NullReferenceException("De dokter is leeg.");
+            }
+            return context.Update(doctor);
+        }
+
+        /// <summary>
+        /// An administrator can get all doctors
+        /// </summary>
+        public List<Doctor> GetAll()
+        {
+            return context.GetAll();
+        }
+
+        /// <summary>
+        /// An administrator can get all doctors of a department
+        /// </summary>
+        public List<Doctor> GetByDoctorWithDepartment(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het afdelingId is leeg.");
+            }
+            return context.GetByDoctorWithDepartment(id);
+        }
+
+        /// <summary>
+        /// An administrator can get all doctors of an institution
+        /// </summary>
+        public List<Doctor> GetByInstitution(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het instellingId is leeg.");
+            }
+            return context.GetByInstitution(id);
+        }
+
+        /// <summary>
+        /// An administrator can add a doctor by its id
+        /// </summary>
+        public Doctor GetById(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het dokterId is leeg.");
+            }
+            return context.GetById(id);
+        }
+
+        public bool CheckDoctorRelationship(long userId, long doctorId)
+        {
+            if (userId < 1 || doctorId < 1)
+            {
+                throw new NullReferenceException("Het dokterId is leeg.");
+            }
+            return context.CheckDoctorRelationship(userId, doctorId);
         }
     }
 }

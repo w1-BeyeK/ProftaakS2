@@ -2,76 +2,158 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Webapp.Context;
-using Webapp.Conv;
+using Webapp.Converters;
 using Webapp.Interfaces;
+using Webapp.Models;
 using Webapp.Models.Data;
 using Webapp.Repository;
 
 namespace Webapp.Controllers
 {
-    public class TreatmentController : Controller
+    /// <summary>
+    /// Treatment controller
+    /// </summary>
+    [Authorize(Roles = "doctor, patient")]
+    public class TreatmentController : BaseController
     {
-        private readonly IContext context;
-        private readonly TreatmentRepository repo;
-        private readonly TreatmentViewModelConverter TreatmentVMC = new TreatmentViewModelConverter();
+        /// <summary>
+        /// Repos
+        /// </summary>
+        private readonly TreatmentRepository treatmentRepository;
+        private readonly PatientRepository patientRepository;
+        private readonly TreatmentTypeRepository treatmentTypeRepository;
+        private readonly CommentRepository commentRepository;
 
-        public TreatmentController()
+        /// <summary>
+        /// Converters
+        /// </summary>
+        private readonly TreatmentViewModelConverter TreatmentConverter = new TreatmentViewModelConverter();
+        private readonly PatientViewModelConverter PatientConverter = new PatientViewModelConverter();
+        private readonly TreatmentTypeViewModelConverter TypeConverter = new TreatmentTypeViewModelConverter();
+
+        /// <summary>
+        /// Default constructor
+        /// </summary>
+        /// <param name="treatmentRepository"></param>
+        /// <param name="patientRepository"></param>
+        /// <param name="treatmentTypeRepository"></param>
+        public TreatmentController(
+            TreatmentRepository treatmentRepository, 
+            PatientRepository patientRepository, 
+            TreatmentTypeRepository treatmentTypeRepository,
+            CommentRepository commentRepository
+            )
         {
-            context = TestContext.GetInstance();
-            //repo = new TreatmentRepository(context);
+            this.treatmentRepository = treatmentRepository;
+            this.patientRepository = patientRepository;
+            this.treatmentTypeRepository = treatmentTypeRepository;
+            this.commentRepository = commentRepository;
         }
-        
+
+        /// <summary>
+        /// Page of treatment detail
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
+            // Get by role
             List<Treatment> items = new List<Treatment>();
-
-            string[] treat = { "VoetZoeken", "BeenHakken", "ArmAandraaien", "FipronilTrekken", "Oorsmeerpeuteren" };
-
-            Random rnd = new Random();
-
-            for (int i = 0; i < 23; i++)
+            if (User.IsInRole("doctor"))
             {
-                Treatment treatment = new Treatment(i, treat[rnd.Next(5)], DateTime.Now, new DateTime(2020, 1, 18));
-                items.Add(treatment);
+                items = treatmentRepository.GetByDoctor(GetUserId());
+                
+            }
+            else if (User.IsInRole("patient"))
+            {
+                items = treatmentRepository.GetByPatient(GetUserId());
             }
 
-            return View(items);
-        }
-
-        [HttpGet]
-        public IActionResult AddTreatment()
-        {
-            return View();
-        }
-
-        //TODO : Voeg extra parameters toe!
-        [HttpPost]
-        public IActionResult AddTreatment(string name, string age, string treatment)
-        {
-            //Sla het op
-            return View();
-        }
-
-        [HttpGet]
-        public IActionResult EditTreatment(int id)
-        {
-            Treatment treatment = new Treatment(6, "shoarmarollen", DateTime.Now, new DateTime(2020, 1, 18));
-            Patient patient = new Patient()
+            // Parse to viewmodel
+            TreatmentViewModel vm = new TreatmentViewModel()
             {
-                Id = 0,
-                Name = "Grietje"
+                treatments = new List<TreatmentDetailViewModel>()
             };
-            treatment.Patient = patient;
-            TreatmentViewModelConverter converter = new TreatmentViewModelConverter();
-            return View(converter.ViewModelFromTreatment(treatment));
+            // add treatments
+            foreach (Treatment treatment in items)
+            {
+                vm.treatments.Add(TreatmentConverter.ModelToViewModel(treatment));
+            }
+
+            // Return view with treatments
+            return View(vm.treatments);
         }
 
-        [HttpPost]
-        public IActionResult EditTreatment()
+        /// <summary>
+        /// Add new treatment
+        /// </summary>
+        /// <param name="id"> PatientId </param>
+        /// <returns></returns>
+        [Authorize(Roles = "doctor")]
+        [HttpGet]
+        public IActionResult Create(long id = 0)
         {
-            return View();
+            // Get and convert treatment
+            TreatmentDetailViewModel vm = new TreatmentDetailViewModel
+            {
+                Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll()),
+                TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll()),
+                PatientId = id
+            };
+            return View(vm);
+        }
+
+        /// <summary>
+        /// Add treatment
+        /// </summary>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "doctor")]
+        [HttpPost]
+        public IActionResult Create(TreatmentDetailViewModel vm)
+        {
+            // Convert back and create treatment
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
+            treatment.DoctorId = GetUserId();
+            Comment comment = vm.Description;
+            comment.TreatmentId = treatmentRepository.Insert(treatment);
+            commentRepository.Insert(comment);
+            return RedirectToAction("index", "treatment");
+        }
+
+        /// <summary>
+        /// Get for update
+        /// </summary>
+        /// <param name="id"> TreatmentId </param>
+        /// <returns></returns>
+        [Authorize(Roles = "doctor")]
+        [HttpGet]
+        public IActionResult Edit(long id)
+        {
+            //Retrieve treatment
+            TreatmentDetailViewModel vm = TreatmentConverter.ModelToViewModel(treatmentRepository.GetById(id));
+            vm.PatientName = patientRepository.GetById(vm.PatientId).Name;
+            vm.TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+
+            // Return with model
+            return View(vm);
+        }
+
+        /// <summary>
+        /// Post update treatment
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="vm"></param>
+        /// <returns></returns>
+        [Authorize(Roles = "doctor")]
+        [HttpPost]
+        public IActionResult Edit(long id, TreatmentDetailViewModel vm)
+        {
+            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
+            treatmentRepository.Update(treatment);
+            return RedirectToAction("index", "treatment");
         }
     }
 }

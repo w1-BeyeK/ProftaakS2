@@ -16,13 +16,41 @@ namespace Webapp.Context.Login
         {
             accounts = new List<BaseAccount>()
             {
-                new Patient(12, "kevinbeye", "k.beye@student.fontys.nl", "Kevin")
+                new Administrator(12, "kevinbeye", "k.beye@student.fontys.nl", "Kevin")
                 {
                     Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
                     NormalizedUserName = "KEVINBEYE"
                 },
-                new Patient(2, "stijn3ssens", "stijn@student.fontys.nl", "Kevin"),
-                new Patient(3, "w@ng", "w@ng@student.fontys.nl", "Kevin"),
+                new Patient(13, "stijn", "stijn@student.fontys.nl", "Kevin")
+                                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "STIJN"
+                },
+                new Patient(14, "wang", "w@ng@student.fontys.nl", "Kevin")
+                                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "WANG"
+                },
+                new Patient(12, "patient", "patient", "patient")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "PATIENT"
+                },
+                new Doctor(15, "doctor", "doctor", "doctor")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "DOCTOR"
+                },
+                new Doctor(11, "soof", "soof", "soof")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "SOOF"
+                },
+                new Administrator(22, "admin", "admin", "admin")
+                {
+                    Password = "AQAAAAEAACcQAAAAEDUhPAiD1wmdSduXLptdEQURGL9oocNf9T9nKEk4wdBZ9V/foWU1Saa4kd47qZBI6Q==",
+                    NormalizedUserName = "ADMIN"
+                },
             };
 
         }
@@ -56,7 +84,7 @@ namespace Webapp.Context.Login
 
         public void Dispose()
         {
-            
+
         }
 
         public Task<BaseAccount> FindByEmailAsync(string normalizedEmail, CancellationToken cancellationToken)
@@ -100,7 +128,7 @@ namespace Webapp.Context.Login
 
                 return Task.FromResult(accounts.FirstOrDefault(a => a.UserName.ToUpper() == normalizedUserName));
             }
-            catch(Exception)
+            catch (Exception)
             {
                 throw;
             }

@@ -2,28 +2,80 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Interfaces;
+using Webapp.Context;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class InstitutionRepository
+    public class InstitutionRepository // : ICRUDRepository<T>
     {
-        IContext context;
+        private readonly IInstitutionContext context;
 
-        public bool AddInstitution(Institution institution)
+        public InstitutionRepository(IInstitutionContext context)
         {
-            return context.AddInstitution(institution);
+            this.context = context ?? throw new NullReferenceException("De instellingContext is leeg.");
         }
 
-        public bool EditInstitution(Institution institution)
+        /// <summary>
+        /// An administrator can add an institution
+        /// </summary>
+        public long Insert(Institution institution)
         {
-            return context.EditInstitution(institution);
+            if (institution == null)
+            {
+                throw new NullReferenceException("De instelling is leeg.");
+            }
+            return context.Insert(institution);
         }
 
-        public bool ActivateInstitution(Institution institution, bool activate)
+        /// <summary>
+        /// A department is added to an institution
+        /// </summary>
+        public bool AddDepartmentToInstitution(long institutionId, long departmentId)
         {
-            return context.ActivateInstitution(institution, activate);
+            if (institutionId < 1)
+            {
+                throw new NullReferenceException("Het instellingId is leeg.");
+            }
+            if (departmentId < 1)
+            {
+                throw new NullReferenceException("Het afdelingId is leeg.");
+            }
+            //return context.AddDepartmentToInstitution(institutionId, departmentId);
+            return true;
+        }
+
+        /// <summary>
+        /// An administrator can update an institution
+        /// </summary>
+        public bool Update(Institution institution)
+        {
+            if (institution == null)
+            {
+                throw new NullReferenceException("De instelling is leeg.");
+            }
+            return context.Update(institution);
+        }
+
+        /// <summary>
+        /// An administrator or doctor can get all institutions
+        /// </summary>
+        public List<Institution> GetAll()
+        {
+            return context.GetAll();
+        }
+
+        /// <summary>
+        /// An administrator or doctor can get a institution by its id
+        /// </summary>
+        public Institution GetById(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het instellingId is leeg.");
+            }
+            return context.GetById(id);
         }
     }
 }

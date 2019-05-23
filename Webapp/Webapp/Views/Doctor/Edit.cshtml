@@ -1,0 +1,83 @@
+﻿@model Webapp.Models.DoctorDetailViewModel
+
+@{
+    ViewData["Title"] = "Aanpassen";
+}
+
+<h2>Aanpassen</h2>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div class="form-group">
+                <label asp-for="EmployeeNumber" class="control-label"></label>
+                <input asp-for="EmployeeNumber" readonly class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" type="text" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Birth" class="control-label"></label>
+                <input asp-for="Birth" type="date" class="form-control" />
+                <span asp-validation-for="Birth" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Phone" class="control-label"></label>
+                <input asp-for="Phone" type="tel" class="form-control" />
+                <span asp-validation-for="Phone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GenderId" class="control-label"></label>
+                <select asp-for="GenderId" class="form-control">
+                    @for (int i = 0; i < Model.Genders.Count(); i++)
+                    {
+                        if (i == Model.GenderId)
+                        {
+                            <option selected value="@i">@Model.Genders[i]</option>
+                        }
+                        else
+                        {
+                            <option value="@i">@Model.Genders[i]</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="GenderId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="UserName" class="control-label"></label>
+                <input asp-for="UserName" type="text" class="form-control" />
+                <span asp-validation-for="UserName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" type="email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PrivMail" /> @Html.DisplayNameFor(model => model.PrivMail)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="PrivPhonenumber" /> @Html.DisplayNameFor(model => model.PrivPhonenumber)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Terug naar lijst</a>
+</div>
+

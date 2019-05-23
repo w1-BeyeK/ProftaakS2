@@ -1,0 +1,47 @@
+﻿@model Webapp.Models.DepartmentDetailViewModel
+
+@{
+    ViewData["Title"] = "Afdelinggegevens";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Afdelinggegevens</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Active)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Active)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.InstitutionId)
+        </dt>
+        <dd>
+            @Html.DropDownListFor(model => model.InstitutionId,
+                Model.Institutions,
+                new { @disabled = "true" })
+        </dd>
+    </dl>
+</div>
+<div>
+    @if (User.IsInRole("admin"))
+    {
+    @Html.ActionLink("Aanpassen", "Edit", new { id = Model.Id }); @: | 
+    }
+    <a asp-action="Index">Terug naar lijst</a>
+</div>

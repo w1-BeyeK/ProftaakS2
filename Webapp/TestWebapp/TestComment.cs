@@ -16,14 +16,13 @@ namespace TestWebapp
             Patient patient = new Patient(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female, 23);
             Doctor doctor = new Doctor(1, "username", "email", "password", "name", DateTime.Today, "phonenumber", true, Gender.Female);
             TreatmentType treatmentType = new TreatmentType("name", "description");
-            Treatment treatment = new Treatment("name", date, date, patient, doctor, treatmentType);
+            Treatment treatment = new Treatment(1, "name", date, date, patient, doctor, treatmentType);
 
-            Comment comment = new Comment(title, description, date, treatment);
+            Comment comment = new Comment(title, description, date);
 
             Assert.Equal(title, comment.Title);
             Assert.Equal(description, comment.Description);
             Assert.Equal(date, comment.Date);
-            Assert.Equal(treatment, comment.Treatment);
         }
     }
 }

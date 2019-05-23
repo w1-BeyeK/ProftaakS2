@@ -1,0 +1,93 @@
+﻿@{
+    ViewData["Title"] = "Behandeling";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model Webapp.Models.TreatmentDetailViewModel
+
+<h2>Arts</h2>
+<h2>@ViewBag.Bericht</h2>
+
+<link rel="stylesheet" href="~/css/User.css" />
+<div class="container bootstrap snippet col-lg-offset-0" id="container" />
+<div class="row">
+    <div class="col-sm-10"><h1>Maak een behandeling aan</h1></div>
+</div>
+<div class="row">
+    <div class="col-sm-9">
+        <div class="tab-content">
+            <div class="tab-pane active" id="home">
+                <hr>
+                <form class="form" method="post">
+                    <div class="form-group">
+                        <div class="col-xs-12">
+                            <label for="patientname" class="h4">Patiënt</label>
+                            <select asp-for="PatientId" type="text" class="form-control" placeholder="Naam van de patiënt" title="Naam van de patiënt.">
+                                @foreach (var Patient in Model.Patients)
+                                {
+                                    <option value="@Patient.UserId">@Patient.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="treatmentname"><h4>Behandelingsnaam</h4></label>
+                            <input type="text" class="form-control" asp-for="Name" placeholder="Naam van de behandeling" title="Naam van de behandeling.">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-6">
+                            <label for="treatmenttype"><h4>Behandelingstype</h4></label>
+                            <select asp-for="TypeId" type="text" class="form-control" placeholder="Type van de behandeling" title="Type van de behandeling.">
+                                @foreach (var Type in Model.TreatmentTypes)
+                                {
+                                    <option value="@Type.Id">@Type.Name</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            <label for="Begindate"><h4>Begindatum</h4></label>
+                            <input type="date" class="form-control" asp-for="BeginDate" placeholder="Begindatum behandeling" title="Begindatum behandeling">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            <label for="BeginTime"><h4>Tijd</h4></label>
+                            <input type="time" class="form-control" asp-for="BeginTime" title="Begintijd behandeling">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            <label for="Enddate"><h4>Einddatum</h4></label>
+                            <input type="date" class="form-control" asp-for="EndDate" placeholder="Einddatum behandeling" title="Einddatum behandeling">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-xs-3">
+                            <label for="EndTime"><h4>Tijd</h4></label>
+                            <input type="time" class="form-control" asp-for="EndTime" title="Eindtijd behandeling">
+                        </div>
+                    </div>
+                    @if (User.IsInRole("doctor"))
+                    {
+                        <div class="form-group">
+                            <div class="col-xs-12">
+                                <label for="Comments"><h4>Nieuw Commentaar</h4></label>
+                                <input type="text" class="form-control" asp-for="Description.Title" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                <br />
+                                <input type="text" class="form-control" asp-for="Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                            </div>
+                        </div>
+                    }
+                    <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Create">Maak Aan</button>
+                </form>
+                <hr>
+            </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+    </div><!--/col-9-->
+</div><!--/row-->
+<div>
+    <a asp-action="Index">Terug naar lijst</a>
+</div>

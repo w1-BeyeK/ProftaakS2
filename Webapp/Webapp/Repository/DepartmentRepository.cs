@@ -2,57 +2,65 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Webapp.Interfaces;
+using Webapp.Context;
+using Webapp.Context.InterfaceContext;
 using Webapp.Models.Data;
 
 namespace Webapp.Repository
 {
-    public class DepartmentRepository
+    public class DepartmentRepository // : ICRUDRepository<T>
     {
-        IContext context;
+        private readonly IDepartmentContext context;
 
-        public bool AddDepartment(Department department)
+        public DepartmentRepository(IDepartmentContext context)
         {
-            return context.AddDepartment();
+            this.context = context ?? throw new NullReferenceException("De afdelingContext is leeg.");
         }
 
-        public bool EditDepartment(Department department)
+        public long Insert(Department department)
         {
-            return context.EditDepartment(department);
+            if (department == null)
+            {
+                throw new NullReferenceException("De afdeling is leeg.");
+            }
+            return context.Insert(department);
         }
 
-        /// <summary>
-        /// Used both to activate and deactive Departments.
-        /// </summary>
-        public bool ActivateDepartment(Department department, bool activate)
+        public bool Update(Department department)
         {
-            return context.ActivateDepartment(department, activate);
+            if (department == null)
+            {
+                throw new NullReferenceException("De afdeling is leeg.");
+            }
+            return context.Update(department);
         }
 
-        /// <summary>
-        /// Shows all departments of an institution.
-        /// </summary>
-        /// <param name="institution"></param>
-        public List<Department> ShowDepartments(Institution institution)
+        public bool Delete(long id)
         {
-            return context.ShowDepartments(institution);
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het afdelingId is leeg.");
+            }
+            return context.Delete(GetById(id));
+        }
+        
+        public Department GetById(long id)
+        {
+            if (id < 1)
+            {
+                throw new NullReferenceException("Het afdelingId is leeg.");
+            }
+            return context.GetById(id);
         }
 
-        /// <summary>
-        /// Shows all departments of a doctor.
-        /// </summary>
-        /// <param name="doctor"></param>
-        public List<Department> ShowDepartments(Institution institution, Doctor doctor)
+        public List<Department> GetAll()
         {
-            return context.ShowDepartments(institution, doctor);
+            return context.GetAll();
         }
 
-        /// <summary>
-        /// Assign a doctor at a department
-        /// </summary>
-        public bool AssignDoctor(Department department, Doctor doctor)
+        internal List<Department> GetForDoctor(long doctorId)
         {
-            return context.AssignDoctor(department, doctor);
+            return context.GetForDoctor(doctorId);
         }
     }
 }

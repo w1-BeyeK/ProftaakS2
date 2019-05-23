@@ -7,7 +7,7 @@
     <title>@ViewData["Title"] - Webapp</title>
 
     <environment include="Development">
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" asp-append-version="true"/>
         <link rel="stylesheet" href="~/css/custom.css" />
         <link rel="stylesheet" href="~/css/site.css" />
         <link rel="stylesheet" href="~/css/slider.css" />
@@ -25,7 +25,7 @@
 <body>
     <div class="container" style="width:100%">
         <div class="row">
-            <div class="col-sm-3 col-xs-12" style="padding:0;">
+            <div class="col-sm-3 col-md-2 col-xs-12" style="padding:0;">
                 <div class="nav-side-menu" style="width:inherit;">
                     <div class="brand">Brand Logo</div>
                     <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
@@ -34,7 +34,7 @@
 
                         <ul id="menu-content" class="menu-content collapse out">
                             <li>
-                                <a href="#">
+                                <a asp-controller="Home" asp-action="Dashboard">
                                     <i class="fa fa-dashboard fa-lg"></i> Dashboard
                                 </a>
                             </li>
@@ -44,22 +44,22 @@
                                     <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdelingen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="departments">
-                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-users fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li><a asp-controller="Department" asp-action="Index"><i class="fa fa-area-chart fa-lg"></i> Overzicht</a></li>
+                                    <li><a asp-controller="Department" asp-action="Create"><i class="fa fa-users fa-lg"></i> Nieuwe toevoegen</a></li>
                                 </ul>
                                 <li data-toggle="collapse" data-target="#typeTreatment" class="collapsed">
                                     <a href="#"><i class="fa fa-heartbeat fa-lg"></i> Type behandelingen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="typeTreatment">
-                                    <li><i class="fa fa-bar-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li><a asp-controller="TreatmentType" asp-action="Index"><i class="fa fa-bar-chart fa-lg"></i> Overzicht</a></li>
+                                    <li><a asp-controller="TreatmentType" asp-action="Create"><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</a></li>
                                 </ul>
                                 <li data-toggle="collapse" data-target="#doctors" class="collapsed">
                                     <a href="#"><i class="fa fa-user-md fa-lg"></i> Artsen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="doctors">
-                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li><a asp-controller="Doctor" asp-action="Index"><i class="fa fa-area-chart fa-lg"></i> Overzicht</a></li>
+                                    <li><a asp-controller="Doctor" asp-action="Create"><i class="fa fa-user-plus fa-lg"></i> Nieuwe toevoegen</a></li>
                                 </ul>
                             }
                             else if (Context.User.IsInRole("doctor"))
@@ -68,27 +68,58 @@
                                     <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen <span class="arrow"></span></a>
                                 </li>
                                 <ul class="sub-menu collapse" id="behandelingen">
-                                    <li><i class="fa fa-area-chart fa-lg"></i> Overzicht</li>
-                                    <li><i class="fa fa-medkit fa-lg"></i> Nieuwe toevoegen</li>
+                                    <li>
+                                        <a asp-action="index" asp-controller="treatment">
+                                            <i class="fa fa-area-chart fa-lg">
+                                            </i> Overzicht
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a asp-action="create" asp-controller="treatment">
+                                            <i class="fa fa-medkit fa-lg">
+                                            </i> Nieuwe toevoegen
+                                        </a>
+                                    </li>
                                 </ul>
 
                                 <li>
-                                    <a href="#"><i class="fa fa-bed fa-lg"></i> Patienten</a>
+                                    <a asp-action="index" asp-controller="patient">
+                                        <i class="fa fa-bed fa-lg">
+                                        </i> Patiënten
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="#"><i class="fa fa-hospital-o fa-lg"></i> Afdeling</a>
+                                    <a asp-controller="Doctor" asp-action="Index">
+                                        <i class="fa fa-user-md fa-lg">
+                                        </i> Artsen
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="index" asp-controller="department">
+                                        <i class="fa fa-hospital-o fa-lg">
+                                        </i> Afdeling
+                                    </a>
                                 </li>
                             }
-                            else if (Context.User.IsInRole("patient"))
+                            else if (User.IsInRole("patient"))
                             {
                                 <li>
-                                    <a href="#"><i class="fa fa-medkit fa-lg"></i> Behandelingen</a>
+                                    <a asp-action="index" asp-controller="treatment">
+                                        <i class="fa fa-medkit fa-lg">
+                                        </i> Behandelingen
+                                    </a>
                                 </li>
                             }
                             <hr style="margin:0;" />
-                            <li>
-                                <a asp-action="index" asp-controller="profile"><i class="fa fa-user fa-lg"></i> Profiel</a>
-                            </li>
+                            @if (!User.IsInRole("admin"))
+                            {
+                                <li>
+                                    <a asp-action="index" asp-controller="profile">
+                                        <i class="fa fa-user fa-lg">
+                                        </i> Profiel
+                                    </a>
+                                </li>
+                            }
                             <li>
                                 <a asp-action="Logout" asp-controller="Home" method="get">
                                     <i class="fa fa-sign-out fa-lg">
@@ -99,7 +130,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-9 col-xs-12">
+            <div class="col-sm-9 col-md-10 col-xs-12">
                 @RenderBody()
                 <hr />
                 <footer>

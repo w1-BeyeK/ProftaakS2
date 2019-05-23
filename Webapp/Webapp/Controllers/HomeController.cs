@@ -17,14 +17,24 @@ namespace Webapp.Controllers
 {
     public class HomeController : BaseController
     {
+        // Repos
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
 
+        // Converter
         private readonly PatientViewModelConverter patientConverter;
 
+        // Account management
         private readonly UserManager<BaseAccount> userManager;
         private readonly SignInManager<BaseAccount> signInManager;
 
+        /// <summary>
+        /// Constructor for homecontroller
+        /// </summary>
+        /// <param name="userManager"></param>
+        /// <param name="signInManager"></param>
+        /// <param name="patientRepository"></param>
+        /// <param name="doctorRepository"></param>
         public HomeController(
                 UserManager<BaseAccount> userManager,
                 SignInManager<BaseAccount> signInManager,
@@ -40,90 +50,77 @@ namespace Webapp.Controllers
 
             this.patientConverter = new PatientViewModelConverter();
         }
+
+        /// <summary>
+        /// Login view
+        /// </summary>
+        /// <returns></returns>
         [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = "patient")]
-        public IActionResult About()
-        {
-            ViewData["Message"] = "Your application description page.";
-
-            return View();
-        }
-
-        public async Task<IActionResult> Test()
-        {
-            var x = userManager.PasswordHasher.HashPassword(new Patient(5, "test","mail@gmail.com", "Kevin"), "Test123!");
-
-            return View();
-        }
-
+        /// <summary>
+        /// Login post
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Login(string username, string password)
         {
+            // Check if is valid
             if (ModelState.IsValid)
             {
-                var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
-                if (result.Succeeded)
+                if (username != null)
                 {
-                    if (HttpContext.User.IsInRole("admin"))
+                    // Check login
+                    var result = await signInManager.PasswordSignInAsync(username, password, false, lockoutOnFailure: false);
+
+                    // If success
+                    if (result.Succeeded)
                     {
-                        return RedirectToAction("about");
+                        // Send to dashboard
+                        return RedirectToAction("dashboard");
                     }
                     else
                     {
-                        return RedirectToAction("index", "profile");
+                        return RedirectToAction("Index");
                     }
                 }
-                else
-                {
-                    return View();
-                }
             }
-            return RedirectToAction("User");
+            return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Logout
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        //[ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<IActionResult> Logout()
         {
-           if (HttpContext.User?.Identity.IsAuthenticated == true)
+            // Check if authenticated
+            if (HttpContext.User?.Identity.IsAuthenticated == true)
             {
+                // Signout
                 await signInManager.SignOutAsync();
             }
 
             return RedirectToAction("index");
-        }        
-        
-        public IActionResult Contact()
-        {
-            ViewData["Message"] = "Your contact page.";
-
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult User()
-        {
-            return View();
-        }
-
-        public IActionResult Doctor()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        [Authorize]
+        public IActionResult Dashboard()
+        {
+            return View();
         }
     }
 }
