@@ -68,7 +68,7 @@ namespace Webapp.Context.Login
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                string query = "select * from [PTS2_Account] where email = @email AND Active = 1";
+                string query = "select * from [PTS2_Account] where email = @email";
                 var result = handler.ExecuteSelect(query, normalizedEmail) as DataTable;
 
                 if (!parser.TryParse(result.Rows[0], out BaseAccount account))
@@ -93,7 +93,7 @@ namespace Webapp.Context.Login
             cancellationToken.ThrowIfCancellationRequested();
             try
             {
-                string query = "select * from [PTS2_Account] where id = @id AND active = 1";
+                string query = "select * from [PTS2_Account] where id = @id";
                 var result = handler.ExecuteSelect(query, userId) as DataTable;
 
                 if (!parser.TryParse(result.Rows[0], out BaseAccount account))
@@ -117,7 +117,7 @@ namespace Webapp.Context.Login
         {
             cancellationToken.ThrowIfCancellationRequested();
 
-            string query = "select * from [PTS2_Account] where email = @email AND active = 1";
+            string query = "select * from [PTS2_Account] where email = @email";
             BaseAccount account = default(BaseAccount);
 
             try
