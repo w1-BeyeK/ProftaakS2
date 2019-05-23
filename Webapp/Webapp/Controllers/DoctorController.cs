@@ -126,7 +126,7 @@ namespace Webapp.Controllers
             else
             {
                 vm.Genders = converter.GetGenders();
-                return View();
+                return View(vm);
             }
         }
 
