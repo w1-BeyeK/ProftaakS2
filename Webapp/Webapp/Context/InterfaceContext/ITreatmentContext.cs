@@ -12,5 +12,6 @@ namespace Webapp.Context.InterfaceContext
         List<Treatment> GetByDoctor(long id);
         List<Treatment> GetByPatient(long id);
         bool CheckTreatmentRelationship(long doctorId, long patientId);
+        bool PatientGiveAccessToDoctor(long treatmentId, bool access);
     }
 }

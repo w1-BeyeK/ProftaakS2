@@ -21,8 +21,8 @@ namespace Webapp.Context.MSSQLContext
         /// <returns> Treatment </returns>
         public Treatment GetById(long id)
         {
-            string query = "SELECT t.Id, t.[Name], t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName " +
-                           "FROM PTS2_Treatment AS t " +
+            string query = "SELECT t.Id, t.[Name], t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName, Status " +
+                           "FROM GetTreatmentsWithStatus AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id " +
                            "WHERE t.Id = @id";
 
@@ -49,8 +49,8 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Treatment> result = new List<Treatment>();
             // Set query
-            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName" +
-                           "FROM PTS2_Treatment AS t " +
+            string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, tt.[Name] AS TreatmentTypeName, Status " +
+                           "FROM GetTreatmentsWithStatus AS t " +
                            "INNER JOIN PTS2_TreatmentType AS tt ON t.TreatmentTypeId = tt.Id";
 
             // Tell the handler to execute the query
@@ -145,7 +145,6 @@ namespace Webapp.Context.MSSQLContext
             catch (Exception e)
             {
                 throw e;
-                return false;
             }
         }
 
@@ -186,8 +185,8 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, a.[Name] AS PatientName " +
-                               "FROM PTS2_Treatment AS t " +
+                string query = "SELECT t.Id, t.Name, t.PatientId, t.DoctorId, t.BeginDate, t.EndDate, t.TreatmentTypeId, a.[Name] AS PatientName, Status " +
+                               "FROM GetTreatmentsWithStatus AS t " +
                                "INNER JOIN PTS2_Account AS a ON t.PatientId = a.Id " +
                                "WHERE DoctorId = @id";
                                 // AND t.EndDate >= '@endDate'";
@@ -229,8 +228,8 @@ namespace Webapp.Context.MSSQLContext
                 // Create result
                 List<Treatment> result = new List<Treatment>();
                 // Set query
-                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId " +
-                               "FROM PTS2_Treatment " +
+                string query = "SELECT Id, Name, PatientId, DoctorId, BeginDate, EndDate, TreatmentTypeId, Status " +
+                               "FROM GetTreatmentsWithStatus " +
                                "WHERE PatientId = @id";
 
               
@@ -268,31 +267,48 @@ namespace Webapp.Context.MSSQLContext
                 List<Treatment> result = new List<Treatment>();
 
                 // Set query
-                string query = $"select * from PTS2_Treatment where DoctorId = @doctorId and PatientId = @patientId";
+                string query = "SELECT CAST(case COUNT(*) WHEN 0 THEN 0 ELSE 1 END AS BIT) " +
+                               "FROM GetTreatmentsWithStatus " +
+                               "WHERE DoctorId = @doctorId AND PatientId = @patientId AND [Status] = 'Toegang' " +
+                               "AND EndDate >= @endDate";
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {
                     new KeyValuePair<string, object>("doctorId", doctorId),
                     new KeyValuePair<string, object>("patientId", patientId),
-                    //new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("dd-mm-yyyy")),
+                    new KeyValuePair<string, object>("endDate", DateTime.Today.AddYears(-1).ToString("yyyy-MM-dd")),
                 };
 
                 // Tell the handler to execute the query
                 var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
 
                 // Parse all rows
-                if(dbResult != null)
-                {
-                    return true;
-                }
-                else
-                {
-                    return false;
-                }
+                return (bool)dbResult.DataSet.Tables[0].Rows[0][0];
             }
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        public bool PatientGiveAccessToDoctor(long treatmentId, bool access)
+        {
+            try
+            {
+                string query = "UPDATE PTS2_Treatment SET ConfirmId = @access WHERE Id = @id";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", treatmentId),
+                    new KeyValuePair<string, object>("access", access ? "2" : "3")
+                };
+
+                handler.ExecuteCommand(query, parameters);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }

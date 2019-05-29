@@ -74,8 +74,14 @@ namespace Webapp.Converters
                 {
                     UserId = p.Id,
                     Name = p.Name,
-                    Gender = p.Gender,
-                    Birth = p.Birth
+                    GenderId = (int)p.Gender,
+                    Birth = p.Birth,
+                    Genders = new List<string>()
+                    {
+                    "Man",
+                    "Vrouw",
+                    "Anders"
+                    }
                 };
 
                 Patienten.Add(patient);
