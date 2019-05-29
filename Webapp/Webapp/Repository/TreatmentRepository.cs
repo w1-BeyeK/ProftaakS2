@@ -90,5 +90,20 @@ namespace Webapp.Repository
             }
             return context.CheckTreatmentRelationship(doctorId, patientId);
         }
+
+        /// <summary>
+        /// The patient can give a doctor access to see them
+        /// </summary>
+        /// <param name="treatmentId"></param>
+        /// <param name="access"></param>
+        /// <returns></returns>
+        public bool PatientGiveAccessToDoctor(long treatmentId, bool access)
+        {
+            if (treatmentId < 1)
+            {
+                throw new NullReferenceException("Het behandelingId is leeg.");
+            }
+            return PatientGiveAccessToDoctor(treatmentId, access);
+        }
     }
 }

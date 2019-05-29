@@ -14,12 +14,12 @@
         <div class="row">
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
-                    <li><a data-toggle="tab" href="#messages">Privacy</a></li>
+                    <li><a data-toggle="tab" href="#alg">Algemeen</a></li>
+                    <li><a data-toggle="tab" href="#priv">Privacy</a></li>
                 </ul>
 
                 <div class="tab-content">
-                    <div class="tab-pane active" id="home">
+                    <div class="tab-pane active" id="alg">
                         <form class="form" action="##" method="post" id="registrationForm">
                             <div class="form-group">
                                 <div class="col-xs-6">
@@ -119,7 +119,7 @@
                         <hr>
 
                     </div><!--/tab-pane-->
-                    <div class="tab-pane" id="messages">
+                    <div class="tab-pane" id="priv">
                         <form class="form" action="#" method="post" id="registrationForm">
 
                             <div class="form-group">
@@ -209,11 +209,11 @@ else if (User.IsInRole("doctor"))
         <div class="row">
             <div class="col-sm-9">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#home">Algemeen</a></li>
-                    <li><a data-toggle="tab" href="#privacy">Privacy</a></li>
+                    <li><a data-toggle="tab" href="#alg">Algemeen</a></li>
+                    <li><a data-toggle="tab" href="#priv">Privacy</a></li>
                 </ul>
                 <div class="tab-content">
-                    <div class="tab-pane active" id="home">
+                    <div class="tab-pane active" id="alg">
                         <form class="form" action="##" method="post" id="registrationForm">
 
                             <div class="form-group">
@@ -308,7 +308,7 @@ else if (User.IsInRole("doctor"))
 
                     </div><!--/tab-pane-->
                     <!-- Hier komt de code voor de tab privacy-->
-                    <div class="tab-pane" id="privacy">
+                    <div class="tab-pane" id="priv">
                         <form class="form" action="#" method="post" id="registrationForm">
 
                             <div class="form-group">
@@ -344,7 +344,18 @@ else if (User.IsInRole("doctor"))
         $("document").ready(function () {
             initDataTable();
             $("#treatmentTypeContainer").removeClass("hidden");
-        });
+            });
+
+            $('#alg').click(function () {
+                $('#priv').removeClass("active");
+                $('#alg').addClass("active");
+            });
+
+            $('#priv').click(function () {
+                $('#priv').addClass("active");
+                $('#alg').removeClass("active");
+            });
+
 
         function initDataTable() {
             $("#treatmentTypeTable").DataTable({
