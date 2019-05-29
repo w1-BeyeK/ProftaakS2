@@ -78,7 +78,7 @@ namespace Webapp.Models
         [Display(Name = "Adres zichtbaar maken")]
         public bool PrivAdress { get; set; }
 
-        [Display(Name = "Geslacht zichtbaar maken")]
+        [Display(Name = "Biologisch geslacht zichtbaar maken")]
         public bool PrivGender { get; set; }
 
         [Display(Name = "'Geboortedatum zichtbaar maken")]
