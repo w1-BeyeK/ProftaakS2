@@ -27,5 +27,11 @@ namespace Webapp.Models
         [DataType(DataType.Date)]
         [Display(Name = "Geboortedatum")]
         public DateTime Birth { get; set; }
+
+        public List<string> Genders { get; set; }
+
+        [Required]
+        [Display(Name = "Geslacht")]
+        public int GenderId { get; set; }
     }
 }

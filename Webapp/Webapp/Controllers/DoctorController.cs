@@ -84,7 +84,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id">Id filter</param>
         /// <returns></returns>
-        [Authorize(Roles = "doctor, admin")]
+        [Authorize(Roles = "admin")]
         public IActionResult Details(long id)
         {
             // Check if id is set

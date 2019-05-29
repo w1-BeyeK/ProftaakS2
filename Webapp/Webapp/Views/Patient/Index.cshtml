@@ -24,7 +24,7 @@
             {
                 <tr>
                     <td>@item.Name</td>
-                    <td>@item.Gender</td>
+                    <td>@item.Genders[item.GenderId]</td>
                     <td>@item.Birth.ToShortDateString()</td>
                     <td>
                         @Html.ActionLink("Details", "PatientDetails", "Profile", new { id = item.UserId })
