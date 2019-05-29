@@ -43,18 +43,28 @@
                         <div class="form-group">
                             <div class="col-xs-12">
                                 <label for="treatments" class="h4">Uitvoerbare behandelingen</label>
-                                @foreach (var Type in Model.Doctor.TreatmentTypes)
+                                @foreach (TreatmentTypeDetailViewModel Type in Model.Doctor.TreatmentTypes)
                                 {
                                     <option>@Type.Name</option>
                                 }
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-xs-3">
-                                <button type="submit" class="btn btn-primary btn-block" asp-action="index" asp-controller="patient">Terug</button>
+                        @if (User.IsInRole("doctor"))
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-3">
+                                    <button type="submit" class="btn btn-primary btn-block" asp-action="index" asp-controller="patient">Terug</button>
+                                </div>
                             </div>
-                        </div>
+                        }
+                        else
+                        {
+                            <div class="form-group">
+                                <div class="col-xs-3">
+                                    <button type="submit" class="btn btn-primary btn-block" asp-action="index" asp-controller="doctor">Terug</button>
+                                </div>
+                            </div>
+                        }
                     </form>
                     <hr>
                 </div>

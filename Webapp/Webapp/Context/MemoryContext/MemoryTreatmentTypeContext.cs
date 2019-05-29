@@ -35,11 +35,11 @@ namespace Webapp.Context.MemoryContext
             return false;
         }
 
-        public bool Delete(TreatmentType treatmentType)
+        public bool Delete(long id, bool active)
         {
-            if (BaseMemoryContext.treatmentTypes.Exists(t => t.Id == treatmentType.Id))
+            if (BaseMemoryContext.treatmentTypes.Exists(t => t.Id == id))
             {
-                BaseMemoryContext.treatmentTypes.FirstOrDefault(t => t.Id == treatmentType.Id).Active = treatmentType.Active;
+                BaseMemoryContext.treatmentTypes.FirstOrDefault(t => t.Id == id).Active = active;
                 return true;
             }
             return false;
@@ -62,6 +62,31 @@ namespace Webapp.Context.MemoryContext
         TreatmentType IUniversalGenerics<TreatmentType>.GetById(long id)
         {
             return BaseMemoryContext.treatmentTypes.Find(t => t.Id == id);
+        }
+
+        TreatmentType ITreatmentTypeContext.GetByTreatmentId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<TreatmentType> ITreatmentTypeContext.GetTreatmentTypesByDoctorId(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalGenerics<TreatmentType>.Insert(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<TreatmentType>.Update(TreatmentType obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<TreatmentType>.Delete(long id, bool active)
+        {
+            throw new NotImplementedException();
         }
     }
 }

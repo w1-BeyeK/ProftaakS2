@@ -10,9 +10,9 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryDepartmentContext : IDepartmentContext
     {
-        public bool Delete(Department department)
+        public bool Delete(long id, bool active)
         {
-            BaseMemoryContext.departments.FirstOrDefault(d => d.Id == department.Id).Active = department.Active;
+            BaseMemoryContext.departments.FirstOrDefault(d => d.Id == id).Active = active;
             return true;
         }
 

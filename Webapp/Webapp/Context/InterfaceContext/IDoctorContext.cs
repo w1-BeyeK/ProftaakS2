@@ -11,6 +11,7 @@ namespace Webapp.Context.InterfaceContext
     {
         List<Doctor> GetByDoctorWithDepartment(long id);
         List<Doctor> GetByInstitution(long id);
+        List<Doctor> GetByPatientWithTreatment(long id);
         bool AddToDepartment(long departmentId, long doctorId);
         bool CheckDoctorRelationship(long userId, long doctorId);
     }

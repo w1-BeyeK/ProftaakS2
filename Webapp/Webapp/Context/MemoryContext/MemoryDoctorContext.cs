@@ -10,12 +10,12 @@ namespace Webapp.Context.MemoryContext
 {
     public class MemoryDoctorContext : IDoctorContext
     {
-        public bool Delete(Doctor doctor)
+        public bool Delete(long id, bool active)
         {
-            int index = BaseMemoryContext.doctors.FindIndex(t => t.Id == doctor.Id);
+            int index = BaseMemoryContext.doctors.FindIndex(t => t.Id == id);
             if (index >= 0)
             {
-                BaseMemoryContext.doctors[index].Active = doctor.Active;
+                BaseMemoryContext.doctors[index].Active = active;
                 return true;
             }
             return false;
@@ -81,6 +81,41 @@ namespace Webapp.Context.MemoryContext
         }
 
         public bool CheckDoctorRelationship(long userId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Doctor> IDoctorContext.GetByDoctorWithDepartment(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Doctor> IDoctorContext.GetByPatientWithTreatment(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDoctorContext.AddToDepartment(long departmentId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IDoctorContext.CheckDoctorRelationship(long userId, long doctorId)
+        {
+            throw new NotImplementedException();
+        }
+
+        long IUniversalGenerics<Doctor>.Insert(Doctor obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<Doctor>.Update(Doctor obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        bool IUniversalGenerics<Doctor>.Delete(long id, bool active)
         {
             throw new NotImplementedException();
         }

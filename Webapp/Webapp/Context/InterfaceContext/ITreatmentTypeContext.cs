@@ -16,5 +16,6 @@ namespace Webapp.Context.InterfaceContext
         //List<TreatmentType> GetAllActiveTreatmentTypes();
         //List<TreatmentType> GetAllTreatmentTypesByActive(bool active);
         //TreatmentType GetById(long id);
+        List<TreatmentType> GetTreatmentTypesByDoctorId(long id);
     }
 }

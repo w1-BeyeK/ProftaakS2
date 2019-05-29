@@ -156,7 +156,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="treatmentType"> TreatmentType </param>
         /// <returns> Bool </returns>
-        public bool Delete(TreatmentType treatmentType)
+        public bool Delete(long id, bool active)
         {
             try
             {
@@ -164,8 +164,8 @@ namespace Webapp.Context.MSSQLContext
 
                 handler.ExecuteCommand(query, new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("id", treatmentType.Id),
-                    new KeyValuePair<string, object>("active", treatmentType.Active)
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", active)
                 });
                 return true;
             }
@@ -199,6 +199,41 @@ namespace Webapp.Context.MSSQLContext
                     // Parse only if succeeded
                     if (parser.TryParse(dr, out TreatmentType treatmentType))
                         result = treatmentType;
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<TreatmentType> GetTreatmentTypesByDoctorId(long id)
+        {
+            try
+            {
+                // Create result
+                List<TreatmentType> result = new List<TreatmentType>();
+                // Set query
+                string query = "select t.Id, t.DepartmentId, t.Name, t.Description, t.Active from PTS2_TreatmentType t inner join PTS2_Department_Doctor dd ON t.DepartmentId = dd.DepartmentId inner join PTS2_doctor d ON dd.doctorId = d.Id where dd.DepartmentId IN (select departmentId from PTS2_Department_Doctor dd WHERE dd.doctorId = @id) and d.Id = @id and t.Active = @active";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", "1")
+                };
+
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out TreatmentType treatmentType))
+                        result.Add(treatmentType);
                 }
 
                 return result;

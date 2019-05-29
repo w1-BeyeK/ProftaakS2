@@ -63,7 +63,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
-            Assert.True(departmentRepository.Delete(1));
+            Assert.True(departmentRepository.Delete(1, false));
         }
 
         [Fact]
@@ -72,7 +72,7 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             departmentRepository = new DepartmentRepository(context);
 
-            Exception ex = Assert.Throws<NullReferenceException>(() => departmentRepository.Delete(-1));
+            Exception ex = Assert.Throws<NullReferenceException>(() => departmentRepository.Delete(-1, false));
             Assert.Equal("Het afdelingId is leeg.", ex.Message);
         }
 

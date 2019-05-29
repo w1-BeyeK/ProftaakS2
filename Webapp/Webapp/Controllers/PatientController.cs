@@ -72,23 +72,15 @@ namespace Webapp.Controllers
             Patient patient = new Patient();
             try
             {
-                if (User.IsInRole("doctor"))
-                {
-                    patient = patientRepository.GetById(id);
-                    patient.Treatments = treatmentRepository.GetByPatient(id);
-                }
-                else if(User.IsInRole("patient"))
-                {
                     long patientId = patientRepository.GetPatientIdByTreatmentId(id);
                     patient = patientRepository.GetById(patientId);
                     patient.Treatments = treatmentRepository.GetByPatient(patientId);
-                }
+                    
                     foreach (Treatment t in patient.Treatments)
                     {
                         t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                        t.Comments = commentRepository.GetByTreatment(id);
                     }
-                
-
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }
             catch (Exception Ex)

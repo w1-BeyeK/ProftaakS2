@@ -222,7 +222,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="doctor"> Doctor </param>
         /// <returns> Bool </returns>
-        public bool Delete(Doctor doctor)
+        public bool Delete(long id, bool active)
         {
             try
             {
@@ -237,8 +237,8 @@ namespace Webapp.Context.MSSQLContext
 
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
-                    new KeyValuePair<string, object>("id", doctor.Id),
-                    new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", active? "1" : "0")
                 };
 
                 handler.ExecuteCommand(query, parameters);
@@ -386,6 +386,41 @@ namespace Webapp.Context.MSSQLContext
                 {
                     return false;
                 }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+        public List<Doctor> GetByPatientWithTreatment(long id)
+        {
+            try
+            {
+                // Create result
+                List<Doctor> result = new List<Doctor>();
+                // Set query
+                string query = "select distinct d.Id, a.Name, d.Gender, d.Phone, d.BirthDate, d.PrivMail, d.PrivPhone from PTS2_Doctor d inner join PTS2_Treatment t ON t.doctorId = d.Id inner join PTS2_Account a ON d.Id = a.Id where t.Id IN (select Id from PTS2_Treatment t WHERE t.patientId = @id) and d.Active = @active";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
+                {
+                    new KeyValuePair<string, object>("id", id),
+                    new KeyValuePair<string, object>("active", "1")
+                };
+
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, parameters) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Doctor doctor))
+                        result.Add(doctor);
+                }
+
+                return result;
             }
             catch (Exception e)
             {

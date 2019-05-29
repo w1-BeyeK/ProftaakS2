@@ -16,7 +16,7 @@ namespace Webapp.Controllers
     /// <summary>
     /// Doctor controller
     /// </summary>
-    [Authorize(Roles = "doctor, admin")]
+    [Authorize]
     public class DoctorController : BaseController
     {
         // Repos
@@ -50,15 +50,16 @@ namespace Webapp.Controllers
             {
                 // Retrieve doctors
                 doctors = doctorRepository.GetAll();
-                if (doctors.Count < 1)
-                    return View();
             }
             else if(User.IsInRole("doctor"))
             {
                 long userId = GetUserId();
                 doctors = doctorRepository.GetByDoctorWithDepartment(userId);
-                if (doctors.Count < 1)
-                    return View();
+            }
+            else if(User.IsInRole("patient"))
+            {
+                long userId = GetUserId();
+                doctors = doctorRepository.GetByPatientWithTreatment(userId);
             }
             
             // Convert to viewmodels
@@ -83,6 +84,7 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="id">Id filter</param>
         /// <returns></returns>
+        [Authorize(Roles = "doctor, admin")]
         public IActionResult Details(long id)
         {
             // Check if id is set
@@ -130,7 +132,7 @@ namespace Webapp.Controllers
             else
             {
                 vm.Genders = converter.GetGenders();
-                return View();
+                return View(vm);
             }
         }
 
@@ -185,7 +187,7 @@ namespace Webapp.Controllers
 
             if (ModelState.IsValid)
             {
-                if (!departmentRepository.Delete(id))
+                if (!doctorRepository.Delete(id, false))
                     return BadRequest("Something went wrong deleting object");
             }
             return RedirectToAction("Index");

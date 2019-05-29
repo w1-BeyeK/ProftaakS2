@@ -97,50 +97,51 @@
                             </div>
 
                         </div>
-                        @*<div class="form-group">
-                                <div class="col-xs-12">
-                                    <label asp-for="TreatmentDetailViewModels[0].TreatmentTypeDescription" for="Description"><h4>Omschrijving</h4></label>
-                                    <input asp-for="TreatmentDetailViewModels[0].TreatmentTypeDescription" type="text" class="form-control" name="description" id="description" placeholder="Omschrijving" title="Omschrijving." value="model beschrijving nog toevoegen">
-                                </div>
-                            </div>*@
-                        @foreach (Comment comment in Model.TreatmentDetailViewModels[0].Comments)
-                        {
-                            <div class="form-group">
-                                <div class="col-xs-12">
-                                    <label for="Comments"><h4>Opmerkingen</h4></label>
-                                    <input type="text" class="form-control" name="comments" id="comments" placeholder="Commentaar" title="Commentaar." value="@comment.Description">
-                                </div>
-                            </div>
-                        }
                         @if (User.IsInRole("doctor"))
                         {
                             <div class="form-group">
                                 <div class="col-xs-12">
                                     <label for="Comments"><h4>Nieuwe opmerking</h4></label>
-                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Title" placeholder="Nieuw Titel" title="Titel van commentaar.">
+                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Title" placeholder="Nieuw Titel" title="Titel van opmerking.">
                                     <br />
-                                    <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Description" placeholder="Nieuw Commentaar" title="Commentaar op behandeling.">
+                                    @Html.TextAreaFor(e => e.TreatmentDetailViewModels[0].Description.Description, new { @class = "form-control", @placeholder = "Inhoud van opmerking", @title = "Inhoud van opmerking" })
                                     <br />
                                     <button type="submit" class="btn btn-primary" asp-controller="Patient" asp-action="Treatment">Plaats Comment</button>
                                 </div>
                             </div>
                         }
+
                         <div class="form-group">
                             <div class="col-xs-12">
-                                <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
-                                <ul>
-
-
-                                    @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
-                                    {
-                                        @if (treatment.Age <= 90)
-                                        {
-                                            <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
-                                        }
-                                    }
-                                </ul>
+                               <label for="Comments"><h4>Opmerkingen</h4></label>
+                                @foreach (Comment comment in Model.TreatmentDetailViewModels[0].Comments)
+                                {
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">@comment.Title</div>
+                                        <div class="panel-body">
+                                            @comment.Description
+                                        </div>
+                                    </div>
+                                }
+                                    </div>
                             </div>
-                        </div>
+
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
+                                    <ul>
+
+
+                                        @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
+                                        {
+                                            @if (treatment.Age <= 90)
+                                            {
+                                                <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
                     </form>
                     <hr>
                 </div><!--/tab-pane-->

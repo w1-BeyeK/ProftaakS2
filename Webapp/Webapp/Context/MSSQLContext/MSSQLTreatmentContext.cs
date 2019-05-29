@@ -127,14 +127,14 @@ namespace Webapp.Context.MSSQLContext
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[beginDate] = @beginDate";
-                    parameters.Add(new KeyValuePair<string, object>("beginDate", treatment.BeginDate));
+                    parameters.Add(new KeyValuePair<string, object>("beginDate", treatment.BeginDate.ToString("yyyy-MM-dd HH:mm:ss.fff")));
                 }
                 if (treatment.EndDate != DateTime.MinValue)
                 {
                     if (!string.IsNullOrWhiteSpace(fields))
                         fields += ",";
                     fields += "[endDate] = @endDate";
-                    parameters.Add(new KeyValuePair<string, object>("endDate", treatment.EndDate));
+                    parameters.Add(new KeyValuePair<string, object>("endDate", treatment.EndDate.ToString("yyyy-MM-dd HH:mm:ss.fff")));
                 }
 
                 query = query.Replace("@fields", fields);
@@ -144,6 +144,7 @@ namespace Webapp.Context.MSSQLContext
             }
             catch (Exception e)
             {
+                throw e;
                 return false;
             }
         }
@@ -153,7 +154,7 @@ namespace Webapp.Context.MSSQLContext
         /// </summary>
         /// <param name="treatment"> Treatment </param>
         /// <returns> Bool </returns>
-        public bool Delete(Treatment treatment)
+        public bool Delete(long id, bool active)
         {
             //try
             //{

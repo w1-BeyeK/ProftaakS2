@@ -18,6 +18,6 @@ namespace Webapp.Interfaces
 
         long Insert(T obj);
         bool Update(T obj);
-        bool Delete(T obj);
+        bool Delete(long id, bool active);
     }
 }
