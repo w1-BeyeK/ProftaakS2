@@ -33,7 +33,7 @@ namespace Webapp.Models.Data
 
         public void AddDepartment(Department department)
         {
-
+            Departments.Add(department);
         }
 
         public void AddTreatment(Treatment treatment)
