@@ -23,7 +23,7 @@ namespace Webapp.Models.Data
         public bool PrivBirthDate { get; set; }
         public List<Department> Departments { get; set; }
         public List<Treatment> Treatments { get; set; }
-
+        public string Status { get; set; }
 
         public Patient(long id, string userName, string email) : base(id, userName, email)
         {
