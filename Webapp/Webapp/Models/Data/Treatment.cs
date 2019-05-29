@@ -19,7 +19,6 @@ namespace Webapp.Models.Data
         public long TreatmentTypeId { get; set; }
         public List<Comment> Comments { get; set; }
         public string PatientName { get; set; }
-        public string Status { get; set; }
 
         public Treatment(long id, string name, DateTime beginDate, DateTime endDate)
         {
