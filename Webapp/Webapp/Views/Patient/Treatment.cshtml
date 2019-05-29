@@ -22,23 +22,19 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label asp-for="Name"><h4>Volledige naam</h4></label>
-                                <input asp-for="Name" type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name">
+                                <input asp-for="Name" type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name" readonly>
                                 <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label asp-for="GenderId" for="Gender"><h4>Geslacht</h4></label>
-                                <select asp-for="GenderId" type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht.">
+                                <select asp-for="GenderId" type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht." readonly>
                                     @for (int i = 0; i < Model.Genders.Count; i++)
                                     {
-                                        if (!(i == Model.GenderId))
+                                        if ((i == Model.GenderId))
                                         {
                                             <option value="@i">@Model.Genders[i]</option>
-                                        }
-                                        else
-                                        {
-                                            <option selected value="@i">@Model.Genders[i]</option>
                                         }
                                     }
                                 </select>
@@ -47,14 +43,14 @@
                         <div class="form-group">
                             <div class="col-xs-6">
                                 <label asp-for="Birth" for="Birthday"><h4>Geboortedatum</h4></label>
-                                <input asp-for="Birth" type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")">
+                                <input asp-for="Birth" type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")" readonly>
                             </div>
                         </div>
                         <div class="form-group">
 
                             <div class="col-xs-6">
                                 <label asp-for="Age" for="Age"><h4>Leeftijd</h4></label>
-                                <input asp-for="Age" type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age">
+                                <input asp-for="Age" type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age" readonly>
 
                                 <br />
                                 <br />
