@@ -39,14 +39,24 @@
                                 </div>
                             </div>
                         }
-
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="treatments" class="h4">Uitvoerbare behandelingen</label>
-                                @foreach (TreatmentTypeDetailViewModel Type in Model.Doctor.TreatmentTypes)
-                                {
-                                    <option>@Type.Name</option>
-                                }
+                        <div class="treatmentTypeContainer">
+                            <div class="form-group">
+                                <div class="col-xs-12">
+                                    <label for="treatments" class="h4">Uitvoerbare behandelingen</label>
+                                    <table class="table table-striped table-hover" id="treatmentTypeTable">
+                                        <thead>
+                                            <th>Naam</th>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (TreatmentTypeDetailViewModel Type in Model.Doctor.TreatmentTypes)
+                                            {
+                                                <tr>
+                                                    <td>@Type.Name</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                         @if (User.IsInRole("doctor"))
@@ -72,3 +82,40 @@
         </div><!--/tab-content-->
     </div><!--/col-9-->
 </div><!--/row-->
+
+@section Scripts {
+    <script>
+        $("document").ready(function () {
+            initDataTable();
+            $("#treatmentTypeContainer").removeClass("hidden");
+        });
+
+        function initDataTable() {
+            $("#treatmentTypeTable").DataTable({
+                "language": {
+                    "sProcessing": "Bezig...",
+                    "sLengthMenu": "_MENU_ resultaten weergeven",
+                    "sZeroRecords": "Geen resultaten gevonden",
+                    "sInfo": "_START_ tot _END_ van _TOTAL_ resultaten",
+                    "sInfoEmpty": "Geen resultaten om weer te geven",
+                    "sInfoFiltered": " (gefilterd uit _MAX_ resultaten)",
+                    "sInfoPostFix": "",
+                    "sSearch": "Zoeken:",
+                    "sEmptyTable": "Geen resultaten aanwezig in de tabel",
+                    "sInfoThousands": ".",
+                    "sLoadingRecords": "Een moment geduld aub - bezig met laden...",
+                    "oPaginate": {
+                        "sFirst": "Eerste",
+                        "sLast": "Laatste",
+                        "sNext": "Volgende",
+                        "sPrevious": "Vorige"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activeer om kolom oplopend te sorteren",
+                        "sSortDescending": ": activeer om kolom aflopend te sorteren"
+                    }
+                }
+            });
+        }
+    </script>
+}
