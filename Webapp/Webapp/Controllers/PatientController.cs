@@ -97,7 +97,7 @@ namespace Webapp.Controllers
             Comment comment = vm.TreatmentDetailViewModels[0].Description;
             comment.TreatmentId = id;
             commentRepository.Insert(comment);
-            return RedirectToAction("index", "patient");
+            return RedirectToAction("Treatment/"+id.ToString(), "patient");
         }
     }
 }

@@ -91,6 +91,14 @@ namespace TestWebapp.TestRepositories
         {
             EmptyLists();
             departmentRepository = new DepartmentRepository(context);
+            departmentRepository.Insert(new Department()
+            {
+                Id = 1,
+                Name = "afdeling 1",
+                Active = true,
+                Description = "iets bijzonders",
+                InstitutionId = 1
+            });
 
             Assert.Equal("afdeling 1", departmentRepository.GetById(1).Name);
         }

@@ -14,7 +14,7 @@ namespace Webapp.Controllers
     /// <summary>
     /// Controller for profiles
     /// </summary>
-    [Authorize(Roles = "patient, doctor")]
+    [Authorize]
     public class ProfileController : BaseController
     {
         /// <summary>
@@ -106,7 +106,13 @@ namespace Webapp.Controllers
             try
             {
                 UserViewModel viewModel = new UserViewModel();
-                if (HttpContext.User.IsInRole("doctor"))
+                if (HttpContext.User.IsInRole("admin"))
+                {
+                    Doctor doctor = doctorRepository.GetById(id);
+                    viewModel.Doctor = doctorConverter.ModelToViewModel(doctor);
+                    viewModel.Doctor.TreatmentTypes = typeConverter.ModelsToViewModel(treatmentTypeRepository.GetTreatmentTypesByDoctorId(id));
+                }
+                else if (HttpContext.User.IsInRole("doctor"))
                 {
                     if (doctorRepository.CheckDoctorRelationship(userId, id))
                     {
