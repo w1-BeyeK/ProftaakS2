@@ -93,5 +93,10 @@ namespace Webapp.Context.MemoryContext
         {
             return BaseMemoryContext.treatments.Exists(t => t.DoctorId == doctorId && t.PatientId == patientId /*&& t.EndDate >= DateTime.Today.AddYears(-1)*/);
         }
+
+        public bool PatientGiveAccessToDoctor(long treatmentId, bool access)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
