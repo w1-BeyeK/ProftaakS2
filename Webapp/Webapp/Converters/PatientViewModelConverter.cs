@@ -76,6 +76,7 @@ namespace Webapp.Converters
                     Name = p.Name,
                     GenderId = (int)p.Gender,
                     Birth = p.Birth,
+                    Status = p.Status,
                     Genders = new List<string>()
                     {
                     "Man",
@@ -99,5 +100,6 @@ namespace Webapp.Converters
         {
             throw new NotImplementedException();
         }
+        
     }
 }
