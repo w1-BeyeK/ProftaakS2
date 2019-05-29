@@ -40,7 +40,9 @@ namespace TestWebapp.TestRepositories
             EmptyLists();
             Doctor doctor = new Doctor(0, "een", "een@een.een", "eend");
             doctorRepository = new DoctorRepository(context);
-            Assert.Equal(14, doctorRepository.Insert(doctor));
+
+            long result = doctorRepository.Insert(doctor);
+            Assert.Equal(14, result);
         }
 
         [Fact]
