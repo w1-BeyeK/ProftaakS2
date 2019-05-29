@@ -281,7 +281,7 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = $"SELECT * FROM [dbo].[GetPatientsWithAccess](@doctorId))";
+            string query = "SELECT * FROM [dbo].[GetPatientsWithAccess](@doctorId))";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {

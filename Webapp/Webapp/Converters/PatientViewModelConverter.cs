@@ -76,7 +76,7 @@ namespace Webapp.Converters
                     Name = p.Name,
                     GenderId = (int)p.Gender,
                     Birth = p.Birth,
-                    Status = p.Status,
+                    AccessToDoctor = p.AccessToDoctor,
                     Genders = new List<string>()
                     {
                     "Man",

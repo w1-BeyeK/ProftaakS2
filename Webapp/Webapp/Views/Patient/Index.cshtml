@@ -26,7 +26,7 @@
                     <td>@item.Name</td>
                     <td>@item.Genders[item.GenderId]</td>
                     <td>@item.Birth.ToShortDateString()</td>
-                    @if (item.Status)
+                    @if (item.AccessToDoctor)
                     {
                     <td>
                         @Html.ActionLink("Details", "PatientDetails", "Profile", new { id = item.UserId })
