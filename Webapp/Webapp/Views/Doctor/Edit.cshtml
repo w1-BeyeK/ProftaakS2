@@ -56,28 +56,18 @@
                 <input asp-for="Email" type="email" class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="PrivMail" /> @Html.DisplayNameFor(model => model.PrivMail)
-                    </label>
-                </div>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="PrivMail" /> @Html.DisplayNameFor(model => model.PrivMail)
+                </label>
             </div>
-            <div class="form-group">
-                <div class="checkbox">
-                    <label>
-                        <input asp-for="PrivPhonenumber" /> @Html.DisplayNameFor(model => model.PrivPhonenumber)
-                    </label>
-                </div>
+            <div class="checkbox">
+                <label>
+                    <input asp-for="PrivPhonenumber" /> @Html.DisplayNameFor(model => model.PrivPhonenumber)
+                </label>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Opslaan" class="btn btn-default" />
-            </div>
+            <input type="submit" value="Opslaan" class="btn btn-default" />
         </form>
     </div>
 </div>
-
-<div>
     <a asp-action="Index">Terug naar lijst</a>
-</div>
-

@@ -87,13 +87,13 @@
                             </div>
                         </div>
                     }
-                    <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Create">Maak Aan</button>
+                        <div class="col-xs-2 btn-group-vertical">
+                            <button type="submit" class="btn btn-primary" asp-controller="Treatment" asp-action="Create" style="margin-top:10px; margin-bottom:10px;">Maak Aan</button>
+                            <a asp-action="Index">Terug naar lijst</a>
+                        </div>
                 </form>
                 <hr>
             </div><!--/tab-pane-->
         </div><!--/tab-content-->
     </div><!--/col-9-->
 </div><!--/row-->
-<div>
-    <a asp-action="Index">Terug naar lijst</a>
-</div>
