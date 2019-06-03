@@ -89,5 +89,6 @@ namespace Webapp.Models
 
         public List<TreatmentDetailViewModel> TreatmentDetailViewModels { get; set; }
         public List<string> Genders { get; set; }
+        
     }
 }

@@ -281,12 +281,11 @@ namespace Webapp.Context.MSSQLContext
             // Create result
             List<Patient> result = new List<Patient>();
             // Set query
-            string query = $"SELECT * FROM PTS2_Patient WHERE[Id] IN(SELECT[PatientId] FROM[PTS2_Treatment] WHERE DoctorId = @doctorId) AND Active = @active";
+            string query = "SELECT * FROM [dbo].[GetPatientsWithAccess](@doctorId))";
 
             List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
                 {
-                    new KeyValuePair<string, object>("doctorId", id),
-                    new KeyValuePair<string, object>("active", true? "1" : "0")
+                    new KeyValuePair<string, object>("doctorId", id)
                 };
 
             // Tell the handler to execute the query

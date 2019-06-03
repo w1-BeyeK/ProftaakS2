@@ -145,7 +145,6 @@ namespace Webapp.Context.MSSQLContext
             catch (Exception e)
             {
                 throw e;
-                return false;
             }
         }
 
@@ -289,6 +288,27 @@ namespace Webapp.Context.MSSQLContext
             catch (Exception e)
             {
                 throw e;
+            }
+        }
+
+        public bool PatientGiveAccessToDoctor(long treatmentId, bool access)
+        {
+            try
+            {
+                string query = "UPDATE PTS2_Treatment SET ConfirmId = @access WHERE Id = @id";
+
+                List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>()
+                {
+                    new KeyValuePair<string, object>("id", treatmentId),
+                    new KeyValuePair<string, object>("access", access ? "2" : "3")
+                };
+
+                handler.ExecuteCommand(query, parameters);
+                return true;
+            }
+            catch (Exception e)
+            {
+                return false;
             }
         }
     }

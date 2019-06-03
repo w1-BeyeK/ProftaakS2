@@ -33,5 +33,7 @@ namespace Webapp.Models
         [Required]
         [Display(Name = "Geslacht")]
         public int GenderId { get; set; }
+
+        public bool AccessToDoctor { get; set; }
     }
 }

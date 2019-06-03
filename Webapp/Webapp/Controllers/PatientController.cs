@@ -54,9 +54,9 @@ namespace Webapp.Controllers
         public IActionResult Index()
         {
             // Retrieve and convert all - active - patients
-            List<Patient> patienten = patientRepository.GetAll();
+            List<Patient> patienten = patientRepository.GetByDoctor(GetUserId());
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
-
+            
             return View(vms);
         }
 
