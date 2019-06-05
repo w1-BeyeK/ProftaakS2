@@ -63,6 +63,11 @@ namespace Webapp.Controllers
         [AllowAnonymous]
         public IActionResult Index()
         {
+            if (TempData["LoginResult"] != null)
+            {
+                ViewBag.LoginResult = TempData["LoginResult"].ToString();
+            }
+            
             return View();
         }
 
@@ -91,8 +96,13 @@ namespace Webapp.Controllers
                     }
                     else
                     {
+                        TempData["LoginResult"] = "Gebruikersnaam en/of wachtwoord is incorrect. Probeer nogmaals.";
                         return RedirectToAction("Index");
                     }
+                }
+                else
+                {
+                    TempData["LoginResult"] = "Gebruikersnaam is niet ingevuld. Gelieve beide velden in te vullen.";
                 }
             }
             return RedirectToAction("Index");

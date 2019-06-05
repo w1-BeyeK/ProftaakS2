@@ -159,7 +159,7 @@ namespace Webapp.Controllers
             {
                 if (id != vm.EmployeeNumber)
                 {
-                    return BadRequest("Ids do not match");
+                    return BadRequest("Ids komen niet overen");
                 }
 
                 Doctor doctor = converter.ViewModelToModel(vm);

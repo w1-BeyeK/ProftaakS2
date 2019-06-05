@@ -87,6 +87,7 @@ namespace Webapp.Models
         [Display(Name = "Leeftijd zichtbaar maken")]
         public int Age { get; set; }
 
+        public long TreatmentId { get; set; }
         public List<TreatmentDetailViewModel> TreatmentDetailViewModels { get; set; }
         public List<string> Genders { get; set; }
         
