@@ -65,7 +65,7 @@
                     @foreach (TreatmentDetailViewModel treatment in Model)
                     {
                         <div class="alert alert-info alert-dismissible" style=" width: 50%; display: inline-block; height: 100px;" role="alert">
-                            <strong>Arts @treatment.DoctorName </strong> wilt een behandeling <strong>@treatment.Name</strong> met je starten.
+                            <strong>Arts @treatment.DoctorName </strong> van behandeling <strong>@treatment.Name</strong> wilt je privé gegevens inzien.
                             <br />
                             <input type="hidden" value="@treatment.Id" asp-for="First().Id">
                             <button class="btn btn-sm" type="submit" asp-action="Accept" asp-controller="Home">Accepteren</button>
