@@ -55,7 +55,7 @@ namespace Webapp.Controllers
                 // Set default first item
                 new SelectListItem
                 {
-                    Text="Select institution...", Value = "-1" , Disabled = true, Selected = true
+                    Text="Selecteer institutie...", Value = "-1" , Disabled = true, Selected = true
                 }
             };
 
@@ -64,15 +64,15 @@ namespace Webapp.Controllers
 
             // Create item for each institution
             institutions.ForEach(i =>
+            {
+                items.Add(new SelectListItem
                 {
-                    items.Add(new SelectListItem
-                    {
-                        Text = i.Name,
-                        Value = i.Id.ToString(),
-                        // Selected if Ids match
-                        Selected = (i.Id == selectId)
-                    });
+                    Text = i.Name,
+                    Value = i.Id.ToString(),
+                    // Selected if Ids match
+                    Selected = (i.Id == selectId)
                 });
+            });
 
             return items;
         }
@@ -117,12 +117,12 @@ namespace Webapp.Controllers
         {
             // Check if id is set
             if (id < 1)
-                return BadRequest("Id cannot be 0");
+                return BadRequest("Id kan niet 0 zijn");
 
             // Retrieve department
             Department department = departmentRepository.GetById(id);
             if (department == null)
-                return BadRequest("Department could not be found");
+                return BadRequest("Afdeling niet gevonden");
 
             // Assign and return view
             DepartmentDetailViewModel vm = converter.ModelToViewModel(department);
@@ -179,12 +179,12 @@ namespace Webapp.Controllers
         {
             // Check if id is set
             if (id < 1)
-                return BadRequest("Id cannot be 0");
+                return BadRequest("Id kan niet 0 zijn");
 
             // Retrieve department
             Department department = departmentRepository.GetById(id);
             if (department == null)
-                return BadRequest("Department could not be found");
+                return BadRequest("Afdeling niet gevonden");
 
             // Convert and return
             DepartmentDetailViewModel vm = converter.ModelToViewModel(department);
@@ -207,9 +207,7 @@ namespace Webapp.Controllers
             {
                 // Validation on Ids
                 if (id != model.Id)
-                {
-                    return BadRequest("Ids do not match");
-                }
+                    return BadRequest("Ids komen niet overeen");
 
                 // Convert vm back to model
                 Department department = converter.ViewModelToModel(model);
@@ -238,7 +236,7 @@ namespace Webapp.Controllers
             {
                 // Delete the department
                 if (!departmentRepository.Delete(id, false))
-                    return BadRequest("Something went wrong deleting object");
+                    return BadRequest("Iets ging fout met het deactiveren");
             }
             return RedirectToAction("Index");
         }

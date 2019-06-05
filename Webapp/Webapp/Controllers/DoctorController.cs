@@ -89,12 +89,12 @@ namespace Webapp.Controllers
         {
             // Check if id is set
             if (id < 1)
-                return BadRequest("Id cannot be 0");
+                return BadRequest("Id kan niet 0 zijn");
 
             // Retrieve doctor
             Doctor doctor = doctorRepository.GetById(id);
             if (doctor == null)
-                return BadRequest("Department could not be found");
+                return BadRequest("Doctor is niet gevonden");
 
             // Convert to viewmodel and return in view
             DoctorDetailViewModel vm = converter.ModelToViewModel(doctor);
@@ -141,11 +141,11 @@ namespace Webapp.Controllers
         public IActionResult Edit(long id)
         {
             if (id < 1)
-                return BadRequest("Id cannot be 0");
+                return BadRequest("Id kan niet 0 zijn");
 
             Doctor doctor = doctorRepository.GetById(id);
             if (doctor == null)
-                return BadRequest("Department could not be found");
+                return BadRequest("Arts is niet gevonden");
 
             DoctorDetailViewModel vm = converter.ModelToViewModel(doctor);
             return View(vm);
@@ -188,7 +188,7 @@ namespace Webapp.Controllers
             if (ModelState.IsValid)
             {
                 if (!doctorRepository.Delete(id, false))
-                    return BadRequest("Something went wrong deleting object");
+                    return BadRequest("Iets ging fout met het deactiveren");
             }
             return RedirectToAction("Index");
         }
