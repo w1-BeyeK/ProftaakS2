@@ -34,8 +34,8 @@ namespace Webapp.Controllers
         /// </summary>
         /// <param name="patientRepository"></param>
         /// <param name="treatmentRepository"></param>
-        public PatientController(   
-            PatientRepository patientRepository, 
+        public PatientController(
+            PatientRepository patientRepository,
             TreatmentRepository treatmentRepository,
             TreatmentTypeRepository treatmentTypeRepository,
             CommentRepository commentRepository
@@ -50,13 +50,13 @@ namespace Webapp.Controllers
         /// <summary>
         /// Gets all patients of a doctor and converts them from a class to a viewmodel
         /// </summary>
-        [Authorize(Roles= "doctor")]
+        [Authorize(Roles = "doctor")]
         public IActionResult Index()
         {
             // Retrieve and convert all - active - patients
             List<Patient> patienten = patientRepository.GetByDoctor(GetUserId());
             List<PatientListViewModel> vms = patientVMC.PatientlistToViewModel(patienten);
-            
+
             return View(vms);
         }
 
@@ -67,26 +67,28 @@ namespace Webapp.Controllers
         [Authorize(Roles = "doctor, patient")]
         public IActionResult Treatment(long id)
         {
-            
+
             PatientDetailViewModel patientDetailViewModel = new PatientDetailViewModel();
-            Patient patient = new Patient();
             try
             {
-                    long patientId = patientRepository.GetPatientIdByTreatmentId(id);
-                    patient = patientRepository.GetById(patientId);
-                    patient.Treatments = treatmentRepository.GetByPatient(patientId);
-                    
-                    foreach (Treatment t in patient.Treatments)
-                    {
-                        t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
-                        t.Comments = commentRepository.GetByTreatment(id);
-                    }
+                Patient patient = new Patient();
+                long patientId = patientRepository.GetPatientIdByTreatmentId(id);
+                patient = patientRepository.GetById(patientId);
+                patient.Treatments = treatmentRepository.GetByPatient(patientId);
+
+                foreach (Treatment t in patient.Treatments)
+                {
+                    t.TreatmentType = treatmentTypeRepository.GetByTreatmentId(t.TreatmentTypeId);
+                    t.Comments = commentRepository.GetByTreatment(id);
+                }
                 patientDetailViewModel = patientWithTreatmentsVMC.PatientToViewModel(patient);
             }
             catch (Exception Ex)
             {
                 return BadRequest(Ex.Message);
             }
+
+            patientDetailViewModel.TreatmentId = id;
             return View(patientDetailViewModel);
         }
 
@@ -97,7 +99,7 @@ namespace Webapp.Controllers
             Comment comment = vm.TreatmentDetailViewModels[0].Description;
             comment.TreatmentId = id;
             commentRepository.Insert(comment);
-            return RedirectToAction("Treatment/"+id.ToString(), "patient");
+            return RedirectToAction("Treatment/" + id.ToString(), "patient");
         }
     }
 }

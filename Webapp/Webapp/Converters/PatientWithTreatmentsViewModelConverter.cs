@@ -16,11 +16,6 @@ namespace Webapp.Converters
                 Id = vm.Id,
             };
 
-            Comment comment = new Comment()
-            {
-
-            };
-
             foreach (TreatmentDetailViewModel t in vm.TreatmentDetailViewModels)
             {
                 Treatment treatment = new Treatment()
@@ -30,7 +25,6 @@ namespace Webapp.Converters
                     Patient = patient,
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
-                    //TreatmentType = t.TypeId,
                     Comments = new List<Comment>(t.Comments),
                 };
                 patient.AddTreatment(treatment);
@@ -57,13 +51,6 @@ namespace Webapp.Converters
             vm.TreatmentDetailViewModels = new List<TreatmentDetailViewModel>();
             foreach (Treatment t in patient.Treatments)
             {
-
-                //The first comment is the description
-                //t.Comments.OrderBy(x => x.Date);
-                //List<Comment> comments = new List<Comment>(t.Comments);
-                //Comment description = comments[0];
-                //comments.RemoveAt(0);
-
                 TreatmentDetailViewModel treatmentDetailViewModel = new TreatmentDetailViewModel()
                 {
                     Id = t.Id,
@@ -73,10 +60,6 @@ namespace Webapp.Converters
                     BeginDate = t.BeginDate,
                     EndDate = t.EndDate,
                     Comments = t.Comments
-
-                    //Comments = comments,
-                    //Description = description,
-                    //Age = t.GetAge()
                 };
                 vm.TreatmentDetailViewModels.Add(treatmentDetailViewModel);
             }
