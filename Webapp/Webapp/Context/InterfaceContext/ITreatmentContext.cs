@@ -13,5 +13,6 @@ namespace Webapp.Context.InterfaceContext
         List<Treatment> GetByPatient(long id);
         bool CheckTreatmentRelationship(long doctorId, long patientId);
         bool PatientGiveAccessToDoctor(long treatmentId, bool access);
+        List<Treatment> GetUnconfirmedTreatmentsByPatient(long patientId);
     }
 }

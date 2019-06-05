@@ -103,7 +103,21 @@ namespace Webapp.Repository
             {
                 throw new NullReferenceException("Het behandelingId is leeg.");
             }
-            return PatientGiveAccessToDoctor(treatmentId, access);
+            return context.PatientGiveAccessToDoctor(treatmentId, access);
+        }
+
+        /// <summary>
+        /// Gets all unconfirmed treatments from a patient.
+        /// </summary>
+        /// <param name="patientId"></param>
+        /// <returns></returns>
+        public List<Treatment> GetUnconfirmedTreatmentsByPatient(long patientId)
+        {
+            if(patientId < 1)
+            {
+                throw new NullReferenceException("Het patiëntId is leeg.");
+            }
+            return context.GetUnconfirmedTreatmentsByPatient(patientId);
         }
     }
 }

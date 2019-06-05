@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<TreatmentDetailViewModel>
+
 @{
     ViewData["Title"] = "Dashboard";
 }
@@ -45,6 +46,7 @@
             <div class="list-group-horizontal row">
                 <button class="btn btn-lg" asp-action="Index" asp-controller="Treatment">Overzicht</button>
             </div>
+
         }
         <h2><i class="fa fa-user-md fa-lg"></i> Artsen</h2>
         <div class="list-group-horizontal row">
@@ -52,6 +54,26 @@
             @if (User.IsInRole("admin"))
             {
                 <button class="btn btn-lg" asp-action="Create" asp-controller="Doctor">Nieuwe toevoegen</button>
+            }
+        </div>
+        <div>
+
+            @if (Context.User.IsInRole("patient"))
+            {
+                if (Model.Any())
+                {
+                    @foreach (TreatmentDetailViewModel treatment in Model)
+                    {
+                        <div class="alert alert-info alert-dismissible" style=" width: 50%; display: inline-block; height: 100px;" role="alert">
+                            <strong>Arts @treatment.DoctorName </strong> wilt een behandeling <strong>@treatment.Name</strong> met je starten.
+                            <br />
+                            <input type="hidden" value="@treatment.Id" asp-for="First().Id">
+                            <button class="btn btn-sm" type="submit" asp-action="Accept" asp-controller="Home">Accepteren</button>
+                            <input type="hidden" value="@treatment.Id" asp-for="First().Id">
+                            <button class="btn btn-sm" asp-action="Deny" asp-controller="Home">Weigeren</button>
+                        </div>
+                    }
+                }
             }
         </div>
     </div>

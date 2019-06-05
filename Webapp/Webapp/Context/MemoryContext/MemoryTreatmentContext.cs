@@ -98,5 +98,10 @@ namespace Webapp.Context.MemoryContext
         {
             throw new NotImplementedException();
         }
+
+        public List<Treatment> GetUnconfirmedTreatmentsByPatient(long patientId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

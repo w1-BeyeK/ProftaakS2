@@ -59,6 +59,8 @@ namespace Webapp.Models
         [Display(Name = "Leeftijd")]
         public int Age { get; set; }
 
+        public string DoctorName { get; set; }
+
         public List<PatientListViewModel> Patients { get; set; }
         public List<TreatmentTypeDetailViewModel> TreatmentTypes { get; set; }
     }

@@ -311,5 +311,37 @@ namespace Webapp.Context.MSSQLContext
                 return false;
             }
         }
+
+        public List<Treatment> GetUnconfirmedTreatmentsByPatient(long patientId)
+        {
+            try
+            {
+                // Create result
+                List<Treatment> result = new List<Treatment>();
+                // Set query
+                string query = "SELECT Id, Name, DoctorId, BeginDate, EndDate, TreatmentTypeId, Status, DoctorName " +
+                               "FROM GetTreatmentsWithStatus " +
+                               "WHERE PatientId = @id " +
+                               "AND Status = 'Onbepaald'";
+
+
+                // Tell the handler to execute the query
+                var dbResult = handler.ExecuteSelect(query, patientId) as DataTable;
+
+                // Parse all rows
+                foreach (DataRow dr in dbResult.Rows)
+                {
+                    // Parse only if succeeded
+                    if (parser.TryParse(dr, out Treatment treatment))
+                        result.Add(treatment);
+                }
+
+                return result;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
     }
 }
