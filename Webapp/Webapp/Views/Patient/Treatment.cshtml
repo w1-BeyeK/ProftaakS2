@@ -28,13 +28,12 @@ else if (User.IsInRole("patient"))
                     <hr>
                     <form class="form" method="post" id="registrationForm">
                         <div class="col-xs-6">
-                            <label asp-for="Name"><h4>Volledige naam</h4></label>
-                            <input asp-for="Name" type="text" class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name" readonly>
-                            <span asp-validation-for="Name" class="text-danger"></span>
+                            <label asp-for="Name" class="h4">Volledige naam</label>
+                            <input asp-for="Name" type="text" readonly class="form-control" name="name" id="name" placeholder="Voer je naam in" title="Voer je naam in." value="@Model.Name">
                         </div>
                         <div class="col-xs-6">
-                            <label asp-for="GenderId" for="Gender"><h4>Geslacht</h4></label>
-                            <select asp-for="GenderId" type="text" class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht." readonly>
+                            <label asp-for="GenderId" for="Gender" class="h4">Geslacht</label>
+                            <select asp-for="GenderId" type="text" readonly class="form-control" name="gender" id="gender" placeholder="Geslacht" title="Geslacht.">
                                 @for (int i = 0; i < Model.Genders.Count; i++)
                                 {
                                     if ((i == Model.GenderId))
@@ -45,41 +44,41 @@ else if (User.IsInRole("patient"))
                             </select>
                         </div>
                         <div class="col-xs-6">
-                            <label asp-for="Birth" for="Birthday"><h4>Geboortedatum</h4></label>
-                            <input asp-for="Birth" type="date" class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")" readonly>
+                            <label asp-for="Birth" for="Birthday" class="h4">Geboortedatum</label>
+                            <input asp-for="Birth" type="date" readonly class="form-control" name="enddate" id="enddate" placeholder="Geboortedatum" title="Geboortedatum" value="@Model.Birth.ToString("yyyy-MM-dd")">
                         </div>
                         <div class="col-xs-6">
-                            <label asp-for="Age" for="Age"><h4>Leeftijd</h4></label>
-                            <input asp-for="Age" type="text" class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age" readonly>
+                            <label asp-for="Age" for="Age" class="h4">Leeftijd</label>
+                            <input asp-for="Age" type="text" readonly class="form-control" name="age" id="age" placeholder="Je leeftijd" title="Je leeftijd." value="@Model.Age">
 
                             <br />
                             <br />
                         </div>
                         <div class="col-xs-6">
-                            <label asp-for="TreatmentDetailViewModels[0].Name" for="nameTreatment"><h4>Naam behandeling</h4></label>
-                            <input asp-for="TreatmentDetailViewModels[0].Name" type="text" class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling." value="@Model.TreatmentDetailViewModels[0].Name">
+                            <label asp-for="TreatmentDetailViewModels[0].Name" for="nameTreatment" class="h4">Naam behandeling</label>
+                            <input asp-for="TreatmentDetailViewModels[0].Name" type="text" readonly class="form-control" name="nameTreatment" id="nameTreatment" placeholder="Naam van de behandeling" title="Naam van de behandeling." value="@Model.TreatmentDetailViewModels[0].Name">
                         </div>
                         <div class="form-group">
                             <div class="col-xs-6">
-                                <label asp-for="TreatmentDetailViewModels[0].TypeName" for="TreatmentType"><h4>Type behandeling</h4></label>
-                                <input asp-for="TreatmentDetailViewModels[0].TypeName" type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TypeName">
+                                <label asp-for="TreatmentDetailViewModels[0].TypeName" for="TreatmentType" class="h4">Type behandeling</label>
+                                <input asp-for="TreatmentDetailViewModels[0].TypeName" type="text" readonly class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TypeName">
                             </div>
                         </div>
                         <div class="col-xs-3">
                             <label asp-for="TreatmentDetailViewModels[0].BeginDate" for="Begindate"><h4>Begindatum</h4></label>
-                            <input asp-for="TreatmentDetailViewModels[0].BeginDate" type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
+                            <input asp-for="TreatmentDetailViewModels[0].BeginDate" type="date" readonly class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
                         </div>
                         <div class="col-xs-3">
                             <label asp-for="TreatmentDetailViewModels[0].BeginTime" for="BeginTime"><h4>Begintijd</h4></label>
-                            <input asp-for="TreatmentDetailViewModels[0].BeginTime" type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToShortTimeString()">
+                            <input asp-for="TreatmentDetailViewModels[0].BeginTime" type="time" readonly class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToShortTimeString()">
                         </div>
                         <div class="col-xs-3">
                             <label asp-for="TreatmentDetailViewModels[0].EndDate" for="Enddate"><h4>Einddatum</h4></label>
-                            <input asp-for="TreatmentDetailViewModels[0].EndDate" type="date" class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToString("yyyy-MM-dd")">
+                            <input asp-for="TreatmentDetailViewModels[0].EndDate" type="date" readonly class="form-control" name="enddate" id="enddate" placeholder="Einddatum behandeling" title="Einddatum behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToString("yyyy-MM-dd")">
                         </div>
                         <div class="col-xs-3">
                             <label asp-for="TreatmentDetailViewModels[0].EndTime" for="EndTime"><h4>Eindtijd</h4></label>
-                            <input asp-for="TreatmentDetailViewModels[0].EndTime" type="time" class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()"><br />
+                            <input asp-for="TreatmentDetailViewModels[0].EndTime" type="time" readonly class="form-control" name="endTime" id="endTime" title="Eindtijd behandeling" value="@Model.TreatmentDetailViewModels[0].EndDate.ToShortTimeString()"><br />
                         </div>
 
                         @if (User.IsInRole("doctor"))
@@ -107,18 +106,21 @@ else if (User.IsInRole("patient"))
                             }
                         </div>
 
-                        <div class="col-xs-12">
-                            <label for="ExecutedTreatmentTypes" class="h4">Uitgevoerde behandelingen</label>
-                            <ul>
-                                @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
-                                {
-                                    @if (treatment.Age <= 90)
+                        @if (User.IsInRole("doctor"))
+                        {
+                            <div class="col-xs-12">
+                                <label for="ExecutedTreatmentTypes" class="h4">Uitgevoerde behandelingen</label>
+                                <ul>
+                                    @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                     {
-                                        <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
+                                        @if (treatment.Age <= 90)
+                                        {
+                                            <li> @treatment.Name / @treatment.TypeId / @treatment.EndDate.ToString("dd-MM-yyyy") </li>
+                                        }
                                     }
-                                }
-                            </ul>
-                        </div>
+                                </ul>
+                            </div>
+                        }
                     </form>
                     <hr>
                 </div><!--/tab-pane-->
