@@ -33,7 +33,7 @@ namespace Webapp.Models
         [Display(Name = "Geboortedatum")]
         public DateTime Birth { get; set; }
 
-        [StringLength(15, ErrorMessage = "Phone telefoonnummer is tussen de 7 en 15 tekens lang.", MinimumLength = 7)]
+        [StringLength(14, ErrorMessage = "Phone telefoonnummer is tussen de 7 en 14 tekens lang.", MinimumLength = 7)]
         [Display(Name = "Telefoonnummer")]
         public string Phone { get; set; }
 
