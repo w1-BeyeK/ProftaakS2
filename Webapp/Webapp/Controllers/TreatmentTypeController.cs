@@ -97,21 +97,16 @@ namespace Webapp.Controllers
 
             return View(vm);
         }
-        
-        /// <summary>
-        /// Method gets all objects form departments and institutions and coverts them to a viewmodel.
-        /// </summary>
-        /// <returns></returns>
-        [Authorize(Roles = "admin")]
-        public IActionResult Create()
+
+        public List<SelectListItem> GetInstitutionsWithDepartments()
         {
-            // Retrieve for dropdown
+            // Get dropdown for treatmenttype
             List<Department> departments = departmentRepository.GetAll();
             List<Institution> institutions = institutionRepository.GetAll();
 
             List<SelectListItem> items = new List<SelectListItem>();
-            SelectListGroup group;
-            
+            SelectListGroup group = null;
+
             // Create dropdownlist for treatmenttype
             foreach (Institution i in institutions)
             {
@@ -130,10 +125,20 @@ namespace Webapp.Controllers
                     });
                 }
             }
-            
+
+            return items;
+        }
+
+        /// <summary>
+        /// Method gets all objects form departments and institutions and coverts them to a viewmodel.
+        /// </summary>
+        /// <returns></returns>
+        [Authorize(Roles = "admin")]
+        public IActionResult Create()
+        {
             TreatmentTypeDetailViewModel vm = new TreatmentTypeDetailViewModel
             {
-                Departments = items
+                Departments = GetInstitutionsWithDepartments()
             };
 
             return View(vm);
@@ -158,11 +163,9 @@ namespace Webapp.Controllers
                 // Return details page of just inserted record
                 return RedirectToAction("details", new { id });
             }
-            else
-            {
-                return View(vm);
-            }
-            
+
+            vm.Departments = GetInstitutionsWithDepartments();
+            return View(vm);            
         }
 
         /// <summary>
@@ -182,33 +185,9 @@ namespace Webapp.Controllers
                 if (tt == null)
                     return BadRequest("Gebruiker niet gevonden.");
 
-                // Get dropdown for treatmenttype
-                List<Department> departments = departmentRepository.GetAll();
-                List<Institution> institutions = institutionRepository.GetAll();
-
-                List<SelectListItem> items = new List<SelectListItem>();
-                SelectListGroup group;
-                foreach (Institution i in institutions)
-                {
-                    group = new SelectListGroup
-                    {
-                        Name = i.Name
-                    };
-
-                    foreach (Department dm in departments.Where(d => d.InstitutionId == i.Id))
-                    {
-                        items.Add(new SelectListItem
-                        {
-                            Value = dm.Id.ToString(),
-                            Text = dm.Name,
-                            Group = group
-                        });
-                    }
-                }
-
                 // Convert to vm
                 TreatmentTypeDetailViewModel vm = converter.ModelToViewModel(tt);
-                vm.Departments = items;
+                vm.Departments = GetInstitutionsWithDepartments();
 
                 return View(vm);
             }
@@ -236,6 +215,8 @@ namespace Webapp.Controllers
                 else
                     return RedirectToAction("index");
             }
+
+            vm.Departments = GetInstitutionsWithDepartments();
             return View(vm);
         }
 
