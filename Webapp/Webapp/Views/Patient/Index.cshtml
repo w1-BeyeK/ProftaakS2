@@ -29,7 +29,7 @@
                    @if (item.AccessToDoctor)
                     {
                     <td>
-                       @if (Context.User.IsInRole("Doctor"))
+                       @if (Context.User.IsInRole("doctor"))
                         {
                             @Html.ActionLink("Details", "PatientDetails", "Profile", new { id = item.UserId })
                         }
