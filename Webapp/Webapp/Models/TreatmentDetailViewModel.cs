@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Webapp.Models.Attributes;
 using Webapp.Models.Data;
 
 namespace Webapp.Models
@@ -40,6 +41,7 @@ namespace Webapp.Models
 
         [DataType(DataType.DateTime)]
         [Display(Name = "Einddatum")]
+        [DateGreaterThan("BeginDate")]
         public DateTime EndDate { get; set; }
 
         [DataType(DataType.DateTime)]
