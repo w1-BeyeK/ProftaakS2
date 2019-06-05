@@ -64,15 +64,15 @@ namespace Webapp.Controllers
 
             // Create item for each institution
             institutions.ForEach(i =>
+            {
+                items.Add(new SelectListItem
                 {
-                    items.Add(new SelectListItem
-                    {
-                        Text = i.Name,
-                        Value = i.Id.ToString(),
-                        // Selected if Ids match
-                        Selected = (i.Id == selectId)
-                    });
+                    Text = i.Name,
+                    Value = i.Id.ToString(),
+                    // Selected if Ids match
+                    Selected = (i.Id == selectId)
                 });
+            });
 
             return items;
         }
@@ -208,7 +208,6 @@ namespace Webapp.Controllers
                 // Validation on Ids
                 if (id != model.Id)
                     return BadRequest("Ids komen niet overeen");
-                }
 
                 // Convert vm back to model
                 Department department = converter.ViewModelToModel(model);
