@@ -73,7 +73,7 @@ namespace Webapp.Controllers
                         Selected = (i.Id == selectId)
                     });
                 });
-            
+
             return items;
         }
 
@@ -164,7 +164,9 @@ namespace Webapp.Controllers
                 // Return detail view
                 return RedirectToAction("Details", new { id });
             }
-            return View();
+
+            model.Institutions = GetInstitutionsForDropdown().ToList();
+            return View(model);
         }
 
         /// <summary>
@@ -201,24 +203,27 @@ namespace Webapp.Controllers
         public IActionResult Edit(long id, DepartmentDetailViewModel model)
         {
             // Check if model is valid
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Validation on Ids
                 if (id != model.Id)
                     return BadRequest("Ids komen niet overeen");
+                }
 
                 // Convert vm back to model
                 Department department = converter.ViewModelToModel(model);
 
                 // Update department, if success redirect to details
                 if (departmentRepository.Update(department))
+                {
                     return RedirectToAction("Details", new { department.Id });
-                else
-                    return View(model);
+                }
             }
-            return View();
+
+            model.Institutions = GetInstitutionsForDropdown().ToList();
+            return View(model);
         }
-        
+
         /// <summary>
         /// Delete for department
         /// </summary>
@@ -228,7 +233,7 @@ namespace Webapp.Controllers
         public IActionResult Delete(long id)
         {
             // Check if model is valid
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 // Delete the department
                 if (!departmentRepository.Delete(id, false))

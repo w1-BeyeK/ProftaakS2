@@ -59,6 +59,11 @@ namespace Webapp.Context
         /// <returns> List of Comments </returns>
         public List<Comment> Insert(Comment comment)
         {
+            if(string.IsNullOrWhiteSpace(comment.Title))
+            {
+                return GetByTreatment(comment.TreatmentId);
+            }
+
             try
             {
                 string query = "insert into PTS2_Comment(Title, Description, TreatmentId) values(@title, @description, @treatmentid)";
