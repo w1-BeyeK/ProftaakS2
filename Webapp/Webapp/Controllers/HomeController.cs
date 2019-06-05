@@ -20,9 +20,11 @@ namespace Webapp.Controllers
         // Repos
         private readonly PatientRepository patientRepository;
         private readonly DoctorRepository doctorRepository;
+        private readonly TreatmentRepository treatmentRepository;
 
         // Converter
         private readonly PatientViewModelConverter patientConverter;
+        private readonly TreatmentViewModelConverter treatmentConverter;
 
         // Account management
         private readonly UserManager<BaseAccount> userManager;
@@ -39,7 +41,8 @@ namespace Webapp.Controllers
                 UserManager<BaseAccount> userManager,
                 SignInManager<BaseAccount> signInManager,
                 PatientRepository patientRepository,
-                DoctorRepository doctorRepository
+                DoctorRepository doctorRepository,
+                TreatmentRepository treatmentRepository
             )
         {
             this.userManager = userManager;
@@ -47,8 +50,10 @@ namespace Webapp.Controllers
 
             this.patientRepository = patientRepository;
             this.doctorRepository = doctorRepository;
+            this.treatmentRepository = treatmentRepository;
 
             this.patientConverter = new PatientViewModelConverter();
+            this.treatmentConverter = new TreatmentViewModelConverter();
         }
 
         /// <summary>
@@ -120,7 +125,62 @@ namespace Webapp.Controllers
         [Authorize]
         public IActionResult Dashboard()
         {
+            if(User.IsInRole("patient"))
+            {
+                List<Treatment> treatments = treatmentRepository.GetUnconfirmedTreatmentsByPatient(GetUserId());
+                List<TreatmentDetailViewModel> Treatments = new List<TreatmentDetailViewModel>(treatmentConverter.ModelsToViewModel(treatments));
+                return View(Treatments);
+            }
             return View();
+        }
+
+       
+        [Authorize(Roles = "patient")]
+        public IActionResult Accept(long id)
+        {
+            if (id < 1)
+                return BadRequest("Id kan niet 0 zijn.");
+            try
+            {
+                Treatment treatment = treatmentRepository.GetById(id);
+                if (treatment.PatientId == GetUserId())
+                {
+                    treatmentRepository.PatientGiveAccessToDoctor(id, true);
+                }
+                else
+                {
+                    return BadRequest("U heeft geen toegang tot deze behandeling.");
+                }
+            }
+            catch
+            {
+                return BadRequest("Geen behandeling gevonden.");
+            }
+            return RedirectToAction("Dashboard");
+        }
+
+        [Authorize(Roles = "patient")]
+        public IActionResult Deny(long id)
+        {
+            if (id < 1)
+                return BadRequest("Id kan niet 0 zijn.");
+            try
+            {
+                Treatment treatment = treatmentRepository.GetById(id);
+                if (treatment.PatientId == GetUserId())
+                {
+                    treatmentRepository.PatientGiveAccessToDoctor(id, false);
+                }
+                else
+                {
+                    return BadRequest("U heeft geen toegang tot deze behandeling.");
+                }
+            }
+            catch
+            {
+                return BadRequest("Geen behandeling gevonden.");
+            }
+            return RedirectToAction("Dashboard");
         }
     }
 }

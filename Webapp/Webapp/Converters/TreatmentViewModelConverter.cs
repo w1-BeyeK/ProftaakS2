@@ -47,6 +47,7 @@ namespace Webapp.Converters
                 PatientName = treatment.PatientName,
                 BeginDate = treatment.BeginDate,
                 EndDate = treatment.EndDate,
+                DoctorName = treatment.DoctorName,
                 Age = treatment.GetAge()
             };
             return vm;
