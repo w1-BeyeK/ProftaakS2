@@ -180,7 +180,7 @@ namespace Webapp.Controllers
                 TreatmentType tt = repository.GetById(id);
 
                 if (tt == null)
-                    return BadRequest("User not found.");
+                    return BadRequest("Gebruiker niet gevonden.");
 
                 // Get dropdown for treatmenttype
                 List<Department> departments = departmentRepository.GetAll();
