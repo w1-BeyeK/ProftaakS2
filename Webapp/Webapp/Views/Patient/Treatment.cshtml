@@ -7,7 +7,14 @@
 
 }
 
-<h2>Arts</h2>
+@if (User.IsInRole("doctor"))
+{
+    <h2>Arts</h2>
+}
+else if (User.IsInRole("patient"))
+{
+    <h2>Patiënt</h2>
+}
 
 <link rel="stylesheet" href="~/css/User.css" />
 <div class="container bootstrap snippet col-lg-offset-0" id="container">
@@ -58,10 +65,10 @@
                                 <input asp-for="TreatmentDetailViewModels[0].TypeName" type="text" class="form-control" name="treatmentType" id="treatmentType" placeholder="naam" title="Dit is het type behandeling." value="@Model.TreatmentDetailViewModels[0].TypeName">
                             </div>
                         </div>
-                            <div class="col-xs-3">
-                                <label asp-for="TreatmentDetailViewModels[0].BeginDate" for="Begindate"><h4>Begindatum</h4></label>
-                                <input asp-for="TreatmentDetailViewModels[0].BeginDate" type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
-                            </div>
+                        <div class="col-xs-3">
+                            <label asp-for="TreatmentDetailViewModels[0].BeginDate" for="Begindate"><h4>Begindatum</h4></label>
+                            <input asp-for="TreatmentDetailViewModels[0].BeginDate" type="date" class="form-control" name="begindate" id="begindate" placeholder="Begindatum behandeling" title="Begindatum behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToString("yyyy-MM-dd")">
+                        </div>
                         <div class="col-xs-3">
                             <label asp-for="TreatmentDetailViewModels[0].BeginTime" for="BeginTime"><h4>Begintijd</h4></label>
                             <input asp-for="TreatmentDetailViewModels[0].BeginTime" type="time" class="form-control" name="beginTime" id="beginTime" title="Begintijd behandeling" value="@Model.TreatmentDetailViewModels[0].BeginDate.ToShortTimeString()">
@@ -78,12 +85,14 @@
                         @if (User.IsInRole("doctor"))
                         {
                             <div class="col-xs-12">
-                                <label for="Comments"><h4>Nieuwe opmerking</h4></label>
+                                <label for="Comments" class="h4">Nieuwe opmerking</label>
                                 <input type="text" class="form-control" asp-for="TreatmentDetailViewModels[0].Description.Title" placeholder="Nieuw Titel" title="Titel van opmerking.">
+                                <span asp-validation-for="TreatmentDetailViewModels[0].Description.Title" class="text-danger"></span>
                                 <br />
                                 @Html.TextAreaFor(e => e.TreatmentDetailViewModels[0].Description.Description, new { @class = "form-control", @placeholder = "Inhoud van opmerking", @title = "Inhoud van opmerking" })
                                 <br />
                                 <button type="submit" class="btn btn-primary" asp-controller="Patient" asp-action="Treatment">Plaats Comment</button>
+                                <span asp-validation-for="TreatmentDetailViewModels[0].Description.Description" class="text-danger"></span>
                             </div>
                         }
 
@@ -99,7 +108,7 @@
                         </div>
 
                         <div class="col-xs-12">
-                            <label for="ExecutedTreatmentTypes"><h4>Uitgevoerde behandelingen</h4></label>
+                            <label for="ExecutedTreatmentTypes" class="h4">Uitgevoerde behandelingen</label>
                             <ul>
                                 @foreach (TreatmentDetailViewModel treatment in Model.TreatmentDetailViewModels)
                                 {
@@ -116,7 +125,7 @@
             </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
-   @if (User.IsInRole("doctor"))
+    @if (User.IsInRole("doctor"))
     {
         <a asp-action="Index">Terug naar lijst</a>
     }
