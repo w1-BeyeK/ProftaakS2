@@ -133,12 +133,12 @@ namespace Webapp.Context.MSSQLContext
                     fields += "DepartmentId = @departmentId";
                     parameters.Add(new KeyValuePair<string, object>("departmentId", treatmentType.DepartmentId));
                 }
-                if (!string.IsNullOrWhiteSpace(fields))
-                {
-                    fields += ",";
-                    fields += "active = @active";
-                    parameters.Add(new KeyValuePair<string, object>("active", treatmentType.Active ? "1" : "0"));
-                }
+                //if (!string.IsNullOrWhiteSpace(fields))
+                //{
+                //    fields += ",";
+                //    fields += "active = @active";
+                //    parameters.Add(new KeyValuePair<string, object>("active", treatmentType.Active ? "1" : "0"));
+                //}
 
                 query = query.Replace("@fields", fields);
 
