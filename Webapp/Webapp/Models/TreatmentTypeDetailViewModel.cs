@@ -12,11 +12,12 @@ namespace Webapp.Models
         public long Id { get; set; }
 
         [Required]
+        [StringLength(300, ErrorMessage = "Naam moet minimaal 1 en maximaal 300 karakters zijn.", MinimumLength = 1)]
         [Display(Name = "Naam")]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(300, ErrorMessage = "Beschrijving mag maximaal 300 karakters zijn.")]
+        [StringLength(300, ErrorMessage = "Beschrijving moet minimaal 1 en maximaal 300 karakters zijn.", MinimumLength = 1)]
         [Display(Name = "Beschrijving")]
         public string Description { get; set; }
 
