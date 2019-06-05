@@ -107,7 +107,14 @@ namespace Webapp.Context.MSSQLContext
                     new KeyValuePair<string, object>("active", doctor.Active? "1" : "0")
                 };
 
-                return (long)handler.ExecuteCommand(query, parameters);
+                if (long.TryParse(handler.ExecuteCommand(query, parameters).ToString(), out long id))
+                {
+                    return id;
+                }
+                else
+                {
+                    return -1;
+                }
             }
             catch (Exception e)
             {
