@@ -13,7 +13,7 @@ namespace Webapp.Models
         [Required]
         public long Id { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "De behandelingsnaam is verplicht.")]
         [StringLength(75, ErrorMessage = "Naam mag maximaal 75 characters zijn.")]
         [Display(Name = "Naam")]
         public string Name { get; set; }

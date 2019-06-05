@@ -129,12 +129,5 @@ else if (User.IsInRole("patient"))
             </div><!--/tab-content-->
         </div><!--/col-9-->
     </div><!--/row-->
-    @if (User.IsInRole("doctor"))
-    {
-        <a asp-action="Index">Terug naar lijst</a>
-    }
-    else if (User.IsInRole("patient"))
-    {
         <a asp-action="Index" asp-controller="treatment">Terug naar lijst</a>
-    }
 </div>

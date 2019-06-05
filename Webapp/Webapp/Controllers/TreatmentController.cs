@@ -125,7 +125,11 @@ namespace Webapp.Controllers
                 return RedirectToAction("index", "treatment");
             }
             else
-                return RedirectToAction(nameof(Create));
+            {
+                vm.Patients = PatientConverter.PatientlistToViewModel(patientRepository.GetAll());
+                vm.TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                return View(vm);
+            }
         }
 
         /// <summary>
@@ -156,9 +160,18 @@ namespace Webapp.Controllers
         [HttpPost]
         public IActionResult Edit(long id, TreatmentDetailViewModel vm)
         {
-            Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
-            treatmentRepository.Update(treatment);
-            return RedirectToAction("index", "treatment");
+            if (ModelState.IsValid)
+            {
+                Treatment treatment = TreatmentConverter.ViewModelToModel(vm);
+                treatmentRepository.Update(treatment);
+                return RedirectToAction("index", "treatment");
+            }
+            else
+            {
+                vm.PatientName = patientRepository.GetById(patientRepository.GetPatientIdByTreatmentId(id)).Name;
+                vm.TreatmentTypes = TypeConverter.ModelsToViewModel(treatmentTypeRepository.GetAll());
+                return View(vm);
+            }
         }
     }
 }
