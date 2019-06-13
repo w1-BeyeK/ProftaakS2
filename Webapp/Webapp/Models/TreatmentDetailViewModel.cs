@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Umbrella.DataAnnotations;
 using Webapp.Models.Attributes;
 using Webapp.Models.Data;
 
@@ -40,8 +41,9 @@ namespace Webapp.Models
         public TimeSpan BeginTime { get; set; }
 
         [DataType(DataType.DateTime)]
+        [GreaterThan("BeginDate", ErrorMessage = "De einddatum moet later zijn dan de begindatum")]
         [Display(Name = "Einddatum")]
-        [DateGreaterThan("BeginDate")]
+        //[DateGreaterThan("BeginDate")]
         public DateTime EndDate { get; set; }
 
         [DataType(DataType.DateTime)]

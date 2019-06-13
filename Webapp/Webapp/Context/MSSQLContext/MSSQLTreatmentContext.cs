@@ -82,8 +82,8 @@ namespace Webapp.Context.MSSQLContext
                 List<KeyValuePair<string, object>> parameters = new List<KeyValuePair<string, object>>
                 {
                     new KeyValuePair<string, object>("name", treatment.Name),
-                    new KeyValuePair<string, object>("beginDate", treatment.BeginDate.ToString("yyyy-MM-dd")),
-                    new KeyValuePair<string, object>("endDate", treatment.EndDate.ToString("yyyy-MM-dd")),
+                    new KeyValuePair<string, object>("beginDate", treatment.BeginDate.ToString("yyyy-MM-dd HH:mm:ss")),
+                    new KeyValuePair<string, object>("endDate", treatment.EndDate.ToString("yyyy-MM-dd HH:mm:ss")),
                     new KeyValuePair<string, object>("doctorId", treatment.DoctorId),
                     new KeyValuePair<string, object>("patientId", treatment.Patient.Id),
                     new KeyValuePair<string, object>("treatmentTypeId", treatment.TreatmentType.Id),
